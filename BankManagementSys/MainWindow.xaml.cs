@@ -20,9 +20,13 @@ namespace BankManagementSys
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        BankManagementSysDbConnection context;
+
         public MainWindow()
         {
             InitializeComponent();
+            context = new BankManagementSysDbConnection();
         }
     }
 }

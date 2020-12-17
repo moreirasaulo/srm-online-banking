@@ -1,0 +1,5 @@
+DAILY SCRUM
+
+host:bankmanagementsys.database.windows.net
+admin:sqladmin
+password: z77smMQEXz
