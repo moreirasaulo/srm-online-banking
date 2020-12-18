@@ -3,3 +3,31 @@ DAILY SCRUM
 host:bankmanagementsys.database.windows.net
 admin:sqladmin
 password: z77smMQEXz
+
+
+2020/12/18 Ksenia
+1. Done/ not done since last scrum:
+- created project plan
+- created examples of application windows
+- planned database tables
+2.To do until next scrum:
+- finalize application layout
+- reserch technologies to be used
+- start setting up database
+3.Need assistance/figure things out:
+- find out where to store user login/password
+- consult about app user interface organization
+
+2020/12/18
+1. Done/ not done since last scrum:
+- created project plan
+- wrote program description
+- created database mockup
+- planned database tables
+2.To do until next scrum:
+- finalize and perfect database
+- reserch technologies to be used
+- start setting up database
+3.Need assistance/figure things out:
+- clarify data types for database tables (money, double...?)
+- verify how to adapt our program to search with actual banking info
