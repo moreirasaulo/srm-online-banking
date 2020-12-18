@@ -18,7 +18,7 @@ password: z77smMQEXz
 - find out where to store user login/password
 - consult about app user interface organization
 
-2020/12/18
+2020/12/18 Saulo
 1. Done/ not done since last scrum:
 - created project plan
 - wrote program description
