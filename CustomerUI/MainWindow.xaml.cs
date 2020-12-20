@@ -29,33 +29,36 @@ namespace CustomerUI
 
         private void btLoginClicked(object sender, RoutedEventArgs e)
         {
-            string username = tbUsername.Text;
-            string password = pbPassword.Password;
+            string username = tbClientUsername.Text;
+            string password = pbClientPassword.Password;
 
-            var user = EFData.context.Logins.FirstOrDefault(u => u.Username == username && u.Password == password);
-            if (user != null)
+            
+            Login login = EFData.context.Logins.SingleOrDefault(u => u.Username == username && u.Password == password);
+
+            
+            if (login != null)
             {
-                if ((user.UserType).ToLower() == "client")
+                if ((login.UserType).ToLower() == "client")
                 {
                     MessageBox.Show("Login successful");
                 }
                 else
                 {
                     MessageBox.Show("Login failed, incorrect login or password");
-                    tbUsername.SelectAll();
-                    tbUsername.BorderBrush = System.Windows.Media.Brushes.Red;
-                    pbPassword.Password = "";
-                    pbPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+                    tbClientUsername.SelectAll();
+                    tbClientUsername.BorderBrush = System.Windows.Media.Brushes.Red;
+                    pbClientPassword.Password = "";
+                    pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
                 }
             }
             else
             {
                 MessageBox.Show("Login failed, this username does not exist");
-                tbUsername.SelectAll();
-                tbUsername.BorderBrush = System.Windows.Media.Brushes.Red;
-                pbPassword.Password = "";
-                pbPassword.BorderBrush = System.Windows.Media.Brushes.Red;
-            }
+                tbClientUsername.SelectAll();
+                tbClientUsername.BorderBrush = System.Windows.Media.Brushes.Red;
+                pbClientPassword.Password = "";
+                pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+            } 
         }
 
         

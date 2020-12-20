@@ -9,10 +9,10 @@
     <Grid>
         <Label Content="Login:" HorizontalAlignment="Left" Margin="110,143,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="186,20,0,0" Source="C:\Users\user\Documents\bank-management-2020\Images\handFolder.png" VerticalAlignment="Top" Width="100"/>
-        <TextBox Name="tbUsername" HorizontalAlignment="Left" Height="23" Margin="180,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
+        <TextBox Name="tbClientUsername" HorizontalAlignment="Left" Height="23" Margin="180,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
         <Label Content="Password:" HorizontalAlignment="Left" Margin="110,183,0,0" VerticalAlignment="Top"/>
         <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="136,245,0,0" VerticalAlignment="Top" Width="75"/>
         <Button  Content="Login" IsDefault="True" HorizontalAlignment="Left" Margin="231,245,0,0" VerticalAlignment="Top" Width="75" Click="btLoginClicked"/>
-        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="180,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
+        <PasswordBox Name="pbClientPassword" HorizontalAlignment="Left" Margin="180,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
     </Grid>
 </Window>

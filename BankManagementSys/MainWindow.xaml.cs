@@ -30,8 +30,8 @@ namespace BankManagementSys
 
         private void btLoginClicked(object sender, RoutedEventArgs e)
         {
-            string username = tbUsername.Text;
-            string password = pbPassword.Password;
+            string username = tbAdminUsername.Text;
+            string password = pbAdminPassword.Password;
 
             var user = EFData.context.Logins.FirstOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
