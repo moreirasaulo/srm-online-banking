@@ -35,7 +35,7 @@ namespace CustomerUI
             var user = EFData.context.Logins.FirstOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
             {
-                if ((user.UserType).ToLower() == "admin")
+                if ((user.UserType).ToLower() == "client")
                 {
                     MessageBox.Show("Login successful");
                 }
