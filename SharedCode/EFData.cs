@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SharedCode
 {
-    public class Class1
+    public class EFData
     {
+        public static BankManagementSysEntities1 context = new BankManagementSysEntities1();
+
+        
     }
+
+    
 }

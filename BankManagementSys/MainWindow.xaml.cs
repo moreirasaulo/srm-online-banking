@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,12 +22,46 @@ namespace BankManagementSys
     public partial class MainWindow : Window
     {
 
-        BankManagementSysDbConnection context;
-
         public MainWindow()
         {
             InitializeComponent();
-            context = new BankManagementSysDbConnection();
+            
         }
+
+        private void btLoginClicked(object sender, RoutedEventArgs e)
+        {
+            string username = tbUsername.Text;
+            string password = pbPassword.Password;
+
+            var user = EFData.context.Logins.FirstOrDefault(u => u.Username == username && u.Password == password);
+            if (user != null)
+            {
+                if ((user.UserType).ToLower() == "admin")
+                {
+                    MessageBox.Show("Login successful");
+                }
+                else
+                {
+                    MessageBox.Show("Login failed, incorrect login or password");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Login failed, this username does not exist");
+            }
+        }
+
+
+
+
+
+
+
+        /*   private bool VerifyUser(string username, string password)
+           {
+              string query =  "SELECT UserType FROM Users WHERE Username ='" + username + "' AND Password = '" + password + "'";
+               string reader;
+               if(reader )
+           }  */
     }
 }

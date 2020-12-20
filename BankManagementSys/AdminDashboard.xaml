@@ -1,0 +1,49 @@
+﻿<Window x:Class="BankManagementSys.AdminDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementSys"
+        mc:Ignorable="d"
+        Title="AdminDashboard" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="419" Width="159">
+            <StackPanel.Background>
+                <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
+            </StackPanel.Background>
+            <Image Height="61" Margin="28,40,30,0" Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\person.png"/>
+            <Label Content="Logged as admin" HorizontalContentAlignment="Center"/>
+            <Label Content="LogOut" Margin="28,40,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Exit" Margin="28,20,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        </StackPanel>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        Margin="264,82,418,243">
+            <StackPanel Width="100">
+                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\people.png" Height="64" Width="80"/>
+                <Label Content="Manage clients" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        Margin="390,-150, 160,10" >
+            <StackPanel>
+                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\folder.png" Height="64" Width="80"/>
+                <Label Content="Manage accounts" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        Margin="458,225,228,93" Width="106" Height="101">
+            <StackPanel Height="99">
+                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\paper.png" Height="64" Width="80"/>
+                <Label Content="Manage reports" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        Margin="69,225,228,93" Width="106" Height="101" >
+            <StackPanel Height="99">
+                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\money.png" Height="64" Width="80"/>
+                <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">Manage transactions</TextBlock>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</Window>

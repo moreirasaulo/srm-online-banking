@@ -5,55 +5,48 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="BankManagementSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BankManagementSys.dbo.People' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="People">
+        <EntityType Name="Logins">
           <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Age" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="UserType" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="BankManagementSysModelStoreContainer">
-          <EntitySet Name="People" EntityType="Self.People" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [People].[Id] AS [Id], 
-    [People].[Name] AS [Name], 
-    [People].[Age] AS [Age]
-    FROM [dbo].[People] AS [People]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BankManagementSysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Person">
+        <EntityType Name="Login">
           <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Age" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="BankManagementSysDbConnection" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="People" EntityType="Self.Person" />
+        <EntityContainer Name="BankManagementSysEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logins" EntityType="Self.Login" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BankManagementSysModelStoreContainer" CdmEntityContainer="BankManagementSysDbConnection">
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="BankManagementSysModel.Person">
-              <MappingFragment StoreEntitySet="People">
+        <EntityContainerMapping StorageEntityContainer="BankManagementSysModelStoreContainer" CdmEntityContainer="BankManagementSysEntities1">
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="BankManagementSysModel.Login">
+              <MappingFragment StoreEntitySet="Logins">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

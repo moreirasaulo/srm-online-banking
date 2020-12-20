@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BankManagementSys
+namespace SharedCode
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BankManagementSysDbConnection : DbContext
+    public partial class BankManagementSysEntities1 : DbContext
     {
-        public BankManagementSysDbConnection()
-            : base("name=BankManagementSysDbConnection")
+        public BankManagementSysEntities1()
+            : base("name=BankManagementSysEntities1")
         {
         }
     
@@ -25,6 +25,6 @@ namespace BankManagementSys
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Login> Logins { get; set; }
     }
 }
