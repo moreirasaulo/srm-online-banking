@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ManageCustomers" Height="450" Width="800">
     <Grid>
-        <ListView Name="lvCustomers" HorizontalAlignment="Left" Height="185" Margin="90,83,0,0" VerticalAlignment="Top" Width="602">
+        <ListView Name="lvCustomers" HorizontalAlignment="Left" Height="185" Margin="79,99,0,0" VerticalAlignment="Top" Width="602">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
@@ -18,12 +18,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Search by Id:" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="tbSearchByNatId" HorizontalAlignment="Left" Height="23" Margin="187,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="395,25,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="187,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="322,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="458,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <Label Content="Search by" HorizontalAlignment="Left" Margin="75,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="272,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="480,25,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="176,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="311,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="447,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
         <Button
         Margin="714,331,18,21">
             <StackPanel Width="31">
@@ -31,5 +31,9 @@
                 <Label Content="Close" HorizontalAlignment="Center" Margin="-6,0,-18,0" Width="55"/>
             </StackPanel>
         </Button>
+        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="154,13,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,35,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,58,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="79,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
     </Grid>
 </Window>

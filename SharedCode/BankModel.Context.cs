@@ -13,10 +13,10 @@ namespace SharedCode
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BankManagementSysEntities1 : DbContext
+    public partial class BankDbConnection : DbContext
     {
-        public BankManagementSysEntities1()
-            : base("name=BankManagementSysEntities1")
+        public BankDbConnection()
+            : base("name=BankDbConnection")
         {
         }
     
@@ -25,7 +25,12 @@ namespace SharedCode
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
+        public virtual DbSet<PaymentSubCategory> PaymentSubCategories { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserType> UserTypes { get; set; }
     }
 }

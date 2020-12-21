@@ -4,9 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1f09baeef6174268988e9d84bd2b2845" Name="Diagram1">
-        <EntityTypeShape EntityType="BankManagementSysModel.Login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankManagementSysModel.User" Width="1.5" PointX="3.375" PointY="0.75" />
+      <Diagram DiagramId="9f33c87532b2449eb80537673f5adc5c" Name="Diagram1">
+        <EntityTypeShape EntityType="BankManagementSysModel.Account" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.AccountType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.Login" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.PaymentSubCategory" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.Transaction" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.User" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankManagementSysModel.UserType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Accounts__Accoun__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Accounts__UserId__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Transacti__Accou__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Logins__UserId__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Logins__UserType__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="BankManagementSysModel.FK__Transacti__Payme__76969D2E" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
