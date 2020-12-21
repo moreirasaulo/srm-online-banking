@@ -16,7 +16,7 @@
             <Label Content="LogOut" Margin="28,40,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
             <Label Content="Exit" Margin="28,20,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
         </StackPanel>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        <Button Click="btManageCustomers_Click" Name="btManageCustomers" HorizontalAlignment="Center" VerticalAlignment="Center"
         Margin="264,82,418,243">
             <StackPanel Width="100">
                 <Image Source="/SharedCode;Component/Images/people.png" Height="64" Width="80"/>

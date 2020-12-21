@@ -29,11 +29,10 @@ namespace BankManagementSys
         {
             string natId = tbSearchByNatId.Text;
 
-            var customers = from cust in EFData.context.Users
-                            where cust.City == "London"
-                            select cust;
-            if (user != null)
-            {
-            }
+            List<User> customers = (from cust in EFData.context.Users
+                            where cust.NationalId == natId
+                            select cust).ToList();
+            lvCustomers.ItemsSource = customers;
+        }   
     }
 }

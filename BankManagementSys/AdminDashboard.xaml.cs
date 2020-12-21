@@ -23,5 +23,12 @@ namespace BankManagementSys
         {
             InitializeComponent();
         }
+
+        private void btManageCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            ManageCustomers custDlg = new ManageCustomers();
+            custDlg.Owner = this;
+            custDlg.ShowDialog();
+        }
     }
 }

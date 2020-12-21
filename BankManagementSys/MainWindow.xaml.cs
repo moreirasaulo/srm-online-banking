@@ -40,6 +40,9 @@ namespace BankManagementSys
                 if ((user.UserType).ToLower() == "admin")
                 {
                     MessageBox.Show("Login successful");
+                    AdminDashboard adminDashDlg = new AdminDashboard();
+                    adminDashDlg.Owner = this;
+                    adminDashDlg.ShowDialog();
                 }
                 else
                 {

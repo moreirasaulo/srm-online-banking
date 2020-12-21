@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="ManageCustomers" Height="450" Width="800">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="185" Margin="90,83,0,0" VerticalAlignment="Top" Width="602">
+        <ListView Name="lvCustomers" HorizontalAlignment="Left" Height="185" Margin="90,83,0,0" VerticalAlignment="Top" Width="602">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Full Name" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="National Id" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="DOB" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Address" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding Path=LastName}" />
+                    <GridViewColumn Header="National Id" Width="120" DisplayMemberBinding="{Binding Path=NationalId}" />
+                    <GridViewColumn Header="DOB" Width="120" DisplayMemberBinding="{Binding Path=DateOfBirth}" />
+                    <GridViewColumn Header="Address" Width="120" DisplayMemberBinding="{Binding Path=Address}" />
                 </GridView>
             </ListView.View>
         </ListView>
