@@ -18,7 +18,7 @@ password: z77smMQEXz
 - find out where to store user login/password
 - consult about app user interface organization
 
-2020/12/18 Saulo Moreira
+2020/12/18 Saulo
 1. Done/ not done since last scrum:
 - created project plan
 - wrote program description
@@ -31,3 +31,31 @@ password: z77smMQEXz
 3.Need assistance/figure things out:
 - clarify data types for database tables (money, double...?)
 - verify how to adapt our program to search with actual banking info
+
+2020/12/21 Ksenia
+1. Done/not done since last scrum:
+- Implemented database connection
+- Completed login window for both users(admin, client)
+- Implemented search in ''Manage customers''section
+2. To do until next scrum:
+- Add/Update/Delete customer
+- Search customer by name
+- View customers
+3. Need assistance:
+- View all customers
+
+2020/12/21 Saulo
+1. Done/not done since last scrum:
+- finished Database
+- setup database
+- created client's dashboard
+- fixed issues on login for client and admin
+2. To do until next scrum:
+- Client: view transactions
+- Implement Deposit/Withdraw
+- Fix images in user/admin dashboard
+- Testing
+3. Need assistance:
+- Clarify connections between tables
+
+
