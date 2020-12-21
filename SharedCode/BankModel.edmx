@@ -4,21 +4,73 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BankManagementSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BankManagementSysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Logins">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="UserType" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BankManagementSys.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="PhoneNo" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="PostalCode" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="NationalId" />
+            <PropertyRef Name="Gender" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProvinceState" Type="nvarchar" MaxLength="20" />
+          <Property Name="Country" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="NationalId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="BankManagementSysModelStoreContainer">
           <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[Id] AS [Id], 
+    [Users].[FirstName] AS [FirstName], 
+    [Users].[MiddleName] AS [MiddleName], 
+    [Users].[LastName] AS [LastName], 
+    [Users].[PhoneNo] AS [PhoneNo], 
+    [Users].[Username] AS [Username], 
+    [Users].[Password] AS [Password], 
+    [Users].[Address] AS [Address], 
+    [Users].[PostalCode] AS [PostalCode], 
+    [Users].[City] AS [City], 
+    [Users].[ProvinceState] AS [ProvinceState], 
+    [Users].[Country] AS [Country], 
+    [Users].[DateOfBirth] AS [DateOfBirth], 
+    [Users].[NationalId] AS [NationalId], 
+    [Users].[Gender] AS [Gender]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BankManagementSysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -28,12 +80,45 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityContainer Name="BankManagementSysEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="Users" EntityType="BankManagementSysModel.User" />
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="PhoneNo" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="PostalCode" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="NationalId" />
+            <PropertyRef Name="Gender" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceState" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NationalId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,6 +132,27 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BankManagementSysModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ProvinceState" ColumnName="ProvinceState" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,15 +19,15 @@
             </ListView.View>
         </ListView>
         <Label Content="Search by Id:" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="187,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Content="Find" HorizontalAlignment="Left" Margin="395,25,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox Name="tbSearchByNatId" HorizontalAlignment="Left" Height="23" Margin="187,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="395,25,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="187,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="322,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="458,295,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
         <Button
         Margin="714,331,18,21">
             <StackPanel Width="31">
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\exit.png"/>
+                <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="Close" HorizontalAlignment="Center" Margin="-6,0,-18,0" Width="55"/>
             </StackPanel>
         </Button>

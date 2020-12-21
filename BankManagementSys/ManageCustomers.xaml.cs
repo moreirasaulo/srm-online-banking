@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,16 @@ namespace BankManagementSys
         {
             InitializeComponent();
         }
+
+        private void btFind_Click(object sender, RoutedEventArgs e)
+        {
+            string natId = tbSearchByNatId.Text;
+
+            var customers = from cust in EFData.context.Users
+                            where cust.City == "London"
+                            select cust;
+            if (user != null)
+            {
+            }
     }
 }

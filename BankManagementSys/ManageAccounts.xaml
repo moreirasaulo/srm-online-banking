@@ -26,7 +26,7 @@
         <Button
         Margin="657,331,75,21">
             <StackPanel Width="31">
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\exit.png"/>
+                <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="Close" HorizontalAlignment="Right" Margin="-5,0,-6,0" Width="42"/>
             </StackPanel>
         </Button>

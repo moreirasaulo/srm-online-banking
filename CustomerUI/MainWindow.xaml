@@ -8,7 +8,7 @@
         Title="Customer login" Height="317" Width="489" Background="Beige" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label Content="Login:" HorizontalAlignment="Left" Margin="110,143,0,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="186,20,0,0" Source="C:\Users\user\Documents\bank-management-2020\Images\handFolder.png" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="186,20,0,0" Source="/SharedCode;Component/Images/handCard.png"  VerticalAlignment="Top" Width="100"/>
         <TextBox Name="tbClientUsername" HorizontalAlignment="Left" Height="23" Margin="180,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
         <Label Content="Password:" HorizontalAlignment="Left" Margin="110,183,0,0" VerticalAlignment="Top"/>
         <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="136,245,0,0" VerticalAlignment="Top" Width="75"/>
