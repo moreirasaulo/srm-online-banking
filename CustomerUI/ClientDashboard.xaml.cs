@@ -27,7 +27,16 @@ namespace CustomerUI
 
         private void btLogout_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-        }      
+            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to logout?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes) 
+            {
+                Close();
+            }            
+        }
+
+        private void btViewTransactions_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

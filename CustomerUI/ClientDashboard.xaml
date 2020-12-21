@@ -15,11 +15,11 @@
             <Label Name="lblLoggedAs" Content="Logged as client" HorizontalContentAlignment="Center"/>
             <Button Name="btLogout" Click="btLogout_Click" Content="Logout"/>
         </StackPanel>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="272,94,382,263">
+        <Button Name="btViewTransactions" Click="btViewTransactions_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Margin="272,98,382,266" Width="104" Height="94">
             <StackPanel Width="100">
                 <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\people.png" Height="64" Width="80"/>
-                <Label Content="Something here 1" HorizontalAlignment="Center"/>
+                <Label Content="View Transactions" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"
