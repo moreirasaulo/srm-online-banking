@@ -63,5 +63,10 @@ namespace CustomerUI
                 pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
             } 
         }
+
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

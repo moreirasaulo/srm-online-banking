@@ -12,7 +12,7 @@
         <Image HorizontalAlignment="Left" Height="100" Margin="188,20,0,0" Source="/SharedCode;Component/Images/bank.png" VerticalAlignment="Top" Width="100"/>
         <TextBox Name="tbAdminUsername" HorizontalAlignment="Left" Height="23" Margin="180,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="110,183,0,0" VerticalAlignment="Top"/>
-        <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="136,245,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Cancel" IsCancel="True" Name="btCancel" Click="btCancel_Click" HorizontalAlignment="Left" Margin="136,245,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Click="btLoginClicked" Content="Login" IsDefault="True" IsCancel="True" HorizontalAlignment="Left" Margin="231,245,0,0" VerticalAlignment="Top" Width="75"/>
         <PasswordBox Name="pbAdminPassword" HorizontalAlignment="Left" Margin="180,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
     </Grid>

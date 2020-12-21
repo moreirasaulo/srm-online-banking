@@ -32,8 +32,9 @@ namespace BankManagementSys
             var customers = from cust in EFData.context.Users
                             where cust.City == "London"
                             select cust;
-            if (user != null)
+            /*if (user != null)
             {
-            }
+            }*/
+        }
     }
 }
