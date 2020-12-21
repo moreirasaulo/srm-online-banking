@@ -12,15 +12,18 @@ namespace SharedCode
     using System;
     using System.Collections.Generic;
     
-    public partial class Login
+    public partial class PaymentSubCategory
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int UserTypeId { get; set; }
-        public int UserId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PaymentSubCategory()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
     
-        public virtual User User { get; set; }
-        public virtual UserType UserType { get; set; }
+        public int Id { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

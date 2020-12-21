@@ -12,15 +12,18 @@ namespace SharedCode
     using System;
     using System.Collections.Generic;
     
-    public partial class Login
+    public partial class Transaction
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int UserTypeId { get; set; }
-        public int UserId { get; set; }
+        public System.DateTime Date { get; set; }
+        public decimal Amount { get; set; }
+        public Nullable<int> ToAccount { get; set; }
+        public string Type { get; set; }
+        public string PaymentCategory { get; set; }
+        public Nullable<int> PaymentSubCategoryId { get; set; }
+        public int AccountId { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual UserType UserType { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual PaymentSubCategory PaymentSubCategory { get; set; }
     }
 }

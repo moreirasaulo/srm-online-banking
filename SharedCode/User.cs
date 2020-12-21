@@ -14,20 +14,30 @@ namespace SharedCode
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Accounts = new HashSet<Account>();
+            this.Logins = new HashSet<Login>();
+        }
+    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string Gender { get; set; }
+        public string NationalId { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public string PhoneNo { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
         public string Address { get; set; }
-        public string PostalCode { get; set; }
         public string City { get; set; }
         public string ProvinceState { get; set; }
+        public string PostalCode { get; set; }
         public string Country { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public string NationalId { get; set; }
-        public string Gender { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Login> Logins { get; set; }
     }
 }
