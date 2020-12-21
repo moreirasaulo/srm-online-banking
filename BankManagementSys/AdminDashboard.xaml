@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="AdminDashboard" Height="450" Width="800">
+        Title="Admin Dashboard" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="419" Width="159">
             <StackPanel.Background>

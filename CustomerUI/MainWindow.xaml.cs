@@ -42,6 +42,8 @@ namespace CustomerUI
                 if ((login.UserType).ToLower() == "client")
                 {
                     MessageBox.Show("Login successful");
+                    ClientDashboard client = new ClientDashboard(username);
+                    client.Show();                   
                 }
                 else
                 {
@@ -61,7 +63,5 @@ namespace CustomerUI
                 pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
             } 
         }
-
-        
     }
 }
