@@ -36,7 +36,18 @@ namespace CustomerUI
 
         private void btViewTransactions_Click(object sender, RoutedEventArgs e)
         {
-
+            string client = lblLoggedAs.Content as string;
+            try
+            {
+                string client1 = client.Substring(10, client.Length - 1);// not working, client1 = null
+            }
+            catch (ArgumentOutOfRangeException ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+            ViewTransactions transactions = new ViewTransactions();
+            transactions.Show();
         }
     }
 }

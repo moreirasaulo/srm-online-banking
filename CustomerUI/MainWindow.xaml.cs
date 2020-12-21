@@ -27,6 +27,8 @@ namespace CustomerUI
             InitializeComponent();
         }
 
+        User user = null;
+
 
         private void btLoginClicked(object sender, RoutedEventArgs e)
         {
@@ -35,6 +37,8 @@ namespace CustomerUI
 
             
             Login login = EFData.context.Logins.SingleOrDefault(u => u.Username == username && u.Password == password);
+
+            user = EFData.context.Users.SingleOrDefault(u => u.Id == login.UserId);
 
             
             if (login != null)
