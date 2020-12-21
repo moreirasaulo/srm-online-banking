@@ -34,10 +34,10 @@ namespace BankManagementSys
             string username = tbAdminUsername.Text;
             string password = pbAdminPassword.Password;
 
-            var user = EFData.context.Logins.FirstOrDefault(u => u.Username == username && u.Password == password);
-            if (user != null)
+            Login login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password);
+            if (login != null)
             {
-                if ((user.UserType).ToLower() == "admin")
+                if (login.UserTypeId == 2)
                 {
                     MessageBox.Show("Login successful");
                     AdminDashboard adminDashDlg = new AdminDashboard();
@@ -59,18 +59,5 @@ namespace BankManagementSys
         {
             Close();
         }
-
-
-
-
-
-
-
-        /*   private bool VerifyUser(string username, string password)
-           {
-              string query =  "SELECT UserType FROM Users WHERE Username ='" + username + "' AND Password = '" + password + "'";
-               string reader;
-               if(reader )
-           }  */
     }
 }

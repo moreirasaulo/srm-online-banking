@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace CustomerUI
     /// </summary>
     public partial class ViewTransactions : Window
     {
-        public ViewTransactions()
+        //public List<>
+        User loggedInUser = null;
+        public ViewTransactions(User loggedInUser)
         {
             InitializeComponent();
+            lblLoggedInAs.Content = "Logged as " + loggedInUser.FirstName + " " + loggedInUser.LastName;
         }
     }
 }

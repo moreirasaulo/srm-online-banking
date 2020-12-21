@@ -8,7 +8,7 @@ namespace SharedCode
 {
     public class EFData
     {
-        public static BankManagementSysEntities1 context = new BankManagementSysEntities1();
+        public static BankDbConnection context = new BankDbConnection();
 
         
     }

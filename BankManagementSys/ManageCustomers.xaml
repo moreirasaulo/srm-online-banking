@@ -34,6 +34,6 @@
         <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="154,13,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,35,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,58,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="79,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
+        <Label Foreground="Red" Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="79,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
     </Grid>
 </Window>

@@ -29,24 +29,20 @@ namespace CustomerUI
 
         User user = null;
 
-
         private void btLoginClicked(object sender, RoutedEventArgs e)
         {
             string username = tbClientUsername.Text;
             string password = pbClientPassword.Password;
-
             
-            Login login = EFData.context.Logins.SingleOrDefault(u => u.Username == username && u.Password == password);
-
-            user = EFData.context.Users.SingleOrDefault(u => u.Id == login.UserId);
-
+            Login login = EFData.context.Logins.SingleOrDefault(l => l.Username == username && l.Password == password);          
             
             if (login != null)
             {
-                if ((login.UserType).ToLower() == "client")
+                if (login.UserTypeId == 3)
                 {
+                    user = EFData.context.Users.SingleOrDefault(u => u.Id == login.UserId); // fix null case
                     MessageBox.Show("Login successful");
-                    ClientDashboard client = new ClientDashboard(username);
+                    ClientDashboard client = new ClientDashboard(user);
                     client.Show();                   
                 }
                 else

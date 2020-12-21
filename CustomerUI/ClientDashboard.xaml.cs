@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,12 @@ namespace CustomerUI
     /// </summary>
     public partial class ClientDashboard : Window
     {
-        public ClientDashboard(string client)
+        User loggedInUser = null;
+        public ClientDashboard(User user)
         {
             InitializeComponent();
-            lblLoggedAs.Content = "Logged as " + client;
+            loggedInUser = user;
+            lblLoggedAs.Content = "Logged as " + user.FirstName + " " + user.LastName;
         }
 
         private void btLogout_Click(object sender, RoutedEventArgs e)
@@ -46,7 +49,7 @@ namespace CustomerUI
                 MessageBox.Show(ex.Message);
             }
             
-            ViewTransactions transactions = new ViewTransactions();
+            ViewTransactions transactions = new ViewTransactions(loggedInUser);
             transactions.Show();
         }
     }

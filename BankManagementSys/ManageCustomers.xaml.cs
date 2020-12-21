@@ -27,33 +27,37 @@ namespace BankManagementSys
 
         private void btFind_Click(object sender, RoutedEventArgs e)
         {
-            string searchCriteria = "";
 
             List<User> customers = new List<User>();
 
+            string searchInfo = tbSearchCustBy.Text;
+
             if (rbNatId.IsChecked == true)
             {
-                searchCriteria = "NationalId";
-              /*  customers = (from cust in EFData.context.Users
-                             where cust.NationalId == searchCriteria
-                             select cust).ToList(); */
-
-                customers = EFData.context.Users.Where(cust => cust.NationalId == searchCriteria).ToList();
+                customers = EFData.context.Users.Where(cust => cust.NationalId == searchInfo).ToList();
             }
             else if (rbAccNo.IsChecked == true)
             {
-                searchCriteria = "Id";
+                int searchInfoAccNo;
+
+                try
+                {
+                    searchInfoAccNo = Int32.Parse(searchInfo);
+                }
+                catch(FormatException ex)
+                {
+                    MessageBox.Show("Please eneter correct account number (just digits)");
+                    return;
+                }
                 customers = (from cust in EFData.context.Users
-                             join acc in EFData.context.Accounts on acc.UserId equals cust.Id
-                             where acc.Id == searchCriteria
+                             join acc in EFData.context.Accounts on cust.Id equals acc.UserId
+                             where acc.Id == searchInfoAccNo
                              select cust).ToList();
+
             }
             else if(rbLastName.IsChecked == true)
             {
-                searchCriteria = "LastName";
-                customers = (from cust in EFData.context.Users
-                             where cust.LastName == searchCriteria
-                             select cust).ToList();
+                customers = EFData.context.Users.Where(cust => cust.LastName == searchInfo).ToList();
             }
             else
             {
@@ -61,13 +65,13 @@ namespace BankManagementSys
                 return;
             }
 
-            string searchInfo = tbSearchCustBy.Text;
-
-            List<User> 
+            tbSearchCustBy.Text = "";
             lvCustomers.ItemsSource = customers;
-            if(customers.Count() == 0)
+            lblEmptyResult.Content = "";
+            if (customers.Count() == 0)
             {
                 lblEmptyResult.Content = "No customers that satisfy search criteria found";
+               
             }
         }   
     }
