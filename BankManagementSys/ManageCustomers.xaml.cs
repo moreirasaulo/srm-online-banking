@@ -25,54 +25,26 @@ namespace BankManagementSys
             InitializeComponent();
         }
 
-        private void btFind_Click(object sender, RoutedEventArgs e)
+       
+
+        private void btBackToDashClicked(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
+        }
 
-            List<User> customers = new List<User>();
+        private void btAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            AddCustomer dlgAddCust = new AddCustomer();
+            dlgAddCust.Owner = this;
+            dlgAddCust.ShowDialog();
 
-            string searchInfo = tbSearchCustBy.Text;
+        }
 
-            if (rbNatId.IsChecked == true)
-            {
-                customers = EFData.context.Users.Where(cust => cust.NationalId == searchInfo).ToList();
-            }
-            else if (rbAccNo.IsChecked == true)
-            {
-                int searchInfoAccNo;
-
-                try
-                {
-                    searchInfoAccNo = Int32.Parse(searchInfo);
-                }
-                catch(FormatException ex)
-                {
-                    MessageBox.Show("Please eneter correct account number (just digits)");
-                    return;
-                }
-                customers = (from cust in EFData.context.Users
-                             join acc in EFData.context.Accounts on cust.Id equals acc.UserId
-                             where acc.Id == searchInfoAccNo
-                             select cust).ToList();
-
-            }
-            else if(rbLastName.IsChecked == true)
-            {
-                customers = EFData.context.Users.Where(cust => cust.LastName == searchInfo).ToList();
-            }
-            else
-            {
-                MessageBox.Show("Please select one search criteria");
-                return;
-            }
-
-            tbSearchCustBy.Text = "";
-            lvCustomers.ItemsSource = customers;
-            lblEmptyResult.Content = "";
-            if (customers.Count() == 0)
-            {
-                lblEmptyResult.Content = "No customers that satisfy search criteria found";
-               
-            }
-        }   
+        private void btManageExistingCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            ManageExistingCustomers dlgManageExistCust = new ManageExistingCustomers();
+            dlgManageExistCust.Owner = this;
+            dlgManageExistCust.ShowDialog();
+        }
     }
 }
