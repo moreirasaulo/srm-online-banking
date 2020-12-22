@@ -20,12 +20,12 @@ namespace CustomerUI
     /// </summary>
     public partial class ClientDashboard : Window
     {
-        User loggedInUser = null;
-        public ClientDashboard(User user)
+        public ClientDashboard()
         {
             InitializeComponent();
-            loggedInUser = user;
-            lblLoggedAs.Content = "Logged as " + user.FirstName + " " + user.LastName;
+            lblLoggedAs.Content = string.Format("Logged as {0} {1}", Utils.loggedInUser.FirstName,
+                Utils.loggedInUser.LastName);
+
         }
 
         private void btLogout_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace CustomerUI
 
         private void btViewTransactions_Click(object sender, RoutedEventArgs e)
         {
-            string client = lblLoggedAs.Content as string;
+          /*  string client = lblLoggedAs.Content as string;
             try
             {
                 string client1 = client.Substring(10, client.Length - 1);// not working, client1 = null
@@ -47,9 +47,9 @@ namespace CustomerUI
             catch (ArgumentOutOfRangeException ex) 
             {
                 MessageBox.Show(ex.Message);
-            }
+            }  */
             
-            ViewTransactions transactions = new ViewTransactions(loggedInUser);
+            ViewTransactions transactions = new ViewTransactions();
             transactions.Show();
         }
     }

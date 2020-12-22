@@ -20,12 +20,38 @@ namespace CustomerUI
     /// </summary>
     public partial class ViewTransactions : Window
     {
-        //public List<>
-        User loggedInUser = null;
-        public ViewTransactions(User loggedInUser)
+        
+        public ViewTransactions()
         {
             InitializeComponent();
-            lblLoggedInAs.Content = "Logged as " + loggedInUser.FirstName + " " + loggedInUser.LastName;
+            lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.loggedInUser.FirstName,
+                Utils.loggedInUser.LastName);
+            LoadUserAccounts();
+            comboAccountType.ItemsSource = Utils.userAccounts;
+            if (Utils.userAccounts.Count == 0)
+            {
+                lblError.Content = "There's no bank account linked to your profile yet.";
+                return;
+            }
+           
+        }
+
+        private void LoadUserAccounts()
+        {
+            Utils.userAccounts = EFData.context.Accounts.Where(a => a.UserId == Utils.loggedInUser.Id).ToList();
+        }
+
+        private void btShowTransactionsClicked(object sender, RoutedEventArgs e)
+        {
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc == null)
+            {
+                MessageBox.Show("Please choose an acount to view transactions");
+                return;
+            }
+            Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
+            selectedAcc.Id).ToList();
+            lvTransactions.ItemsSource = Utils.userTransactions;
         }
     }
 }
