@@ -5,35 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ManageCustomers" Height="450" Width="800">
+        Title="Manage Customers" Height="345" Width="541">
     <Grid>
-        <ListView Name="lvCustomers" HorizontalAlignment="Left" Height="185" Margin="79,99,0,0" VerticalAlignment="Top" Width="602">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
-                    <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding Path=LastName}" />
-                    <GridViewColumn Header="National Id" Width="120" DisplayMemberBinding="{Binding Path=NationalId}" />
-                    <GridViewColumn Header="DOB" Width="120" DisplayMemberBinding="{Binding Path=DateOfBirth}" />
-                    <GridViewColumn Header="Address" Width="120" DisplayMemberBinding="{Binding Path=Address}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Content="Search by" HorizontalAlignment="Left" Margin="75,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="272,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="480,25,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="176,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="311,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="447,353,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button
-        Margin="714,331,18,21">
-            <StackPanel Width="31">
-                <Image Source="/SharedCode;Component/Images/exit.png"/>
-                <Label Content="Close" HorizontalAlignment="Center" Margin="-6,0,-18,0" Width="55"/>
+        <Button Name="btAddCustomer"
+        Margin="81,86,292,132" Height="96" Click="btAddCustomer_Click">
+            <StackPanel Width="120">
+                <Image Source="/SharedCode;Component/Images/addPerson.png" Height="64" Width="80"/>
+                <Label Content="Add new customer" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="154,13,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,35,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="154,58,0,0" VerticalAlignment="Top"/>
-        <Label Foreground="Red" Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="79,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
+        <Button Click="btManageExistingCustomers_Click" Name="btManageExistingCustomers"
+        Margin="311,86,65,132" Height="96">
+            <StackPanel Width="120">
+                <Image Source="/SharedCode;Component/Images/manageClients.png" Height="64" Width="80"/>
+                <Label Content="Manage existing customers" HorizontalAlignment="Center" Margin="-17,0,-20,0" Width="157"/>
+            </StackPanel>
+        </Button>
+        <Button Click="btBackToDashClicked"
+        Margin="438,232,10,10">
+            <StackPanel Width="31">
+                <Image Source="/SharedCode;Component/Images/exit.png"/>
+                <Label Content="To dashboard" HorizontalAlignment="Center" Margin="-24,0,-27,0" Width="82"/>
+            </StackPanel>
+        </Button>
+
     </Grid>
 </Window>

@@ -117,12 +117,14 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Images\exit.png" />
-    <Content Include="Images\file.png" />
-    <Content Include="Images\folder.png" />
-    <Content Include="Images\handMoney.png" />
-    <Content Include="Images\people.png" />
-    <Content Include="Images\person.png" />
+    <Resource Include="Images\manageClients.png" />
+    <Resource Include="Images\addPerson.png" />
+    <Resource Include="Images\exit.png" />
+    <Resource Include="Images\file.png" />
+    <Resource Include="Images\folder.png" />
+    <Resource Include="Images\handMoney.png" />
+    <Resource Include="Images\people.png" />
+    <Resource Include="Images\person.png" />
     <Resource Include="Images\bank.png" />
     <Resource Include="Images\handCard.png" />
   </ItemGroup>
