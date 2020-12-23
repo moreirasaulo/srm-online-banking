@@ -24,20 +24,18 @@
         </ListView>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="89" Margin="24,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="96"/>
         <Label Content="Nice image here" HorizontalAlignment="Left" Margin="24,49,0,0" VerticalAlignment="Top"/>
-        <Button Content="Make a Transfer" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Content="Make a Payment" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Name="btMakeTransfer" Content="Make a Transfer" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Name="btMakePayment" Content="Make a Payment" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
         <Button Name="btPDF" Content="Save as .PDF" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
         <Button Name="btShowTransactions" Click="btShowTransactionsClicked" Content="Show transactions" HorizontalAlignment="Left" Margin="406,63,0,0" VerticalAlignment="Top" Width="171" Height="26"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbAll" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbDeposits" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbWithdrawals" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbTransfers" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="466,115,0,0" VerticalAlignment="Top" Width="111">
-            <ComboBoxItem Content="7 days" IsSelected="True" HorizontalAlignment="Left" Width="118"/>
-            <ComboBoxItem Content="30 days" HorizontalAlignment="Left" Width="118"/>
-            <ComboBoxItem Content="60 days" HorizontalAlignment="Left" Width="118"/>
-        </ComboBox>
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="474,117,0,0" VerticalAlignment="Top" Width="120"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="385,135,0,0" VerticalAlignment="Top"/>
+        
     </Grid>
 </Window>

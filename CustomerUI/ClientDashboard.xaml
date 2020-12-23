@@ -18,28 +18,28 @@
         <Button Name="btViewTransactions" Click="btViewTransactions_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="272,98,382,266" Width="104" Height="94">
             <StackPanel Width="100">
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\people.png" Height="64" Width="80"/>
+                <Image Source="/SharedCode;Component/Images/handMoney.png" Height="64" Width="80"/>
                 <Label Content="View Transactions" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="462,95,188,262" >
             <StackPanel>
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\folder.png" Height="64" Width="80"/>
+                <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>
                 <Label Content="Something here 2" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="462,280,188,76" Width="108" Height="102">
             <StackPanel Height="99" Width="96">
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\paper.png" Height="72" Width="Auto" Margin="10,0,8,0"/>
+                <Image Source="/SharedCode;Component/Images/people.png" Height="72" Width="Auto" Margin="10,0,8,0"/>
                 <Label Content="Something here 4" HorizontalAlignment="Center" Width="98" Margin="-2,0,0,0"/>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="272,280,382,76" Width="104" Height="102" >
             <StackPanel Height="99">
-                <Image Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\money.png" Height="78" Width="80"/>
+                <Image Source="/SharedCode;Component/Images/people.png" Height="78" Width="80"/>
                 <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="19" RenderTransformOrigin="0.479,1.211"><Run Text="Something here 3"/></TextBlock>
             </StackPanel>
         </Button>
