@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ManageExistingCustomers" Height="459.945" Width="933.011">
+        Title="ManageExistingCustomers" Height="459.945" Width="781.011">
     <Grid>
         <ListView Name="lvCustomers" HorizontalAlignment="Left" Height="152" Margin="36,99,0,0" VerticalAlignment="Top" Width="580">
             <ListView.View>
@@ -20,20 +20,13 @@
         <Label Content="Search by" HorizontalAlignment="Left" Margin="35,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="232,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="440,25,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Click="btViewCustProfileClicked" Content="View full customer profile" HorizontalAlignment="Left" Margin="121,306,0,0" VerticalAlignment="Top" Width="150" Height="37"/>
-        <Button Content="Update customer profile" HorizontalAlignment="Left" Margin="334,306,0,0" VerticalAlignment="Top" Width="142" Height="37"/>
-        <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="226" Margin="647,25,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label Content="Customer id:" HorizontalAlignment="Left" Margin="662,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Button Click="btViewCustProfileClicked" Content="View/Update full customer profile" HorizontalAlignment="Left" Margin="218,290,0,0" VerticalAlignment="Top" Width="221" Height="37"/>
         <Label Content="" HorizontalAlignment="Left" Margin="737,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
-        <Label Content="First name:" HorizontalAlignment="Left" Margin="665,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
-        <Label Content="First name:" HorizontalAlignment="Left" Margin="665,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
         <Label Content="" HorizontalAlignment="Left" Margin="708,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
-        <Label Content="Account type:" HorizontalAlignment="Left" Margin="665,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
         <Label Content="" HorizontalAlignment="Left" Margin="748,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
-        <Label Content="Balance:" HorizontalAlignment="Left" Margin="665,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
         <Label Content="" HorizontalAlignment="Left" Margin="751,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Button Click="btBackToDashClicked"
-        Margin="805,290,18,22">
+        Margin="629,287,44,25">
             <StackPanel Width="31">
                 <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="To Manage Customers" HorizontalAlignment="Center" Margin="-24,0,-27,0" Width="82"/>

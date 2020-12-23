@@ -27,12 +27,12 @@ namespace CustomerUI
             InitializeComponent();
             comboHistory.Items.Add("7 days");
             comboHistory.Items.Add("30 days");
-            comboHistory.Items.Add("60 days"); //FIX items are not loading to combo from list
+            comboHistory.Items.Add("60 days");
 
             
             lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
                 Utils.login.User.LastName);
-           // LoadUserAccounts();
+      
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
             comboAccountType.DisplayMemberPath = "AccountType.Description";
             
