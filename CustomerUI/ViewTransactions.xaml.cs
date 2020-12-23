@@ -141,5 +141,21 @@ namespace CustomerUI
         {
             DialogResult = true;
         }
+
+        private void btMakeTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            MakeTransfer transfer = new MakeTransfer();
+            transfer.Show();
+        }
+
+        private void btMakePayment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btPDF_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -24,10 +24,10 @@
         </ListView>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="89" Margin="24,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="96"/>
         <Label Content="Nice image here" HorizontalAlignment="Left" Margin="24,49,0,0" VerticalAlignment="Top"/>
-        <Button Name="btMakeTransfer" Content="Make a Transfer" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Name="btMakePayment" Content="Make a Payment" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Name="btMakeTransfer" Content="Make a Transfer" Click="btMakeTransfer_Click" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Name="btMakePayment" Content="Make a Payment" Click="btMakePayment_Click" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
-        <Button Name="btPDF" Content="Save as .PDF" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Name="btPDF" Content="Save as .PDF" Click="btPDF_Click" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
         <Button Name="btShowTransactions" Click="btShowTransactionsClicked" Content="Show transactions" HorizontalAlignment="Left" Margin="433,63,0,0" VerticalAlignment="Top" Width="218" Height="26"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
