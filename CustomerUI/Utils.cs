@@ -10,8 +10,6 @@ namespace CustomerUI
     public class Utils
     {
         public static Login login;
-
         public static List<Transaction> userTransactions;
-        
     }
 }

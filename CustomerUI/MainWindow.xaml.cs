@@ -27,14 +27,12 @@ namespace CustomerUI
             InitializeComponent();
         }
 
-        
-
         private void btLoginClicked(object sender, RoutedEventArgs e)
         {
             string username = tbClientUsername.Text;
             string password = pbClientPassword.Password;
             
-            Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);
+            Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);          
             
             if (Utils.login != null)
             {
@@ -62,7 +60,6 @@ namespace CustomerUI
                 pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
             } 
         }
-
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {

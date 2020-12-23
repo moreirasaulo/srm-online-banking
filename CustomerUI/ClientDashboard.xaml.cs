@@ -50,7 +50,7 @@ namespace CustomerUI
             }  */
             
             ViewTransactions transactions = new ViewTransactions();
-            transactions.Show();
+            transactions.ShowDialog();
         }
     }
 }
