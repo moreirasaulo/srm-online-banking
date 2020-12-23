@@ -29,7 +29,6 @@
         <TextBox Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="126,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
         <TextBox Name="tbProvinceState" HorizontalAlignment="Left" Height="23" Margin="126,291,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
         <TextBox Name="tbPostalCode" HorizontalAlignment="Left" Height="23" Margin="126,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="126,353,0,0" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
         <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" HorizontalAlignment="Left" Margin="126,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="182,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="248,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
@@ -45,6 +44,7 @@
                 <Label Content="Customers"  Width="113" Margin="19,-9,-21,0"/>
             </StackPanel>
         </Button>
+        <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="126,353,0,0" VerticalAlignment="Top" Width="177"/>
 
     </Grid>
 </Window>

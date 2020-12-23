@@ -25,6 +25,7 @@ namespace BankManagementSys
         {
             currentUser = user;
             InitializeComponent();
+            comboCountry.ItemsSource = Utils.Countries;
             DeactivateFields();
             LoadCustomerInfoToFileds();
             
@@ -54,7 +55,7 @@ namespace BankManagementSys
             tbCity.Text = currentUser.City;
             tbProvinceState.Text = currentUser.ProvinceState;
             tbPostalCode.Text = currentUser.PostalCode;
-            comboCountry.SelectedItem = currentUser.Country;
+            comboCountry.Text = currentUser.Country;
         }
 
         private void DeactivateFields()
