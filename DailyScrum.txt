@@ -59,3 +59,29 @@ password: z77smMQEXz
 - Clarify connections between tables
 
 
+2020/12/22 Ksenia
+1. Done/not done since last scrum:
+- Implemented Manage customers window
+- Implemented search existing customer by last Name and Account No
+- Implemented view customers
+2. To do until next scrum:
+- Add new customer
+- Update existing customer
+- Delete existing customer
+- View complete customer profile
+3. Need assistance:
+- Find out how to store history of account balance
+
+2020/12/22 Saulo
+1. Done/not done since last scrum:
+- implemented list of customer's accounts
+- implemented list of account transactions
+- fixed images on dashboard
+2. To do until next scrum:
+- Implement sorting for transactions (by date and type)
+- Implement Tranfer, Payment buttons
+- Implement Logout button
+3. Need assistance:
+- transactions sorting
+
+
