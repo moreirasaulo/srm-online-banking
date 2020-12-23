@@ -85,3 +85,31 @@ password: z77smMQEXz
 - transactions sorting
 
 
+2020/12/23 Ksenia
+1. Done/not done since last scrum:
+- Implemented update existing customer
+- Partially implemented add new customer
+- Implemented 'view complete customer's profile'
+- option 'delete customer' was removed from project
+- did not fiure how to store history of account balance
+2. To do until next scrum:
+- add validation to add/update customer
+- implement 'manage accounts' window in admin interface
+- implement add new account
+-implement search existing accounts
+3. Need assistance:
+- Find out how to store history of account balance
+
+
+2020/12/23 Saulo
+1. Done/not done since last scrum:
+- implemented sorting for transactions by date and type
+- implemented logout button
+- fixed existing user accounts
+- did not implement transfer and payment
+2. To do until next scrum:
+- Implement Tranfer, Payment buttons
+- Implement payment categories
+- Implement window 'create payment subcategories'
+3. Need assistance:
+- sorting by date and type at the same time
