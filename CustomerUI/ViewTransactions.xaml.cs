@@ -31,14 +31,15 @@ namespace CustomerUI
         public ViewTransactions()
         {
             InitializeComponent();
-            comboHistory.Items.Add("7 days");
-            comboHistory.Items.Add("30 days");
-            comboHistory.Items.Add("60 days"); //FIX items are not loading to combo from list
+            foreach (string item in transactionHistoryDays)
+            {
+                comboHistory.Items.Add(item);
+            }
 
             
             lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
                 Utils.login.User.LastName);
-           // LoadUserAccounts();
+           
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
             comboAccountType.DisplayMemberPath = "AccountType.Description";
             
@@ -114,24 +115,6 @@ namespace CustomerUI
             }
         }
 
-        private void btShowTransactionsClicked(object sender, RoutedEventArgs e)
-        {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if (selectedAcc == null)
-            {
-                MessageBox.Show("Please choose an acount to view transactions");
-                return;
-            }
-
-            Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            selectedAcc.Id).ToList();
-            
-
-            SortTransactionsByTypeAndDate();
-            comboHistory.SelectedIndex = 0;
-
-        }
-
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             SortTransactionsByTypeAndDate(); 
@@ -154,6 +137,8 @@ namespace CustomerUI
             MakeTransfer transfer = new MakeTransfer();
             transfer.Show();
         }
+
+
 
         private void btMakePayment_Click(object sender, RoutedEventArgs e)
         {
@@ -197,6 +182,7 @@ namespace CustomerUI
                 //Create a DataTable.
                 DataTable dataTable = new DataTable();
                 //Add columns to the DataTable
+               // Utils.login.User.FirstName
                 dataTable.Columns.Add("Transaction Type");
                 dataTable.Columns.Add("Date");
                 dataTable.Columns.Add("Amount");
@@ -221,6 +207,24 @@ namespace CustomerUI
             {
                 MessageBox.Show(ex.Message + "Error");
             }
+        }
+
+        private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc == null)
+            {
+                MessageBox.Show("Please choose an acount to view transactions");
+                return;
+            }
+            tbBalance.Text = selectedAcc.Balance + "";
+
+            Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
+            selectedAcc.Id).ToList();
+
+
+            SortTransactionsByTypeAndDate();
+            comboHistory.SelectedIndex = 0;
         }
     }
 }

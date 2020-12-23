@@ -8,7 +8,7 @@
         Title="View Transactions" Height="482" Width="697">
     <Grid>
         <Label Content="Select Account:" HorizontalAlignment="Left" Margin="145,63,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="161">
+        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
 
         </ComboBox>
         <Label Name="lblLoggedInAs" Content="Logged as Client" HorizontalAlignment="Left" Margin="145,15,0,0" VerticalAlignment="Top"/>
@@ -23,13 +23,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="89" Margin="24,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="96"/>
-        <Label Content="Nice image here" HorizontalAlignment="Left" Margin="24,49,0,0" VerticalAlignment="Top"/>
         <Button Name="btMakeTransfer" Content="Make a Transfer" Click="btMakeTransfer_Click" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
         <Button Name="btMakePayment" Content="Make a Payment" Click="btMakePayment_Click" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
         <Button Name="btPDF" Content="Save as .PDF" Click="btPDF_Click" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Name="btShowTransactions" Click="btShowTransactionsClicked" Content="Show transactions" HorizontalAlignment="Left" Margin="433,63,0,0" VerticalAlignment="Top" Width="218" Height="26"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
@@ -37,6 +34,8 @@
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
-
+        <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
+        <TextBox Name="tbBalance" HorizontalAlignment="Left" Height="23" Margin="544,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/handMoney.png"  VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
