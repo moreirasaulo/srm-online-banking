@@ -23,38 +23,8 @@ namespace CustomerUI
         public MakeTransfer()
         {
             InitializeComponent();
-
-        }
-
-        private bool ValidateFields()
-        {
-            Account selectedAcc = (Account)comboAccounts.SelectedItem;
-            if (selectedAcc == null)
-            {
-                MessageBox.Show("Please choose an account to make transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            int destinationAccNo;
-            int.TryParse(tbBeneficiaryAcct.Text, out destinationAccNo);  //FIX exception
-            Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
-            if(beneficiaryAcc == null)
-            {
-                MessageBox.Show("Destination account does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            decimal amount = 0;
-            decimal.TryParse(tbAmount.Text, out amount); //FIX exception
-            if (amount < 0)
-            {
-                MessageBox.Show("You cannot transfer negative amount", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (amount > selectedAcc.Balance)
-            {
-                MessageBox.Show("You do not have sufficinet funds to make this transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            return true;
+            comboAccountType.ItemsSource = Utils.login.User.Accounts;
+            comboAccountType.DisplayMemberPath = "AccountType.Description";
         }
 
         private void btOK_Click(object sender, RoutedEventArgs e)
@@ -62,7 +32,7 @@ namespace CustomerUI
             MessageBoxResult answer = MessageBox.Show("Are you sure you would like to proceed with this transfer?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                Account selectedAcc = (Account)comboAccounts.SelectedItem;
+                Account selectedAcc = (Account)comboAccountType.SelectedItem;
                 if (!ValidateFields()) { return; }
 
                 decimal amount = 0;
@@ -96,11 +66,66 @@ namespace CustomerUI
             }
         }
 
+        private bool ValidateFields()
+        {
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc == null)
+            {
+                MessageBox.Show("Please choose an account to make transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            int destinationAccNo;
+            int.TryParse(tbBeneficiaryAcct.Text, out destinationAccNo);  //FIX exception
+            Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
+            if (beneficiaryAcc == null)
+            {
+                MessageBox.Show("Destination account does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            decimal amount = 0;
+            decimal.TryParse(tbAmount.Text, out amount); //FIX exception
+            if (amount < 0)
+            {
+                MessageBox.Show("You cannot transfer negative amount", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (amount > selectedAcc.Balance)
+            {
+                MessageBox.Show("You do not have sufficinet funds to make this transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
+
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-       
+        private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc == null)
+            {
+                tbBalance.Text = "";
+            }
+            tbBalance.Text = selectedAcc.Balance + "";
+        }
+
+        private void tbBeneficiaryAcct_KeyDown(object sender, KeyEventArgs e)
+        {
+            for (int i = 0; i <= 9; i++)
+            {
+                if (e.Key.ToString() != i + "")
+                {
+                    MessageBox.Show("Only numbers are accepted.");
+                    return;
+                }
+            }
+            
+            //MessageBox.Show(e.Key.ToString() + " " + e.SystemKey.ToString());
+            
+        }
     }
 }

@@ -8,17 +8,17 @@
         Title="Make a transfer to another account" Height="322.804" Width="499.711">
     <Grid>
         <Label Content="Select your account:" HorizontalAlignment="Left" Margin="29,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboAccounts_SelectionChanged" Name="comboAccounts" HorizontalAlignment="Left" Margin="150,25,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Current balance:" HorizontalAlignment="Left" Margin="275,25,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="150,25,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboAccountType_SelectionChanged"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Margin="275,25,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbBalance" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="333,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Account number of the beneficiary:" HorizontalAlignment="Left" Margin="29,75,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbBeneficiaryAcct" HorizontalAlignment="Left" Height="23" Margin="230,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223"/>
+        <TextBox Name="tbBeneficiaryAcct" HorizontalAlignment="Left" Height="23" Margin="230,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223" KeyDown="tbBeneficiaryAcct_KeyDown"/>
         <Button Name="btCancel" Content="Cancel" Click="btCancel_Click" IsCancel="True" HorizontalAlignment="Left" Margin="258,224,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
         <Label Content="New balance:" HorizontalAlignment="Left" Margin="144,163,0,0" VerticalAlignment="Top" Width="86"/>
         <TextBox Name="tbNewBalance" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="230,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="144,122,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="208,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="142"/>
         <Button Name="btOK" Click="btOK_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="361,224,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
-        <Label Name="lblCurrentBalance" Content="." HorizontalAlignment="Left" Margin="373,25,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
