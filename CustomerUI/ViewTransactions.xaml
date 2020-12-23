@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="View Transactions" Height="482" Width="624">
+        Title="View Transactions" Height="482" Width="697">
     <Grid>
         <Label Content="Select Account:" HorizontalAlignment="Left" Margin="145,63,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="131">
+        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="161">
 
         </ComboBox>
         <Label Name="lblLoggedInAs" Content="Logged as Client" HorizontalAlignment="Left" Margin="145,15,0,0" VerticalAlignment="Top"/>
-        <Button Name="btLogOut" Content="Log Out" HorizontalAlignment="Left" Margin="501,18,0,0" VerticalAlignment="Top" Width="76"/>
-        <ListView Name="lvTransactions" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="432">
+        <Button Click="btBackToDash_Click" Name="btBackToDash" Content="Back to dashboard" HorizontalAlignment="Left" Margin="544,18,0,0" VerticalAlignment="Top" Width="107"/>
+        <ListView Name="lvTransactions" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="506">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Transaction Type" Width="160" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Date" Width="120" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
-                    <GridViewColumn Header="Amount" Width="150" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
+                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -28,14 +28,14 @@
         <Button Name="btMakePayment" Content="Make a Payment" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
         <Button Name="btPDF" Content="Save as .PDF" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Name="btShowTransactions" Click="btShowTransactionsClicked" Content="Show transactions" HorizontalAlignment="Left" Margin="406,63,0,0" VerticalAlignment="Top" Width="171" Height="26"/>
+        <Button Name="btShowTransactions" Click="btShowTransactionsClicked" Content="Show transactions" HorizontalAlignment="Left" Margin="433,63,0,0" VerticalAlignment="Top" Width="218" Height="26"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="474,117,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="385,135,0,0" VerticalAlignment="Top"/>
-        
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

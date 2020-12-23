@@ -25,17 +25,17 @@ namespace CustomerUI
         public ViewTransactions()
         {
             InitializeComponent();
+            comboHistory.Items.Add("7 days");
+            comboHistory.Items.Add("30 days");
+            comboHistory.Items.Add("60 days"); //FIX items are not loading to combo from list
+
             
             lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
                 Utils.login.User.LastName);
            // LoadUserAccounts();
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
             comboAccountType.DisplayMemberPath = "AccountType.Description";
-            comboHistory.Items.Add("7 days");
-            comboHistory.Items.Add("30 days");
-            comboHistory.Items.Add("60 days"); //FIX items are not loading to combo from list
-
-            comboHistory.SelectedIndex = 0;
+            
             if (Utils.login.User.Accounts.Count == 0)
             {
                 lblError.Content = "There's no bank account linked to your profile yet.";
@@ -44,22 +44,7 @@ namespace CustomerUI
            
         }
 
-     /*   private void LoadUserAccounts()
-        {
-            Utils.userAccounts = EFData.context.Accounts.Where(a => a.UserId == Utils.loggedInUser.Id).ToList();
-
-            foreach (Account account in Utils.userAccounts)
-            {
-                account.AccountType = EFData.context.AccountTypes.FirstOrDefault(t => t.Id == account.AccountTypeId);
-
-                //account.Transactions = EFData.context.Transactions.Where(tr => tr.AccountId == account.Id).ToList();
-
-                account.User = EFData.context.Users.FirstOrDefault(u => u.Id == account.UserId);
-
-            }           
-        } */
-
-        private void SortTransactions()
+        private void SortTransactionsByTypeAndDate()
         {
             List<Transaction> sortedTransactions = new List<Transaction>();
 
@@ -67,48 +52,60 @@ namespace CustomerUI
             if (rbTransactAll.IsChecked == true)
             { 
                 sortedTransactions = Utils.userTransactions;
-
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
             else if (rbTransacDeposits.IsChecked == true)
             {
                 sortedTransactions = Utils.userTransactions.Where(t => t.Type == "Deposit").ToList();
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
             else if (rbTransacWithdrawals.IsChecked == true)
             {
                 sortedTransactions = Utils.userTransactions.Where(t => t.Type == "Withdrawal").ToList();
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
             else if (rbTransacTransfers.IsChecked == true)
             {
                 sortedTransactions = Utils.userTransactions.Where(t => t.Type == "Transfer").ToList();
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
             else if (rbTransacPayments.IsChecked == true)
             {
                 sortedTransactions = Utils.userTransactions.Where(t => t.Type == "Payment").ToList();
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
             else
             {
                 sortedTransactions = Utils.userTransactions;
+                //by date
+                sortedTransactions = SortTransactionsByDate(sortedTransactions);
             }
+            lvTransactions.ItemsSource = sortedTransactions;
+        }
 
-            //by date
-            if(comboHistory.SelectedIndex == 0)
+        private List<Transaction> SortTransactionsByDate(List<Transaction> list)
+        {
+            if (comboHistory.SelectedIndex == 0)
             {
-                sortedTransactions = Utils.userTransactions.Where(t => (DateTime.Now - t.Date).TotalDays <= 7).ToList();
+                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 7);
             }
             else if (comboHistory.SelectedIndex == 1)
             {
-                sortedTransactions = Utils.userTransactions.Where(t => (DateTime.Now - t.Date).TotalDays <= 30).ToList();
+                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 30);
             }
             else if (comboHistory.SelectedIndex == 2)
             {
-                sortedTransactions = Utils.userTransactions.Where(t => (DateTime.Now - t.Date).TotalDays <= 60).ToList();
+                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 60);
             }
             else
             {
-                sortedTransactions = Utils.userTransactions;
+                return list;
             }
-
-            lvTransactions.ItemsSource = sortedTransactions;
         }
 
         private void btShowTransactionsClicked(object sender, RoutedEventArgs e)
@@ -123,30 +120,26 @@ namespace CustomerUI
             Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
             selectedAcc.Id).ToList();
 
-            SortTransactions();
+            SortTransactionsByTypeAndDate();
+            comboHistory.SelectedIndex = 0;
 
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (comboHistory == null || comboHistory.Items.Count == 0)
-            {
-                return;
-            }
-                SortTransactions();
-            
+            SortTransactionsByTypeAndDate(); 
         }
 
         
 
         private void comboHistory_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (comboHistory == null || comboHistory.Items.Count == 0)
-            {
-                return;
-            }
-            SortTransactions();
-            
+            SortTransactionsByTypeAndDate();  
+        }
+
+        private void btBackToDash_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }

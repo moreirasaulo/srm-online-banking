@@ -33,6 +33,7 @@ namespace CustomerUI
             MessageBoxResult answer = MessageBox.Show("Are you sure you would like to logout?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes) 
             {
+                Utils.login = null;
                 Close();
             }            
         }
