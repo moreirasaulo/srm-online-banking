@@ -9,8 +9,9 @@ namespace CustomerUI
 {
     public class Utils
     {
-        public static User loggedInUser;
-        public static List<Account> userAccounts;
+        public static Login login;
+
         public static List<Transaction> userTransactions;
+        
     }
 }

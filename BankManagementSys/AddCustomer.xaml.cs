@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,42 @@ namespace BankManagementSys
         public AddCustomer()
         {
             InitializeComponent();
+        }
+
+        private void AddCust_Click(object sender, RoutedEventArgs e)
+        {
+            //FIX VALIDATION
+            // if fields are valid then
+            string gender = "";
+            if(rbGenderMale.IsChecked == true)
+            {
+                gender = "male";
+            }
+            else if(rbGenderFemale.IsChecked == true)
+            {
+                gender = "female";
+            }
+            else if(rbGenderOther.IsChecked == true)
+            {
+                gender = "other";
+            }
+            else
+            {
+                MessageBox.Show("Please select gender");
+                return;
+            }
+
+          /*  User user = new User
+            {
+                FirstName = tbFirstName.Text,
+                MiddleName = tbMiddleName.Text,
+                LastName = tbLastName.Text,
+                Gender = gender,
+                NationalId = tbNatId.Text,
+
+
+            } */
+
         }
     }
 }

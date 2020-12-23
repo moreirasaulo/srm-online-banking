@@ -24,21 +24,16 @@ namespace CustomerUI
         public ViewTransactions()
         {
             InitializeComponent();
-            lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.loggedInUser.FirstName,
-                Utils.loggedInUser.LastName);
-            LoadUserAccounts();
-            comboAccountType.ItemsSource = Utils.userAccounts;
-            if (Utils.userAccounts.Count == 0)
+            lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
+                Utils.login.User.LastName);
+
+            comboAccountType.ItemsSource = Utils.login.User.Accounts;
+            if (Utils.login.User.Accounts.Count == 0)
             {
                 lblError.Content = "There's no bank account linked to your profile yet.";
                 return;
             }
            
-        }
-
-        private void LoadUserAccounts()
-        {
-            Utils.userAccounts = EFData.context.Accounts.Where(a => a.UserId == Utils.loggedInUser.Id).ToList();
         }
 
         private void btShowTransactionsClicked(object sender, RoutedEventArgs e)

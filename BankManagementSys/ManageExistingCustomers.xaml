@@ -20,9 +20,8 @@
         <Label Content="Search by" HorizontalAlignment="Left" Margin="35,21,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="232,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="440,25,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="View full customer profile" HorizontalAlignment="Left" Margin="87,306,0,0" VerticalAlignment="Top" Width="150" Height="37"/>
-        <Button Content="Update customer profile" HorizontalAlignment="Left" Margin="260,306,0,0" VerticalAlignment="Top" Width="142" Height="37"/>
-        <Button Content="Delete customer profile" HorizontalAlignment="Left" Margin="418,306,0,0" VerticalAlignment="Top" Width="143" Height="37"/>
+        <Button Click="btViewCustProfileClicked" Content="View full customer profile" HorizontalAlignment="Left" Margin="121,306,0,0" VerticalAlignment="Top" Width="150" Height="37"/>
+        <Button Content="Update customer profile" HorizontalAlignment="Left" Margin="334,306,0,0" VerticalAlignment="Top" Width="142" Height="37"/>
         <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="226" Margin="647,25,0,0" VerticalAlignment="Top" Width="210"/>
         <Label Content="Customer id:" HorizontalAlignment="Left" Margin="662,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
         <Label Content="" HorizontalAlignment="Left" Margin="737,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>

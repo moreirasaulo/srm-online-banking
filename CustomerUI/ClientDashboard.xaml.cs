@@ -23,8 +23,8 @@ namespace CustomerUI
         public ClientDashboard()
         {
             InitializeComponent();
-            lblLoggedAs.Content = string.Format("Logged as {0} {1}", Utils.loggedInUser.FirstName,
-                Utils.loggedInUser.LastName);
+            lblLoggedAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
+                Utils.login.User.LastName);
 
         }
 
