@@ -129,20 +129,24 @@ namespace CustomerUI
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (comboAccountType.SelectedIndex != 0 && lvTransactions.Items.Count != 0)
+            if (comboHistory == null || comboHistory.Items.Count == 0)
             {
-                SortTransactions();
+                return;
             }
+                SortTransactions();
+            
         }
 
         
 
         private void comboHistory_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (comboAccountType.SelectedIndex != 0 && lvTransactions.Items.Count != 0)
+            if (comboHistory == null || comboHistory.Items.Count == 0)
             {
-                SortTransactions();
+                return;
             }
+            SortTransactions();
+            
         }
     }
 }
