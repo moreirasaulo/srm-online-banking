@@ -150,7 +150,8 @@ namespace CustomerUI
 
         private void btMakePayment_Click(object sender, RoutedEventArgs e)
         {
-
+            MakePayment payment = new MakePayment();
+            payment.Show();
         }
 
         private void btPDF_Click(object sender, RoutedEventArgs e)

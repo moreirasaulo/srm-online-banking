@@ -1,5 +1,4 @@
-﻿using SharedCode;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,21 +15,21 @@ using System.Windows.Shapes;
 namespace CustomerUI
 {
     /// <summary>
-    /// Interaction logic for MakeTransfer.xaml
+    /// Interaction logic for MakePayment.xaml
     /// </summary>
-    public partial class MakeTransfer : Window
+    public partial class MakePayment : Window
     {
-        public MakeTransfer()
+        public MakePayment()
         {
             InitializeComponent();
         }
 
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to proceed with this transfer?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to proceed with this payment?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                MessageBox.Show("The transfer was completed successfuly.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("The payment was completed successfuly.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
