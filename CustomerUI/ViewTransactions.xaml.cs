@@ -151,6 +151,17 @@ namespace CustomerUI
 
         private void btMakeTransfer_Click(object sender, RoutedEventArgs e)
         {
+            if(Utils.login.User.Accounts == null || comboAccountType.SelectedIndex == -1)
+            {
+                MessageBox.Show("You do not have an account to make a transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if(selectedAcc.Balance <= 0)
+            {
+                MessageBox.Show("Your account balance is insufficient to make a transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             MakeTransfer transfer = new MakeTransfer();
             transfer.Show();
         }
