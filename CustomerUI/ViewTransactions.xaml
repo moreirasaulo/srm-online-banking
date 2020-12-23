@@ -16,9 +16,10 @@
         <ListView Name="lvTransactions" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="506">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
-                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="Transaction Type" Width="150" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Date" Width="110" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
+                    <GridViewColumn Header="Amount" Width="120" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="Balance" Width="120" DisplayMemberBinding="{Binding Balance}"/>
                 </GridView>
             </ListView.View>
         </ListView>
