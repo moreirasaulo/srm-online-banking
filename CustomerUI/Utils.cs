@@ -11,5 +11,6 @@ namespace CustomerUI
     {
         public static Login login;
         public static List<Transaction> userTransactions;
+        public static List<string> transactionHistoryDays = new List<string> { "7 days", "30 days", "60 days" };
     }
 }

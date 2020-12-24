@@ -26,15 +26,12 @@ namespace CustomerUI
     /// </summary>
     public partial class ViewTransactions : Window
     {
-        List<string> transactionHistoryDays = new List<string> { "7 days", "30 days", "60 days" };
+        
         
         public ViewTransactions()
         {
             InitializeComponent();
-            foreach (string item in transactionHistoryDays)
-            {
-                comboHistory.Items.Add(item);
-            }
+            comboHistory.ItemsSource = Utils.transactionHistoryDays;
 
             
             lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
@@ -145,8 +142,14 @@ namespace CustomerUI
                 MessageBox.Show("Your account balance is insufficient to make a transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            MakeTransfer transfer = new MakeTransfer();
-            transfer.Show();
+            MakeTransfer transfer = new MakeTransfer(selectedAcc);
+            transfer.Owner = this;
+            bool? result = transfer.ShowDialog();
+
+            if(result == true)
+            {
+                SortTransactionsByTypeAndDate();
+            }
         }
 
 
@@ -154,7 +157,8 @@ namespace CustomerUI
         private void btMakePayment_Click(object sender, RoutedEventArgs e)
         {
             MakePayment payment = new MakePayment();
-            payment.Show();
+            payment.Owner = this;
+            payment.ShowDialog();
         }
 
         private void btPDF_Click(object sender, RoutedEventArgs e)

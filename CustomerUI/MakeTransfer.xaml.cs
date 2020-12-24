@@ -20,11 +20,16 @@ namespace CustomerUI
     /// </summary>
     public partial class MakeTransfer : Window
     {
-        public MakeTransfer()
+        Account currentAccount;
+
+        public MakeTransfer(Account account)
         {
             InitializeComponent();
-            comboAccountType.ItemsSource = Utils.login.User.Accounts;
-            comboAccountType.DisplayMemberPath = "AccountType.Description";
+            currentAccount = account;
+            lblOwnerName.Content = string.Format("{0} {1} {2}", Utils.login.User.FirstName, Utils.login.User.MiddleName, Utils.login.User.LastName);
+            lblBalance.Content = string.Format("$ {0}", currentAccount.Balance);
+            lblAccNo.Content = currentAccount.Id;
+            lblAccType.Content = currentAccount.AccountType.Description;
         }
 
         private void btOK_Click(object sender, RoutedEventArgs e)
@@ -32,7 +37,6 @@ namespace CustomerUI
             MessageBoxResult answer = MessageBox.Show("Are you sure you would like to proceed with this transfer?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                Account selectedAcc = (Account)comboAccountType.SelectedItem;
                 if (!ValidateFields()) { return; }
 
                 decimal amount = 0;
@@ -49,13 +53,14 @@ namespace CustomerUI
                         Amount = amount,
                         ToAccount = destinationAccNo,
                         Type = "Transfer",
-                        AccountId = selectedAcc.Id
+                        AccountId = currentAccount.Id
                     };
                     EFData.context.Transactions.Add(transTransfer);
-                    selectedAcc.Balance = selectedAcc.Balance - amount;
+                    currentAccount.Balance = currentAccount.Balance - amount;
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
                     beneficiaryAcc.Balance = beneficiaryAcc.Balance + amount;
                     EFData.context.SaveChanges();
+                    lblBalance.Content = currentAccount.Balance;
                 }
                 catch (SystemException ex)
                 {
@@ -63,17 +68,13 @@ namespace CustomerUI
                 }
 
                 MessageBox.Show("The transfer was completed successfuly.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                tbAmount.Text = "";
+                tbBeneficiaryAcct.Text = "";
             }
         }
 
         private bool ValidateFields()
         {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if (selectedAcc == null)
-            {
-                MessageBox.Show("Please choose an account to make transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
             int destinationAccNo;
             int.TryParse(tbBeneficiaryAcct.Text, out destinationAccNo);  //FIX exception
             Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
@@ -89,7 +90,7 @@ namespace CustomerUI
                 MessageBox.Show("You cannot transfer negative amount", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (amount > selectedAcc.Balance)
+            if (amount > currentAccount.Balance)
             {
                 MessageBox.Show("You do not have sufficinet funds to make this transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -102,16 +103,7 @@ namespace CustomerUI
         {
             Close();
         }
-
-        private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if (selectedAcc == null)
-            {
-                tbBalance.Text = "";
-            }
-            tbBalance.Text = selectedAcc.Balance + "";
-        }      
+     
 
         private void NumbersOnly(KeyEventArgs e) 
         {
@@ -153,5 +145,7 @@ namespace CustomerUI
         {
             NumbersOnly(e);
         }
+
+       
     }
 }
