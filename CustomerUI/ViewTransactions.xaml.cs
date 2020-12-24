@@ -148,6 +148,8 @@ namespace CustomerUI
 
             if(result == true)
             {
+                Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
+            selectedAcc.Id).ToList();   //FIX exception
                 SortTransactionsByTypeAndDate();
             }
         }
@@ -235,7 +237,7 @@ namespace CustomerUI
             tbBalance.Text = selectedAcc.Balance + "";
 
             Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            selectedAcc.Id).ToList();
+            selectedAcc.Id).ToList(); //FIX exception
 
 
             SortTransactionsByTypeAndDate();

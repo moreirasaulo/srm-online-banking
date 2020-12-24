@@ -98,11 +98,6 @@ namespace CustomerUI
             return true;
         }
 
-
-        private void btCancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
      
 
         private void NumbersOnly(KeyEventArgs e) 
@@ -146,6 +141,9 @@ namespace CustomerUI
             NumbersOnly(e);
         }
 
-       
+        private void btBackToTrans_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }
