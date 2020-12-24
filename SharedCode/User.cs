@@ -25,9 +25,6 @@ namespace SharedCode
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-
-        //full name
-        public string FullName { get { return FirstName + " "+ MiddleName+" " + LastName; } }
         public string Gender { get; set; }
         public string NationalId { get; set; }
         public System.DateTime DateOfBirth { get; set; }
@@ -37,6 +34,7 @@ namespace SharedCode
         public string ProvinceState { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }

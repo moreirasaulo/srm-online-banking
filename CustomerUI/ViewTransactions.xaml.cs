@@ -173,13 +173,14 @@ namespace CustomerUI
                 //Add a page.
                 PdfPage page = doc.Pages.Add();
                 //Create a PdfGrid.
-                PdfGrid pdfGrid = new PdfGrid();
+                PdfGrid pdfGrid01 = new PdfGrid();
+                PdfGrid pdfGrid02 = new PdfGrid();
                 //Create a DataTable.
                 DataTable dataTable = new DataTable();
                 // Add account holder and number
                 PdfGraphics graphics = page.Graphics;
                 PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 15);
-                graphics.DrawString("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAccount Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName + "\nAccount number: " + selectedAcc.Id, font, PdfBrushes.Black, new PointF(0, 0));
+                graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName + "\nAccount number: " + selectedAcc.Id, font, PdfBrushes.Black, new PointF(0, 0));
                 //Add columns to the DataTable
                 dataTable.Columns.Add("Transaction Type");
                 dataTable.Columns.Add("Date");
@@ -190,11 +191,15 @@ namespace CustomerUI
                     dataTable.Rows.Add(new object[] { t.Type, t.Date, t.Amount });
                 }
                 //Assign data source.
-                pdfGrid.DataSource = dataTable;
+                pdfGrid02.DataSource = dataTable;
+               
                 //Draw grid to the page of PDF document.
-                pdfGrid.Draw(page, new PointF(10, 10));
-                //Save the document.
-                SaveFileDialog saveFile = new SaveFileDialog();
+                pdfGrid01.Draw(page, new PointF(10, 10));
+                
+                pdfGrid02.Draw(page, new PointF(10, 50));
+
+                 //Save the document.
+                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
                 saveFile.InitialDirectory = @"C:\Documents\";
                 saveFile.Title = "Save your banking history to file";
