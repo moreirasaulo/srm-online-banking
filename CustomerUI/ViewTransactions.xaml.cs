@@ -1,4 +1,5 @@
-﻿using SharedCode;
+﻿using Microsoft.Win32;
+using SharedCode;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
@@ -186,7 +187,7 @@ namespace CustomerUI
                 // TO FIX: Put WPF content in the PDF
             
             }*/
-
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
             try
             {
 
@@ -198,8 +199,11 @@ namespace CustomerUI
                 PdfGrid pdfGrid = new PdfGrid();
                 //Create a DataTable.
                 DataTable dataTable = new DataTable();
+                // Add account holder and number
+                PdfGraphics graphics = page.Graphics;
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 15);
+                graphics.DrawString("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAccount Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName + "\nAccount number: " + selectedAcc.Id, font, PdfBrushes.Black, new PointF(0, 0));
                 //Add columns to the DataTable
-               // Utils.login.User.FirstName
                 dataTable.Columns.Add("Transaction Type");
                 dataTable.Columns.Add("Date");
                 dataTable.Columns.Add("Amount");
@@ -213,12 +217,18 @@ namespace CustomerUI
                 //Draw grid to the page of PDF document.
                 pdfGrid.Draw(page, new PointF(10, 10));
                 //Save the document.
-                doc.Save("Output.pdf");
-                //close the document
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
+                saveFile.InitialDirectory = @"C:\Documents\";
+                saveFile.Title = "Save your banking history to file";
+                //saveFile.ShowDialog();
+                if (saveFile.ShowDialog() == true) 
+                {
+                    doc.Save(saveFile.FileName);
+                }
+
                 doc.Close(true);
 
-                // TO FIX: Add account holder and balance.
-                // TO FIX: Open dialog to choose where to save file.
             }
             catch (IOException ex)
             {
@@ -231,10 +241,10 @@ namespace CustomerUI
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
             if (selectedAcc == null)
             {
-                MessageBox.Show("Please choose an acount to view transactions");
+                MessageBox.Show("Please choose an account to view transactions.");
                 return;
             }
-            tbBalance.Text = selectedAcc.Balance + "";
+            lblBalance.Content = "$ " + selectedAcc.Balance;
 
             Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
             selectedAcc.Id).ToList(); //FIX exception

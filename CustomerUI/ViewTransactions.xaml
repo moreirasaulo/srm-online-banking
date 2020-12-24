@@ -18,7 +18,7 @@
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
-                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount, StringFormat=#.00}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -34,7 +34,7 @@
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
         <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
-        <TextBox Name="tbBalance" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="544,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/handMoney.png"  VerticalAlignment="Top" Width="100"/>
+        <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
     </Grid>
 </Window>
