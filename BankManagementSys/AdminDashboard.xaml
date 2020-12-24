@@ -23,7 +23,7 @@
                 <Label Content="Manage clients" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Click="btManageAccounts_Click"
         Margin="390,-150, 160,10" >
             <StackPanel>
                 <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>

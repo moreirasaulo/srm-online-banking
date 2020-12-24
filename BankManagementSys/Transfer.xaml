@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Transfer" Height="293.37" Width="604.834">
     <Grid>
-        <Label Content="Account summary" HorizontalAlignment="Left" Margin="77,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Account summary" HorizontalAlignment="Left" Margin="74,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="146" Margin="36,65,0,0" VerticalAlignment="Top" Width="210"/>
         <Label Content="Account id:" HorizontalAlignment="Left" Margin="53,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
         <Label Content="1720" HorizontalAlignment="Left" Margin="135,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>

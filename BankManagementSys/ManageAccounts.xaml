@@ -5,32 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ManageAccounts" Height="450" Width="800">
+        Title="ManageAccounts" Height="466" Width="800">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="185" Margin="90,122,0,0" VerticalAlignment="Top" Width="482">
+        <ListView  Name="lvAccounts" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Account type" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Date of opening" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Balance" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Header="Account No" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Account type Id" Width="120" DisplayMemberBinding="{Binding Path=AccountTypeId}" />
+                    <GridViewColumn Header="Date of opening" Width="120" DisplayMemberBinding="{Binding Path=OpenDate, StringFormat=d}" />
+                    <GridViewColumn Header="Balance" Width="120" DisplayMemberBinding="{Binding Path=Balance}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Search customer by national id:" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="310,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Content="Find" HorizontalAlignment="Left" Margin="518,25,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="159,326,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="294,326,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="430,326,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button
+        <Label Content="Search customer by" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="232,13,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,35,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,57,0,0" VerticalAlignment="Top"/>
+
+        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="260,367,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="385,367,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <Button Name="btBackToDash" Click="btBackToDash_Click"
         Margin="657,331,75,21">
             <StackPanel Width="31">
                 <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="Close" HorizontalAlignment="Right" Margin="-5,0,-6,0" Width="42"/>
             </StackPanel>
         </Button>
-        <Label Content="Customer found: Thomas Chapais, national id 45678TY" HorizontalAlignment="Left" Margin="90,52,0,0" VerticalAlignment="Top"/>
-        <Label Content="Customers accounts:" HorizontalAlignment="Left" Margin="90,96,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblCustNotFound" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top"/>
+        <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" HorizontalAlignment="Left" Height="99" Margin="90,78,0,0" VerticalAlignment="Top" Width="482">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Full Name" Width="190" DisplayMemberBinding="{Binding FullName}" />
+                    <GridViewColumn Header="National Id" Width="147" DisplayMemberBinding="{Binding NationalId}" />
+                    <GridViewColumn Header="Date of Birth" Width="140" DisplayMemberBinding="{Binding DateOfBirth, StringFormat=d}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Customer's accounts:" HorizontalAlignment="Left" Margin="90,209,0,0" VerticalAlignment="Top"/>
+        <Button Click="btViewAccInfo_Click" Name="btViewAccInfo" Content="View full account info" HorizontalAlignment="Left" Margin="105,367,0,0" VerticalAlignment="Top" Width="124" Height="37"/>
     </Grid>
 </Window>

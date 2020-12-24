@@ -26,9 +26,16 @@ namespace BankManagementSys
 
         private void btManageCustomers_Click(object sender, RoutedEventArgs e)
         {
-            ManageCustomers custDlg = new ManageCustomers();
-            custDlg.Owner = this;
-            custDlg.ShowDialog();
+            ManageCustomers manageCustsDlg = new ManageCustomers();
+            manageCustsDlg.Owner = this;
+            manageCustsDlg.ShowDialog();
+        }
+
+        private void btManageAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            ManageAccounts manageAccsDlg = new ManageAccounts();
+            manageAccsDlg.Owner = this;
+            manageAccsDlg.ShowDialog();
         }
     }
 }

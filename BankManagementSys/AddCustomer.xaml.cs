@@ -24,7 +24,7 @@ namespace BankManagementSys
         public AddCustomer()
         {
             InitializeComponent();
-            comboCountry.ItemsSource = Utils.Countries;
+            comboCountry.ItemsSource = Utilities.Countries;
             comboCountry.SelectedIndex = 0;
         }
 

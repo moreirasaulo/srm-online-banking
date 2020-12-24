@@ -25,7 +25,7 @@ namespace BankManagementSys
         {
             currentUser = user;
             InitializeComponent();
-            comboCountry.ItemsSource = Utils.Countries;
+            comboCountry.ItemsSource = Utilities.Countries;
             DeactivateFields();
             LoadCustomerInfoToFileds();
             

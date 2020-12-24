@@ -91,6 +91,10 @@
     <Compile Include="Transfer.xaml.cs">
       <DependentUpon>Transfer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities.cs" />
+    <Compile Include="ViewAccountInfo.xaml.cs">
+      <DependentUpon>ViewAccountInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewCustomerProfile.xaml.cs">
       <DependentUpon>ViewCustomerProfile.xaml</DependentUpon>
     </Compile>
@@ -134,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Transfer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewAccountInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

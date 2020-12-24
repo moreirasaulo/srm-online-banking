@@ -27,7 +27,7 @@ namespace SharedCode
         public string LastName { get; set; }
 
         //full name
-        public string FullName { get { return LastName + " " + FirstName; } }
+        public string FullName { get { return FirstName + " "+ MiddleName+" " + LastName; } }
         public string Gender { get; set; }
         public string NationalId { get; set; }
         public System.DateTime DateOfBirth { get; set; }
