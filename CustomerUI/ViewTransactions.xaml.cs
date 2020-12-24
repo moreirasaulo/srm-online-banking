@@ -166,31 +166,9 @@ namespace CustomerUI
 
         private void btPDF_Click(object sender, RoutedEventArgs e)
         {
-            /*using (PdfDocument document = new PdfDocument())
-            {
-                //Add a page to the document
-                PdfPage page = document.Pages.Add();
-
-                //Create PDF graphics for a page
-                PdfGraphics graphics = page.Graphics;
-
-                //Set the standard font
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-
-                //Draw the text
-                graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
-
-                //Save the document
-                document.Save("Output.pdf");
-
-                // TO FIX: Open dialog to choose file name and where to save
-                // TO FIX: Put WPF content in the PDF
-            
-            }*/
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
             try
             {
-
                 //Create a new PDF document.
                 PdfDocument doc = new PdfDocument();
                 //Add a page.
@@ -221,7 +199,6 @@ namespace CustomerUI
                 saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
                 saveFile.InitialDirectory = @"C:\Documents\";
                 saveFile.Title = "Save your banking history to file";
-                //saveFile.ShowDialog();
                 if (saveFile.ShowDialog() == true) 
                 {
                     doc.Save(saveFile.FileName);
