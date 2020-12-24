@@ -85,6 +85,9 @@
     <Compile Include="AddCustomer.xaml.cs">
       <DependentUpon>AddCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Deposit.xaml.cs">
+      <DependentUpon>Deposit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageExistingCustomers.xaml.cs">
       <DependentUpon>ManageExistingCustomers.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Deposit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
