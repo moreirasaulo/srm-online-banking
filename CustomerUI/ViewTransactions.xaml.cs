@@ -34,7 +34,6 @@ namespace CustomerUI
             InitializeComponent();
             comboHistory.ItemsSource = Utils.transactionHistoryDays;
 
-            
             lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
                 Utils.login.User.LastName);
            

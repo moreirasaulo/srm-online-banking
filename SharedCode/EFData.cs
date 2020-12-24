@@ -9,7 +9,6 @@ namespace SharedCode
     public class EFData
     {
         public static BankDbConnection context = new BankDbConnection();
-
         
     }
 

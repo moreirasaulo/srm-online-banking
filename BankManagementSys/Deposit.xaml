@@ -1,0 +1,30 @@
+﻿<Window x:Class="BankManagementSys.Deposit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementSys"
+        mc:Ignorable="d"
+        Title="Deposit" Height="341" Width="751">
+    <Grid>
+        <StackPanel Background="Azure" HorizontalAlignment="Left" Height="170" Margin="33,60,0,0" VerticalAlignment="Top" Width="305"/>
+        <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="310" Margin="380,0,0,0" VerticalAlignment="Top" Width="363"/>
+
+        <Label Content="Account summary:" HorizontalAlignment="Left" Margin="42,68,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Owner:" HorizontalAlignment="Left" Margin="42,102,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblOwner" Content="." HorizontalAlignment="Left" Margin="128,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Account No:" HorizontalAlignment="Left" Margin="42,131,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblAccountNo" Content="." HorizontalAlignment="Left" Margin="128,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="Account type:" HorizontalAlignment="Left" Margin="42,160,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="128,159,0,0" VerticalAlignment="Top"/>
+        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="440,169,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Label Content="Amount:" HorizontalAlignment="Left" Margin="440,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="530,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110"/>
+        <Button Click="btDeposit_Click" Name="btDeposit"  Content="Deposit" HorizontalAlignment="Left" Margin="594,169,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Label Content="Deposit" HorizontalAlignment="Left" Margin="436,46,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Button Click="btBackToTrans_Click" x:Name="btBackToTrans" IsDefault="True"  HorizontalAlignment="Left" Margin="603,261,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>
+        <Label Content="$" HorizontalAlignment="Left" Margin="513,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        </Grid>
+</Window>
