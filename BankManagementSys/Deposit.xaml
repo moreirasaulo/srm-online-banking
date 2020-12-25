@@ -22,7 +22,7 @@
         <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="530,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110"/>
         <Button Click="btDeposit_Click" Name="btDeposit"  Content="Deposit" HorizontalAlignment="Left" Margin="594,169,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Content="Deposit" HorizontalAlignment="Left" Margin="436,46,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Button Click="btBackToTrans_Click" x:Name="btBackToTrans" IsDefault="True"  HorizontalAlignment="Left" Margin="603,261,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
+        <Button x:Name="btBackToTrans" IsDefault="True"  HorizontalAlignment="Left" Margin="603,261,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>
         <Label Content="$" HorizontalAlignment="Left" Margin="513,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
