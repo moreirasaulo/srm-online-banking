@@ -21,7 +21,7 @@
         <TextBox Name="tbBeneficiaryAcct" HorizontalAlignment="Left" Height="23" Margin="525,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110" KeyDown="tbBeneficiaryAcct_KeyDown"/>
         <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="343,191,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="301,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
-        <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="525,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110" KeyDown="tbAmount_KeyDown" KeyUp="tbAmount_KeyUp"/>
+        <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="525,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110" KeyDown="tbAmount_KeyDown"/>
         <Button Name="btTransfer" Click="btOK_Click" Content="Transfer" HorizontalAlignment="Left" Margin="485,191,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Content="Transfer" HorizontalAlignment="Left" Margin="426,34,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Button Click="btBackToTrans_Click" x:Name="btBackToTrans" IsDefault="True" Content="Back to transactions"  HorizontalAlignment="Left" Margin="537,252,0,0" VerticalAlignment="Top" Width="119" Height="29"/>

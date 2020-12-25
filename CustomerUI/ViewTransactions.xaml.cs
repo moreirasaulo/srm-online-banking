@@ -1,11 +1,12 @@
 ﻿using Microsoft.Win32;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.Advanced;
 using SharedCode;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Grid;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -154,69 +155,6 @@ namespace CustomerUI
             }
         }
 
-
-
-        private void btMakePayment_Click(object sender, RoutedEventArgs e)
-        {
-            MakePayment payment = new MakePayment();
-            payment.Owner = this;
-            payment.ShowDialog();
-        }
-
-        private void btPDF_Click(object sender, RoutedEventArgs e)
-        {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            try
-            {
-                //Create a new PDF document.
-                PdfDocument doc = new PdfDocument();
-                //Add a page.
-                PdfPage page = doc.Pages.Add();
-                //Create a PdfGrid.
-                PdfGrid pdfGrid01 = new PdfGrid();
-                PdfGrid pdfGrid02 = new PdfGrid();
-                //Create a DataTable.
-                DataTable dataTable = new DataTable();
-                // Add account holder and number
-                PdfGraphics graphics = page.Graphics;
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 15);
-                graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName + "\nAccount number: " + selectedAcc.Id, font, PdfBrushes.Black, new PointF(0, 0));
-                //Add columns to the DataTable
-                dataTable.Columns.Add("Transaction Type");
-                dataTable.Columns.Add("Date");
-                dataTable.Columns.Add("Amount");
-                //Add rows to the DataTable.
-                foreach (Transaction t in lvTransactions.Items)
-                {
-                    dataTable.Rows.Add(new object[] { t.Type, t.Date, t.Amount });
-                }
-                //Assign data source.
-                pdfGrid02.DataSource = dataTable;
-               
-                //Draw grid to the page of PDF document.
-                pdfGrid01.Draw(page, new PointF(10, 10));
-                
-                pdfGrid02.Draw(page, new PointF(10, 50));
-
-                 //Save the document.
-                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
-                saveFile.InitialDirectory = @"C:\Documents\";
-                saveFile.Title = "Save your banking history to file";
-                if (saveFile.ShowDialog() == true) 
-                {
-                    doc.Save(saveFile.FileName);
-                }
-
-                doc.Close(true);
-
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message + "Error");
-            }
-        }
-
         private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
@@ -233,6 +171,88 @@ namespace CustomerUI
 
             SortTransactionsByTypeAndDate();
             comboHistory.SelectedIndex = 0;
+        }
+
+        private void btMakePayment_Click(object sender, RoutedEventArgs e)
+        {
+            MakePayment payment = new MakePayment();
+            payment.Owner = this;
+            payment.ShowDialog();
+        }
+
+        private void btPDF_Click(object sender, RoutedEventArgs e)
+        {           
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc == null)
+            {
+                MessageBox.Show("You should select an account first.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else 
+            {
+                try
+                {
+                    PdfDocument doc = new PdfDocument();
+                    doc.Info.Title = "Banking history";
+                    PdfPage page = doc.AddPage();
+
+                    XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                    XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
+                    XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
+                    XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
+
+                    try
+                    {
+                        graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                        graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                        graphics.DrawString("Account Number: " + selectedAcc.Id, fontBold, XBrushes.Black, 20, 45);
+                        graphics.DrawString("Current Balance: $ " + selectedAcc.Balance, fontBold, XBrushes.Black, 20, 60);
+                        graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                        XPen lineRed = new XPen(XColors.Green, 5);
+                        XPoint pt1 = new XPoint(0, 90);
+                        XPoint pt2 = new XPoint(page.Width, 90);
+                        graphics.DrawLine(lineRed, pt1, pt2);
+                        graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                        graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                        graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+
+                        List<Transaction> tr = new List<Transaction>();
+                        foreach (Transaction item in lvTransactions.Items)
+                        {
+                            tr.Add(item);
+                        }
+
+                        int ind = 120;
+                        for (int i = 0; i < tr.Count ; i++)
+                        {
+                            Transaction t = tr[i];                           
+                            graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                            graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                            graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                            ind = ind + 15;
+                        }                        
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    SaveFileDialog saveFile = new SaveFileDialog();
+                    saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
+                    saveFile.InitialDirectory = @"C:\Documents\";
+                    saveFile.Title = "Save your banking history to file";
+                    if (saveFile.ShowDialog() == true)
+                    {
+                        doc.Save(saveFile.FileName);
+                        Process.Start(saveFile.FileName);
+                    }
+
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message + "Error");
+                }
+            }
         }
     }
 }
