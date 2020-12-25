@@ -34,7 +34,7 @@ namespace BankManagementSys
             string username = tbAdminUsername.Text;
             string password = pbAdminPassword.Password;
 
-            Login login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password);
+            Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password);
 
             /* same:
             Login login1 = (from l in EFData.context.Logins
@@ -42,9 +42,9 @@ namespace BankManagementSys
                            select l).FirstOrDefault();
             */
 
-            if (login != null)
+            if (Utilities.login != null)
             {
-                if (login.UserTypeId == 2)
+                if (Utilities.login.UserTypeId == 2)
                 {
                     MessageBox.Show("Login successful");
                     AdminDashboard adminDashDlg = new AdminDashboard();

@@ -37,25 +37,34 @@ namespace BankManagementSys
 
         private void btDeposit_Click(object sender, RoutedEventArgs e)
         {
-            decimal amount = 0;
-            decimal.TryParse(tbAmount.Text, out amount); //FIX exception (format exception?)
-            try
+            MessageBoxResult answer = MessageBox.Show("Proceed with this deposit?\n"+ tbAmount.Text + " $", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
             {
-                Transaction transDeposit = new Transaction
+                decimal amount = 0;
+                decimal.TryParse(tbAmount.Text, out amount); //FIX exception (format exception?)
+                try
                 {
-                    Date = DateTime.Now,
-                    Amount = amount,
-                    Type = "Deposit",
-                    AccountId = currentAccount.Id
-                };
-                EFData.context.Transactions.Add(transDeposit);
-                currentAccount.Balance = currentAccount.Balance + amount;
-                EFData.context.SaveChanges();
-                lblBalance.Content = currentAccount.Balance + " $";
-            }
-            catch (SystemException ex)
-            {
-                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Transaction transDeposit = new Transaction
+                    {
+                        Date = DateTime.Now,
+                        Amount = amount,
+                        Type = "Deposit",
+                        AccountId = currentAccount.Id
+                    };
+                    EFData.context.Transactions.Add(transDeposit);
+                    decimal previousBalance = currentAccount.Balance;
+                    currentAccount.Balance = currentAccount.Balance + amount;
+                    EFData.context.SaveChanges();
+                    lblBalance.Content = currentAccount.Balance + " $";
+                   // int transactionId = transDeposit.Id;
+                    DepositReceipt depositReceiptDlg = new DepositReceipt(currentAccount, previousBalance, transDeposit, currentUser);
+                    depositReceiptDlg.Owner = this;
+                    bool? result = depositReceiptDlg.ShowDialog();
+                }
+                catch (SystemException ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
