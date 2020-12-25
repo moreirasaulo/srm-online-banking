@@ -178,5 +178,13 @@ namespace CustomerUI
         {
             DialogResult = true;
         }
+        /*
+        private void tbAmount_KeyUp(object sender, KeyEventArgs e)
+        {
+            Double val = Double.TryParse(tbAmount.Text, out double v) ? v : 0.0; //  Boolean istrue =   (1 == 1) ? true : false; // Elvis Presley operator
+            
+            tbAmount.Text = (v / 100).ToString();
+        }
+        */
     }
 }
