@@ -26,6 +26,14 @@ namespace BankManagementSys
             InitializeComponent();
             comboCountry.ItemsSource = Utilities.Countries;
             comboCountry.SelectedIndex = 0;
+            if(rbCustCatCompany.IsChecked == true)
+            {
+                lblCompanyRep.Visibility = Visibility.Visible;
+                lblNatIdCompRegNo.Content = "Company registration ID: *";
+                lblDateBirthOrRegist.Content = "Date of company registration";
+                lblCompName.Content = "Company name: *";
+                tbCompanyName.Visibility = Visibility.Visible;
+            }
         }
 
         private bool ValidateFields()
@@ -52,17 +60,17 @@ namespace BankManagementSys
             }
             if (tbNatId.Text.Length < 5 || tbNatId.Text.Length > 20)
             {
-                MessageBox.Show("National Id number must containt between 5 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("National Id/Company registration Id number must containt between 5 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (dpBirthday == null)
             {
-                MessageBox.Show("Please select date of birth", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select date of birth/date of company registration", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (dpBirthday.SelectedDate > DateTime.Now)
             {
-                MessageBox.Show("Date of birth must be earlier than today's date", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Date of birth/company registration date must be earlier than today's date", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
@@ -100,6 +108,16 @@ namespace BankManagementSys
                 MessageBox.Show("Please select country", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            if (tbEmail.Text.Length > 60)
+            {
+                MessageBox.Show("E-mail must contain maximum 60 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbCompanyName.Text.Length < 1 || tbCompanyName.Text.Length > 70)
+            {
+                MessageBox.Show("Company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             return true;
         }
 
@@ -127,21 +145,26 @@ namespace BankManagementSys
             }
             try
             {
-                User user = new User
+                User user = new User();
+
+                user.FirstName = tbFirstName.Text;
+                user.MiddleName = tbMiddleName.Text;
+                user.LastName = tbLastName.Text;
+                user.Gender = gender;
+                user.NationalId = tbNatId.Text;
+                user.DateOfBirth = (DateTime)dpBirthday.SelectedDate;
+                user.PhoneNo = tbPhoneNo.Text;
+                user.Address = tbAddress.Text;
+                user.City = tbCity.Text;
+                user.ProvinceState = tbProvinceState.Text;
+                user.PostalCode = tbPostalCode.Text;
+                user.Country = comboCountry.Text;
+                user.Email = tbEmail.Text;
+                if(rbCustCatCompany.IsChecked == true)
                 {
-                    FirstName = tbFirstName.Text,
-                    MiddleName = tbMiddleName.Text,
-                    LastName = tbLastName.Text,
-                    Gender = gender,
-                    NationalId = tbNatId.Text,
-                    DateOfBirth = (DateTime)dpBirthday.SelectedDate,
-                    PhoneNo = tbPhoneNo.Text,
-                    Address = tbAddress.Text,
-                    City = tbCity.Text,
-                    ProvinceState = tbProvinceState.Text,
-                    PostalCode = tbPostalCode.Text,
-                    Country = comboCountry.Text,
-                };
+                    user.CompanyName = tbCompanyName.Text;
+                }
+                
                 EFData.context.Users.Add(user);
                 EFData.context.SaveChanges();
                 string successMessage = string.Format("new customer {0} {1} added successfully", user.FirstName, user.LastName);
