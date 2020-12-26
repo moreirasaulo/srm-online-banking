@@ -1,4 +1,5 @@
 ﻿using PdfSharp;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using SharedCode;
 using System;
@@ -32,54 +33,63 @@ namespace BankManagementSys
     public partial class DepositReceipt : Window
     {
         User currentCust;
-        public DepositReceipt(Account account, decimal oldBalance, Transaction deposit, User user)
+        Transaction currentTans;
+        public DepositReceipt(Account account, decimal oldBalance, Transaction transaction, User user, bool needOldBalance)
         {
             InitializeComponent();
             currentCust = user;
-            if(user.Email == null)
+            currentTans = transaction;
+            this.Title = transaction.Type;
+            lblTransType.Content = transaction.Type;
+            lblTransTypeAmount.Content = transaction.Type + " amount";
+            
+            if (transaction.Type == "Transfer")
             {
-              //  btSendByEmail.IsEnabled = false;
+                lblBenefAcc.Content = "Beneficiary account:";
+                lblBenefAccNo.Content = transaction.ToAccount;
+            }
+            if (transaction.Type == "Payment")
+            {
+                lblBenefAcc.Content = "Payee:";
+                lblBenefAccNo.Content = (from u in EFData.context.Users
+                                         join acc in EFData.context.Accounts on u.Id equals acc.UserId
+                                         where acc.Id == transaction.ToAccount
+                                         select u.CompanyName).FirstOrDefault();   //FIX Exception
+            }
+            if (user.Email == null)
+            {
+               btSendByEmail.IsEnabled = false;
+            }
+            if(needOldBalance == true)
+            {
+                lblPreviousBalance.Content = oldBalance + " $";
+            }
+            if(needOldBalance == false)
+            {
+                lblOldBalance.Content = "";
+                lblPreviousBalance.Content = "";
+                lblNewOrCurrentBalance.Content = "Current balance:";
             }
             lblAccNo.Content = account.Id;
-            lblTransId.Content = deposit.Id;
-            lblPreviousBalance.Content = oldBalance + " $";
-            lblAmount.Content = deposit.Amount + " $";
+            lblTransId.Content = transaction.Id;
+            lblAmount.Content = string.Format("{0:0.00} $", transaction.Amount);
             lblNewBalance.Content = account.Balance + " $";
             lblAgentNo.Content = Utilities.login.User.Id;
-            lblDate.Content = deposit.Date;
+            lblDate.Content = transaction.Date;
+            lblPrintDate.Content = DateTime.Now;
 
 
         }
 
         private void btSendByEmail_Click(object sender, RoutedEventArgs e)
         {
-
-            /*PrintDialog pd = new PrintDialog();
-            pd.PrintQueue = new PrintQueue(new PrintServer(), "Adobe PDF");
-            pd.PrintVisual(this, this.Title); */
-            // create a document
-            /*      FixedDocument document = new FixedDocument();
-                  document.DocumentPaginator.PageSize = new Size(96 * 8.5, 96 * 11);
-                  // create a page
-                  FixedPage page1 = new FixedPage();
-                  page1.Width = document.DocumentPaginator.PageSize.Width;
-                  page1.Height = document.DocumentPaginator.PageSize.Height;
-                  // add some text to the page
-                  page1.Children.Add(grid);
-                  // add the page to the document
-                  PageContent page1Content = new PageContent();
-                  ((IAddChild)page1Content).AddChild(page1);
-                  document.Pages.Add(page1Content);
-
-               /*   //to pdf
-                  var pdfXpsDoc = PdfSharp.Xps.XpsModel.XpsDocument.Open(lMemoryStream);
-                  PdfSharp.Xps.XpsConverter.Convert(pdfXpsDoc, d.FileName, 0);  */
-            int Width = (int)grid.RenderSize.Width;
-            int Height = (int)grid.RenderSize.Height;
-            string fileName = "myCapture.bmp";
+            //create bmp
+            int Width = (int)receiptPanel.RenderSize.Width;
+            int Height = (int)receiptPanel.RenderSize.Height;
+            string fileName = "receipt.bmp";
             RenderTargetBitmap renderTargetBitmap =
             new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
-            renderTargetBitmap.Render(grid);
+            renderTargetBitmap.Render(receiptPanel);
             PngBitmapEncoder pngImage = new PngBitmapEncoder();
             pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             using (Stream fileStream = File.Create(fileName))
@@ -87,15 +97,22 @@ namespace BankManagementSys
                 pngImage.Save(fileStream);
             }
 
-            // Specify the file to be attached and sent.
-            // This example assumes that a file named Data.xls exists in the
-            // current working directory.
-            string file = "myCapture.bmp";
-        
+            //create pdf
+            string pdfFileName = "receipt.pdf";
+            PdfDocument doc = new PdfDocument();
+            PdfPage oPage = new PdfPage();
+            doc.Pages.Add(oPage);
+            XGraphics xgr = XGraphics.FromPdfPage(oPage);
+            XImage img = XImage.FromFile("receipt.bmp");
+            xgr.DrawImage(img, 0, 0);
+            using (Stream fileStream = File.Create(pdfFileName))
+            {
+                doc.Save(fileStream);
+            }
 
-            
 
-            //Send the message.
+            //email
+            string file = "receipt.pdf";
             SmtpClient client = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -109,44 +126,33 @@ namespace BankManagementSys
                     Password = "1112522kO"
                 }
             };
-            MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Viri");
-            MailAddress ToEmail = new MailAddress("ks.studilina@gmail.com", "Someone");
+            MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Bank");
+            MailAddress ToEmail = new MailAddress("ks.studilina@gmail.com", "Customer"); //change cust email
 
             MailMessage mess = new MailMessage(
                 "ks.studilina@gmail.com",
-                "ks.studilina@gmail.com",
-                "Quarterly data report.",
-                "See the attached spreadsheet.");
+                "ks.studilina@gmail.com", //change cust email
+                "Transaction receipt from " + currentTans.Date.ToShortDateString(),
+                "Please see the attached receipt.\nThank you,\nBank");
 
-            // Create  the file attachment for this email message.
             Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 
-            // Add the file attachment to this email message.
             mess.Attachments.Add(data);
 
             try
             {
                 client.Send(mess);
-                MessageBox.Show("Done");
+                MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
-            catch (Exception ex)
+            catch (SmtpException ex)
             {
                 Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
                     ex.ToString());
             }
-
-
-
-
-
-
         }
 
            
-
-
-
         private void btPrint_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();  //not win forms
@@ -161,6 +167,9 @@ namespace BankManagementSys
                 this.btPrint.Visibility = Visibility.Visible;
                 this.btSendByEmail.Visibility = Visibility.Visible;
             }
+
         }
+
+        
     }
 }

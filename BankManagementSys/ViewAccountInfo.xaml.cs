@@ -1,4 +1,6 @@
-﻿using SharedCode;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using SharedCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace BankManagementSys
             currentAccount = account;
             comboHistory.ItemsSource = Utilities.transactionHistoryDays;
             comboHistory.SelectedIndex = 0;
-            lblFullName.Content = string.Format("{0} {1} {2}", user.FirstName, user.MiddleName, user.LastName);
+            lblFullName.Content = user.FullName;
             lblDateOfBirth.Content = user.DateOfBirth.ToShortDateString();
             lblNatId.Content = user.NationalId;
             lblAccNo.Content = account.Id;
@@ -136,15 +138,58 @@ namespace BankManagementSys
             SortTransactionsByTypeAndDate();
         }
 
-        private void btDeposit_Click(object sender, RoutedEventArgs e)
+        private void CallTransactionDialog(string type)
         {
-            Deposit depositDlg = new Deposit(currentUser, currentAccount);
+            Deposit depositDlg = new Deposit(currentUser, currentAccount, type);
             depositDlg.Owner = this;
             bool? result = depositDlg.ShowDialog();
-            if(result == true)
+            if (result == true)
             {
                 SortTransactionsByTypeAndDate();
             }
         }
+
+        //deposit
+        private void btDeposit_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransactionDialog("Deposit");
+        }
+
+        
+
+        //withdrawal
+        private void btWithdrawal_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransactionDialog("Withdrawal");
+        }
+
+        //transfer
+        private void btTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransactionDialog("Transfer");
+        }
+
+        //payment
+        private void btPayment_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransactionDialog("Payment");
+        }
+
+
+
+        private void lvTransactions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(lvTransactions.Items.Count == 0 || lvTransactions.SelectedIndex == -1)
+            {
+                return;
+            }
+            Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
+           
+                DepositReceipt depReceiptDlg = new DepositReceipt(currentAccount, 0, currTrans, currentUser, false);
+                depReceiptDlg.Owner = this;
+                depReceiptDlg.ShowDialog();
+        }
+
+        
     }
 }

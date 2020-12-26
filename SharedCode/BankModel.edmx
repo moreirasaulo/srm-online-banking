@@ -73,6 +73,7 @@
           <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="60" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="70" />
         </EntityType>
         <EntityType Name="UserTypes">
           <Key>
@@ -269,6 +270,7 @@
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__UserId__75A278F5" FromRole="Users" ToRole="Accounts" />
           <NavigationProperty Name="Logins" Relationship="Self.FK__Logins__UserId__05D8E0BE" FromRole="Users" ToRole="Logins" />
           <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -447,6 +449,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="BankManagementSysModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

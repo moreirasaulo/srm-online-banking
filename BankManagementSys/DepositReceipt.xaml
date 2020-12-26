@@ -5,30 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Deposit Receipt" Height="497" Width="353.562">
-    <Grid Name="grid" Margin="-2,1,2,-1">
-        <Label Content="Proof of transaction" HorizontalAlignment="Left" Margin="112,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="13"/>
-        <Label Content="Transaction type:         Deposit" HorizontalAlignment="Left" Margin="36,62,0,0" VerticalAlignment="Top"/>
-        <Label Content="Deposit amount" HorizontalAlignment="Left" Margin="38,206,0,0" VerticalAlignment="Top"/>
-        <Canvas HorizontalAlignment="Left" Height="183" Margin="23,131,0,0" VerticalAlignment="Top" Width="260">
-            <Line X1="10" Y1="60" X2="250" Y2="60" Stroke="Black" StrokeThickness="2" Canvas.Left="9" Canvas.Top="-42"/>
-            <Line X1="10" Y1="160" X2="10" Y2="270" StrokeDashArray="2 2" Stroke="Black" StrokeThickness="1" Canvas.Left="116" Canvas.Top="-125"/>
-        </Canvas>
-        <Label Name="lblAmount" Content="." HorizontalAlignment="Left" Margin="165,205,0,0" VerticalAlignment="Top"/>
-        <Label Content="Previous balance" HorizontalAlignment="Left" Margin="38,172,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPreviousBalance" Content="." HorizontalAlignment="Left" Margin="165,171,0,0" VerticalAlignment="Top"/>
-        <Label Content="New balance" HorizontalAlignment="Left" Margin="38,239,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblNewBalance" Content="." HorizontalAlignment="Left" Margin="165,238,0,0" VerticalAlignment="Top"/>
-        <Label Content="Account number:" HorizontalAlignment="Left" Margin="36,88,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblTransId" Content="..." HorizontalAlignment="Left" Margin="154,114,0,0" VerticalAlignment="Top"/>
-        <Label  Content="Agent number:" HorizontalAlignment="Left" Margin="122,331,0,0" VerticalAlignment="Top"/>
-        <Label  Content="Date:" HorizontalAlignment="Left" Margin="122,358,0,0" VerticalAlignment="Top"/>
-        <Label Content="Transaction number:" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblAccNo" Content="..." HorizontalAlignment="Left" Margin="154,87,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblAgentNo" Content="..." HorizontalAlignment="Left" Margin="210,332,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDate" Content="..." HorizontalAlignment="Left" Margin="210,357,0,0" VerticalAlignment="Top"/>
-        <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,418,0,0" VerticalAlignment="Top" Width="94"/>
-        <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,418,0,0" VerticalAlignment="Top" Width="94"/>
-
+        Title="Deposit Receipt" Height="606" Width="353.562">
+    <Grid Margin="-2,1,2,-1">
+        <StackPanel Name="receiptPanel" Margin="0,0,0,84">
+            <Label Content="Proof of transaction" HorizontalAlignment="Left" Margin="112,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="13"/>
+            <Label Content="Transaction type:" HorizontalAlignment="Left" Margin="36,12,0,0" VerticalAlignment="Top" Width="117"/>
+            <Label x:Name="lblTransType" Content="Deposit" HorizontalAlignment="Left" Margin="156,-25,0,0" VerticalAlignment="Top"/>
+            <Label Content="Account number:" HorizontalAlignment="Left" Margin="36,8,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblAccNo" Content="..." HorizontalAlignment="Left" Margin="156,-27,0,0" VerticalAlignment="Top"/>
+            <Label Content="Transaction number:" HorizontalAlignment="Left" Margin="36,8,0,0" VerticalAlignment="Top"/>
+            <Label Name="lblTransId" Content="..." HorizontalAlignment="Left" Margin="156,-27,0,0" VerticalAlignment="Top"/>
+            <Label Name="lblBenefAcc" Content="" HorizontalAlignment="Left" Margin="36,8,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblBenefAccNo" Content="" HorizontalAlignment="Left" Margin="156,-27,0,0" VerticalAlignment="Top"/>
+            <Canvas HorizontalAlignment="Left" Height="183" Margin="23,131,0,0" VerticalAlignment="Top" Width="260">
+                <Line X1="10" Y1="-80" X2="250" Y2="-80" Stroke="Black" StrokeThickness="2" Canvas.Left="9" Canvas.Top="-42"/>
+                <Line X1="25" Y1="20" X2="25" Y2="130" StrokeDashArray="2 2" Stroke="Black" StrokeThickness="1" Canvas.Left="116" Canvas.Top="-125"/>
+            </Canvas>
+            <Label Name="lblOldBalance" Content="Previous balance" HorizontalAlignment="Left" Margin="38,-280,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblPreviousBalance" Content="." HorizontalAlignment="Left" Margin="178,-280,0,0" VerticalAlignment="Top"/>
+            <Label Name="lblTransTypeAmount" Content="Deposit amount" HorizontalAlignment="Left" Margin="38,-245,0,0" VerticalAlignment="Top"/>
+            <Label Name="lblAmount" Content="." HorizontalAlignment="Left" Margin="178,-245,0,0" VerticalAlignment="Top"/>
+            <Label Name="lblNewOrCurrentBalance" Content="New balance" HorizontalAlignment="Left" Margin="38,-210,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblNewBalance" Content="." HorizontalAlignment="Left" Margin="178,-210,0,0" VerticalAlignment="Top"/>
+            <Label  Content="Agent number:" HorizontalAlignment="Left" Margin="80,-130,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblAgentNo" Content="..." HorizontalAlignment="Left" Margin="210,-130,0,0" VerticalAlignment="Top"/>
+            <Label  Content="Transaction date:" HorizontalAlignment="Left" Margin="80,-100,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblDate" Content="..." HorizontalAlignment="Left" Margin="210,-100,0,0" VerticalAlignment="Top"/>
+            <Label  Content="Receipt generated on:" HorizontalAlignment="Left" Margin="80,-70,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblPrintDate" Content="..." HorizontalAlignment="Left" Margin="210,-70,0,0" VerticalAlignment="Top"/>
+            <Label Content="Transaction type:" HorizontalAlignment="Left" Margin="51,12,0,0" VerticalAlignment="Top" Width="117"/>
+           
+        </StackPanel>
+        <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,510,0,0" VerticalAlignment="Top" Width="94"/>
+        <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,510,0,0" VerticalAlignment="Top" Width="94"/>
     </Grid>
 </Window>
