@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ManageAccounts" Height="466" Width="800">
+        Title="ManageAccounts" Height="472" Width="704">
     <Grid>
-        <ListView  Name="lvAccounts" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="482">
+        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Account No" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
@@ -17,17 +17,18 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Search customer by" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Image HorizontalAlignment="Left" Height="79" Margin="586,78,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="89"/>
+        <Label Content="Search customer by" HorizontalAlignment="Left" Margin="90,24,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="35"/>
         <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="232,13,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,35,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,57,0,0" VerticalAlignment="Top"/>
 
-        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Click="btFind_Click" Name="btFind" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="260,367,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="385,367,0,0" VerticalAlignment="Top" Width="90" Height="37"/>
+        <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btAdd" Content="New Account" HorizontalAlignment="Left" Margin="232,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
+        <Button Name="btCloseAcct" IsEnabled="False" Content="Close Account" HorizontalAlignment="Left" Margin="347,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
         <Button Name="btBackToDash" Click="btBackToDash_Click"
-        Margin="657,331,75,21">
+        Margin="600,327,30,28">
             <StackPanel Width="31">
                 <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="Close" HorizontalAlignment="Right" Margin="-5,0,-6,0" Width="42"/>
@@ -44,6 +45,8 @@
             </ListView.View>
         </ListView>
         <Label Content="Customer's accounts:" HorizontalAlignment="Left" Margin="90,209,0,0" VerticalAlignment="Top"/>
-        <Button Click="btViewAccInfo_Click" Name="btViewAccInfo" Content="View full account info" HorizontalAlignment="Left" Margin="105,367,0,0" VerticalAlignment="Top" Width="124" Height="37"/>
+        <Button Name="btViewAccInfo" Click="btViewAccInfo_Click" IsEnabled="False" Content="View Full Acct Info" FontWeight="Bold" HorizontalAlignment="Left" Margin="90,367,0,0" VerticalAlignment="Top" Width="124" Height="37"/>
+        <Button Name="btStatement" Click="btStatement_Click" Content="Statement" IsEnabled="False" HorizontalAlignment="Left" Margin="462,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
+        <Label Name="lblErrorMsg" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="334,47,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

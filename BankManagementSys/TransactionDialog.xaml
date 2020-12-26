@@ -22,16 +22,16 @@
         <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="592,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
         <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="594,214,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Name="lblTransacTitle" Content="Deposit" HorizontalAlignment="Left" Margin="439,33,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Button x:Name="btBackToTrans" IsDefault="True"  HorizontalAlignment="Left" Margin="650,264,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
+        <Button Content="Back" x:Name="btBackToTrans" HorizontalAlignment="Left" Margin="650,264,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>
         <Label Content="$" HorizontalAlignment="Left" Margin="575,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <Label Name="lblBenefAcc" Content="" HorizontalAlignment="Left" Margin="440,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <TextBox x:Name="tbBenefAccNo" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="592,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
-        <Label Name="lblBenefAccOwner" Content="" HorizontalAlignment="Left" Margin="440,167,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <Label Name="lblBenefAccOwner" Content="" HorizontalAlignment="Left" Margin="440,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <Button Click="btFindBenefAccHolder_Click" Visibility="Hidden"  x:Name="btFindBenefAccHolder"  Content="Find" HorizontalAlignment="Left" Margin="754,160,0,0" VerticalAlignment="Top" Width="54" Height="23"/>
         <Label Name="lblPayee" Content="" HorizontalAlignment="Left" Margin="440,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <ComboBox Visibility="Hidden" Name="comboPayees" HorizontalAlignment="Left" Margin="592,77,0,0" VerticalAlignment="Top" Width="148"/>
-        <ComboBox x:Name="comboPayCategory" Visibility="Hidden" HorizontalAlignment="Left" Margin="592,161,0,0" VerticalAlignment="Top" Width="148"/>
+        <ComboBox x:Name="comboPayCategory" Visibility="Hidden" HorizontalAlignment="Left" Margin="592,167,0,0" VerticalAlignment="Top" Width="148"/>
     </Grid>
 </Window>

@@ -224,6 +224,14 @@ namespace BankManagementSys
                 Receipt receiptDlg = new Receipt(currentAccount, previousBalance, transac, currentUser, true);
                 receiptDlg.Owner = this;
                 bool? result = receiptDlg.ShowDialog();
+                if (result == true)
+                {
+                    MessageBoxResult answer = MessageBox.Show("Would you like to perform another " + currentTransType.ToLower() + " ?", "Choice required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (answer == MessageBoxResult.No)
+                    {
+                        DialogResult = true;
+                    }
+                }
             }
             catch (SystemException ex)
             {
