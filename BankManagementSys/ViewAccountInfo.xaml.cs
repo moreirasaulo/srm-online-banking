@@ -140,9 +140,9 @@ namespace BankManagementSys
 
         private void CallTransactionDialog(string type)
         {
-            Deposit depositDlg = new Deposit(currentUser, currentAccount, type);
-            depositDlg.Owner = this;
-            bool? result = depositDlg.ShowDialog();
+            TransactionDialog transacDlg = new TransactionDialog(currentUser, currentAccount, type);
+            transacDlg.Owner = this;
+            bool? result = transacDlg.ShowDialog();
             if (result == true)
             {
                 SortTransactionsByTypeAndDate();
