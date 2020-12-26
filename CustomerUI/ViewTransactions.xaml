@@ -9,7 +9,6 @@
     <Grid>
         <Label Content="Select Account:" HorizontalAlignment="Left" Margin="145,63,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
-
         </ComboBox>
         <Label Name="lblLoggedInAs" Content="Logged as Client" HorizontalAlignment="Left" Margin="145,15,0,0" VerticalAlignment="Top"/>
         <Button Click="btBackToDash_Click" Name="btBackToDash" Content="Back to dashboard" HorizontalAlignment="Left" Margin="544,18,0,0" VerticalAlignment="Top" Width="107"/>
@@ -22,8 +21,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="btMakeTransfer" Content="Make a Transfer" Click="btMakeTransfer_Click" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Name="btMakePayment" Content="Make a Payment" Click="btMakePayment_Click" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
@@ -33,8 +30,22 @@
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
         <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/handMoney.png"  VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png"  VerticalAlignment="Top" Width="100"/>
         <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Name="btMakeTransfer" Click="btMakeTransfer_Click" 
+            Margin="24,161,565,219">
+            <StackPanel Width="80">
+                <Image Source="/SharedCode;component/Images/transfer.png" Height="41"/>
+                <Label Content="Transfers" HorizontalAlignment="Right" Width="70"/>
+            </StackPanel>
+        </Button>
+        <Button Name="btMakePayment" Click="btMakePayment_Click" 
+            Margin="24,254,565,126">
+            <StackPanel Width="80">
+                <Image Source="/SharedCode;component/Images/payment.png" Height="41"/>
+                <Label Content="Payments" HorizontalAlignment="Right" Width="70"/>
+            </StackPanel>
+        </Button>
         <Button Name="btPDF" Click="btPDF_Click" 
             Margin="24,346,565,34">
             <StackPanel Width="80">
