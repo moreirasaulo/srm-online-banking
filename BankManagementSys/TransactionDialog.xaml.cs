@@ -30,12 +30,9 @@ namespace BankManagementSys
             currentTransType = type;
             this.Title = type;
             lblTransacTitle.Content = type;
-            btMakeTrans.Content = type;
+            btMakeTrans.Content = "Make " +  type;
             if (type == "Transfer")
             {
-                this.Title = type;
-                lblTransacTitle.Content = type;
-                btMakeTrans.Content = type;
                 lblBenefAcc.Content = "Beneficiary account No:";
                 tbBenefAccNo.Visibility = Visibility.Visible;
                 btFindBenefAccHolder.Visibility = Visibility.Visible;
@@ -100,12 +97,13 @@ namespace BankManagementSys
             //payment (payee account, payment category)
             if (currentTransType == "Payment")
             {
-                return ValidateDestAccount();
                 if (comboPayCategory.Items.Count == 0 || comboPayCategory.SelectedIndex == -1 || comboPayCategory.SelectedIndex == 0)
                 {
                     MessageBox.Show("Payment category must be selected", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
+                return ValidateDestAccount();
+                
             }
             return true;
         }

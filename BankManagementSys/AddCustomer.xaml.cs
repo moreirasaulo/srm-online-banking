@@ -45,11 +45,6 @@ namespace BankManagementSys
                 MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
-            {
-                MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
             if (rbGenderMale.IsChecked == false && rbGenderFemale.IsChecked == false && rbGenderOther.IsChecked == false)
             {
                 MessageBox.Show("Please select gender", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
