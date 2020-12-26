@@ -189,7 +189,10 @@ namespace BankManagementSys
 
         private void btStatement_Click(object sender, RoutedEventArgs e)
         {
-
+            Account currentAccount = (Account)lvAccounts.SelectedItem;
+            GenerateStatement statementWindow = new GenerateStatement(currentAccount);
+            statementWindow.Owner = this;
+            statementWindow.Show();
         }       
     }
 }

@@ -63,7 +63,7 @@ namespace CustomerUI
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Close();            
         }
     }
 }
