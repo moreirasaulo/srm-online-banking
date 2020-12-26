@@ -1,17 +1,13 @@
-﻿using PdfSharp;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using SharedCode;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,22 +15,20 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-
 namespace BankManagementSys
 {
     /// <summary>
-    /// Interaction logic for DepositReceipt.xaml
+    /// Interaction logic for Receipt.xaml
     /// </summary>
-    public partial class DepositReceipt : Window
+    public partial class Receipt : Window
     {
         User currentCust;
         Transaction currentTans;
-        public DepositReceipt(Account account, decimal oldBalance, Transaction transaction, User user, bool needOldBalance)
+        public Receipt(Account account, decimal oldBalance, Transaction transaction, User user, bool needOldBalance)
         {
             InitializeComponent();
             currentCust = user;
@@ -42,7 +36,7 @@ namespace BankManagementSys
             this.Title = transaction.Type;
             lblTransType.Content = transaction.Type;
             lblTransTypeAmount.Content = transaction.Type + " amount";
-            
+
             if (transaction.Type == "Transfer")
             {
                 lblBenefAcc.Content = "Beneficiary account:";
@@ -58,13 +52,13 @@ namespace BankManagementSys
             }
             if (user.Email == null)
             {
-               btSendByEmail.IsEnabled = false;
+                btSendByEmail.IsEnabled = false;
             }
-            if(needOldBalance == true)
+            if (needOldBalance == true)
             {
                 lblPreviousBalance.Content = oldBalance + " $";
             }
-            if(needOldBalance == false)
+            if (needOldBalance == false)
             {
                 lblOldBalance.Content = "";
                 lblPreviousBalance.Content = "";
@@ -152,7 +146,7 @@ namespace BankManagementSys
             }
         }
 
-           
+
         private void btPrint_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();  //not win forms
@@ -162,7 +156,7 @@ namespace BankManagementSys
                 this.btSendByEmail.Visibility = Visibility.Hidden;
                 printDialog.PrintVisual(this, this.Title);
             }
-            if(printDialog.ShowDialog() == false)
+            if (printDialog.ShowDialog() == false)
             {
                 this.btPrint.Visibility = Visibility.Visible;
                 this.btSendByEmail.Visibility = Visibility.Visible;
@@ -170,6 +164,6 @@ namespace BankManagementSys
 
         }
 
-        
+
     }
 }

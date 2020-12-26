@@ -120,9 +120,9 @@ namespace BankManagementSys
                 MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 tbAmount.Text = "";
                 tbBenefAccNo.Text = "";
-                DepositReceipt depositReceiptDlg = new DepositReceipt(currentAccount, previousBalance, transac, currentUser, true);
-                depositReceiptDlg.Owner = this;
-                bool? result = depositReceiptDlg.ShowDialog();
+                Receipt receiptDlg = new Receipt(currentAccount, previousBalance, transac, currentUser, true);
+                receiptDlg.Owner = this;
+                bool? result = receiptDlg.ShowDialog();
             }
             catch (SystemException ex)
             {

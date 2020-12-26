@@ -185,9 +185,9 @@ namespace BankManagementSys
             }
             Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
            
-                DepositReceipt depReceiptDlg = new DepositReceipt(currentAccount, 0, currTrans, currentUser, false);
-                depReceiptDlg.Owner = this;
-                depReceiptDlg.ShowDialog();
+                Receipt receiptDlg = new Receipt(currentAccount, 0, currTrans, currentUser, false);
+                receiptDlg.Owner = this;
+                receiptDlg.ShowDialog();
         }
 
         
