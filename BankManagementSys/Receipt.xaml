@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Deposit" Height="598.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="Deposit" Height="642.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid Margin="-2,1,2,-1">
             <StackPanel Name="receiptPanel" Margin="0,0,0,84">
@@ -39,6 +39,7 @@
             </StackPanel>
             <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,510,0,0" VerticalAlignment="Top" Width="94"/>
             <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,510,0,0" VerticalAlignment="Top" Width="94"/>
+            <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="145,562,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
 
     </Grid>

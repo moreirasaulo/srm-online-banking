@@ -154,16 +154,18 @@ namespace BankManagementSys
             {
                 this.btPrint.Visibility = Visibility.Hidden;
                 this.btSendByEmail.Visibility = Visibility.Hidden;
+                this.btOk.Visibility = Visibility.Hidden;
                 printDialog.PrintVisual(this, this.Title);
             }
-            if (printDialog.ShowDialog() == false)
-            {
-                this.btPrint.Visibility = Visibility.Visible;
-                this.btSendByEmail.Visibility = Visibility.Visible;
-            }
+            this.btPrint.Visibility = Visibility.Visible;
+            this.btSendByEmail.Visibility = Visibility.Visible;
+            this.btOk.Visibility = Visibility.Visible;
 
         }
 
-
+        private void btOk_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }
