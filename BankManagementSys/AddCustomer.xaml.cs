@@ -28,7 +28,7 @@ namespace BankManagementSys
             comboCountry.SelectedIndex = 0;
         }
 
-        private bool VerifyFields()
+        private bool ValidateFields()
         {
             if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
             {
@@ -38,11 +38,6 @@ namespace BankManagementSys
             if (tbMiddleName.Text.Length > 20)
             {
                 MessageBox.Show("Middle name must containt not more than 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
-            {
-                MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
@@ -110,7 +105,7 @@ namespace BankManagementSys
 
         private void AddCust_Click(object sender, RoutedEventArgs e)
         {
-            if (!VerifyFields()) { return; }
+            if (!ValidateFields()) { return; }
     
             string gender = "";
             if(rbGenderMale.IsChecked == true)

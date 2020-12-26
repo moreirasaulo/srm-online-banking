@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="TransactionDialog" Height="341" Width="834">
+        Title="TransactionDialog" Height="356" Width="834">
     <Grid>
         <StackPanel Background="Azure" HorizontalAlignment="Left" Height="170" Margin="33,60,0,0" VerticalAlignment="Top" Width="333"/>
-        <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="310" Margin="380,0,0,0" VerticalAlignment="Top" Width="446"/>
+        <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="325" Margin="380,0,0,0" VerticalAlignment="Top" Width="446"/>
 
         <Label Content="Account summary:" HorizontalAlignment="Left" Margin="42,68,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Owner:" HorizontalAlignment="Left" Margin="42,102,0,0" VerticalAlignment="Top"/>
@@ -17,18 +17,18 @@
         <Label Name="lblAccountNo" Content="." HorizontalAlignment="Left" Margin="128,129,0,0" VerticalAlignment="Top"/>
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="42,160,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="128,159,0,0" VerticalAlignment="Top"/>
-        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="440,214,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="440,226,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="440,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="592,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
-        <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="594,214,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="594,226,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Name="lblTransacTitle" Content="Deposit" HorizontalAlignment="Left" Margin="439,33,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Button Content="Back" x:Name="btBackToTrans" HorizontalAlignment="Left" Margin="650,264,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
+        <Button Content="Back" x:Name="btBackToTrans" HorizontalAlignment="Left" Margin="650,280,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>
         <Label Content="$" HorizontalAlignment="Left" Margin="575,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
-        <Label Name="lblBenefAcc" Content="" HorizontalAlignment="Left" Margin="440,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <Label Name="lblBenefAcc" Content="" HorizontalAlignment="Left" Margin="440,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <TextBox x:Name="tbBenefAccNo" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="592,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
-        <Label Name="lblBenefAccOwner" Content="" HorizontalAlignment="Left" Margin="440,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <Label Name="lblBenefAccOwner" Content="" HorizontalAlignment="Left" Margin="440,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <Button Click="btFindBenefAccHolder_Click" Visibility="Hidden"  x:Name="btFindBenefAccHolder"  Content="Find" HorizontalAlignment="Left" Margin="754,160,0,0" VerticalAlignment="Top" Width="54" Height="23"/>
         <Label Name="lblPayee" Content="" HorizontalAlignment="Left" Margin="440,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <ComboBox Visibility="Hidden" Name="comboPayees" HorizontalAlignment="Left" Margin="592,77,0,0" VerticalAlignment="Top" Width="148"/>
