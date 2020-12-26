@@ -130,11 +130,12 @@ password: z77smMQEXz
 2020/12/26 Saulo
 1. Done/not done since last scrum:
 - Implemented Tranfer, Payment buttons (client)
-- Made 'Save as .PDF button'
+- Implemented 'Save as .PDF button'
 - Implemented sorting transactions by date/time
 2. To do until next scrum:
-- Implement 'Generate Statement' window
+- Implement 'Generate Statement'
 - Implement 'Print statement'
 - Implement 'Email statement'
+- Create logo
 3. Need assistance:
 - How to save wpf controls as pdf

@@ -129,6 +129,9 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\saveAsPDF.png" />
+    <Resource Include="Images\clearAll.png" />
+    <Resource Include="Images\johnabbottbank.png" />
     <Resource Include="Images\manageClients.png" />
     <Resource Include="Images\addPerson.png" />
     <Resource Include="Images\exit.png" />

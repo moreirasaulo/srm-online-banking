@@ -25,7 +25,6 @@
         <Button Name="btMakeTransfer" Content="Make a Transfer" Click="btMakeTransfer_Click" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Width="96"/>
         <Button Name="btMakePayment" Content="Make a Payment" Click="btMakePayment_Click" HorizontalAlignment="Left" Margin="24,236,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
-        <Button Name="btPDF" Content="Save as .PDF" Click="btPDF_Click" HorizontalAlignment="Left" Margin="24,298,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
@@ -36,5 +35,12 @@
         <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/handMoney.png"  VerticalAlignment="Top" Width="100"/>
         <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Name="btPDF" Click="btPDF_Click" 
+            Margin="24,346,565,34">
+            <StackPanel Width="80">
+                <Image Source="/SharedCode;component/Images/saveAsPDF.png" Height="41"/>
+                <Label Content="Save as .PDF" HorizontalAlignment="Right" Width="80"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
