@@ -155,23 +155,37 @@ namespace BankManagementSys
             CallTransactionDialog("Deposit");
         }
 
+        private bool IsBalanceSufficient()
+        {
+            if (currentAccount.Balance <= 0)
+            {
+                string message = string.Format("Account No {0} has insufficient balance ({1} $) to proceed with operation", currentAccount.Id, currentAccount.Balance);
+                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
         
 
         //withdrawal
         private void btWithdrawal_Click(object sender, RoutedEventArgs e)
         {
+            if(IsBalanceSufficient() == false) { return; }
             CallTransactionDialog("Withdrawal");
         }
 
         //transfer
         private void btTransfer_Click(object sender, RoutedEventArgs e)
         {
+            if (IsBalanceSufficient() == false) { return; }
             CallTransactionDialog("Transfer");
         }
 
         //payment
         private void btPayment_Click(object sender, RoutedEventArgs e)
         {
+            if (IsBalanceSufficient() == false) { return; }
             CallTransactionDialog("Payment");
         }
 

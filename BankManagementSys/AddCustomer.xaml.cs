@@ -28,7 +28,7 @@ namespace BankManagementSys
             comboCountry.SelectedIndex = 0;
         }
 
-        private bool VerifyFields()
+        private bool ValidateFields()
         {
             if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
             {
@@ -110,7 +110,7 @@ namespace BankManagementSys
 
         private void AddCust_Click(object sender, RoutedEventArgs e)
         {
-            if (!VerifyFields()) { return; }
+            if (!ValidateFields()) { return; }
     
             string gender = "";
             if(rbGenderMale.IsChecked == true)
