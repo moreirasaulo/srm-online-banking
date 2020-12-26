@@ -96,7 +96,7 @@ password: z77smMQEXz
 - add validation to add/update customer
 - implement 'manage accounts' window in admin interface
 - implement add new account
--implement search existing accounts
+- implement search existing accounts
 3. Need assistance:
 - Find out how to store history of account balance
 
@@ -113,3 +113,28 @@ password: z77smMQEXz
 - Implement window 'create payment subcategories'
 3. Need assistance:
 - sorting by date and type at the same time
+
+
+2020/12/26 Ksenia
+1. Done/not done since last scrum:
+- Implemented 'manage accounts' window
+- Implemented make deposit, withdrawal, transfer, payment (admin) inside of account
+- Implemented transaction receipt
+- Did not implement validation
+2. To do until next scrum:
+- add validation to add/update customer and to transactions
+- implement create new account
+3. Need assistance:
+- Find out how to store companies info in database (Users table or separate Companies table)
+
+2020/12/26 Saulo
+1. Done/not done since last scrum:
+- Implemented Tranfer, Payment buttons (client)
+- Made 'Save as .PDF button'
+- Implemented sorting transactions by date/time
+2. To do until next scrum:
+- Implement 'Generate Statement' window
+- Implement 'Print statement'
+- Implement 'Email statement'
+3. Need assistance:
+- How to save wpf controls as pdf

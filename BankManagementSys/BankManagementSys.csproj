@@ -82,14 +82,14 @@
     <Compile Include="AddCustomer.xaml.cs">
       <DependentUpon>AddCustomer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Deposit.xaml.cs">
-      <DependentUpon>Deposit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ManageExistingCustomers.xaml.cs">
       <DependentUpon>ManageExistingCustomers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Receipt.xaml.cs">
       <DependentUpon>Receipt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionDialog.xaml.cs">
+      <DependentUpon>TransactionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transfer.xaml.cs">
       <DependentUpon>Transfer.xaml</DependentUpon>
@@ -106,10 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminDashboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Deposit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Receipt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransactionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
