@@ -37,5 +37,11 @@ namespace BankManagementSys
             manageAccsDlg.Owner = this;
             manageAccsDlg.ShowDialog();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddClientDialog dlg = new AddClientDialog();
+            dlg.ShowDialog();
+        }
     }
 }

@@ -176,5 +176,24 @@ namespace BankManagementSys
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void rbCustCatIndividual_Checked(object sender, RoutedEventArgs e)
+        {
+            if(lblCompanyRep == null) { return; }
+            lblCompanyRep.Visibility = Visibility.Hidden;
+            lblNatIdCompRegNo.Content = "National ID: *";
+            lblDateBirthOrRegist.Content = "Date of birth: *";
+            lblCompName.Content = "";
+            tbCompanyName.Visibility = Visibility.Hidden;
+        }
+
+        private void rbCustCatCompany_Checked(object sender, RoutedEventArgs e)
+        {
+            lblCompanyRep.Visibility = Visibility.Visible;
+            lblNatIdCompRegNo.Content = "Company registration ID: *";
+            lblDateBirthOrRegist.Content = "Date of company registration: *";
+            lblCompName.Content = "Company name: *";
+            tbCompanyName.Visibility = Visibility.Visible;
+        }
     }
 }
