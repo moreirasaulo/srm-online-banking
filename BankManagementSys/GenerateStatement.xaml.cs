@@ -23,14 +23,46 @@ namespace BankManagementSys
         public GenerateStatement(Account currentAccount)
         {
             InitializeComponent();
+            calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
         }
 
-        /*private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
+        private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
         {
-            if (Calendar.DisplayModeProperty = CalendarMode.Month) 
+            //DateTime monthYear = new DateTime();
+            if (calendarMonthYear.DisplayMode == CalendarMode.Month)
             {
-                Calendar.DisplayModeProperty == Microsoft.Windows.Controls.CalendarMode.Year
+                calendarMonthYear.DisplayMode = CalendarMode.Year;                
             }
-        }*/
+
+            //calendarMonthYear.SelectedDate = new DateTime(2019, 01, 01);
+            /*if (calendarMonthYear.DisplayMode == CalendarMode.Month)
+            {
+
+                calendarMonthYear.DisplayMode = CalendarMode.Year;
+                //monthYear. = calendarMonthYear.SelectedDate;
+                //MessageBox.Show(monthYear.Year + ""); // 1
+                //calendarMonthYear.SelectedDate.
+                DateTime date = calendarMonthYear.SelectedDate.Value;
+                calendarMonthYear.SelectedDate = new DateTime(2019, 12, 1);
+                MessageBox.Show(calendarMonthYear.SelectedDate.ToString()); // empty
+                if (calendarMonthYear.SelectedDate.HasValue) 
+                {
+                    MessageBox.Show(calendarMonthYear.SelectedDate.Value.ToString("dd/MM/yyyy"));
+                }
+
+                
+                 if (calendarMonthYear. == Calendar.D) 
+                {
+                    Calendar.DisplayModeProperty == Microsoft.Windows.Controls.CalendarMode.Year
+                }
+                 
+            }*/
+
+        }
+
+        private void calendarMonthYear_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+                DateTime date = calendarMonthYear.SelectedDate.Value;                 
+        }
     }
 }
