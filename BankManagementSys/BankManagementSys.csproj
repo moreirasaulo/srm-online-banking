@@ -94,9 +94,6 @@
     <Compile Include="AddClientDialog.xaml.cs">
       <DependentUpon>AddClientDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddCustomer.xaml.cs">
-      <DependentUpon>AddCustomer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GenerateStatement.xaml.cs">
       <DependentUpon>GenerateStatement.xaml</DependentUpon>
     </Compile>
@@ -120,10 +117,6 @@
       <DependentUpon>ViewCustomerProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AddClientDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
