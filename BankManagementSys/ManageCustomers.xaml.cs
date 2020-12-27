@@ -34,9 +34,9 @@ namespace BankManagementSys
 
         private void btAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            AddCustomer dlgAddCust = new AddCustomer();
-            dlgAddCust.Owner = this;
-            dlgAddCust.ShowDialog();
+            AddClientDialog addNewClientDlg = new AddClientDialog();
+            addNewClientDlg.Owner = this;
+            addNewClientDlg.ShowDialog();
 
         }
 

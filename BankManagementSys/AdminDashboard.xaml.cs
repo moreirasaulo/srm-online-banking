@@ -22,6 +22,7 @@ namespace BankManagementSys
         public AdminDashboard()
         {
             InitializeComponent();
+           
         }
 
         private void btManageCustomers_Click(object sender, RoutedEventArgs e)
@@ -38,10 +39,7 @@ namespace BankManagementSys
             manageAccsDlg.ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddClientDialog dlg = new AddClientDialog();
-            dlg.ShowDialog();
-        }
+       
+
     }
 }

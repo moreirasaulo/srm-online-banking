@@ -44,7 +44,5 @@
                 <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">Manage transactions</TextBlock>
             </StackPanel>
         </Button>
-        <Button Click="Button_Click" Content="Button" HorizontalAlignment="Left" Margin="688,225,0,0" VerticalAlignment="Top" Width="75"/>
-
     </Grid>
 </Window>
