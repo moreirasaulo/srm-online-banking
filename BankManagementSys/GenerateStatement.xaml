@@ -5,11 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Generate Statement" Height="199.433" Width="341.464" ResizeMode="NoResize">
+        Title="Generate Statement" Height="441.433" Width="485.464" ResizeMode="NoResize">
     <Grid>
-        <ComboBox HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="202"/>
-        <Button Content="By Email" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.853,0.65"/>
-        <Button Content="Print" HorizontalAlignment="Left" Margin="89,48,0,0" VerticalAlignment="Top" Width="64"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="158,48,0,0" VerticalAlignment="Top" Width="64"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="24,22,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="100"/>
+        <ComboBox Name="comboStatementMonths" IsEnabled="False" HorizontalAlignment="Left" Margin="321,49,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementMonths_SelectionChanged"/>
+        <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="252,81,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.853,0.65"/>
+        <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="321,81,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Name="btCancel" Click="btCancel_Click" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="390,81,0,0" VerticalAlignment="Top" Width="64"/>
+        <ComboBox Name="comboStatementYears" HorizontalAlignment="Left" Margin="321,22,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementYears_SelectionChanged"/>
+        <Label Content="Year:" HorizontalAlignment="Left" Margin="252,22,0,0" VerticalAlignment="Top"/>
+        <Label Content="Month:" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>
+        <ListView Name="lvMonthStatement"  HorizontalAlignment="Left" Height="262" Margin="24,127,0,0" VerticalAlignment="Top" Width="430">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Transaction Type" Width="160" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Date" Width="125" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
+                    <GridViewColumn Header="Amount" Width="135" DisplayMemberBinding="{Binding Amount, StringFormat=#.00}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

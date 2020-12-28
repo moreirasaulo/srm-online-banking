@@ -178,7 +178,7 @@ namespace BankManagementSys
                 lblSumPostalCode.Content = tbPostalCode.Text;
                 lblSumProvinceState.Content = tbProvinceState.Text;
                 lblSumCountry.Content = comboCountry.Text;
-
+                lblSumCompName.Content = tbCompanyName.Text;
             }
         }
 
@@ -208,7 +208,6 @@ namespace BankManagementSys
             lblCompName.Content = "Company name: *";
             tbCompanyName.Visibility = Visibility.Visible;
             lblSummaryCompInfo.Content = "Company name:";
-            lblSumCompName.Content = tbCompanyName.Text;
             lblSummaryDateOfBirth.Content = "Company reg date:";
             lblSummaryNatId.Content = "Company reg no:";
         }

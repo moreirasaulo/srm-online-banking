@@ -139,3 +139,28 @@ password: z77smMQEXz
 - Create logo
 3. Need assistance:
 - How to save wpf controls as pdf
+
+2020/12/28 Ksenia
+1. Done/not done since last scrum:
+- Added validation to add/update customer and to transactions
+- Created wizard for 'Add Customer'
+- Added 'Add Online Bank' option for new customer
+2. To do until next scrum:
+- Add 'Create New Account' window
+- Add option to activate/deactivate account
+3. Need assistance:
+- Find out how to create progress bar with buttons
+
+2020/12/28 Saulo
+1. Done/not done since last scrum:
+- Implemented 'Generate Statement' window
+- Implemented Filters by year and month for 'Generate Statement' window
+- Implemented 'Export' button (instead of Print)
+- Manage accounts(admin): Implemented input validations
+- View transactions(client): Implemented logos
+2. To do until next scrum:
+- Implement 'Email statement'
+- Add validation to client 'Transfer' and 'Payment' window
+- Implement user(client) van view spending reports
+3. Need assistance:
+- How to make a preview of PDF

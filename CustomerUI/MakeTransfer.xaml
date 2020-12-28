@@ -25,5 +25,6 @@
         <Button Name="btTransfer" Click="btOK_Click" Content="Transfer" HorizontalAlignment="Left" Margin="485,191,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
         <Label Content="Transfer" HorizontalAlignment="Left" Margin="426,34,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Button Click="btBackToTrans_Click" x:Name="btBackToTrans" IsDefault="True" Content="Back to transactions"  HorizontalAlignment="Left" Margin="537,252,0,0" VerticalAlignment="Top" Width="119" Height="29"/>
+        <Label Name="lblBeneficiaryName" Content="Beneficiary Name:" Visibility="Hidden" HorizontalAlignment="Left" Margin="301,154,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

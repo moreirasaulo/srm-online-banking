@@ -1,6 +1,13 @@
-﻿using SharedCode;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,49 +27,226 @@ namespace BankManagementSys
     /// </summary>
     public partial class GenerateStatement : Window
     {
-        public GenerateStatement(Account currentAccount)
+        Account currentAccount;
+        public GenerateStatement(Account account)
         {
             InitializeComponent();
-            calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
+            currentAccount = account;
+            LoadYears();
+            //calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
+        }
+        private void LoadYears() 
+        {
+            List<int> years = new List<int>();
+
+            try
+            {
+                for (int i = currentAccount.OpenDate.Year; i <= DateTime.Now.Year; i++)
+                {
+                    years.Add(i);
+                }
+
+                comboStatementYears.ItemsSource = years;
+            }
+            catch (NullReferenceException ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }   
         }
 
-        private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
-        {
-            //DateTime monthYear = new DateTime();
-            if (calendarMonthYear.DisplayMode == CalendarMode.Month)
+        private List<string> LoadMonths() 
+        {            
+            List<string> months = new List<string>();
+            int currentSelectedYear = (int)comboStatementYears.SelectedItem;
+
+
+            if (currentSelectedYear == currentAccount.OpenDate.Year && currentSelectedYear == DateTime.Now.Year)
             {
-                calendarMonthYear.DisplayMode = CalendarMode.Year;                
+                months.Clear();
+                // select months only from month of opeing and today's month
+                for (int i = currentAccount.OpenDate.Month; i <= DateTime.Now.Month; i++)
+                {
+                    months.Add(DateAndTime.MonthName(i));
+                }
+            }
+            else if (currentSelectedYear == DateTime.Now.Year)
+            {
+                months.Clear();
+                // need to select from january to current month
+                for (int i = 1; i <= DateTime.Now.Month; i++)
+                {
+                    months.Add(DateAndTime.MonthName(i));
+                }
+            }
+            else if (currentSelectedYear == currentAccount.OpenDate.Year)
+            {
+                months.Clear();
+                // only from date when person open acct to december
+                for (int i = currentAccount.OpenDate.Month; i <= 12; i++)
+                {
+                    months.Add(DateAndTime.MonthName(i));
+                }
+            }
+            else
+            {
+                months.Clear();
+                for (int i = 1; i <= 12; i++)
+                {
+                    // select all months
+                    months.Add(DateAndTime.MonthName(i));
+                }
+            }
+            return months;
+        }
+
+        private void comboStatementYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboStatementYears.Items.Count == 0 || comboStatementYears.SelectedIndex == -1) 
+            {
+                MessageBox.Show("You should select a year first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            comboStatementMonths.IsEnabled = true;
+            comboStatementMonths.ItemsSource = LoadMonths();
+        }
+
+        private void comboStatementMonths_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {            
+            if (currentAccount == null)
+            {
+                MessageBox.Show("It was not possible to define an account to generate a statement.");
+                return;
+            }            
+
+            int selectedYear = (int)comboStatementYears.SelectedItem;
+            string selectedMonthStr = comboStatementMonths.SelectedItem.ToString();
+            int selectedMonth = DateTime.ParseExact(selectedMonthStr, "MMMM", CultureInfo.CurrentCulture).Month;
+
+            try
+            {
+                Utilities.Transactions = EFData.context.Transactions.Where(t => t.AccountId ==
+            currentAccount.Id && t.Date.Year == selectedYear && t.Date.Month == selectedMonth).ToList(); //FIX exception
+            }
+            catch (SystemException ex) 
+            {
+                MessageBox.Show("Error fetching from Database: " + ex.Message);
             }
 
-            //calendarMonthYear.SelectedDate = new DateTime(2019, 01, 01);
-            /*if (calendarMonthYear.DisplayMode == CalendarMode.Month)
+            if (Utilities.Transactions != null)
+            {                
+                lvMonthStatement.ItemsSource = Utilities.Transactions;
+            }
+
+            if (lvMonthStatement.Items.Count != 0)
             {
-
-                calendarMonthYear.DisplayMode = CalendarMode.Year;
-                //monthYear. = calendarMonthYear.SelectedDate;
-                //MessageBox.Show(monthYear.Year + ""); // 1
-                //calendarMonthYear.SelectedDate.
-                DateTime date = calendarMonthYear.SelectedDate.Value;
-                calendarMonthYear.SelectedDate = new DateTime(2019, 12, 1);
-                MessageBox.Show(calendarMonthYear.SelectedDate.ToString()); // empty
-                if (calendarMonthYear.SelectedDate.HasValue) 
-                {
-                    MessageBox.Show(calendarMonthYear.SelectedDate.Value.ToString("dd/MM/yyyy"));
-                }
-
-                
-                 if (calendarMonthYear. == Calendar.D) 
-                {
-                    Calendar.DisplayModeProperty == Microsoft.Windows.Controls.CalendarMode.Year
-                }
-                 
-            }*/
-
+                btExport.IsEnabled = true;
+            }
+            else 
+            {
+                MessageBox.Show("No transaction was registered during the selected period.");
+                btExport.IsEnabled = false;
+            }
         }
 
-        private void calendarMonthYear_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void btByEmail_Click(object sender, RoutedEventArgs e)
         {
-                DateTime date = calendarMonthYear.SelectedDate.Value;                 
+            if (currentAccount.User.Email != null)
+            {
+                btByEmail.IsEnabled = true;
+            }
         }
+
+        private void AddLogo(XGraphics gfx, PdfPage page, string imagePath, int xPosition, int yPosition)
+        {
+            if (!File.Exists(imagePath))
+            {
+                throw new FileNotFoundException(String.Format("Could not find image {0}.", imagePath));
+            }
+
+            XImage xImage = XImage.FromFile(imagePath);
+            gfx.DrawImage(xImage, xPosition, yPosition, xImage.PixelWidth/3, xImage.PixelWidth/3);
+        }
+
+        private void btExport_Click(object sender, RoutedEventArgs e)
+        {
+            string year = comboStatementYears.SelectedItem.ToString();
+            string month = comboStatementMonths.SelectedItem.ToString();
+            XImage logo = XImage.FromFile("johnabbottbank.png");
+
+            try
+            {
+                PdfDocument doc = new PdfDocument();
+                doc.Info.Title = "Banking history";
+                PdfPage page = doc.AddPage();
+
+                XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
+                XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
+                XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
+                XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
+
+                try
+                {
+                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
+                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
+                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
+                    XPen lineRed = new XPen(XColors.Green, 5);
+                    XPoint pt1 = new XPoint(0, 90);
+                    XPoint pt2 = new XPoint(page.Width, 90);
+                    graphics.DrawLine(lineRed, pt1, pt2);
+                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
+
+                    List<Transaction> tr = new List<Transaction>();
+                    foreach (Transaction item in lvMonthStatement.Items)
+                    {
+                        tr.Add(item);
+                    }
+
+                    int ind = 120;
+                    for (int i = 0; i < tr.Count; i++)
+                    {
+                        Transaction t = tr[i];
+                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                        ind = ind + 15;
+                    }
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
+                saveFile.InitialDirectory = @"C:\Documents\";
+                saveFile.Title = month + " " + year + " Statement";
+                if (saveFile.ShowDialog() == true)
+                {
+                    doc.Save(saveFile.FileName);
+                    Process.Start(saveFile.FileName);
+                }
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message + "Error");
+            }
+        }
+    
+
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        
     }
 }
