@@ -26,6 +26,8 @@ namespace BankManagementSys
             InitializeComponent();
             comboCountry.ItemsSource = Utilities.Countries;
             comboCountry.SelectedIndex = 0;
+            Wizard.FinishButtonContent = "Add customer";
+            Wizard.CancelButtonClosesWindow = false;
         }
 
 
@@ -149,8 +151,50 @@ namespace BankManagementSys
                 }
             }
 
-            //summary
-            if (Wizard.CurrentPage == Page4)
+            // online bank
+            if (Wizard.CurrentPage == Page5)
+            {
+                if (rbOnlineBankYes.IsChecked == false && rbOnlineBankNo.IsChecked == false)
+                {
+                    MessageBox.Show("Please choose on of the options", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    e.Cancel = true;
+                }
+                if(rbOnlineBankYes.IsChecked == true)
+                {
+                    if (tbUsername.Text.Length < 5 || tbUsername.Text.Length > 20)
+                    {
+                        MessageBox.Show("Username must be made of 5 to 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        e.Cancel = true;
+                        return;
+                    }
+                    string username = null;
+                    try
+                    {
+                        username = (from l in EFData.context.Logins
+                                                          where l.Username == tbUsername.Text
+                                                          select l.Username).FirstOrDefault();
+                    }
+                    catch(SystemException ex)
+                    {
+                        MessageBox.Show("Error fetching from database: " + ex.Message, "Database error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    if (username != null)
+                    {
+                        MessageBox.Show("This username already exists, please choose another one", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        e.Cancel = true;
+                        return;
+                    }
+                    if (tbPassword.Text.Length < 8 || tbPassword.Text.Length > 20) // FIX(any othe syblos allowed?????)
+                    {
+                        MessageBox.Show("Password must be made of 8 to 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+            }
+
+                //summary
+                if (Wizard.CurrentPage == Page5)
             {
                 lblSumFirstName.Content = tbFirstName.Text;
                 lblSumMidName.Content = tbMiddleName.Text;
@@ -169,6 +213,7 @@ namespace BankManagementSys
                     gender = "other";
                 }
                 lblSumGender.Content = gender;
+                lblSumCompName.Content = tbCompanyName.Text;
                 lblSumDateOfBirth.Content = dpBirthday.Text;
                 lblSumNatId.Content = tbNatId.Text;
                 lblSumPhoneNo.Content = tbPhoneNo.Text;
@@ -178,7 +223,7 @@ namespace BankManagementSys
                 lblSumPostalCode.Content = tbPostalCode.Text;
                 lblSumProvinceState.Content = tbProvinceState.Text;
                 lblSumCountry.Content = comboCountry.Text;
-
+                lblSumUsername.Content = tbUsername.Text;
             }
         }
 
@@ -196,6 +241,7 @@ namespace BankManagementSys
             lblSumCompName.Content = "";
             lblSummaryDateOfBirth.Content = "Date of birth:";
             lblSummaryNatId.Content = "National Id:";
+            tbCompanyName.Text = "";
         }
 
         private void rbCustCatCompany_Checked(object sender, RoutedEventArgs e)
@@ -208,7 +254,6 @@ namespace BankManagementSys
             lblCompName.Content = "Company name: *";
             tbCompanyName.Visibility = Visibility.Visible;
             lblSummaryCompInfo.Content = "Company name:";
-            lblSumCompName.Content = tbCompanyName.Text;
             lblSummaryDateOfBirth.Content = "Company reg date:";
             lblSummaryNatId.Content = "Company reg no:";
         }
@@ -249,15 +294,70 @@ namespace BankManagementSys
                 {
                     user.CompanyName = tbCompanyName.Text;
                 }
+                string message = string.Format("Add new customer {0} ?", user.FullName);
+                MessageBoxResult answer = MessageBox.Show(message, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (answer == MessageBoxResult.Yes)
+                {
+                    EFData.context.Users.Add(user);
+                    string successMessage = string.Format("New customer {0} {1} added successfully", user.FirstName, user.LastName);
+                    if (rbOnlineBankYes.IsChecked == true)
+                    {
 
-                EFData.context.Users.Add(user);
-                EFData.context.SaveChanges();
-                string successMessage = string.Format("new customer {0} {1} added successfully", user.FirstName, user.LastName);
-                MessageBox.Show(successMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+                        Login login = new Login
+                        {
+                            Username = tbUsername.Text,
+                            Password = tbPassword.Text,
+                            UserTypeId = 3,
+                            UserId = user.Id
+                        };
+                        EFData.context.Logins.Add(login);
+                        successMessage = successMessage + ",\nonline bank with Username:" + login.Username + "was created";
+                    }
+                    EFData.context.SaveChanges();
+
+                    MessageBox.Show(successMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                if (answer == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                }
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void rbOnlineBankYes_Checked(object sender, RoutedEventArgs e)
+        {
+            lblUsername.Content = "Create username: *";
+            tbUsername.Visibility = Visibility.Visible;
+            lblPassword.Content = "Create password: *";
+            tbPassword.Visibility = Visibility.Visible;
+            lblSummaryUsername.Content = "Username:";
+        }
+
+        private void rbOnlineBankNo_Checked(object sender, RoutedEventArgs e)
+        {
+            if (lblUsername == null) { return; }
+            lblUsername.Content = "";
+            tbUsername.Visibility = Visibility.Hidden;
+            lblPassword.Content = "";
+            tbPassword.Visibility = Visibility.Hidden;
+            tbUsername.Text = "";
+            tbPassword.Text = "";
+            lblSummaryUsername.Content = "";
+            lblSumUsername.Content = "";
+        }
+
+        private void Wizard_Cancel(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show("Exit 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
+            {
+                Wizard.CancelButtonClosesWindow = true;
             }
         }
     }
