@@ -6,9 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Add New Customer" Height="350" Width="649">
+        Title="Add New Customer" Height="390" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
-        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=LastPage}" >
+        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=LastPage}" >
             <xctk:WizardPage x:Name="Page1" 
                                    Title="Add new customer"
                                    Description="Select type of cutomer">
@@ -40,7 +40,9 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage  x:Name="Page3" PageType="Interior"
-                                   Title="National Id and Date of Birth">
+                                   Title="National Id and Date of Birth"
+                              NextPage="{Binding ElementName=Page4 }"
+                                   PreviousPage="{Binding ElementName=Page2}">
                 <Grid>
                     <Label Name="lblNatIdCompRegNo" Content="National ID: *" HorizontalAlignment="Left" Margin="36,41,0,0" VerticalAlignment="Top"/>
                     <Label Name="lblDateBirthOrRegist" Content="Date of Birth: *" HorizontalAlignment="Left" Margin="36,88,0,0" VerticalAlignment="Top"/>
@@ -50,7 +52,9 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page4" PageType="Interior"
-                                   Title="Contact information">
+                                   Title="Contact information"
+                             NextPage="{Binding ElementName=Page5 }"
+                                   PreviousPage="{Binding ElementName=Page3}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="58*"/>
@@ -75,6 +79,20 @@
 
                 </Grid>
             </xctk:WizardPage>
+            <xctk:WizardPage  x:Name="Page5" PageType="Interior"
+                                   Title="Online bank access"
+                              NextPage="{Binding ElementName=LastPage }"
+                                   PreviousPage="{Binding ElementName=Page4}">
+                <Grid>
+                    <Label Content="Add access to online bank for this customer?" HorizontalAlignment="Left" Margin="171,17,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <RadioButton Checked="rbOnlineBankYes_Checked" Name="rbOnlineBankYes" GroupName="OnlineBank" Content="Yes" HorizontalAlignment="Left" Margin="252,57,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Checked="rbOnlineBankNo_Checked" Name="rbOnlineBankNo" GroupName="OnlineBank" Content="No" IsChecked="True" HorizontalAlignment="Left" Margin="310,57,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblUsername" Content="" HorizontalAlignment="Left" Margin="137,101,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="tbUsername" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+                    <Label Name="lblPassword" Content="" HorizontalAlignment="Left" Margin="138,137,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="tbPassword" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+                </Grid>
+            </xctk:WizardPage>
             <xctk:WizardPage x:Name="LastPage" PageType="Interior" 
                                    Title="New customer summary"
                                    CanFinish="True">
@@ -91,9 +109,9 @@
                     <Label Content="Province/State:" HorizontalAlignment="Left" Margin="329,102,0,0" VerticalAlignment="Top" FontWeight="Bold" />
                     <Label Content="Postal Code:" HorizontalAlignment="Left" Margin="329,134,0,0" VerticalAlignment="Top" FontWeight="Bold" />
                     <Label Content="Country:" HorizontalAlignment="Left" Margin="329,164,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-                    <Label Name="lblSummaryCompInfo" Content="Company Name:" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Name="lblSummaryCompInfo" Content="" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="E-mail:" HorizontalAlignment="Left" Margin="330,24,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-                    <Label Name="lblSumCompName" Content="-" HorizontalAlignment="Left" Margin="134,-2,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblSumCompName" Content=""  HorizontalAlignment="Left" Margin="134,-2,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblSumFirstName" Content="-" HorizontalAlignment="Left" Margin="134,22,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblSumMidName" Content="-" HorizontalAlignment="Left" Margin="134,51,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblSumGender" Content="-" HorizontalAlignment="Left" Margin="134,107,0,0" VerticalAlignment="Top"/>
@@ -107,6 +125,8 @@
                     <Label x:Name="lblSumPostalCode" Content="-" HorizontalAlignment="Left" Margin="429,134,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblSumCountry" Content="-" HorizontalAlignment="Left" Margin="429,164,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblSumLastName" Content="-" HorizontalAlignment="Left" Margin="134,79,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblSummaryUsername" Content="" HorizontalAlignment="Left" Margin="329,189,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+                    <Label x:Name="lblSumUsername" Content="" HorizontalAlignment="Left" Margin="429,189,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </xctk:WizardPage>
