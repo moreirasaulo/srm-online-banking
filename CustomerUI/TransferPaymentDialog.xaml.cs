@@ -1,6 +1,7 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,29 +14,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BankManagementSys
+namespace CustomerUI
 {
     /// <summary>
-    /// Interaction logic for TransactionDialog.xaml
+    /// Interaction logic for TransferPaymentDialog.xaml
     /// </summary>
-    public partial class TransactionDialog : Window
+    public partial class TransferPaymentDialog : Window
     {
-        User currentUser;
         Account currentAccount;
         string currentTransType;
-
-        public TransactionDialog(User user, Account account, string type)
+        public TransferPaymentDialog(Account account, string type)
         {
             InitializeComponent();
+            currentAccount = account;
             currentTransType = type;
             this.Title = type;
-            lblTransacTitle.Content = type;
-            btMakeTrans.Content = "Make " +  type;
+            lblTransacTypeTitle.Content = type;
+            btMakeTransaction.Content = "Make " + type;
+            lblAccNo.Content = currentAccount.Id;
+            lblOwnerName.Content = Utils.login.User.FullName;
+            lblAccType.Content = currentAccount.AccountType.Description;
+            lblBalance.Content = currentAccount.Balance + " $";
+
             if (type == "Transfer")
             {
-                lblBenefAcc.Content = "Beneficiary account No:";
-                tbBenefAccNo.Visibility = Visibility.Visible;
-                btFindBenefAccHolder.Visibility = Visibility.Visible;
+                lblBeneficiaryPayee.Content = "Beneficiary account No:";
+                tbBeneficiaryAcct.Visibility = Visibility.Visible;
             }
             if (type == "Payment")
             {
@@ -43,36 +47,109 @@ namespace BankManagementSys
                 comboPayees.Visibility = Visibility.Visible;
                 try
                 {
-                    Utilities.Payees = EFData.context.Users.Include("Accounts").Where(u => u.CompanyName != null).ToList();
+                    Utils.Payees = EFData.context.Users.Include("Accounts").Where(u => u.CompanyName != null).ToList();
                 }
                 catch (SystemException ex)
                 {
                     MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                comboPayees.ItemsSource = Utilities.Payees;
+                comboPayees.ItemsSource = Utils.Payees;
                 comboPayees.DisplayMemberPath = "CompanyName";
-                lblBenefAccOwner.Content = "Payment category";
+                lblBeneficiaryPayee.Content = "Payment category:";
                 comboPayCategory.Visibility = Visibility.Visible;
-                comboPayCategory.ItemsSource = Utilities.paymentCategories;
+                comboPayCategory.ItemsSource = Utils.paymentCategories;
                 comboPayCategory.SelectedIndex = 0;
             }
-            currentUser = user;
-            currentAccount = account;
-            lblOwner.Content = user.FullName;
-            lblAccountNo.Content = account.Id;
-            lblAccType.Content = account.AccountType.Description;
-            lblBalance.Content = account.Balance + " $";
+        }
 
+        private void btMakeTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateFields()) { return; }
+            string message = string.Format("Proceed with this {0}: {1} $ ?", currentTransType.ToLower(),
+                decimal.Parse(tbAmount.Text).ToString("N2"));
+            MessageBoxResult answer = MessageBox.Show(message, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
+            {
+                MakeTransaction();
+            }
+        }
+
+        private void MakeTransaction()
+        {
+            try
+            {
+                decimal amount = decimal.Parse(tbAmount.Text);
+                Transaction transac = new Transaction();
+                transac.Date = DateTime.Now;
+                transac.Amount = amount;
+                transac.Type = currentTransType;
+                transac.AccountId = currentAccount.Id;
+                if (currentTransType == "Transfer")
+                {
+                    int destinationAccNo = int.Parse(tbBeneficiaryAcct.Text);
+                    transac.ToAccount = destinationAccNo;
+                }
+                if (currentTransType == "Payment")
+                {
+                    User payee = (User)comboPayees.SelectedItem;
+
+                    transac.ToAccount = (from a in payee.Accounts
+                                         where a.AccountType.Description == "Business"
+                                         select a.Id).FirstOrDefault();
+
+                    transac.PaymentCategory = comboPayCategory.Text;
+                }
+                EFData.context.Transactions.Add(transac);
+
+                decimal previousBalance = currentAccount.Balance; //balance before transaction
+                
+                    Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
+                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
+                    beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
+                
+                EFData.context.SaveChanges();
+                lblBalance.Content = currentAccount.Balance + " $";
+
+
+                string message = string.Format("The {0} was completed successfully", currentTransType.ToLower());
+                MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearFields();
+
+                Receipt receiptDlg = new Receipt(currentAccount, previousBalance, transac, true);
+                receiptDlg.Owner = this;
+                bool? result = receiptDlg.ShowDialog();
+                if (result == true)
+                {
+                    MessageBoxResult answer = MessageBox.Show("Would you like to perform another " + currentTransType.ToLower() + " ?", "Choice required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (answer == MessageBoxResult.No)
+                    {
+                        DialogResult = true;
+                    }
+                }
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClearFields()
+        {
+            tbAmount.Text = "";
+            tbBeneficiaryAcct.Text = "";
+            comboPayCategory.SelectedIndex = 0;
+            comboPayees.SelectedIndex = -1;
+            lblBeneficiaryName.Content = "";
         }
 
         private bool ValidateFields()
         {
-            //all transactions (amount)
+            // transfer and payment(amount)
             decimal amount;
             try
             {
                 amount = decimal.Parse(tbAmount.Text);
-                if(amount <= 0)
+                if (amount <= 0)
                 {
                     MessageBox.Show("Amount must not be 0 or negative", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -83,7 +160,7 @@ namespace BankManagementSys
                 MessageBox.Show("Amount must contain only digits and . symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (currentTransType != "Deposit" && currentAccount.Balance < amount)
+            if (currentAccount.Balance < amount)
             {
                 MessageBox.Show("Insufficient funds to proceed with operation", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -102,7 +179,6 @@ namespace BankManagementSys
                     return false;
                 }
                 return ValidateDestAccount();
-                
             }
             return true;
         }
@@ -114,17 +190,18 @@ namespace BankManagementSys
             {
                 if (currentTransType == "Transfer")
                 {
-                    destinationAccNo = int.Parse(tbBenefAccNo.Text);
+                    destinationAccNo = int.Parse(tbBeneficiaryAcct.Text);
 
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
                     if (beneficiaryAcc == null)
                     {
-                        lblBenefAccOwner.Content = "This destination account does not exist";
-                        lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
+                        lblBeneficiaryName.Foreground = new SolidColorBrush(Colors.Red);
+                        lblBeneficiaryName.Content = "This destination account does not exist";
                         return false;
                     }
-                    lblBenefAccOwner.Content = string.Format("Beneficiary account holder: {0}", beneficiaryAcc.User.FullName);
-                    if(beneficiaryAcc.Id == currentAccount.Id)
+                    lblBeneficiaryName.Foreground = new SolidColorBrush(Colors.Black);
+                    lblBeneficiaryName.Content = string.Format("Beneficiary account holder: {0}", beneficiaryAcc.User.FullName);
+                    if (beneficiaryAcc.Id == currentAccount.Id)
                     {
                         MessageBox.Show("Destination account and current account must be different", "Transaction prohibited", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
@@ -155,6 +232,12 @@ namespace BankManagementSys
             }
             catch (FormatException)
             {
+                if (tbBeneficiaryAcct.Text.Length == 0)
+                {
+                    lblBeneficiaryName.Foreground = new SolidColorBrush(Colors.Red);
+                    lblBeneficiaryName.Content = "Enter beneficiary account number";
+                    return false;
+                }
                 MessageBox.Show("Destination account must contain digits only", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
@@ -165,91 +248,7 @@ namespace BankManagementSys
             }
         }
 
-
-
-        //make transaction
-        private void MakeTransaction()
-        {
-            try
-            {
-                decimal amount = decimal.Parse(tbAmount.Text);
-                Transaction transac = new Transaction();
-                transac.Date = DateTime.Now;
-                transac.Amount = amount;
-                transac.Type = currentTransType;
-                transac.AccountId = currentAccount.Id;
-                if (currentTransType == "Transfer")
-                {
-                    int destinationAccNo = int.Parse(tbBenefAccNo.Text);
-                    transac.ToAccount = destinationAccNo;
-                }
-                if (currentTransType == "Payment")
-                {
-                    User payee = (User)comboPayees.SelectedItem;
-
-                    transac.ToAccount = (from a in payee.Accounts
-                                         where a.AccountType.Description == "Business"
-                                         select a.Id).FirstOrDefault();
-
-                    transac.PaymentCategory = comboPayCategory.Text;
-                }
-                EFData.context.Transactions.Add(transac);
-
-                decimal previousBalance = currentAccount.Balance; //balance before transaction
-                if (currentTransType == "Deposit")
-                {
-                    currentAccount.Balance = currentAccount.Balance + Math.Round(amount, 2);  //new balance
-                }
-                if (currentTransType == "Withdrawal")
-                {
-                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
-                }
-                if (currentTransType == "Transfer" || currentTransType == "Payment")
-                {
-                    Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
-                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
-                    beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
-                }
-                EFData.context.SaveChanges();
-                lblBalance.Content = currentAccount.Balance + " $";
-
-
-                string message = string.Format("The {0} was completed successfully", currentTransType.ToLower());
-                MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                tbAmount.Text = "";
-                tbBenefAccNo.Text = "";
-                Receipt receiptDlg = new Receipt(currentAccount, previousBalance, transac, currentUser, true);
-                receiptDlg.Owner = this;
-                bool? result = receiptDlg.ShowDialog();
-                if (result == true)
-                {
-                    MessageBoxResult answer = MessageBox.Show("Would you like to perform another " + currentTransType.ToLower() + " ?", "Choice required", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (answer == MessageBoxResult.No)
-                    {
-                        DialogResult = true;
-                    }
-                }
-            }
-            catch (SystemException ex)
-            {
-                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-
-        private void btMakeTrans_Click(object sender, RoutedEventArgs e)
-        {
-            if (!ValidateFields()) { return; }
-            string message = string.Format("Proceed with this {0}: {1} $ ?", currentTransType.ToLower(),
-                decimal.Parse(tbAmount.Text).ToString("N2"));
-            MessageBoxResult answer = MessageBox.Show(message, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (answer == MessageBoxResult.Yes)
-            {
-                MakeTransaction();
-            }
-        }
-
-        private void btFindBenefAccHolder_Click(object sender, RoutedEventArgs e)
+        private void tbBeneficiaryAcct_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidateDestAccount();
         }
@@ -327,7 +326,5 @@ namespace BankManagementSys
         {
             MoneyInput(e);
         }
-
     }
-
 }

@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="View Transactions" Height="482" Width="697">
+        Title="View Transactions" Height="501" Width="697">
     <Grid>
         <Label Content="Select Account:" HorizontalAlignment="Left" Margin="145,63,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
         </ComboBox>
-        <Label Name="lblLoggedInAs" Content="Logged as Client" HorizontalAlignment="Left" Margin="145,15,0,0" VerticalAlignment="Top"/>
+        <Label  Name="lblLoggedInAs" Content="Logged as Client" HorizontalAlignment="Left" Margin="145,15,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
         <Button Click="btBackToDash_Click" Name="btBackToDash" Content="Back to dashboard" HorizontalAlignment="Left" Margin="544,18,0,0" VerticalAlignment="Top" Width="107"/>
-        <ListView Name="lvTransactions" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="506">
+        <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="506">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
@@ -33,25 +33,26 @@
         <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png"  VerticalAlignment="Top" Width="100"/>
         <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
         <Button Name="btMakeTransfer" Click="btMakeTransfer_Click" 
-            Margin="24,161,565,219">
+            Margin="24,161,565,230">
             <StackPanel Width="80">
                 <Image Source="/SharedCode;component/Images/transfer.png" Height="41"/>
-                <Label Content="Transfers" HorizontalAlignment="Right" Width="70"/>
+                <Label Content="Make transfer" HorizontalAlignment="Right" Width="90" Margin="-2,0,-8,0"/>
             </StackPanel>
         </Button>
         <Button Name="btMakePayment" Click="btMakePayment_Click" 
-            Margin="24,254,565,126">
+            Margin="24,250,565,142">
             <StackPanel Width="80">
                 <Image Source="/SharedCode;component/Images/payment.png" Height="41"/>
-                <Label Content="Payments" HorizontalAlignment="Right" Width="70"/>
+                <Label Content="Make payment" HorizontalAlignment="Right" Width="90" Margin="-4,0,-6,0"/>
             </StackPanel>
         </Button>
         <Button Name="btPDF" Click="btPDF_Click" 
-            Margin="24,346,565,34">
+            Margin="24,337,565,53">
             <StackPanel Width="80">
                 <Image Source="/SharedCode;component/Images/saveAsPDF.png" Height="41"/>
                 <Label Content="Save as .PDF" HorizontalAlignment="Right" Width="80"/>
             </StackPanel>
         </Button>
+        <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="145,417,0,0" VerticalAlignment="Top" FontSize="10"/>
     </Grid>
 </Window>

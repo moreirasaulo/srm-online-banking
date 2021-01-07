@@ -26,7 +26,7 @@
             Margin="462,95,188,262" >
             <StackPanel>
                 <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>
-                <Label Content="Something here 2" HorizontalAlignment="Center"/>
+                <Label Content="View spending reposrts" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"

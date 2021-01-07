@@ -1,0 +1,32 @@
+﻿<Window x:Class="CustomerUI.TransferPaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerUI"
+        mc:Ignorable="d"
+         Title="Make a transfer to another account" Height="332.173" Width="718.387">
+    <Grid>
+        <Label Content="Account summary" HorizontalAlignment="Left" Margin="74,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="146" Margin="36,65,0,0" VerticalAlignment="Top" Width="260"/>
+        <Label Content="Account no:" HorizontalAlignment="Left" Margin="53,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblAccNo" Content="" HorizontalAlignment="Left" Margin="145,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Owner:" HorizontalAlignment="Left" Margin="53,101,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblOwnerName" Content="" HorizontalAlignment="Left" Margin="145,101,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Account type:" HorizontalAlignment="Left" Margin="53,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblAccType" Content="" HorizontalAlignment="Left" Margin="145,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Margin="53,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblBalance" Content="" HorizontalAlignment="Left" Margin="145,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Name="lblBeneficiaryPayee" Content="" HorizontalAlignment="Left" Margin="315,142,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbBeneficiaryAcct" KeyDown="tbBeneficiaryAcct_KeyDown"  Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="458,146,0,0" TextWrapping="Wrap" TextChanged="tbBeneficiaryAcct_TextChanged" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="343,210,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Label Content="Amount:" HorizontalAlignment="Left" Margin="315,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="458,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" KeyDown="tbAmount_KeyDown"/>
+        <Button Name="btMakeTransaction" Click="btMakeTransaction_Click" Content="Transfer" HorizontalAlignment="Left" Margin="485,210,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Label Name="lblTransacTypeTitle" Content="Transfer" HorizontalAlignment="Left" Margin="426,34,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Name="lblBeneficiaryName" Content=""  HorizontalAlignment="Left" Margin="315,165,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblPayee" Content="" HorizontalAlignment="Left" Margin="315,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
+        <ComboBox Name="comboPayees" Visibility="Hidden" HorizontalAlignment="Left" Margin="457,77,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="comboPayCategory" Visibility="Hidden" HorizontalAlignment="Left" Margin="457,147,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

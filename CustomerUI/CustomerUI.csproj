@@ -68,6 +68,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFCustomMessageBox, Version=1.0.7.39267, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\BankManagementSys\packages\WPFCustomMessageBox.1.0.7\lib\WPFCustomMessageBox.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\BankManagementSys\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -89,17 +92,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MakePayment.xaml.cs">
-      <DependentUpon>MakePayment.xaml</DependentUpon>
+    <Compile Include="EmailDialog.xaml.cs">
+      <DependentUpon>EmailDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MakeTransfer.xaml.cs">
-      <DependentUpon>MakeTransfer.xaml</DependentUpon>
+    <Compile Include="Receipt.xaml.cs">
+      <DependentUpon>Receipt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransferPaymentDialog.xaml.cs">
+      <DependentUpon>TransferPaymentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
     <Compile Include="ViewTransactions.xaml.cs">
       <DependentUpon>ViewTransactions.xaml</DependentUpon>
     </Compile>
     <Page Include="ClientDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmailDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,11 +128,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MakePayment.xaml">
+    <Page Include="Receipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MakeTransfer.xaml">
+    <Page Include="TransferPaymentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

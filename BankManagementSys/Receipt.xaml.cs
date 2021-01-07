@@ -45,10 +45,17 @@ namespace BankManagementSys
             if (transaction.Type == "Payment")
             {
                 lblBenefAcc.Content = "Payee:";
-                lblBenefAccNo.Content = (from u in EFData.context.Users
-                                         join acc in EFData.context.Accounts on u.Id equals acc.UserId
-                                         where acc.Id == transaction.ToAccount
-                                         select u.CompanyName).FirstOrDefault();   //FIX Exception
+                try
+                {
+                    lblBenefAccNo.Content = (from u in EFData.context.Users
+                                             join acc in EFData.context.Accounts on u.Id equals acc.UserId
+                                             where acc.Id == transaction.ToAccount
+                                             select u.CompanyName).FirstOrDefault();
+                }
+                catch (SystemException ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             if (user.Email == null)
             {
@@ -66,6 +73,7 @@ namespace BankManagementSys
             }
             lblAccNo.Content = account.Id;
             lblTransId.Content = transaction.Id;
+            lblAccHolder.Content = currentCust.FullName;
             lblAmount.Content = string.Format("{0:0.00} $", transaction.Amount);
             lblNewBalance.Content = account.Balance + " $";
             lblAgentNo.Content = Utilities.login.User.Id;
@@ -77,72 +85,76 @@ namespace BankManagementSys
 
         private void btSendByEmail_Click(object sender, RoutedEventArgs e)
         {
-            //create bmp
-            int Width = (int)receiptPanel.RenderSize.Width;
-            int Height = (int)receiptPanel.RenderSize.Height;
-            string fileName = "receipt.bmp";
-            RenderTargetBitmap renderTargetBitmap =
-            new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
-            renderTargetBitmap.Render(receiptPanel);
-            PngBitmapEncoder pngImage = new PngBitmapEncoder();
-            pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream fileStream = File.Create(fileName))
+            MessageBoxResult answer = MessageBox.Show("Send receipt to "+ currentCust.Email, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
             {
-                pngImage.Save(fileStream);
-            }
-
-            //create pdf
-            string pdfFileName = "receipt.pdf";
-            PdfDocument doc = new PdfDocument();
-            PdfPage oPage = new PdfPage();
-            doc.Pages.Add(oPage);
-            XGraphics xgr = XGraphics.FromPdfPage(oPage);
-            XImage img = XImage.FromFile("receipt.bmp");
-            xgr.DrawImage(img, 0, 0);
-            using (Stream fileStream = File.Create(pdfFileName))
-            {
-                doc.Save(fileStream);
-            }
-
-
-            //email
-            string file = "receipt.pdf";
-            SmtpClient client = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential()
+                //create bmp
+                int Width = (int)receiptPanel.RenderSize.Width;
+                int Height = (int)receiptPanel.RenderSize.Height;
+                string fileName = "receipt.bmp";
+                RenderTargetBitmap renderTargetBitmap =
+                new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
+                renderTargetBitmap.Render(receiptPanel);
+                PngBitmapEncoder pngImage = new PngBitmapEncoder();
+                pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+                using (Stream fileStream = File.Create(fileName))
                 {
-                    UserName = "ks.studilina@gmail.com",
-                    Password = "1112522kO"
+                    pngImage.Save(fileStream);
                 }
-            };
-            MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Bank");
-            MailAddress ToEmail = new MailAddress("ks.studilina@gmail.com", "Customer"); //change cust email
 
-            MailMessage mess = new MailMessage(
-                "ks.studilina@gmail.com",
-                "ks.studilina@gmail.com", //change cust email
-                "Transaction receipt from " + currentTans.Date.ToShortDateString(),
-                "Please see the attached receipt.\nThank you,\nBank");
+                //create pdf
+                string pdfFileName = "receipt.pdf";
+                PdfDocument doc = new PdfDocument();
+                PdfPage oPage = new PdfPage();
+                doc.Pages.Add(oPage);
+                XGraphics xgr = XGraphics.FromPdfPage(oPage);
+                XImage img = XImage.FromFile("receipt.bmp");
+                xgr.DrawImage(img, 0, 0);
+                using (Stream fileStream = File.Create(pdfFileName))
+                {
+                    doc.Save(fileStream);
+                }
 
-            Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 
-            mess.Attachments.Add(data);
+                //email
+                string file = "receipt.pdf";
+                SmtpClient client = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential()
+                    {
+                        UserName = "ks.studilina@gmail.com",
+                        Password = "1112522kO"
+                    }
+                };
+                MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Bank");
+                MailAddress ToEmail = new MailAddress("ks.studilina@gmail.com", "Customer"); //change cust email
 
-            try
-            {
-                client.Send(mess);
-                MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MailMessage mess = new MailMessage(
+                    "ks.studilina@gmail.com",
+                    "ks.studilina@gmail.com", //change cust email
+                    "Transaction receipt from " + currentTans.Date.ToShortDateString(),
+                    "Please see the attached receipt.\nThank you,\nBank");
 
-            }
-            catch (SmtpException ex)
-            {
-                Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
-                    ex.ToString());
+                Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+
+                mess.Attachments.Add(data);
+
+                try
+                {
+                    client.Send(mess);
+                    MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                catch (SmtpException ex)
+                {
+                    Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                        ex.ToString());
+                }
             }
         }
 

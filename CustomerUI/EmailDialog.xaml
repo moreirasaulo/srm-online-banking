@@ -1,0 +1,16 @@
+﻿<Window x:Class="CustomerUI.EmailDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerUI"
+        mc:Ignorable="d"
+        Title="EmailDialog" Height="216" Width="415">
+    <Grid>
+        <Label Content="Enter e-mail address for receipt to be sent:" HorizontalAlignment="Left" Margin="90,49,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="90,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="235"/>
+        <Button Click="btSendReceipt_Click" Name="btSendReceipt" Content="Send receipt" IsDefault="True" HorizontalAlignment="Left" Margin="130,141,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="221,141,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

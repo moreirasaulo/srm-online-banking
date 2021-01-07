@@ -119,6 +119,12 @@ namespace BankManagementSys
             }            
 
             int selectedYear = (int)comboStatementYears.SelectedItem;
+            if (comboStatementMonths.Items.Count == 0 || comboStatementMonths.SelectedIndex == -1)
+            {
+                Utilities.Transactions = null;
+                lvMonthStatement.ItemsSource = Utilities.Transactions;
+                return;
+            }
             string selectedMonthStr = comboStatementMonths.SelectedItem.ToString();
             int selectedMonth = DateTime.ParseExact(selectedMonthStr, "MMMM", CultureInfo.CurrentCulture).Month;
 

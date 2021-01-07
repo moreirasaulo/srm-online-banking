@@ -28,34 +28,46 @@ namespace CustomerUI
     /// </summary>
     public partial class ViewTransactions : Window
     {
-        
-        
+
+
         public ViewTransactions()
         {
             InitializeComponent();
             comboHistory.ItemsSource = Utils.transactionHistoryDays;
 
-            lblLoggedInAs.Content = string.Format("Logged as {0} {1}", Utils.login.User.FirstName,
-                Utils.login.User.LastName);
-           
+            lblLoggedInAs.Content = string.Format("Logged as {0}", Utils.login.User.FullName);
+
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
             comboAccountType.DisplayMemberPath = "AccountType.Description";
-            
+
             if (Utils.login.User.Accounts.Count == 0)
             {
-                lblError.Content = "There's no bank account linked to your profile yet.";
+                lblError.Content = "There's no bank account linked to your profile yet";
                 return;
             }
-           
+        }
+
+        private void LoadTransactions()
+        {
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            try
+            {
+                Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
+            selectedAcc.Id).ToList();
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void SortTransactionsByTypeAndDate()
         {
             List<Transaction> sortedTransactions = new List<Transaction>();
-
             //by type
             if (rbTransactAll.IsChecked == true)
-            { 
+            {
                 sortedTransactions = Utils.userTransactions;
                 //by date
                 sortedTransactions = SortTransactionsByDate(sortedTransactions);
@@ -115,14 +127,14 @@ namespace CustomerUI
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            SortTransactionsByTypeAndDate(); 
+            SortTransactionsByTypeAndDate();
         }
 
-        
+
 
         private void comboHistory_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            SortTransactionsByTypeAndDate();  
+            SortTransactionsByTypeAndDate();
         }
 
         private void btBackToDash_Click(object sender, RoutedEventArgs e)
@@ -132,25 +144,24 @@ namespace CustomerUI
 
         private void btMakeTransfer_Click(object sender, RoutedEventArgs e)
         {
-            if(Utils.login.User.Accounts == null || comboAccountType.SelectedIndex == -1)
+            if (Utils.login.User.Accounts == null || comboAccountType.SelectedIndex == -1)
             {
-                MessageBox.Show("You do not have an account to make a transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Select an account to make a transfer", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if(selectedAcc.Balance <= 0)
+            if (selectedAcc.Balance <= 0)
             {
-                MessageBox.Show("Your account balance is insufficient to make a transfer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Your account balance is insufficient to make a transfer", "Insufficient balance", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            MakeTransfer transfer = new MakeTransfer(selectedAcc);
-            transfer.Owner = this;
-            bool? result = transfer.ShowDialog();
+            TransferPaymentDialog transferDlg = new TransferPaymentDialog(selectedAcc, "Transfer");
+            transferDlg.Owner = this;
+            bool? result = transferDlg.ShowDialog();
 
-            if(result == true)
+            if (result == true)
             {
-                Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            selectedAcc.Id).ToList();   //FIX exception
+                LoadTransactions();
                 SortTransactionsByTypeAndDate();
             }
         }
@@ -160,99 +171,121 @@ namespace CustomerUI
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
             if (selectedAcc == null)
             {
-                MessageBox.Show("Please choose an account to view transactions.");
+                MessageBox.Show("Please choose an account to view transactions");
                 return;
             }
             lblBalance.Content = "$ " + selectedAcc.Balance;
 
-            Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            selectedAcc.Id).ToList(); //FIX exception
-
-
+            LoadTransactions();
             SortTransactionsByTypeAndDate();
             comboHistory.SelectedIndex = 0;
         }
 
         private void btMakePayment_Click(object sender, RoutedEventArgs e)
         {
-            MakePayment payment = new MakePayment();
-            payment.Owner = this;
-            payment.ShowDialog();
+            if (Utils.login.User.Accounts == null || comboAccountType.SelectedIndex == -1)
+            {
+                MessageBox.Show("Select an account to make a payment", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (selectedAcc.Balance <= 0)
+            {
+                MessageBox.Show("Your account balance is insufficient to make a payment", "Insufficient balance", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            TransferPaymentDialog paymentDlg = new TransferPaymentDialog(selectedAcc, "Payment");
+            paymentDlg.Owner = this;
+            bool? result = paymentDlg.ShowDialog();
+            if (result == true)
+            {
+                LoadTransactions();
+                SortTransactionsByTypeAndDate();
+            }
         }
 
         private void btPDF_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
             if (selectedAcc == null)
             {
                 MessageBox.Show("You should select an account first.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            else 
+            try
             {
-                try
+                PdfDocument doc = new PdfDocument();
+                doc.Info.Title = "Banking history";
+                PdfPage page = doc.AddPage();
+
+                XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
+                XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
+                XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
+
+                graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                graphics.DrawString("Account Number: " + selectedAcc.Id, fontBold, XBrushes.Black, 20, 45);
+                graphics.DrawString("Current Balance: $ " + selectedAcc.Balance, fontBold, XBrushes.Black, 20, 60);
+                graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                XPen lineRed = new XPen(XColors.Green, 5);
+                XPoint pt1 = new XPoint(0, 90);
+                XPoint pt2 = new XPoint(page.Width, 90);
+                graphics.DrawLine(lineRed, pt1, pt2);
+                graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+
+                List<Transaction> tr = new List<Transaction>();
+                foreach (Transaction item in lvTransactions.Items)
                 {
-                    PdfDocument doc = new PdfDocument();
-                    doc.Info.Title = "Banking history";
-                    PdfPage page = doc.AddPage();
-
-                    XGraphics graphics = XGraphics.FromPdfPage(page);
-
-                    XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
-                    XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
-                    XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
-
-                    try
-                    {
-                        graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
-                        graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
-                        graphics.DrawString("Account Number: " + selectedAcc.Id, fontBold, XBrushes.Black, 20, 45);
-                        graphics.DrawString("Current Balance: $ " + selectedAcc.Balance, fontBold, XBrushes.Black, 20, 60);
-                        graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
-                        XPen lineRed = new XPen(XColors.Green, 5);
-                        XPoint pt1 = new XPoint(0, 90);
-                        XPoint pt2 = new XPoint(page.Width, 90);
-                        graphics.DrawLine(lineRed, pt1, pt2);
-                        graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
-                        graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
-                        graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
-
-                        List<Transaction> tr = new List<Transaction>();
-                        foreach (Transaction item in lvTransactions.Items)
-                        {
-                            tr.Add(item);
-                        }
-
-                        int ind = 120;
-                        for (int i = 0; i < tr.Count ; i++)
-                        {
-                            Transaction t = tr[i];                           
-                            graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
-                            graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
-                            graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
-                            ind = ind + 15;
-                        }                        
-                    }
-                    catch (InvalidOperationException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-                    SaveFileDialog saveFile = new SaveFileDialog();
-                    saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
-                    saveFile.InitialDirectory = @"C:\Documents\";
-                    saveFile.Title = "Save your banking history to file";
-                    if (saveFile.ShowDialog() == true)
-                    {
-                        doc.Save(saveFile.FileName);
-                        Process.Start(saveFile.FileName);
-                    }
-
+                    tr.Add(item);
                 }
-                catch (IOException ex)
+
+                int ind = 120;
+                for (int i = 0; i < tr.Count; i++)
                 {
-                    MessageBox.Show(ex.Message + "Error");
+                    Transaction t = tr[i];
+                    graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                    graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                    graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                    ind = ind + 15;
+                }
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
+                saveFile.InitialDirectory = @"C:\Documents\";
+                saveFile.Title = "Save your banking history to file";
+                if (saveFile.ShowDialog() == true)
+                {
+                    doc.Save(saveFile.FileName);
+                    Process.Start(saveFile.FileName);
                 }
             }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Error saving to file: " + ex.Message, "Error saving to file", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void lvTransactions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (comboAccountType.Items.Count == 0 || comboAccountType.SelectedIndex == -1)
+            {
+                return;
+            }
+            Account currentAcc = (Account)comboAccountType.SelectedItem;
+            if (lvTransactions.Items.Count == 0 || lvTransactions.SelectedIndex == -1)
+            {
+                return;
+            }
+            Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
+
+            Receipt receiptDlg = new Receipt(currentAcc, 0, currTrans, false);
+            receiptDlg.Owner = this;
+            receiptDlg.ShowDialog();
         }
     }
 }
