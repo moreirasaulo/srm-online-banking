@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,14 @@ namespace BankManagementSys
         {
             currentUser = user;
             InitializeComponent();
+            if(currentUser.CompanyName != null)
+            {
+                lblDate.Content = "Company reg. date:";
+                lblId.Content = "Company reg. No:";
+                lblCompanyName.Content = "Company name:";
+                tbCompanyName.Visibility = Visibility.Visible;
+                tbCompanyName.Text = currentUser.CompanyName;
+            }
             comboCountry.ItemsSource = Utilities.Countries;
             DeactivateFields();
             LoadCustomerInfoToFileds();
@@ -37,15 +46,15 @@ namespace BankManagementSys
             tbMiddleName.Text = currentUser.MiddleName;
             tbLastName.Text = currentUser.LastName;
             tbNatId.Text = currentUser.NationalId;
-            if (currentUser.Gender == "male")
+            if (currentUser.Gender.ToLower() == "male")
             {
                 rbGenderMale.IsChecked = true;
             }
-            else if (currentUser.Gender == "female")
+            else if (currentUser.Gender.ToLower() == "female")
             {
                 rbGenderFemale.IsChecked = true;
             }
-            else if (currentUser.Gender == "other")
+            else if (currentUser.Gender.ToLower() == "other")
             {
                 rbGenderOther.IsChecked = true;
             }
@@ -56,6 +65,7 @@ namespace BankManagementSys
             tbProvinceState.Text = currentUser.ProvinceState;
             tbPostalCode.Text = currentUser.PostalCode;
             comboCountry.Text = currentUser.Country;
+            tbEmail.Text = currentUser.Email;
         }
 
         private void DeactivateFields()
@@ -74,6 +84,8 @@ namespace BankManagementSys
             tbProvinceState.IsEnabled = false;
             tbPostalCode.IsEnabled = false;
             comboCountry.IsEnabled = false;
+            tbCompanyName.IsEnabled = false;
+            tbEmail.IsEnabled = false;
 
         }
 
@@ -93,11 +105,14 @@ namespace BankManagementSys
             tbProvinceState.IsEnabled = true;
             tbPostalCode.IsEnabled = true;
             comboCountry.IsEnabled = true;
-
+            tbCompanyName.IsEnabled = true;
+            tbEmail.IsEnabled = true;
         }
 
         private void btUpdateCustomer_Click(object sender, RoutedEventArgs e)
         {
+            btConfirmUpdate.Visibility = Visibility.Visible;
+            btCancelUpdate.Visibility = Visibility.Visible;
             ActivateFields();
         }
 
@@ -105,13 +120,99 @@ namespace BankManagementSys
         {
             LoadCustomerInfoToFileds();
             DeactivateFields();
+            btCancelUpdate.Visibility = Visibility.Hidden;
+            btConfirmUpdate.Visibility = Visibility.Hidden;
+        }
+
+        private bool ValidateFields()
+        {
+            if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
+            {
+                MessageBox.Show("First name must contain between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbMiddleName.Text.Length > 20)
+            {
+                MessageBox.Show("Middle name must containt not more than 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
+            {
+                MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (rbGenderMale.IsChecked == false && rbGenderFemale.IsChecked == false && rbGenderOther.IsChecked == false)
+            {
+                MessageBox.Show("Please choose gender of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (tbNatId.Text.Length < 5 || tbNatId.Text.Length > 20)
+            {
+                MessageBox.Show("National Id/Company registration Id number must containt between 5 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (dpBirthday.SelectedDate == null)
+            {
+                MessageBox.Show("Please select date of birth/date of company registration", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (dpBirthday.SelectedDate > DateTime.Now)
+            {
+                MessageBox.Show("Date of birth/company registration date must be earlier than today's date", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
+            {
+                MessageBox.Show("Please enter valid phone number xxx-xxx-xx-xx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbAddress.Text.Length < 5 || tbAddress.Text.Length > 50)
+            {
+                MessageBox.Show("Address must contain between 5 and 50 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbCity.Text.Length < 2 || tbCity.Text.Length > 20)
+            {
+                MessageBox.Show("City must contain between 2 and 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbProvinceState.Text.Length < 2 || tbProvinceState.Text.Length > 20)
+            {
+                MessageBox.Show("Province or State must be between 2 and 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbPostalCode.Text.Length < 5 || tbPostalCode.Text.Length > 10)
+            {
+                MessageBox.Show("Postal code must be made of 5 to 10 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (comboCountry.Text.Length > 20)
+            {
+                MessageBox.Show("Country must contain maximum 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (comboCountry.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select country", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (tbEmail.Text.Length > 60)
+            {
+                MessageBox.Show("E-mail must contain maximum 60 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (currentUser.CompanyName != null && (tbCompanyName.Text.Length < 1 || tbCompanyName.Text.Length > 70))
+            {
+                MessageBox.Show("Company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
 
         private void btConfirmUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //FIX exceptions
-            //FIX validate fields
-            //if fields are valid then
+            if(!ValidateFields()) { return; }
+            
             currentUser.FirstName = tbFirstName.Text;
             currentUser.MiddleName = tbMiddleName.Text;
             currentUser.LastName = tbLastName.Text;
@@ -135,10 +236,24 @@ namespace BankManagementSys
             currentUser.PostalCode = tbPostalCode.Text;
             currentUser.ProvinceState = tbProvinceState.Text;
             currentUser.Country = comboCountry.Text;
+            currentUser.Email = tbEmail.Text;
+            if(currentUser.CompanyName != null)
+            {
+                currentUser.CompanyName = tbCompanyName.Text;
+            }
 
-            EFData.context.SaveChanges();
+            try
+            {
+                EFData.context.SaveChanges();
+            }
+            catch(SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error fetching from database", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             LoadCustomerInfoToFileds();
             DeactivateFields();
+            btCancelUpdate.Visibility = Visibility.Hidden;
+            btConfirmUpdate.Visibility = Visibility.Hidden;
         }
 
         private void BackToManageCusts_Click(object sender, RoutedEventArgs e)

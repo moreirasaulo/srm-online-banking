@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="View Account Information" Height="554" Width="811">
+        Title="View Account Information" Height="512" Width="859">
     <Grid>
-        <StackPanel Background="Azure" HorizontalAlignment="Left" Height="159" Margin="33,21,0,0" VerticalAlignment="Top" Width="305"/>
+        <StackPanel Background="Azure" HorizontalAlignment="Left" Height="172" Margin="33,21,0,0" VerticalAlignment="Top" Width="338"/>
         <Label Content="Account's owner information:" HorizontalAlignment="Left" Margin="42,29,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Full name:" HorizontalAlignment="Left" Margin="42,63,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblFullName" Content="." HorizontalAlignment="Left" Margin="128,61,0,0" VerticalAlignment="Top"/>
-        <Label Content="Date of rirth:" HorizontalAlignment="Left" Margin="42,92,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblDateOfBirth" Content="." HorizontalAlignment="Left" Margin="128,90,0,0" VerticalAlignment="Top"/>
-        <Label Content="National Id:" HorizontalAlignment="Left" Margin="42,121,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblNatId" Content="." HorizontalAlignment="Left" Margin="128,120,0,0" VerticalAlignment="Top"/>
-        <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="235" Margin="33,198,0,0" VerticalAlignment="Top" Width="305">
+        <Label Name="lblFullName" Content="." HorizontalAlignment="Left" Margin="212,61,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblDate" Content="Date of birth:" HorizontalAlignment="Left" Margin="42,92,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblDateOfBirth" Content="." HorizontalAlignment="Left" Margin="212,90,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblId" Content="National Id:" HorizontalAlignment="Left" Margin="42,121,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblNatId" Content="." HorizontalAlignment="Left" Margin="212,120,0,0" VerticalAlignment="Top"/>
+        <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="235" Margin="33,198,0,0" VerticalAlignment="Top" Width="338">
         </StackPanel>
         <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="152,230,0,0" VerticalAlignment="Top"/>
         <Label Content="Account information:" HorizontalAlignment="Left" Margin="42,203,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
@@ -25,7 +25,7 @@
         <Label x:Name="lblOpenDate" Content="." HorizontalAlignment="Left" Margin="151,279,0,0" VerticalAlignment="Top"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="43,305,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="151,302,0,0" VerticalAlignment="Top"/>
-        <Button Click="btOk_Click" Name="btOk" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="535,478,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="btOk_Click" Name="btOk" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="568,412,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="43,232,0,0" VerticalAlignment="Top"/>
         <Label Content="Monthly fee:" HorizontalAlignment="Left" Margin="43,330,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblMonthlyFee" Content="." HorizontalAlignment="Left" Margin="151,327,0,0" VerticalAlignment="Top"/>
@@ -33,13 +33,13 @@
         <Label x:Name="lblInterest" Content="." HorizontalAlignment="Left" Margin="151,353,0,0" VerticalAlignment="Top"/>
         <Label Name="lblInterestOrFee"  Content="..." HorizontalAlignment="Left" Margin="43,379,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblInterestFeeDate" Content="." HorizontalAlignment="Left" Margin="151,378,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="592,87,0,0" VerticalAlignment="Top" Width="155"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="376,124,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="423,124,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="498,124,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="595,125,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="675,125,0,0" VerticalAlignment="Top"/>
-        <ListView MouseDoubleClick="lvTransactions_MouseDoubleClick" Name="lvTransactions" HorizontalAlignment="Left" Height="223" Margin="377,156,0,0" VerticalAlignment="Top" Width="370">
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="625,23,0,0" VerticalAlignment="Top" Width="155"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="409,60,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="456,60,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="531,60,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="628,61,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="708,61,0,0" VerticalAlignment="Top"/>
+        <ListView MouseDoubleClick="lvTransactions_MouseDoubleClick" Name="lvTransactions" HorizontalAlignment="Left" Height="223" Margin="410,92,0,0" VerticalAlignment="Top" Width="370">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="120" DisplayMemberBinding="{Binding Type}"/>
@@ -48,11 +48,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Recent account transactions:" HorizontalAlignment="Left" Margin="372,82,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <Button Click="btDeposit_Click" Name="btDeposit" Content="Make Deposit" HorizontalAlignment="Left" Margin="423,401,0,0" VerticalAlignment="Top" Width="95"/>
-        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" Content="Make Withdrawal" HorizontalAlignment="Left" Margin="535,401,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btTransfer_Click" x:Name="btTransfer" Content="Make Transfer" HorizontalAlignment="Left" Margin="651,401,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btPayment_Click" x:Name="btPayment" Content="Make Payment" HorizontalAlignment="Left" Margin="538,437,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Recent account transactions:" HorizontalAlignment="Left" Margin="405,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Button Click="btDeposit_Click" Name="btDeposit" Content="Make Deposit" HorizontalAlignment="Left" Margin="384,354,0,0" VerticalAlignment="Top" Width="95"/>
+        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" Content="Make Withdrawal" HorizontalAlignment="Left" Margin="491,354,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button Click="btTransfer_Click" x:Name="btTransfer" Content="Make Transfer" HorizontalAlignment="Left" Margin="606,354,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button Click="btPayment_Click" x:Name="btPayment" Content="Make Payment" HorizontalAlignment="Left" Margin="722,354,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label x:Name="lblCompanyName" Content="" HorizontalAlignment="Left" Margin="42,149,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCompanyNameValue" Content="" HorizontalAlignment="Left" Margin="212,149,0,0" VerticalAlignment="Top"/>
 
 
 

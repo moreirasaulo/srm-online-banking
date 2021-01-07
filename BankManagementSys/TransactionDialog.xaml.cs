@@ -35,7 +35,6 @@ namespace BankManagementSys
             {
                 lblBenefAcc.Content = "Beneficiary account No:";
                 tbBenefAccNo.Visibility = Visibility.Visible;
-                btFindBenefAccHolder.Visibility = Visibility.Visible;
             }
             if (type == "Payment")
             {
@@ -119,10 +118,11 @@ namespace BankManagementSys
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
                     if (beneficiaryAcc == null)
                     {
-                        lblBenefAccOwner.Content = "This destination account does not exist";
                         lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
+                        lblBenefAccOwner.Content = "This destination account does not exist";
                         return false;
                     }
+                    lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Black);
                     lblBenefAccOwner.Content = string.Format("Beneficiary account holder: {0}", beneficiaryAcc.User.FullName);
                     if(beneficiaryAcc.Id == currentAccount.Id)
                     {
@@ -155,6 +155,12 @@ namespace BankManagementSys
             }
             catch (FormatException)
             {
+                if (tbBenefAccNo.Text.Length == 0)
+                {
+                    lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
+                    lblBenefAccOwner.Content = "Enter beneficiary account number";
+                    return false;
+                }
                 MessageBox.Show("Destination account must contain digits only", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
@@ -249,10 +255,6 @@ namespace BankManagementSys
             }
         }
 
-        private void btFindBenefAccHolder_Click(object sender, RoutedEventArgs e)
-        {
-            ValidateDestAccount();
-        }
 
         private void NumbersOnly(KeyEventArgs e)
         {
@@ -328,6 +330,10 @@ namespace BankManagementSys
             MoneyInput(e);
         }
 
+        private void tbBenefAccNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateDestAccount();
+        }
     }
 
 }

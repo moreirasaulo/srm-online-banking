@@ -5,46 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ViewCustomerProfile" Height="476" Width="523.851">
+        Title="ViewCustomerProfile" Height="501" Width="562.851">
     <Grid>
         <Label Content="First Name:" HorizontalAlignment="Left" Margin="36,21,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="36,51,0,0" VerticalAlignment="Top"/>
         <Label Content="Last Name:" HorizontalAlignment="Left" Margin="36,79,0,0" VerticalAlignment="Top"/>
         <Label Content="Gender:" HorizontalAlignment="Left" Margin="36,108,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <Label Content="National ID:" HorizontalAlignment="Left" Margin="36,137,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <Label Content="Date of Birth:" HorizontalAlignment="Left" Margin="36,169,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Name="lblId" Content="National ID:" HorizontalAlignment="Left" Margin="36,137,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Name="lblDate" Content="Date of Birth:" HorizontalAlignment="Left" Margin="36,169,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Phone No:" HorizontalAlignment="Left" Margin="36,201,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Address:" HorizontalAlignment="Left" Margin="36,232,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="City:" HorizontalAlignment="Left" Margin="36,262,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Province/State:" HorizontalAlignment="Left" Margin="36,287,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Postal Code:" HorizontalAlignment="Left" Margin="36,319,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Country:" HorizontalAlignment="Left" Margin="36,349,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="126,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbMiddleName" HorizontalAlignment="Left" Height="23" Margin="126,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="126,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbNatId" HorizontalAlignment="Left" Height="23" Margin="126,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <DatePicker Name="dpBirthday" HorizontalAlignment="Left" Margin="126,170,0,0" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbPhoneNo" HorizontalAlignment="Left" Height="23" Margin="126,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbAddress" HorizontalAlignment="Left" Height="23" Margin="126,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="126,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbProvinceState" HorizontalAlignment="Left" Height="23" Margin="126,291,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <TextBox Name="tbPostalCode" HorizontalAlignment="Left" Height="23" Margin="126,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Row="1" Grid.RowSpan="2"/>
-        <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" HorizontalAlignment="Left" Margin="126,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="182,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="248,114,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-        <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="179" Margin="330,114,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button Click="btUpdateCustomer_Click" Name="btUpdateCustomer" Content="Update profile"  HorizontalAlignment="Left" Margin="346,128,0,0" VerticalAlignment="Top" Width="131" Height="45"/>
-        <Button Click="btCancelUpdate_Click" Name="btCancelUpdate" Content="Cancel update" Background="LightCoral" HorizontalAlignment="Left" Margin="367,199,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
-        <Button Click="btConfirmUpdate_Click" Name="btConfirmUpdate" Content="Confirm update" Background="LightGreen"  HorizontalAlignment="Left" Margin="367,245,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
+        <TextBox Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="159,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbMiddleName" HorizontalAlignment="Left" Height="23" Margin="159,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="159,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbNatId" HorizontalAlignment="Left" Height="23" Margin="159,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <DatePicker Name="dpBirthday" HorizontalAlignment="Left" Margin="159,170,0,0" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbPhoneNo" HorizontalAlignment="Left" Height="23" Margin="159,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbAddress" HorizontalAlignment="Left" Height="23" Margin="159,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="159,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbProvinceState" HorizontalAlignment="Left" Height="23" Margin="159,291,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <TextBox Name="tbPostalCode" HorizontalAlignment="Left" Height="23" Margin="159,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" HorizontalAlignment="Left" Margin="159,114,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="215,114,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="281,114,0,0" VerticalAlignment="Top"/>
+        <Button Click="btUpdateCustomer_Click" Name="btUpdateCustomer" Content="Update profile"  HorizontalAlignment="Left" Margin="391,128,0,0" VerticalAlignment="Top" Width="131" Height="45"/>
+        <Button Click="btCancelUpdate_Click" Visibility="Hidden" Name="btCancelUpdate" Content="Cancel update" Background="LightCoral" HorizontalAlignment="Left" Margin="412,199,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
+        <Button Click="btConfirmUpdate_Click" Visibility="Hidden" Name="btConfirmUpdate" Content="Confirm update" Background="LightGreen"  HorizontalAlignment="Left" Margin="412,245,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
         <Button Name="BackToManageCusts" Click="BackToManageCusts_Click"
-        Margin="384,349,18,10">
+        Margin="427,349,18,10">
             <StackPanel Width="111">
                 <Image Source="/SharedCode;Component/Images/exit.png" Width="31"/>
                 <Label Content="Back to Manage"  Width="113" Margin="11,0,-13,0"/>
                 <Label Content="Customers"  Width="113" Margin="19,-9,-21,0"/>
             </StackPanel>
         </Button>
-        <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="126,353,0,0" VerticalAlignment="Top" Width="177"/>
+        <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="159,353,0,0" VerticalAlignment="Top" Width="177"/>
+        <Label Name="lblCompanyName" Content="" HorizontalAlignment="Left" Margin="36,414,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbCompanyName" HorizontalAlignment="Left" Height="23" Visibility="Hidden" Margin="159,414,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+        <Label x:Name="lblCompanyName_Copy" Content="E-mail:" HorizontalAlignment="Left" Margin="36,383,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="159,383,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
 
     </Grid>
 </Window>
