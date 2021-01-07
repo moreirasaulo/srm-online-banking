@@ -17,7 +17,7 @@
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
-                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount, StringFormat=#.00}"/>
+                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}"/>
                 </GridView>
             </ListView.View>
         </ListView>

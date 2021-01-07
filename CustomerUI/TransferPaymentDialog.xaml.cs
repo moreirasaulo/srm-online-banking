@@ -326,5 +326,10 @@ namespace CustomerUI
         {
             MoneyInput(e);
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

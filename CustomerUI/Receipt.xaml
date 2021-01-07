@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="Deposit" Height="670.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="Deposit" Height="670.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid>
         <Grid Margin="-2,1,2,-1">
             <StackPanel Name="receiptPanel" Margin="0,0,0,56">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-         Title="Make a transfer to another account" Height="332.173" Width="718.387">
+         Title="Make a transfer to another account" Height="332.173" Width="718.387" Closing="Window_Closing">
     <Grid>
         <Label Content="Account summary" HorizontalAlignment="Left" Margin="74,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="146" Margin="36,65,0,0" VerticalAlignment="Top" Width="260"/>
