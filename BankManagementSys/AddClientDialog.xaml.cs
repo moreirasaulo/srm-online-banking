@@ -103,7 +103,7 @@ namespace BankManagementSys
             {
                 if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
                 {
-                    MessageBox.Show("Please enter valid phone number xxx-xxx-xx-xx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter valid phone number xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -156,7 +156,7 @@ namespace BankManagementSys
             {
                 if (rbOnlineBankYes.IsChecked == false && rbOnlineBankNo.IsChecked == false)
                 {
-                    MessageBox.Show("Please choose on of the options", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Please choose one of the options", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                 }
                 if(rbOnlineBankYes.IsChecked == true)
@@ -202,15 +202,15 @@ namespace BankManagementSys
                 string gender = "";
                 if (rbGenderMale.IsChecked == true)
                 {
-                    gender = "male";
+                    gender = "Male";
                 }
                 else if (rbGenderFemale.IsChecked == true)
                 {
-                    gender = "female";
+                    gender = "Female";
                 }
                 else if (rbGenderOther.IsChecked == true)
                 {
-                    gender = "other";
+                    gender = "Other";
                 }
                 lblSumGender.Content = gender;
                 lblSumCompName.Content = tbCompanyName.Text;
@@ -263,15 +263,15 @@ namespace BankManagementSys
             string gender = "";
             if (rbGenderMale.IsChecked == true)
             {
-                gender = "male";
+                gender = "Male";
             }
             else if (rbGenderFemale.IsChecked == true)
             {
-                gender = "female";
+                gender = "Female";
             }
             else if (rbGenderOther.IsChecked == true)
             {
-                gender = "other";
+                gender = "Other";
             }
             try
             {
@@ -311,7 +311,7 @@ namespace BankManagementSys
                             UserId = user.Id
                         };
                         EFData.context.Logins.Add(login);
-                        successMessage = successMessage + ",\nonline bank with Username:" + login.Username + "was created";
+                        successMessage = successMessage + ",\nonline bank with Username: " + login.Username + " was created";
                     }
                     EFData.context.SaveChanges();
 
