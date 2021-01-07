@@ -1,0 +1,18 @@
+﻿<Window x:Class="BankManagementSys.AddNewAccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementSys"
+        mc:Ignorable="d"
+        Title="Add a New Customer's Account" Height="194.845" Width="411.804">
+    <Grid>
+        <Label Name="lblNewAcctFor" Content="New account for ..." HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top"/>
+        <Label Content="Account Type: " HorizontalAlignment="Left" Margin="20,52,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="comboAcctTypes" HorizontalAlignment="Left" Margin="112,56,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="comboAcctTypes_SelectionChanged"/>
+        <Label Name="lblFeeOrInterest" Content="Fee or Interest:" Visibility="Hidden" HorizontalAlignment="Left" Margin="20,83,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbFeeOrInterest" KeyDown="tbFeeOrInterest_KeyDown" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="112,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <Button Content="OK" Click="btOK_Click" Name="btOK" IsDefault="True" HorizontalAlignment="Left" Margin="224,122,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Cancel" Name="btCancel" IsCancel="True" HorizontalAlignment="Left" Margin="304,122,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

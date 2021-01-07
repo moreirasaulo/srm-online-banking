@@ -76,6 +76,13 @@ namespace BankManagementSys
 
         }
 
+        private void LoadFoundAccounts()
+        {
+            User selectedUser = (User)lvCustomers.SelectedItem;
+            List<Account> accounts = EFData.context.Accounts.Where(a => a.UserId.Equals(selectedUser.Id)).ToList();
+            lvAccounts.ItemsSource = accounts;
+        }
+
         private void btFind_Click(object sender, RoutedEventArgs e)
         {
             if (tbSearchCustBy.Text == "")
@@ -192,7 +199,25 @@ namespace BankManagementSys
             Account currentAccount = (Account)lvAccounts.SelectedItem;
             GenerateStatement statementWindow = new GenerateStatement(currentAccount);
             statementWindow.Owner = this;
-            statementWindow.Show();
-        }       
+            statementWindow.ShowDialog();
+        }
+
+        private void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1) 
+            {
+                MessageBox.Show("A customer must be selected first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            User selectedCust = (User)lvCustomers.SelectedItem;
+
+            AddNewAccount addNewAcct = new AddNewAccount(selectedCust);
+            addNewAcct.Owner = this;
+            bool? result = addNewAcct.ShowDialog();
+            if (result == true)
+            {
+                LoadFoundAccounts();
+            }
+        }
     }
 }
