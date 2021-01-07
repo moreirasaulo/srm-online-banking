@@ -35,6 +35,7 @@ namespace CustomerUI
             {
                 Utils.login = null;
                 Close();
+                Utils.mainWindow.Show();
             }            
         }
 

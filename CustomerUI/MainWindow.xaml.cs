@@ -25,6 +25,7 @@ namespace CustomerUI
         public MainWindow()
         {
             InitializeComponent();
+            Utils.mainWindow = this;
         }
 
         private void btLoginClicked(object sender, RoutedEventArgs e)
@@ -40,6 +41,9 @@ namespace CustomerUI
                 {
                     MessageBox.Show("Login successful");
                     ClientDashboard client = new ClientDashboard();
+                    Hide(); // this window
+                    tbClientUsername.Text = "";
+                    pbClientPassword.Password = "";
                     client.Show();                   
                 }
                 else

@@ -25,7 +25,7 @@
 
         <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btAdd" Content="New Account" HorizontalAlignment="Left" Margin="232,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
+        <Button Name="btNewAccount" Click="btNewAccount_Click" Content="New Account" HorizontalAlignment="Left" Margin="232,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
         <Button Name="btCloseAcct" IsEnabled="False" Content="Close Account" HorizontalAlignment="Left" Margin="347,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
         <Button Name="btBackToDash" Click="btBackToDash_Click"
         Margin="600,327,30,28">

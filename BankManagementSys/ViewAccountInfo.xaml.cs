@@ -29,6 +29,13 @@ namespace BankManagementSys
             InitializeComponent();
             currentUser = user;
             currentAccount = account;
+            if(currentUser.CompanyName != null)
+            {
+                lblDate.Content = "Company registration date:";
+                lblId.Content = "Company registration number:";
+                lblCompanyName.Content = "Company name:";
+                lblCompanyNameValue.Content = currentUser.CompanyName;
+            }
             comboHistory.ItemsSource = Utilities.transactionHistoryDays;
             comboHistory.SelectedIndex = 0;
             lblFullName.Content = user.FullName;
@@ -60,6 +67,13 @@ namespace BankManagementSys
                 lblInterestDivid.Content = "Monthly dividents:";
                 lblInterest.Content = account.Interest + " %";
                 lblInterestOrFee.Content = "Next dividents date:";
+            }
+            else if (account.AccountType.Description == "Business")
+            {
+                lblMonthlyFee.Content = "$ " + account.MonthlyFee;
+                lblInterest.Content = "0 %";
+                lblInterestDivid.Content = "Monthly interest:";
+                lblInterestOrFee.Content = "Next fee date:";
             }
         }
 

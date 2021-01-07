@@ -181,7 +181,7 @@ namespace BankManagementSys
             {
                 NumbersOnly(e);
             }
-            if (tbSearchCustBy.Text == "") 
+            if (tbSearchCustBy.Text.Length == 0) 
             {
                 lblErrorMsg.Content = "";
             }
@@ -192,7 +192,12 @@ namespace BankManagementSys
             Account currentAccount = (Account)lvAccounts.SelectedItem;
             GenerateStatement statementWindow = new GenerateStatement(currentAccount);
             statementWindow.Owner = this;
-            statementWindow.Show();
-        }       
+            statementWindow.ShowDialog();
+        }
+
+        private void btNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
