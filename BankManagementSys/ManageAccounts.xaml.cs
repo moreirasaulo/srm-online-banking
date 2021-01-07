@@ -202,10 +202,10 @@ namespace BankManagementSys
             statementWindow.ShowDialog();
         }
 
-<<<<<<< HEAD
+
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1) 
+            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
             {
                 MessageBox.Show("A customer must be selected first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -219,11 +219,6 @@ namespace BankManagementSys
             {
                 LoadFoundAccounts();
             }
-=======
-        private void btNewAccount_Click(object sender, RoutedEventArgs e)
-        {
-
->>>>>>> a1a089acf6fc1304014d46c44f6eb8d57a3f278a
         }
     }
 }
