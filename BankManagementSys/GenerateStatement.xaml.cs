@@ -9,6 +9,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +31,7 @@ namespace BankManagementSys
     public partial class GenerateStatement : Window
     {
         Account currentAccount;
+
         public GenerateStatement(Account account)
         {
             InitializeComponent();
@@ -140,12 +144,16 @@ namespace BankManagementSys
 
             if (Utilities.Transactions != null)
             {                
-                lvMonthStatement.ItemsSource = Utilities.Transactions;
+                lvMonthStatement.ItemsSource = Utilities.Transactions;                
             }
 
             if (lvMonthStatement.Items.Count != 0)
             {
                 btExport.IsEnabled = true;
+                if (currentAccount.User.Email != null)
+                {
+                    btByEmail.IsEnabled = true;
+                }
             }
             else 
             {
@@ -154,11 +162,175 @@ namespace BankManagementSys
             }
         }
 
-        private void btByEmail_Click(object sender, RoutedEventArgs e)
+        private void CreatePDF()
         {
-            if (currentAccount.User.Email != null)
+            string year = comboStatementYears.SelectedItem.ToString();
+            string month = comboStatementMonths.SelectedItem.ToString();
+            XImage logo = XImage.FromFile("johnabbottbank.png");
+
+            try
             {
-                btByEmail.IsEnabled = true;
+                PdfDocument doc = new PdfDocument();
+                doc.Info.Title = "Banking history";
+                PdfPage page = doc.AddPage();
+
+                XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
+                XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
+                XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
+                XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
+
+                try
+                {
+                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
+                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
+                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
+                    XPen lineRed = new XPen(XColors.Green, 5);
+                    XPoint pt1 = new XPoint(0, 90);
+                    XPoint pt2 = new XPoint(page.Width, 90);
+                    graphics.DrawLine(lineRed, pt1, pt2);
+                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
+
+                    List<Transaction> tr = new List<Transaction>();
+                    foreach (Transaction item in lvMonthStatement.Items)
+                    {
+                        tr.Add(item);
+                    }
+
+                    int ind = 120;
+                    for (int i = 0; i < tr.Count; i++)
+                    {
+                        Transaction t = tr[i];
+                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                        ind = ind + 15;
+                    }
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message + "Error");
+            }
+        }
+
+        private void btByEmail_Click(object sender, RoutedEventArgs e)
+        {           
+            string year = comboStatementYears.SelectedItem.ToString();
+            string month = comboStatementMonths.SelectedItem.ToString();
+            XImage logo = XImage.FromFile("johnabbottbank.png");
+
+            try
+            {
+                PdfDocument doc = new PdfDocument();
+                doc.Info.Title = "Banking history";
+                PdfPage page = doc.AddPage();
+
+                XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
+                XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
+                XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
+                XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
+
+                try
+                {
+                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
+                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
+                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
+                    XPen lineRed = new XPen(XColors.Green, 5);
+                    XPoint pt1 = new XPoint(0, 90);
+                    XPoint pt2 = new XPoint(page.Width, 90);
+                    graphics.DrawLine(lineRed, pt1, pt2);
+                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
+
+                    List<Transaction> tr = new List<Transaction>();
+                    foreach (Transaction item in lvMonthStatement.Items)
+                    {
+                        tr.Add(item);
+                    }
+
+                    int ind = 120;
+                    for (int i = 0; i < tr.Count; i++)
+                    {
+                        Transaction t = tr[i];
+                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                        ind = ind + 15;
+                    }
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                doc.Save("Statement.pdf");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message + "Error");
+            }
+
+            string file = "Statement.pdf";
+            SmtpClient client = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "johnabbottbank@gmail.com",
+                    Password = "querty123!"
+                }
+            };
+            MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "John Abbott Bank");
+            MailAddress ToEmail = new MailAddress(currentAccount.User.Email, "Customer");
+
+            MailMessage mess = new MailMessage(
+                "johnabbottbank@gmail.com",
+                currentAccount.User.Email,
+                "Transaction receipt from " + DateTime.Now.ToShortDateString(),
+                "Please see the attached statement.\nThank you,\n John Abbott Bank");
+
+            try
+            {
+                Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+
+                mess.Attachments.Add(data);
+
+
+                client.Send(mess);
+                MessageBox.Show("The statement was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                    ex.ToString());
+            }
+            catch (IOException ex) 
+            {
+                MessageBox.Show("Attachment error: " + ex.Message, "Attachment error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -239,20 +411,16 @@ namespace BankManagementSys
                     doc.Save(saveFile.FileName);
                     Process.Start(saveFile.FileName);
                 }
-
             }
             catch (IOException ex)
             {
                 MessageBox.Show(ex.Message + "Error");
-            }
+            }                     
         }
     
-
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        
+        }        
     }
 }
