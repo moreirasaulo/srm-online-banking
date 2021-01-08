@@ -30,12 +30,19 @@ namespace BankManagementSys
     /// </summary>
     public partial class GenerateStatement : Window
     {
+        User currentUser;
         Account currentAccount;
+        DateTime finishDate = DateTime.Today;
 
-        public GenerateStatement(Account account)
+    public GenerateStatement(User user, Account account)
         {
             InitializeComponent();
+            currentUser = user;
             currentAccount = account;
+            if (currentAccount.IsActive == false)
+            {
+                finishDate = (DateTime)currentAccount.CloseDate;
+            }
             LoadYears();
             //calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
         }
@@ -45,7 +52,7 @@ namespace BankManagementSys
 
             try
             {
-                for (int i = currentAccount.OpenDate.Year; i <= DateTime.Now.Year; i++)
+                for (int i = currentAccount.OpenDate.Year; i <= finishDate.Year; i++)
                 {
                     years.Add(i);
                 }
@@ -67,17 +74,17 @@ namespace BankManagementSys
             if (currentSelectedYear == currentAccount.OpenDate.Year && currentSelectedYear == DateTime.Now.Year)
             {
                 months.Clear();
-                // select months only from month of opeing and today's month
-                for (int i = currentAccount.OpenDate.Month; i <= DateTime.Now.Month; i++)
+                // select months only from month of opeing and today's(or closing date) month
+                for (int i = currentAccount.OpenDate.Month; i <= finishDate.Month; i++)
                 {
                     months.Add(DateAndTime.MonthName(i));
                 }
             }
-            else if (currentSelectedYear == DateTime.Now.Year)
+            else if (currentSelectedYear == finishDate.Year)
             {
                 months.Clear();
-                // need to select from january to current month
-                for (int i = 1; i <= DateTime.Now.Month; i++)
+                // need to select from january to current month (or to month of closing account)
+                for (int i = 1; i <= finishDate.Month; i++)
                 {
                     months.Add(DateAndTime.MonthName(i));
                 }
@@ -421,6 +428,19 @@ namespace BankManagementSys
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }        
+        }
+
+        private void lvMonthStatement_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvMonthStatement.Items.Count == 0 || lvMonthStatement.SelectedIndex == -1)
+            {
+                return;
+            }
+            Transaction currTrans = (Transaction)lvMonthStatement.SelectedItem;
+
+            Receipt receiptDlg = new Receipt(currentAccount, 0, currTrans, currentUser, false);
+            receiptDlg.Owner = this;
+            receiptDlg.ShowDialog();
+        }
     }
 }
