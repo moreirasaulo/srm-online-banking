@@ -17,6 +17,8 @@
           <Property Name="MonthlyFee" Type="decimal" Precision="5" Scale="2" />
           <Property Name="InterestFeeDate" Type="date" Nullable="false" />
           <Property Name="AccountTypeId" Type="int" Nullable="false" />
+          <Property Name="CloseDate" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountTypes">
           <Key>
@@ -206,6 +208,8 @@
           <NavigationProperty Name="AccountType" Relationship="Self.FK__Accounts__Accoun__74AE54BC" FromRole="Accounts" ToRole="AccountTypes" />
           <NavigationProperty Name="User" Relationship="Self.FK__Accounts__UserId__75A278F5" FromRole="Accounts" ToRole="Users" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Accou__778AC167" FromRole="Accounts" ToRole="Transactions" />
+          <Property Name="CloseDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountType">
           <Key>
@@ -394,6 +398,8 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="BankManagementSysModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

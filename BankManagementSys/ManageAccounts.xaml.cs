@@ -67,7 +67,7 @@ namespace BankManagementSys
                     return;
                 }
                 lvCustomers.ItemsSource = customers;
-               
+
             }
             catch (SystemException ex)
             {
@@ -87,10 +87,10 @@ namespace BankManagementSys
         {
             if (tbSearchCustBy.Text == "")
             {
-                    MessageBox.Show("The search input cannot be null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                MessageBox.Show("The search input cannot be null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            
+
             LoadFoundCustomers();
             tbSearchCustBy.Text = "";
             lblCustNotFound.Content = "";
@@ -104,7 +104,7 @@ namespace BankManagementSys
 
         private void lvCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(lvCustomers.Items.Count != 0 && lvCustomers.SelectedIndex != -1)
+            if (lvCustomers.Items.Count != 0 && lvCustomers.SelectedIndex != -1)
             {
                 User selectedUser = (User)lvCustomers.SelectedItem;
                 lvAccounts.ItemsSource = selectedUser.Accounts;
@@ -130,7 +130,7 @@ namespace BankManagementSys
             }
             User selectedUser = (User)lvCustomers.SelectedItem;
             Account selectedAcc = (Account)lvAccounts.SelectedItem;
-            ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(selectedUser,selectedAcc);
+            ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(selectedUser, selectedAcc);
             viewAccInfoDlg.Owner = this;
             viewAccInfoDlg.ShowDialog();
         }
@@ -140,8 +140,8 @@ namespace BankManagementSys
             btViewAccInfo.IsEnabled = true;
             btCloseAcct.IsEnabled = true;
             btStatement.IsEnabled = true;
-
-            if (lvAccounts.SelectedIndex == -1) 
+            Account selectedAcc = (Account)lvAccounts.SelectedItem;
+            if (lvAccounts.Items.Count == 0 || lvAccounts.SelectedIndex == -1 || selectedAcc.IsActive == false) 
             {
                 btViewAccInfo.IsEnabled = false;
                 btCloseAcct.IsEnabled = false;
@@ -218,6 +218,60 @@ namespace BankManagementSys
             if (result == true)
             {
                 LoadFoundAccounts();
+            }
+        }
+
+        private void btCloseAcct_Click(object sender, RoutedEventArgs e)
+        {
+            if(lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
+            {
+                User selectedCust = (User)lvCustomers.SelectedItem;
+                Account currentAccount = (Account)lvAccounts.SelectedItem;
+                string closingAcctMessage = null;
+                if(currentAccount.Balance > 0)
+                {
+                    closingAcctMessage = "Before closing account, withdraw remaining balance of $" + currentAccount.Balance +" Withdraw funds?";
+                    MessageBoxResult result = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    Transaction transac;
+                    if(result == MessageBoxResult.Yes)
+                    {
+                        transac = new Transaction();
+                        transac.Date = DateTime.Now;
+                        transac.Amount = currentAccount.Balance;
+                        transac.Type = "Withdrawal";
+                        transac.AccountId = currentAccount.Id;
+                        decimal previousBalance = currentAccount.Balance; //balance before transaction
+                        try
+                        {
+                            EFData.context.Transactions.Add(transac);
+                            currentAccount.Balance = 0;  //new balance
+                            EFData.context.SaveChanges();
+                        }
+                        catch (SystemException ex)
+                        {
+                            MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        Receipt withdrawalReceipt = new Receipt(currentAccount, previousBalance, transac, selectedCust, true);
+                        withdrawalReceipt.Owner = this;
+                        bool? dlgResult = withdrawalReceipt.ShowDialog();
+                        if(dlgResult == true)
+                        {
+                            currentAccount.IsActive = false;
+                            currentAccount.CloseDate = DateTime.Today;
+                            try
+                            {
+                                EFData.context.SaveChanges();
+                            }
+                            catch (SystemException ex)
+                            {
+                                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            //FIX: generate statement about closing account
+                        }
+
+                    }
+                }
+                
             }
         }
     }

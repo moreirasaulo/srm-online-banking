@@ -113,9 +113,6 @@
     <Compile Include="TransactionDialog.xaml.cs">
       <DependentUpon>TransactionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Transfer.xaml.cs">
-      <DependentUpon>Transfer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="ViewAccountInfo.xaml.cs">
       <DependentUpon>ViewAccountInfo.xaml</DependentUpon>
@@ -166,19 +163,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ManageTransactions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Receipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TransactionDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Transfer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,9 +186,6 @@
     </Compile>
     <Compile Include="ManageCustomers.xaml.cs">
       <DependentUpon>ManageCustomers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ManageTransactions.xaml.cs">
-      <DependentUpon>ManageTransactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -28,8 +28,12 @@ namespace SharedCode
         public Nullable<decimal> MonthlyFee { get; set; }
         public System.DateTime InterestFeeDate { get; set; }
         public int AccountTypeId { get; set; }
-    
-        public virtual AccountType AccountType { get; set; }
+        public Nullable<System.DateTime> CloseDate { get; set; }
+        public bool IsActive { get; set; }
+        // Status(active/notActive)
+        public string Status { get { return IsActive? "Active" : "Inactive"; } }
+
+    public virtual AccountType AccountType { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }

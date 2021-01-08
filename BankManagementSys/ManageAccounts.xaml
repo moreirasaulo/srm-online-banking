@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="ManageAccounts" Height="472" Width="704">
+        Title="ManageAccounts" Height="472" Width="787">
     <Grid>
-        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="482">
+        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="580">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Account No" Width="120" DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Account No" Width="95" DisplayMemberBinding="{Binding Path=Id}" />
                     <GridViewColumn Header="Account type Id" Width="120" DisplayMemberBinding="{Binding Path=AccountTypeId}" />
                     <GridViewColumn Header="Date of opening" Width="120" DisplayMemberBinding="{Binding Path=OpenDate, StringFormat=d}" />
                     <GridViewColumn Header="Balance" Width="120" DisplayMemberBinding="{Binding Path=Balance, StringFormat=0.00}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Path=Status}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -26,9 +27,9 @@
         <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="btAdd" Content="New Account" HorizontalAlignment="Left" Margin="232,367,0,0" VerticalAlignment="Top" Width="110" Height="37" Click="btAdd_Click"/>
-        <Button Name="btCloseAcct" IsEnabled="False" Content="Close Account" HorizontalAlignment="Left" Margin="347,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
+        <Button Name="btCloseAcct" Click="btCloseAcct_Click" IsEnabled="False" Content="Close Account" HorizontalAlignment="Left" Margin="347,367,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
         <Button Name="btBackToDash" Click="btBackToDash_Click"
-        Margin="600,327,30,28">
+        Margin="686,327,19,28">
             <StackPanel Width="31">
                 <Image Source="/SharedCode;Component/Images/exit.png"/>
                 <Label Content="Close" HorizontalAlignment="Right" Margin="-5,0,-6,0" Width="42"/>
