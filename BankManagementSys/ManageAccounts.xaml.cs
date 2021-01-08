@@ -146,6 +146,10 @@ namespace BankManagementSys
                 btViewAccInfo.IsEnabled = false;
                 btCloseAcct.IsEnabled = false;
                 btStatement.IsEnabled = false;
+                if(selectedAcc.IsActive == false)
+                {
+                    btStatement.IsEnabled = true;
+                }
             }
         }
 
@@ -196,8 +200,9 @@ namespace BankManagementSys
 
         private void btStatement_Click(object sender, RoutedEventArgs e)
         {
+            User currentUser = (User)lvCustomers.SelectedItem;
             Account currentAccount = (Account)lvAccounts.SelectedItem;
-            GenerateStatement statementWindow = new GenerateStatement(currentAccount);
+            GenerateStatement statementWindow = new GenerateStatement(currentUser,currentAccount);
             statementWindow.Owner = this;
             statementWindow.ShowDialog();
         }
@@ -230,7 +235,7 @@ namespace BankManagementSys
                 string closingAcctMessage = null;
                 if(currentAccount.Balance > 0)
                 {
-                    closingAcctMessage = "Before closing account, withdraw remaining balance of $" + currentAccount.Balance +" Withdraw funds?";
+                    closingAcctMessage = "Before closing account, confirm withdrawal of remaining balance of $" + currentAccount.Balance;
                     MessageBoxResult result = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     Transaction transac;
                     if(result == MessageBoxResult.Yes)
@@ -266,9 +271,16 @@ namespace BankManagementSys
                             {
                                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
+                            //FIX : confirm closing account
                             //FIX: generate statement about closing account
+                            LoadFoundAccounts();
                         }
 
+                    }
+                    if(result == MessageBoxResult.No)
+                    {
+                        MessageBox.Show("Account cannot be closed before withdrawal of remaining funds", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                 }
                 
