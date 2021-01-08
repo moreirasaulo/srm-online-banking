@@ -36,11 +36,10 @@
         <Button Click="btCancelUpdate_Click" Visibility="Hidden" Name="btCancelUpdate" Content="Cancel update" Background="LightCoral" HorizontalAlignment="Left" Margin="412,199,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
         <Button Click="btConfirmUpdate_Click" Visibility="Hidden" Name="btConfirmUpdate" Content="Confirm update" Background="LightGreen"  HorizontalAlignment="Left" Margin="412,245,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
         <Button Name="BackToManageCusts" Click="BackToManageCusts_Click"
-        Margin="427,349,18,10">
-            <StackPanel Width="111">
-                <Image Source="/SharedCode;Component/Images/exit.png" Width="31"/>
-                <Label Content="Back to Manage"  Width="113" Margin="11,0,-13,0"/>
-                <Label Content="Customers"  Width="113" Margin="19,-9,-21,0"/>
+        Margin="427,337,50,33">
+            <StackPanel Width="78">
+                <Image Source="/SharedCode;Component/Images/exit.png" Height="55"/>
+                <Label Content="Back" Margin="21,0,0,0"/>
             </StackPanel>
         </Button>
         <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="159,353,0,0" VerticalAlignment="Top" Width="177"/>

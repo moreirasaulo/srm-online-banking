@@ -94,6 +94,7 @@ namespace BankManagementSys
                 {
                     account.Interest = decimal.Parse(tbFeeOrInterest.Text);
                 }
+                account.IsActive = true;
 
                 try
                 {
