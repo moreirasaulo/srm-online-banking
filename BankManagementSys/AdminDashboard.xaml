@@ -44,5 +44,6 @@
                 <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">Manage transactions</TextBlock>
             </StackPanel>
         </Button>
+        <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="674,176,0,0" VerticalAlignment="Top" Width="92"/>
     </Grid>
 </Window>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="BankManagementSys.UserTypeValidationTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementSys"
+        mc:Ignorable="d"
+        Title="UserTypeValidationTest" Height="278" Width="433">
+    <Grid>
+        <Label Content="Usertype description:" HorizontalAlignment="Left" Margin="53,71,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbDescription" HorizontalAlignment="Left" Height="23" Margin="180,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157"/>
+        <Button Click="Button_Click" Content="Save" HorizontalAlignment="Left" Margin="180,147,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

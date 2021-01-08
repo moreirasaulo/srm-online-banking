@@ -39,5 +39,11 @@ namespace BankManagementSys
             manageAccsDlg.ShowDialog();
         }
 
+        private void btValidationTest_Click(object sender, RoutedEventArgs e)
+        {
+            UserTypeValidationTest validationTestDlg = new UserTypeValidationTest();
+            validationTestDlg.Owner = this;
+            validationTestDlg.ShowDialog();
+        }
     }
 }
