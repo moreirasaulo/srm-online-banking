@@ -52,9 +52,9 @@ namespace BankManagementSys
                     {
                         searchInfoAccNo = Int32.Parse(searchInfo);
                     }
-                    catch (FormatException ex)
+                    catch (FormatException)
                     {
-                        MessageBox.Show("Please eneter correct account number (just digits)");
+                        MessageBox.Show("Please eneter correct account number (only digits are allowed)");
                         return;
                     }
                     customers = (from cust in EFData.context.Users
