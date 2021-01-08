@@ -146,7 +146,7 @@ namespace BankManagementSys
                 btViewAccInfo.IsEnabled = false;
                 btCloseAcct.IsEnabled = false;
                 btStatement.IsEnabled = false;
-                if(selectedAcc.IsActive == false)
+                if(selectedAcc != null && selectedAcc.IsActive == false)
                 {
                     btStatement.IsEnabled = true;
                 }

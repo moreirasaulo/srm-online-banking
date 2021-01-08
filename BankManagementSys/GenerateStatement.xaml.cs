@@ -34,7 +34,7 @@ namespace BankManagementSys
         Account currentAccount;
         DateTime finishDate = DateTime.Today;
 
-    public GenerateStatement(User user, Account account)
+        public GenerateStatement(User user, Account account)
         {
             InitializeComponent();
             currentUser = user;
@@ -46,7 +46,7 @@ namespace BankManagementSys
             LoadYears();
             //calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
         }
-        private void LoadYears() 
+        private void LoadYears()
         {
             List<int> years = new List<int>();
 
@@ -59,14 +59,14 @@ namespace BankManagementSys
 
                 comboStatementYears.ItemsSource = years;
             }
-            catch (NullReferenceException ex) 
+            catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
-            }   
+            }
         }
 
-        private List<string> LoadMonths() 
-        {            
+        private List<string> LoadMonths()
+        {
             List<string> months = new List<string>();
             int currentSelectedYear = (int)comboStatementYears.SelectedItem;
 
@@ -112,7 +112,7 @@ namespace BankManagementSys
 
         private void comboStatementYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboStatementYears.Items.Count == 0 || comboStatementYears.SelectedIndex == -1) 
+            if (comboStatementYears.Items.Count == 0 || comboStatementYears.SelectedIndex == -1)
             {
                 MessageBox.Show("You should select a year first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -122,12 +122,12 @@ namespace BankManagementSys
         }
 
         private void comboStatementMonths_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            
+        {
             if (currentAccount == null)
             {
                 MessageBox.Show("It was not possible to define an account to generate a statement.");
                 return;
-            }            
+            }
 
             int selectedYear = (int)comboStatementYears.SelectedItem;
             if (comboStatementMonths.Items.Count == 0 || comboStatementMonths.SelectedIndex == -1)
@@ -144,14 +144,14 @@ namespace BankManagementSys
                 Utilities.Transactions = EFData.context.Transactions.Where(t => t.AccountId ==
             currentAccount.Id && t.Date.Year == selectedYear && t.Date.Month == selectedMonth).ToList(); //FIX exception
             }
-            catch (SystemException ex) 
+            catch (SystemException ex)
             {
                 MessageBox.Show("Error fetching from Database: " + ex.Message);
             }
 
             if (Utilities.Transactions != null)
-            {                
-                lvMonthStatement.ItemsSource = Utilities.Transactions;                
+            {
+                lvMonthStatement.ItemsSource = Utilities.Transactions;
             }
 
             if (lvMonthStatement.Items.Count != 0)
@@ -162,84 +162,22 @@ namespace BankManagementSys
                     btByEmail.IsEnabled = true;
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("No transaction was registered during the selected period.");
                 btExport.IsEnabled = false;
             }
         }
 
-        private void CreatePDF()
-        {
-            string year = comboStatementYears.SelectedItem.ToString();
-            string month = comboStatementMonths.SelectedItem.ToString();
-            XImage logo = XImage.FromFile("johnabbottbank.png");
-
-            try
-            {
-                PdfDocument doc = new PdfDocument();
-                doc.Info.Title = "Banking history";
-                PdfPage page = doc.AddPage();
-
-                XGraphics graphics = XGraphics.FromPdfPage(page);
-
-                XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
-                XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
-                XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
-                XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
-
-                try
-                {
-                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
-                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
-                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
-                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
-                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
-                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
-                    XPen lineRed = new XPen(XColors.Green, 5);
-                    XPoint pt1 = new XPoint(0, 90);
-                    XPoint pt2 = new XPoint(page.Width, 90);
-                    graphics.DrawLine(lineRed, pt1, pt2);
-                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
-                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
-                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
-                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
-
-                    List<Transaction> tr = new List<Transaction>();
-                    foreach (Transaction item in lvMonthStatement.Items)
-                    {
-                        tr.Add(item);
-                    }
-
-                    int ind = 120;
-                    for (int i = 0; i < tr.Count; i++)
-                    {
-                        Transaction t = tr[i];
-                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
-                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
-                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
-                        ind = ind + 15;
-                    }
-                }
-                catch (InvalidOperationException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message + "Error");
-            }
-        }
-
         private void btByEmail_Click(object sender, RoutedEventArgs e)
-        {           
-            string year = comboStatementYears.SelectedItem.ToString();
-            string month = comboStatementMonths.SelectedItem.ToString();
-            XImage logo = XImage.FromFile("johnabbottbank.png");
-
+        {
             try
             {
+                string year = comboStatementYears.SelectedItem.ToString();
+                string month = comboStatementMonths.SelectedItem.ToString();
+                XImage logo = XImage.FromFile("johnabbottbank.png");
+
+
                 PdfDocument doc = new PdfDocument();
                 doc.Info.Title = "Banking history";
                 PdfPage page = doc.AddPage();
@@ -251,42 +189,36 @@ namespace BankManagementSys
                 XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
                 XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
 
-                try
+
+                //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
+                graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
+                graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
+                XPen lineRed = new XPen(XColors.Green, 5);
+                XPoint pt1 = new XPoint(0, 90);
+                XPoint pt2 = new XPoint(page.Width, 90);
+                graphics.DrawLine(lineRed, pt1, pt2);
+                graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
+
+                List<Transaction> tr = new List<Transaction>();
+                foreach (Transaction item in lvMonthStatement.Items)
                 {
-                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
-                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
-                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
-                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
-                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
-                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
-                    XPen lineRed = new XPen(XColors.Green, 5);
-                    XPoint pt1 = new XPoint(0, 90);
-                    XPoint pt2 = new XPoint(page.Width, 90);
-                    graphics.DrawLine(lineRed, pt1, pt2);
-                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
-                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
-                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
-                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
-
-                    List<Transaction> tr = new List<Transaction>();
-                    foreach (Transaction item in lvMonthStatement.Items)
-                    {
-                        tr.Add(item);
-                    }
-
-                    int ind = 120;
-                    for (int i = 0; i < tr.Count; i++)
-                    {
-                        Transaction t = tr[i];
-                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
-                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
-                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
-                        ind = ind + 15;
-                    }
+                    tr.Add(item);
                 }
-                catch (InvalidOperationException ex)
+
+                int ind = 120;
+                for (int i = 0; i < tr.Count; i++)
                 {
-                    MessageBox.Show(ex.Message);
+                    Transaction t = tr[i];
+                    graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                    graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                    graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                    ind = ind + 15;
                 }
 
                 doc.Save("Statement.pdf");
@@ -335,7 +267,7 @@ namespace BankManagementSys
                 Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
                     ex.ToString());
             }
-            catch (IOException ex) 
+            catch (IOException ex)
             {
                 MessageBox.Show("Attachment error: " + ex.Message, "Attachment error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -349,17 +281,17 @@ namespace BankManagementSys
             }
 
             XImage xImage = XImage.FromFile(imagePath);
-            gfx.DrawImage(xImage, xPosition, yPosition, xImage.PixelWidth/3, xImage.PixelWidth/3);
+            gfx.DrawImage(xImage, xPosition, yPosition, xImage.PixelWidth / 3, xImage.PixelWidth / 3);
         }
 
         private void btExport_Click(object sender, RoutedEventArgs e)
         {
-            string year = comboStatementYears.SelectedItem.ToString();
-            string month = comboStatementMonths.SelectedItem.ToString();
-            XImage logo = XImage.FromFile("johnabbottbank.png");
-
             try
             {
+                string year = comboStatementYears.SelectedItem.ToString();
+                string month = comboStatementMonths.SelectedItem.ToString();
+                XImage logo = XImage.FromFile("johnabbottbank.png");
+
                 PdfDocument doc = new PdfDocument();
                 doc.Info.Title = "Banking history";
                 PdfPage page = doc.AddPage();
@@ -371,43 +303,39 @@ namespace BankManagementSys
                 XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
                 XFont fontBoldItalic = new XFont("Arial", 15, XFontStyle.BoldItalic);
 
-                try
-                {
-                    //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
-                    graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
-                    graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
-                    graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
-                    graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
-                    graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
-                    XPen lineRed = new XPen(XColors.Green, 5);
-                    XPoint pt1 = new XPoint(0, 90);
-                    XPoint pt2 = new XPoint(page.Width, 90);
-                    graphics.DrawLine(lineRed, pt1, pt2);
-                    graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
-                    graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
-                    graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
-                    AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
 
-                    List<Transaction> tr = new List<Transaction>();
-                    foreach (Transaction item in lvMonthStatement.Items)
-                    {
-                        tr.Add(item);
-                    }
+                //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
+                graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
+                graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);
+                graphics.DrawString(month + " " + year + " Statement", fontBoldItalic, XBrushes.Black, 250, 60);
+                XPen lineRed = new XPen(XColors.Green, 5);
+                XPoint pt1 = new XPoint(0, 90);
+                XPoint pt2 = new XPoint(page.Width, 90);
+                graphics.DrawLine(lineRed, pt1, pt2);
+                graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
+                graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
+                graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
 
-                    int ind = 120;
-                    for (int i = 0; i < tr.Count; i++)
-                    {
-                        Transaction t = tr[i];
-                        graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
-                        graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
-                        graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
-                        ind = ind + 15;
-                    }
-                }
-                catch (InvalidOperationException ex)
+                List<Transaction> tr = new List<Transaction>();
+                foreach (Transaction item in lvMonthStatement.Items)
                 {
-                    MessageBox.Show(ex.Message);
+                    tr.Add(item);
                 }
+
+                int ind = 120;
+                for (int i = 0; i < tr.Count; i++)
+                {
+                    Transaction t = tr[i];
+                    graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
+                    graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
+                    graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                    ind = ind + 15;
+                }
+
+
 
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "PDF Files (*.pdf)|*.pdf|All files(*.*)|*.*";
@@ -422,9 +350,9 @@ namespace BankManagementSys
             catch (IOException ex)
             {
                 MessageBox.Show(ex.Message + "Error");
-            }                     
+            }
         }
-    
+
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
