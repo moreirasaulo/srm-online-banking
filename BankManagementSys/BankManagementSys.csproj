@@ -113,6 +113,9 @@
     <Compile Include="TransactionDialog.xaml.cs">
       <DependentUpon>TransactionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserTypeValidationTest.xaml.cs">
+      <DependentUpon>UserTypeValidationTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="ViewAccountInfo.xaml.cs">
       <DependentUpon>ViewAccountInfo.xaml</DependentUpon>
@@ -168,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TransactionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserTypeValidationTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -164,3 +164,27 @@ password: z77smMQEXz
 - Implement user(client) van view spending reports
 3. Need assistance:
 - How to make a preview of PDF
+
+2021/01/07 Ksenia
+1. Done/not done since last scrum:
+- added 'Close account'
+- added receipt to 'view transactions'
+- fixed issues in 'manage existing clients' (update existing client)
+- did not implement 'create new account' ( task is assigned to Saulo)
+2. To do until next scrum:
+- Implement 'spending reports' for customer
+3. Need assistance:
+- Clarify how to implement validation of entities
+
+2021/01/07 Saulo
+1. Done/not done since last scrum:
+- Implemented 'Email statement'
+- Added validation to 'Transfer' and 'Payment' windows
+- Did not implement customer can view spending reports (task is assigned to Ksenia)
+- Implemented 'add new account' for admin
+2. To do until next scrum:
+- Fix 'email' and 'save as pdf' buttons
+- Implement 'update account' for user(admin)
+- Implement 'update contact information' for customer
+3. Need assistance:
+- How to send PDF by email without saving it before

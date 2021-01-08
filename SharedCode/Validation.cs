@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace SharedCode
 {
 
-    public partial class Login : IValidatableObject
+    public partial class UserType : IValidatableObject
     {
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
-                if (Username.Length < 1 || Username.Length > 20)
+                if (Description.Length < 1 || Description.Length > 20)
                 {
                     yield return new ValidationResult(
-                        "Username must be between 1 and 20 characters",
-                        new[] {nameof(Username)});
+                        "Description must be between 1 and 20 characters",
+                        new[] {nameof(Description)});
                 }
             }
         }
