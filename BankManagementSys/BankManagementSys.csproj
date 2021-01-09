@@ -110,6 +110,9 @@
     <Compile Include="Receipt.xaml.cs">
       <DependentUpon>Receipt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SetupNewRate.xaml.cs">
+      <DependentUpon>SetupNewRate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TransactionDialog.xaml.cs">
       <DependentUpon>TransactionDialog.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Receipt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupNewRate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

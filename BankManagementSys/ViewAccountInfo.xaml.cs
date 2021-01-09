@@ -29,50 +29,57 @@ namespace BankManagementSys
             InitializeComponent();
             currentUser = user;
             currentAccount = account;
-            if(currentUser.CompanyName != null)
+            LoadInfoToFileds();
+            comboHistory.ItemsSource = Utilities.transactionHistoryDays;
+            comboHistory.SelectedIndex = 0;
+           
+        }
+
+        private void LoadInfoToFileds()
+        {
+            if (currentUser.CompanyName != null)
             {
                 lblDate.Content = "Company registration date:";
                 lblId.Content = "Company registration number:";
                 lblCompanyName.Content = "Company name:";
                 lblCompanyNameValue.Content = currentUser.CompanyName;
             }
-            comboHistory.ItemsSource = Utilities.transactionHistoryDays;
-            comboHistory.SelectedIndex = 0;
-            lblFullName.Content = user.FullName;
-            lblDateOfBirth.Content = user.DateOfBirth.ToShortDateString();
-            lblNatId.Content = user.NationalId;
-            lblAccNo.Content = account.Id;
-            lblOpenDate.Content = account.OpenDate.ToShortDateString();
-            lblBalance.Content ="$ " + account.Balance;
-            lblAccType.Content = account.AccountType.Description;
-            lblInterestFeeDate.Content = account.InterestFeeDate.ToShortDateString();
+            lblFullName.Content = currentUser.FullName;
+            lblDateOfBirth.Content = currentUser.DateOfBirth.ToShortDateString();
+            lblNatId.Content = currentUser.NationalId;
+            lblAccNo.Content = currentAccount.Id;
+            lblOpenDate.Content = currentAccount.OpenDate.ToShortDateString();
+            lblBalance.Content = "$ " + currentAccount.Balance;
+            lblAccType.Content = currentAccount.AccountType.Description;
+            lblInterestFeeDate.Content = currentAccount.InterestFeeDate.ToShortDateString();
 
-            if(account.AccountType.Description == "Checking")
+            if (currentAccount.AccountType.Description == "Checking")
             {
-                lblMonthlyFee.Content = "$ " + account.MonthlyFee;
+                lblMonthlyFeeAst.Content = "Monthly fee: *";
+                lblMonthlyFee.Content = "$ " + currentAccount.MonthlyFee;
                 lblInterest.Content = "0 %";
-                lblInterestDivid.Content = "Monthly interest:";
+                lblInterestDivid.Content = "Interest:";
                 lblInterestOrFee.Content = "Next fee date:";
             }
-            else if (account.AccountType.Description == "Savings")
+            else if (currentAccount.AccountType.Description == "Savings")
             {
                 lblMonthlyFee.Content = "$ 0";
-                lblInterestDivid.Content = "Interest: *";
-                lblInterest.Content = account.Interest + " %";
+                lblInterestDivid.Content = "Interest *:";
+                lblInterest.Content = currentAccount.Interest + " %";
                 lblInterestOrFee.Content = "Next interest date:";
             }
-            else if (account.AccountType.Description == "Investment")
+            else if (currentAccount.AccountType.Description == "Investment")
             {
                 lblMonthlyFee.Content = "$ 0";
-                lblInterestDivid.Content = "Monthly dividents:";
-                lblInterest.Content = account.Interest + " %";
-                lblInterestOrFee.Content = "Next dividents date:";
+                lblInterestDivid.Content = "Monthly dividends:";
+                lblInterest.Content = currentAccount.Interest + " %";
+                lblInterestOrFee.Content = "Next dividends date:";
             }
-            else if (account.AccountType.Description == "Business")
+            else if (currentAccount.AccountType.Description == "Business")
             {
-                lblMonthlyFee.Content = "$ " + account.MonthlyFee;
+                lblMonthlyFee.Content = "$ " + currentAccount.MonthlyFee;
                 lblInterest.Content = "0 %";
-                lblInterestDivid.Content = "Monthly interest:";
+                lblInterestDivid.Content = "Interest:";
                 lblInterestOrFee.Content = "Next fee date:";
             }
         }
@@ -218,6 +225,32 @@ namespace BankManagementSys
                 receiptDlg.ShowDialog();
         }
 
-        
+        private void lblMonthlyFee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (currentAccount.AccountType.Description == "Checking") 
+            {
+                SetupNewRate setupDlg = new SetupNewRate(currentAccount);
+                setupDlg.Owner = this;
+                bool? result = setupDlg.ShowDialog();
+                if(result == true)
+                {
+                    LoadInfoToFileds();
+                }
+            }
+        }
+
+        private void lblInterest_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (currentAccount.AccountType.Description == "Savings")
+            {
+                SetupNewRate setupDlg = new SetupNewRate(currentAccount);
+                setupDlg.Owner = this;
+                bool? result = setupDlg.ShowDialog();
+                if (result == true)
+                {
+                    LoadInfoToFileds();
+                }
+            }
+        }
     }
 }

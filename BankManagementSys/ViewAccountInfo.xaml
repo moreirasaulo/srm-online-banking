@@ -24,13 +24,13 @@
         <Label Content="Date of opening:" HorizontalAlignment="Left" Margin="43,280,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblOpenDate" Content="." HorizontalAlignment="Left" Margin="151,279,0,0" VerticalAlignment="Top"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="43,305,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="151,302,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="151,305,0,0" VerticalAlignment="Top" Height="26"/>
         <Button Click="btOk_Click" Name="btOk" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="568,412,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="43,232,0,0" VerticalAlignment="Top"/>
-        <Label Content="Monthly fee: *" HorizontalAlignment="Left" Margin="43,330,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="lblMonthlyFee" Content="." HorizontalAlignment="Left" Margin="151,327,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblMonthlyFeeAst" Content="Monthly fee:" HorizontalAlignment="Left" Margin="43,330,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="lblMonthlyFee" MouseDoubleClick="lblMonthlyFee_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="151,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.462,0.885" Height="26"/>
         <Label Name="lblInterestDivid"  Content="..." HorizontalAlignment="Left" Margin="43,355,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblInterest" Content="." HorizontalAlignment="Left" Margin="151,353,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblInterest" MouseDoubleClick="lblInterest_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="151,353,0,0" VerticalAlignment="Top"/>
         <Label Name="lblInterestOrFee"  Content="..." HorizontalAlignment="Left" Margin="43,379,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblInterestFeeDate" Content="." HorizontalAlignment="Left" Margin="151,378,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="625,23,0,0" VerticalAlignment="Top" Width="155"/>
@@ -55,7 +55,7 @@
         <Button Click="btPayment_Click" x:Name="btPayment" Content="Make Payment" HorizontalAlignment="Left" Margin="722,354,0,0" VerticalAlignment="Top" Width="105"/>
         <Label x:Name="lblCompanyName" Content="" HorizontalAlignment="Left" Margin="42,149,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblCompanyNameValue" Content="" HorizontalAlignment="Left" Margin="212,149,0,0" VerticalAlignment="Top"/>
-        <Label Content="* Double-click to update" HorizontalAlignment="Left" Margin="43,438,0,0" VerticalAlignment="Top"/>
+        <Label Content="* Double-click to modify" HorizontalAlignment="Left" Margin="33,438,0,0" VerticalAlignment="Top"/>
 
 
 
