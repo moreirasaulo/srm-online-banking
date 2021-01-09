@@ -146,7 +146,7 @@ namespace BankManagementSys
                 btViewAccInfo.IsEnabled = false;
                 btCloseAcct.IsEnabled = false;
                 btStatement.IsEnabled = false;
-                if(selectedAcc.IsActive == false)
+                if(selectedAcc != null && selectedAcc.IsActive == false)
                 {
                     btStatement.IsEnabled = true;
                 }
@@ -236,9 +236,9 @@ namespace BankManagementSys
                 if(currentAccount.Balance > 0)
                 {
                     closingAcctMessage = "Before closing account, confirm withdrawal of remaining balance of $" + currentAccount.Balance;
-                    MessageBoxResult result = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    MessageBoxResult res = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     Transaction transac;
-                    if(result == MessageBoxResult.Yes)
+                    if(res == MessageBoxResult.Yes)
                     {
                         transac = new Transaction();
                         transac.Date = DateTime.Now;
@@ -259,31 +259,36 @@ namespace BankManagementSys
                         Receipt withdrawalReceipt = new Receipt(currentAccount, previousBalance, transac, selectedCust, true);
                         withdrawalReceipt.Owner = this;
                         bool? dlgResult = withdrawalReceipt.ShowDialog();
-                        if(dlgResult == true)
-                        {
-                            currentAccount.IsActive = false;
-                            currentAccount.CloseDate = DateTime.Today;
-                            try
-                            {
-                                EFData.context.SaveChanges();
-                            }
-                            catch (SystemException ex)
-                            {
-                                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                            //FIX : confirm closing account
-                            //FIX: generate statement about closing account
-                            LoadFoundAccounts();
-                        }
-
                     }
-                    if(result == MessageBoxResult.No)
+                    if(res == MessageBoxResult.No)
                     {
                         MessageBox.Show("Account cannot be closed before withdrawal of remaining funds", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
+                string message = string.Format("Confirm closure of account number {0} with remaining balance of {1} $ ?", currentAccount.Id, currentAccount.Balance);
+                MessageBoxResult result = MessageBox.Show(message, "Confirmation of account closure required", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if(result == MessageBoxResult.Yes)
+                {
+                    currentAccount.IsActive = false;
+                    currentAccount.CloseDate = DateTime.Today;
+                    AccountClosureStatement closureStatementDlg = new AccountClosureStatement(currentAccount);
+                    closureStatementDlg.Owner = this;
+                    closureStatementDlg.ShowDialog();
+                }
                 
+                try
+                {
+                    EFData.context.SaveChanges();
+                }
+                catch (SystemException ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                //FIX : confirm closing account
+                //FIX: generate statement about closing account
+                LoadFoundAccounts();
+
             }
         }
     }

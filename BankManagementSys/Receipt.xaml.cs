@@ -88,6 +88,8 @@ namespace BankManagementSys
             MessageBoxResult answer = MessageBox.Show("Send receipt to "+ currentCust.Email, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
+                try
+                { 
                 //create bmp
                 int Width = (int)receiptPanel.RenderSize.Width;
                 int Height = (int)receiptPanel.RenderSize.Height;
@@ -144,16 +146,18 @@ namespace BankManagementSys
 
                 mess.Attachments.Add(data);
 
-                try
-                {
+               
                     client.Send(mess);
                     MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
+                catch(IOException ex)
+                {
+                    MessageBox.Show("Error sending receipt: " + ex.Message, "Internal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 catch (SmtpException ex)
                 {
-                    Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
-                        ex.ToString());
+                    MessageBox.Show("Error sending email: " + ex.Message, "Internal error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
