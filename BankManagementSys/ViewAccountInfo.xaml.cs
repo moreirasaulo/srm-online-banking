@@ -57,7 +57,7 @@ namespace BankManagementSys
             else if (account.AccountType.Description == "Savings")
             {
                 lblMonthlyFee.Content = "$ 0";
-                lblInterestDivid.Content = "Interest:";
+                lblInterestDivid.Content = "Interest: *";
                 lblInterest.Content = account.Interest + " %";
                 lblInterestOrFee.Content = "Next interest date:";
             }
