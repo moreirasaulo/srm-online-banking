@@ -132,7 +132,11 @@ namespace BankManagementSys
             Account selectedAcc = (Account)lvAccounts.SelectedItem;
             ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(selectedUser, selectedAcc);
             viewAccInfoDlg.Owner = this;
-            viewAccInfoDlg.ShowDialog();
+            bool? result = viewAccInfoDlg.ShowDialog();
+            if(result == true)
+            {
+                LoadFoundAccounts();
+            }
         }
 
         private void lvAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
