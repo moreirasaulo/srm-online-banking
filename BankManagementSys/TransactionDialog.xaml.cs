@@ -116,7 +116,7 @@ namespace BankManagementSys
                     destinationAccNo = int.Parse(tbBenefAccNo.Text);
 
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == destinationAccNo);
-                    if (beneficiaryAcc == null)
+                    if (beneficiaryAcc == null || beneficiaryAcc.IsActive == false)
                     {
                         lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
                         lblBenefAccOwner.Content = "This destination account does not exist";
@@ -143,7 +143,7 @@ namespace BankManagementSys
                     Account payeeAcc = (from a in payee.Accounts
                                         where a.AccountType.Description == "Business"
                                         select a).FirstOrDefault();
-                    if (payeeAcc == null)
+                    if (payeeAcc == null || payeeAcc.IsActive == false)
                     {
                         MessageBox.Show("Payee business account does not exist", "Payment impossible", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;

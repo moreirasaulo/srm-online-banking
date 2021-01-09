@@ -168,6 +168,7 @@ namespace BankManagementSys
             if (result == true)
             {
                 SortTransactionsByTypeAndDate();
+                LoadInfoToFileds();
             }
         }
 
