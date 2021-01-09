@@ -95,6 +95,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AccountClosureStatement.xaml.cs">
+      <DependentUpon>AccountClosureStatement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddClientDialog.xaml.cs">
       <DependentUpon>AddClientDialog.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
     <Compile Include="ViewCustomerProfile.xaml.cs">
       <DependentUpon>ViewCustomerProfile.xaml</DependentUpon>
     </Compile>
+    <Page Include="AccountClosureStatement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddClientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

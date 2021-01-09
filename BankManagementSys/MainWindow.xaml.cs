@@ -34,7 +34,7 @@ namespace BankManagementSys
             string username = tbAdminUsername.Text;
             string password = pbAdminPassword.Password;
 
-            Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password);
+            Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password); //FIX exception
 
             /* same:
             Login login1 = (from l in EFData.context.Logins

@@ -1,6 +1,7 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -28,10 +29,12 @@ namespace BankManagementSys
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UserType userType = new UserType();
-            userType.Description = tbDescription.Text;
+            UserType userType = null;
             try
             {
+                // EFData.context.SaveChanges(); // this must not be necessary
+                userType = new UserType();
+                userType.Description = tbDescription.Text;
                 EFData.context.UserTypes.Add(userType);
                 EFData.context.SaveChanges();
             }
@@ -39,6 +42,11 @@ namespace BankManagementSys
             {
                 var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                 MessageBox.Show(error.ErrorMessage);
+                EFData.context.Entry(userType).State = EntityState.Detached;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Some other exception: " + ex.Message);
             }
         }
     }
