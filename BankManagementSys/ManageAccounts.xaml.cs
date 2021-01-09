@@ -85,7 +85,7 @@ namespace BankManagementSys
 
         private void btFind_Click(object sender, RoutedEventArgs e)
         {
-            if (tbSearchCustBy.Text == "")
+            if (tbSearchCustBy.Text.Length == 0)
             {
                 MessageBox.Show("The search input cannot be null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -104,11 +104,12 @@ namespace BankManagementSys
 
         private void lvCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lvCustomers.Items.Count != 0 && lvCustomers.SelectedIndex != -1)
+            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
             {
-                User selectedUser = (User)lvCustomers.SelectedItem;
-                lvAccounts.ItemsSource = selectedUser.Accounts;
+                lvAccounts.ItemsSource = new List<User>();
+                return;
             }
+            LoadFoundAccounts();
         }
 
         private void btBackToDash_Click(object sender, RoutedEventArgs e)

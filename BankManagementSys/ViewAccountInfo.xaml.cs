@@ -49,14 +49,15 @@ namespace BankManagementSys
             lblNatId.Content = currentUser.NationalId;
             lblAccNo.Content = currentAccount.Id;
             lblOpenDate.Content = currentAccount.OpenDate.ToShortDateString();
-            lblBalance.Content = "$ " + currentAccount.Balance;
+            lblBalance.Content = "$ " + currentAccount.Balance.ToString("0.00");
             lblAccType.Content = currentAccount.AccountType.Description;
             lblInterestFeeDate.Content = currentAccount.InterestFeeDate.ToShortDateString();
 
             if (currentAccount.AccountType.Description == "Checking")
             {
                 lblMonthlyFeeAst.Content = "Monthly fee: *";
-                lblMonthlyFee.Content = "$ " + currentAccount.MonthlyFee;
+                decimal monthlyFee = currentAccount.MonthlyFee.HasValue ? Decimal.Round(currentAccount.MonthlyFee.Value, 2) : 0;
+                lblMonthlyFee.Content = "$ " + monthlyFee.ToString("0.00");
                 lblInterest.Content = "0 %";
                 lblInterestDivid.Content = "Interest:";
                 lblInterestOrFee.Content = "Next fee date:";
@@ -95,7 +96,7 @@ namespace BankManagementSys
             {
                 return;
             }
-            List<Transaction> accTransactions = currentAccount.Transactions.ToList();   //FIX exception
+            List<Transaction> accTransactions = currentAccount.Transactions.ToList();
             if (comboHistory.SelectedIndex == 0)
             {
                 accTransactions = accTransactions.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 7);
