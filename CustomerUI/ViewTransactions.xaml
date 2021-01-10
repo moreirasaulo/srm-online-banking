@@ -55,5 +55,6 @@
         </Button>
         <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="145,417,0,0" VerticalAlignment="Top" FontSize="10"/>
         <Button Content="View spending reports" Name="btViewSpendRep" Click="btViewSpendRep_Click" HorizontalAlignment="Left" Margin="493,441,0,0" VerticalAlignment="Top" Width="129" Height="44"/>
+        <Button Name="btMyProfile" Click="btMyProfile_Click" Content="My Profile" HorizontalAlignment="Left" Margin="385,441,0,0" VerticalAlignment="Top" Width="75" Height="44"/>
     </Grid>
 </Window>

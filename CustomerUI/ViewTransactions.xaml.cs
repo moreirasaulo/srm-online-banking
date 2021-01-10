@@ -306,5 +306,10 @@ namespace CustomerUI
             spendingRepDlg.Owner = this;
             spendingRepDlg.ShowDialog();
         }
+
+        private void btMyProfile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
