@@ -23,10 +23,14 @@ namespace CustomerUI
     public partial class PieChart : UserControl
     {
         Account currentAcc;
-        public PieChart(Account account)
+        DateTime fromDate;
+        DateTime toDate;
+        public PieChart(Account account, DateTime startDate, DateTime finishDate)
         {
             InitializeComponent();
             currentAcc = account;
+            fromDate = startDate;
+            toDate = finishDate;
             LoadPieChartData();
         }
 
@@ -36,7 +40,7 @@ namespace CustomerUI
             List<Transaction> transactions;
             try
             {
-                transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null).ToList();
+                transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null && t.Date <= toDate && t.Date >= fromDate).ToList();
             }
             catch (SystemException ex)
             {
@@ -52,19 +56,19 @@ namespace CustomerUI
 
             List<decimal> amounts = new List<decimal>();
 
-            decimal sum = 0;
+
             foreach (string pc in Utils.paymentCategories)
-                {
+            {
                 var transacByCat = transactions.FindAll(t => t.PaymentCategory == pc);
-                
-                    foreach (Transaction t in transactions)
-                    {
-                        sum = sum + t.Amount;
-                    } 
+                decimal sum = 0;
+                foreach (Transaction t in transacByCat)
+                {
+                    sum = sum + t.Amount;
+                }
                 amounts.Add(sum);
             }
 
-                var CategoryAmount = new List<KeyValuePair<string, decimal>>();
+            var CategoryAmount = new List<KeyValuePair<string, decimal>>();
 
                 CategoryAmount = Enumerable.Range(0, Utils.paymentCategories.Count)
                 .Select(i => new KeyValuePair<string, decimal>(Utils.paymentCategories[i], amounts[i]))

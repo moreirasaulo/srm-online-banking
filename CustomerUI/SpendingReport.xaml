@@ -13,7 +13,7 @@
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="52,80,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="." x:Name="lblAccType" HorizontalAlignment="Left" Margin="174,80,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="52,112,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="." x:Name="lblAccType_Copy" HorizontalAlignment="Left" Margin="174,112,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="." x:Name="lblBalance" HorizontalAlignment="Left" Margin="174,112,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Choose a time period to see spending report:" HorizontalAlignment="Left" Margin="34,197,0,0" VerticalAlignment="Top"/>
         <Label Content="From:" HorizontalAlignment="Left" Margin="34,228,0,0" VerticalAlignment="Top"/>
         <DatePicker Name="dpFromDate" HorizontalAlignment="Left" Margin="93,230,0,0" VerticalAlignment="Top" Width="191"/>

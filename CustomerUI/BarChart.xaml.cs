@@ -23,17 +23,21 @@ namespace CustomerUI
     public partial class BarChart : UserControl
     {
         Account currentAcc;
-        public BarChart(Account account)
+        DateTime fromDate;
+        DateTime toDate;
+        public BarChart(Account account, DateTime startDate, DateTime finishDate)
         {
             InitializeComponent();
             currentAcc = account;
+            fromDate = startDate;
+            toDate = finishDate;
             LoadBarChartData();
         }
 
         private void LoadBarChartData()
         {
-            //load all payments
-            List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null).ToList();
+            //load all payments for selected period of time
+            List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null && t.Date <= toDate && t.Date >= fromDate).ToList();
             //FIX exception
 
             if (transactions.Count == 0)
@@ -44,12 +48,12 @@ namespace CustomerUI
 
             List<decimal> amounts = new List<decimal>();
 
-            decimal sum = 0;
+            
             foreach (string pc in Utils.paymentCategories)
             {
                 var transacByCat = transactions.FindAll(t => t.PaymentCategory == pc);
-
-                foreach (Transaction t in transactions)
+                decimal sum = 0;
+                foreach (Transaction t in transacByCat)
                 {
                     sum = sum + t.Amount;
                 }
