@@ -33,7 +33,7 @@ namespace CustomerUI
             string username = tbClientUsername.Text;
             string password = pbClientPassword.Password;
             
-            Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);          
+            Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);     //FIX exception     
             
             if (Utils.login != null)
             {

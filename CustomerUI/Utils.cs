@@ -15,7 +15,7 @@ namespace CustomerUI
         public static List<Transaction> userTransactions;
         public static List<string> transactionHistoryDays = new List<string> { "7 days", "30 days", "60 days" };
         public static List<User> Payees;
-        public static List<string> paymentCategories = new List<string> { "Select category", "Utility bills", "Educations", "Groceiries", "Government", "Transportation", "Leisure" };
+        public static List<string> paymentCategories = new List<string> { "Utility bills", "Education", "Groceries", "Government", "Transportation", "Leisure", "Other" };
         public static string emailForReceipts;
     }
 }

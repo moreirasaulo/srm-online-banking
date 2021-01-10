@@ -22,7 +22,7 @@
                 <Label Content="View Transactions" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+        <Button Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="462,95,188,262" >
             <StackPanel>
                 <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>

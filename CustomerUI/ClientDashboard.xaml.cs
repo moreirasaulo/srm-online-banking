@@ -46,5 +46,10 @@ namespace CustomerUI
             transactions.Owner = this;
             transactions.ShowDialog();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

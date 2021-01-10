@@ -287,5 +287,24 @@ namespace CustomerUI
             receiptDlg.Owner = this;
             receiptDlg.ShowDialog();
         }
+
+
+        private void btViewSpendRep_Click(object sender, RoutedEventArgs e)
+        {
+            if(comboAccountType.Items.Count == 0 || comboAccountType.SelectedIndex == -1)
+            {
+                MessageBox.Show("First select an account to view spending reports");
+                return;
+            }
+            Account selectedAcc = (Account)comboAccountType.SelectedItem;
+            if(selectedAcc.AccountType.Description != "Checking")
+            {
+                MessageBox.Show("Spending reports are available only for checking accounts");
+                return;
+            }
+            SpendingReport spendingRepDlg = new SpendingReport(selectedAcc);
+            spendingRepDlg.Owner = this;
+            spendingRepDlg.ShowDialog();
+        }
     }
 }

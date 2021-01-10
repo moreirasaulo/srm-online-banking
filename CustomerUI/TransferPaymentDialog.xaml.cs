@@ -173,7 +173,7 @@ namespace CustomerUI
             //payment (payee account, payment category)
             if (currentTransType == "Payment")
             {
-                if (comboPayCategory.Items.Count == 0 || comboPayCategory.SelectedIndex == -1 || comboPayCategory.SelectedIndex == 0)
+                if (comboPayCategory.Items.Count == 0 || comboPayCategory.SelectedIndex == -1)
                 {
                     MessageBox.Show("Payment category must be selected", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;

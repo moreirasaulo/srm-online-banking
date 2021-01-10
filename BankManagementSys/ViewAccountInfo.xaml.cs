@@ -30,6 +30,15 @@ namespace BankManagementSys
             currentUser = user;
             currentAccount = account;
             LoadInfoToFileds();
+            if(currentAccount.AccountType.Description == "Savings")
+            {
+                btPayment.IsEnabled = false;
+            }
+            if(currentAccount.AccountType.Description == "Investment")
+            {
+                btTransfer.IsEnabled = false;
+                btPayment.IsEnabled = false;
+            }
             comboHistory.ItemsSource = Utilities.transactionHistoryDays;
             comboHistory.SelectedIndex = 0;
            
