@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,39 @@ namespace CustomerUI
     /// </summary>
     public partial class MyProfile : Window
     {
+        User currentUser;
         public MyProfile()
         {
             InitializeComponent();
+            currentUser = Utils.login.User;
+
+            if (currentUser.MiddleName != null)
+            {
+                tbFullName.Text = currentUser.FirstName + " " + currentUser.MiddleName + " " + currentUser.LastName;
+            }
+            else 
+            {
+                tbFullName.Text = currentUser.FirstName + " " + currentUser.LastName;
+            }
+
+            tbPhoneNo.Text = currentUser.PhoneNo;
+            tbNationalID.Text = currentUser.NationalId;
+            tbDOB.Text = currentUser.DateOfBirth.ToString();
+            tbAddress.Text = currentUser.Address;
+            tbCity.Text = currentUser.City;
+            tbProvinceState.Text = currentUser.ProvinceState;
+            tbPostalCode.Text = currentUser.PostalCode;
+            tbCountry.Text = currentUser.Country;
+            tbEmail.Text = currentUser.Email;
+        }
+
+        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            btUpdate.Content = "Confirm Changes";
+            tbPhoneNo.BorderBrush = System.Windows.Media.Brushes.Green;
+            tbEmail.BorderBrush = System.Windows.Media.Brushes.Green;
+            tbPhoneNo.IsEnabled = true;
+            tbEmail.IsEnabled = true;
         }
     }
 }

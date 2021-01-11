@@ -61,7 +61,10 @@ namespace CustomerUI
 
         private void btMyProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            this.contentControl.Content = new CustProfile();
+            btBack.Visibility = Visibility.Visible;
+            btViewSpendRep.Visibility = Visibility.Hidden;
+            btMyProfile.Visibility = Visibility.Hidden;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
