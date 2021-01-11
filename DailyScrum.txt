@@ -211,3 +211,25 @@ password: z77smMQEXz
 3. Need assistance:
 - How to implement automatic date and fee increase in database
 
+
+2021/01/11 Ksenia
+1. Done/not done since last scrum:
+- Implemented 'spending reports' for customer
+- payment subcategories were removed from project
+2. To do until next scrum:
+- change program interface for 'admin'
+- Add montly fee and interest transaction types
+- Add entities validation
+3. Need assistance:
+- exception when trying to update entities
+
+2021/01/11 Saulo
+1. Done/not done since last scrum:
+- Implemented 'update contact information' for customer
+2. To do until next scrum:
+- Add validation to entities
+- add menu to the program
+3. Need assistance:
+- entities validation (consult with Ksenia)
+
+

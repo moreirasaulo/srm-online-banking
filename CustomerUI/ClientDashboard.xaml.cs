@@ -24,7 +24,7 @@ namespace CustomerUI
         public ClientDashboard()
         {
             InitializeComponent();
-            lblLoggedAs.Content = string.Format("Logged as {0}", Utils.login.User.FullName);
+            lblLoggedAs.Content = Utils.login.User.FullName;
             manageAccs = new ManageAccounts();
             this.contentControl.Content = manageAccs;
 

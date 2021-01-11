@@ -12,7 +12,8 @@
                 <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
             </StackPanel.Background>
             <Image Height="61" Margin="28,40,30,0" Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\person.png"/>
-            <Label Name="lblLoggedAs" Content="Logged as client" HorizontalContentAlignment="Center"/>
+            <Label Content="Logged as" HorizontalContentAlignment="Center"/>
+            <Label Name="lblLoggedAs" Content="" HorizontalContentAlignment="Center"/>
             <Button Name="btLogout" Click="btLogout_Click" Content="Logout"/>
         </StackPanel>
         <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="164,0,0,0" VerticalAlignment="Top" Height="485" Width="697"/>
