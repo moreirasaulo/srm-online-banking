@@ -9,9 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="400" Height="250">
+        <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="400" Height="250" BorderThickness="0">
             <DVC:Chart.Series>
-                <DVC:BarSeries Title="Amount" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                <DVC:BarSeries Title="Amount" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" BorderThickness="0">
                     </DVC:BarSeries>
             </DVC:Chart.Series>
             </DVC:Chart>

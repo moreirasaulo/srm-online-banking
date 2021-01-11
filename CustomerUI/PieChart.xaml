@@ -9,10 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
-        <Label Content="Spending report"/>
-        <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="400" Height="250">
-                <DVC:Chart.Series>
-                    <DVC:PieSeries IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+        <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart" Width="400" Height="250" BorderThickness="0">
+            <DVC:Chart.Series>
+                    <DVC:PieSeries BorderThickness="0" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
                     </DVC:PieSeries>
                 </DVC:Chart.Series>
         </DVC:Chart>
