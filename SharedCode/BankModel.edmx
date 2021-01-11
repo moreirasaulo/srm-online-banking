@@ -37,13 +37,6 @@
           <Property Name="UserTypeId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="PaymentSubCategories">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
         <EntityType Name="Transactions">
           <Key>
             <PropertyRef Name="Id" />
@@ -54,7 +47,6 @@
           <Property Name="ToAccount" Type="int" />
           <Property Name="Type" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="PaymentCategory" Type="nvarchar" MaxLength="20" />
-          <Property Name="PaymentSubCategoryId" Type="int" />
           <Property Name="AccountId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -144,23 +136,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__Payme__76969D2E">
-          <End Role="PaymentSubCategories" Type="Self.PaymentSubCategories" Multiplicity="0..1" />
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentSubCategories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="PaymentSubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BankManagementSysModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountTypes" EntityType="Self.AccountTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaymentSubCategories" EntityType="Self.PaymentSubCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
@@ -182,10 +161,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__Transacti__Accou__778AC167" Association="Self.FK__Transacti__Accou__778AC167">
             <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacti__Payme__76969D2E" Association="Self.FK__Transacti__Payme__76969D2E">
-            <End Role="PaymentSubCategories" EntitySet="PaymentSubCategories" />
             <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
@@ -231,14 +206,6 @@
           <NavigationProperty Name="User" Relationship="Self.FK__Logins__UserId__05D8E0BE" FromRole="Logins" ToRole="Users" />
           <NavigationProperty Name="UserType" Relationship="Self.FK__Logins__UserType__04E4BC85" FromRole="Logins" ToRole="UserTypes" />
         </EntityType>
-        <EntityType Name="PaymentSubCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Payme__76969D2E" FromRole="PaymentSubCategories" ToRole="Transactions" />
-        </EntityType>
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,10 +216,8 @@
           <Property Name="ToAccount" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PaymentCategory" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentSubCategoryId" Type="Int32" />
           <Property Name="AccountId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Self.FK__Transacti__Accou__778AC167" FromRole="Transactions" ToRole="Accounts" />
-          <NavigationProperty Name="PaymentSubCategory" Relationship="Self.FK__Transacti__Payme__76969D2E" FromRole="Transactions" ToRole="PaymentSubCategories" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -344,23 +309,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Transacti__Payme__76969D2E">
-          <End Role="PaymentSubCategories" Type="Self.PaymentSubCategory" Multiplicity="0..1" />
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentSubCategories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="PaymentSubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BankDbConnection" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
           <EntitySet Name="Logins" EntityType="Self.Login" />
-          <EntitySet Name="PaymentSubCategories" EntityType="Self.PaymentSubCategory" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserTypes" EntityType="Self.UserType" />
@@ -383,10 +335,6 @@
           <AssociationSet Name="FK__Logins__UserType__04E4BC85" Association="Self.FK__Logins__UserType__04E4BC85">
             <End Role="UserTypes" EntitySet="UserTypes" />
             <End Role="Logins" EntitySet="Logins" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacti__Payme__76969D2E" Association="Self.FK__Transacti__Payme__76969D2E">
-            <End Role="PaymentSubCategories" EntitySet="PaymentSubCategories" />
-            <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -430,14 +378,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PaymentSubCategories">
-            <EntityTypeMapping TypeName="BankManagementSysModel.PaymentSubCategory">
-              <MappingFragment StoreEntitySet="PaymentSubCategories">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="BankManagementSysModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
@@ -447,7 +387,6 @@
                 <ScalarProperty Name="ToAccount" ColumnName="ToAccount" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PaymentCategory" ColumnName="PaymentCategory" />
-                <ScalarProperty Name="PaymentSubCategoryId" ColumnName="PaymentSubCategoryId" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>

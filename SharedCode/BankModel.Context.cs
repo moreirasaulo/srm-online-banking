@@ -28,7 +28,6 @@ namespace SharedCode
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
-        public virtual DbSet<PaymentSubCategory> PaymentSubCategories { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }

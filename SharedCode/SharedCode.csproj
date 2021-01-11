@@ -119,9 +119,6 @@
     <Compile Include="Login.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PaymentSubCategory.cs">
-      <DependentUpon>BankModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction.cs">
       <DependentUpon>BankModel.tt</DependentUpon>

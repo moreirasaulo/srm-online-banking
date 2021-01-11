@@ -20,10 +20,8 @@ namespace SharedCode
         public Nullable<int> ToAccount { get; set; }
         public string Type { get; set; }
         public string PaymentCategory { get; set; }
-        public Nullable<int> PaymentSubCategoryId { get; set; }
         public int AccountId { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual PaymentSubCategory PaymentSubCategory { get; set; }
     }
 }

@@ -20,10 +20,11 @@ namespace SharedCode
             this.Accounts = new HashSet<Account>();
             this.Logins = new HashSet<Login>();
         }
+    
+        public int Id { get; set; }
 
         //full name
         public string FullName { get { return FirstName + " " + MiddleName + " " + LastName; } }
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
