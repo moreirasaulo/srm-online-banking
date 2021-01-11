@@ -1,6 +1,7 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,9 +141,8 @@ namespace BankManagementSys
                     }
                     User payee = (User)comboPayees.SelectedItem;
 
-                    Account payeeAcc = (from a in payee.Accounts
-                                        where a.AccountType.Description == "Business"
-                                        select a).FirstOrDefault();
+                    Account payeeAcc = (from a in EFData.context.Accounts
+                                        where a.UserId == payee.Id && a.AccountType.Id == 4 select a).FirstOrDefault();
                     if (payeeAcc == null || payeeAcc.IsActive == false)
                     {
                         MessageBox.Show("Payee business account does not exist", "Payment impossible", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -176,10 +176,11 @@ namespace BankManagementSys
         //make transaction
         private void MakeTransaction()
         {
+            Transaction transac = null;
             try
             {
                 decimal amount = decimal.Parse(tbAmount.Text);
-                Transaction transac = new Transaction();
+                transac = new Transaction();
                 transac.Date = DateTime.Now;
                 transac.Amount = amount;
                 transac.Type = currentTransType;
@@ -193,9 +194,8 @@ namespace BankManagementSys
                 {
                     User payee = (User)comboPayees.SelectedItem;
 
-                    transac.ToAccount = (from a in payee.Accounts
-                                         where a.AccountType.Description == "Business"
-                                         select a.Id).FirstOrDefault();
+                    transac.ToAccount = (from a in EFData.context.Accounts where a.UserId == payee.Id &&
+                                         a.AccountType.Id == 4 select a.Id).FirstOrDefault();
 
                     transac.PaymentCategory = comboPayCategory.Text;
                 }
@@ -239,6 +239,10 @@ namespace BankManagementSys
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+              /*  String innerMessage = (ex.InnerException.InnerException != null)
+                      ? ex.InnerException.InnerException.Message
+                      : "";
+                MessageBox.Show(innerMessage); */
             }
         }
 
