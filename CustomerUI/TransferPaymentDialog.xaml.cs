@@ -21,20 +21,18 @@ namespace CustomerUI
     /// </summary>
     public partial class TransferPaymentDialog : Window
     {
-        Account currentAccount;
         string currentTransType;
-        public TransferPaymentDialog(Account account, string type)
+        public TransferPaymentDialog(string type)
         {
             InitializeComponent();
-            currentAccount = account;
             currentTransType = type;
             this.Title = type;
             lblTransacTypeTitle.Content = type;
             btMakeTransaction.Content = "Make " + type;
-            lblAccNo.Content = currentAccount.Id;
+            lblAccNo.Content = Utils.selectedAcc.Id;
             lblOwnerName.Content = Utils.login.User.FullName;
-            lblAccType.Content = currentAccount.AccountType.Description;
-            lblBalance.Content = currentAccount.Balance + " $";
+            lblAccType.Content = Utils.selectedAcc.AccountType.Description;
+            lblBalance.Content = Utils.selectedAcc.Balance + " $";
 
             if (type == "Transfer")
             {
@@ -83,7 +81,7 @@ namespace CustomerUI
                 transac.Date = DateTime.Now;
                 transac.Amount = amount;
                 transac.Type = currentTransType;
-                transac.AccountId = currentAccount.Id;
+                transac.AccountId = Utils.selectedAcc.Id;
                 if (currentTransType == "Transfer")
                 {
                     int destinationAccNo = int.Parse(tbBeneficiaryAcct.Text);
@@ -101,21 +99,21 @@ namespace CustomerUI
                 }
                 EFData.context.Transactions.Add(transac);
 
-                decimal previousBalance = currentAccount.Balance; //balance before transaction
+                decimal previousBalance = Utils.selectedAcc.Balance; //balance before transaction
                 
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
-                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
+                Utils.selectedAcc.Balance = Utils.selectedAcc.Balance - Math.Round(amount, 2);  //new balance
                     beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 
                 EFData.context.SaveChanges();
-                lblBalance.Content = currentAccount.Balance + " $";
+                lblBalance.Content = Utils.selectedAcc.Balance + " $";
 
 
                 string message = string.Format("The {0} was completed successfully", currentTransType.ToLower());
                 MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ClearFields();
 
-                Receipt receiptDlg = new Receipt(currentAccount, previousBalance, transac, true);
+                Receipt receiptDlg = new Receipt(Utils.selectedAcc, previousBalance, transac, true);
                 receiptDlg.Owner = this;
                 bool? result = receiptDlg.ShowDialog();
                 if (result == true)
@@ -160,7 +158,7 @@ namespace CustomerUI
                 MessageBox.Show("Amount must contain only digits and . symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (currentAccount.Balance < amount)
+            if (Utils.selectedAcc.Balance < amount)
             {
                 MessageBox.Show("Insufficient funds to proceed with operation", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -201,7 +199,7 @@ namespace CustomerUI
                     }
                     lblBeneficiaryName.Foreground = new SolidColorBrush(Colors.Black);
                     lblBeneficiaryName.Content = string.Format("Beneficiary account holder: {0}", beneficiaryAcc.User.FullName);
-                    if (beneficiaryAcc.Id == currentAccount.Id)
+                    if (beneficiaryAcc.Id == Utils.selectedAcc.Id)
                     {
                         MessageBox.Show("Destination account and current account must be different", "Transaction prohibited", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;

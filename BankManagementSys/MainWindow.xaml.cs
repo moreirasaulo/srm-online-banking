@@ -34,8 +34,14 @@ namespace BankManagementSys
             string username = tbAdminUsername.Text;
             string password = pbAdminPassword.Password;
 
-            Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password); //FIX exception
-
+            try
+            {
+                Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password); //FIX exception
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error loading from Database", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             /* same:
             Login login1 = (from l in EFData.context.Logins
                            where l.Username == username && l.Password == password

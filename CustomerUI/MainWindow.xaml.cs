@@ -32,19 +32,30 @@ namespace CustomerUI
         {
             string username = tbClientUsername.Text;
             string password = pbClientPassword.Password;
-            
-            Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);     //FIX exception     
-            
+
+            try
+            {
+                Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error loading from Database", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             if (Utils.login != null)
             {
                 if (Utils.login.UserTypeId == 3)
                 {
                     MessageBox.Show("Login successful");
-                    ClientDashboard client = new ClientDashboard();
+                    ClientDashboard clientDlg = new ClientDashboard();
                     Hide(); // this window
                     tbClientUsername.Text = "";
                     pbClientPassword.Password = "";
-                    client.Show();                   
+                    bool? result = clientDlg.ShowDialog();
+                    if(result == true)
+                    {
+                        Show(); //this window
+                    }
                 }
                 else
                 {

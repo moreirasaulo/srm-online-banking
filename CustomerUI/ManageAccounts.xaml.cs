@@ -1,13 +1,10 @@
 ﻿using Microsoft.Win32;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using PdfSharp.Pdf.Advanced;
 using SharedCode;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,23 +16,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CustomerUI
 {
     /// <summary>
-    /// Interaction logic for ViewTransactions.xaml
+    /// Interaction logic for ManageAccounts.xaml
     /// </summary>
-    public partial class ViewTransactions : Window
+    public partial class ManageAccounts : UserControl
     {
-
-
-        public ViewTransactions()
+        public ManageAccounts()
         {
             InitializeComponent();
             comboHistory.ItemsSource = Utils.transactionHistoryDays;
 
-            lblLoggedInAs.Content = string.Format("Logged as {0}", Utils.login.User.FullName);
 
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
             comboAccountType.DisplayMemberPath = "AccountType.Description";
@@ -49,11 +44,10 @@ namespace CustomerUI
 
         private void LoadTransactions()
         {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
             try
             {
                 Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            selectedAcc.Id).ToList();
+            Utils.selectedAcc.Id).ToList();
             }
             catch (SystemException ex)
             {
@@ -137,11 +131,6 @@ namespace CustomerUI
             SortTransactionsByTypeAndDate();
         }
 
-        private void btBackToDash_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
         private void btMakeTransfer_Click(object sender, RoutedEventArgs e)
         {
             if (Utils.login.User.Accounts == null || comboAccountType.SelectedIndex == -1)
@@ -149,14 +138,13 @@ namespace CustomerUI
                 MessageBox.Show("Select an account to make a transfer", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if (selectedAcc.Balance <= 0)
+            if (Utils.selectedAcc.Balance <= 0)
             {
                 MessageBox.Show("Your account balance is insufficient to make a transfer", "Insufficient balance", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             TransferPaymentDialog transferDlg = new TransferPaymentDialog("Transfer");
-            transferDlg.Owner = this;
+            //transferDlg.Owner = ClientDashboard;
             bool? result = transferDlg.ShowDialog();
 
             if (result == true)
@@ -168,13 +156,13 @@ namespace CustomerUI
 
         private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if (selectedAcc == null)
+            Utils.selectedAcc = (Account)comboAccountType.SelectedItem;
+            if (Utils.selectedAcc == null)
             {
                 MessageBox.Show("Please choose an account to view transactions");
                 return;
             }
-            lblBalance.Content = "$ " + selectedAcc.Balance;
+            lblBalance.Content = "$ " + Utils.selectedAcc.Balance;
 
             LoadTransactions();
             SortTransactionsByTypeAndDate();
@@ -195,7 +183,7 @@ namespace CustomerUI
                 return;
             }
             TransferPaymentDialog paymentDlg = new TransferPaymentDialog("Payment");
-            paymentDlg.Owner = this;
+           // paymentDlg.Owner = this;
             bool? result = paymentDlg.ShowDialog();
             if (result == true)
             {
@@ -284,32 +272,11 @@ namespace CustomerUI
             Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
 
             Receipt receiptDlg = new Receipt(currentAcc, 0, currTrans, false);
-            receiptDlg.Owner = this;
+           // receiptDlg.Owner = this;
             receiptDlg.ShowDialog();
         }
 
 
-        private void btViewSpendRep_Click(object sender, RoutedEventArgs e)
-        {
-            if(comboAccountType.Items.Count == 0 || comboAccountType.SelectedIndex == -1)
-            {
-                MessageBox.Show("First select an account to view spending reports");
-                return;
-            }
-            Account selectedAcc = (Account)comboAccountType.SelectedItem;
-            if(selectedAcc.AccountType.Description != "Checking")
-            {
-                MessageBox.Show("Spending reports are available only for checking accounts");
-                return;
-            }
-            SpendingReport spendingRepDlg = new SpendingReport(selectedAcc);
-            spendingRepDlg.Owner = this;
-            spendingRepDlg.ShowDialog();
-        }
-
-        private void btMyProfile_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+ 
     }
 }

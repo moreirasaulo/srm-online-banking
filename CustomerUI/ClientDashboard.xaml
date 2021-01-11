@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="BMS - Client Dashboard" Height="489.072" Width="766.021">
+        Title="BMS - Client Dashboard" Height="587.144" Width="883.45" Closing="Window_Closing">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="Auto" Width="159" Margin="0,0,0,-1">
             <StackPanel.Background>
@@ -15,34 +15,9 @@
             <Label Name="lblLoggedAs" Content="Logged as client" HorizontalContentAlignment="Center"/>
             <Button Name="btLogout" Click="btLogout_Click" Content="Logout"/>
         </StackPanel>
-        <Button Name="btViewTransactions" Click="btViewTransactions_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="272,98,382,266" Width="104" Height="94">
-            <StackPanel Width="100">
-                <Image Source="/SharedCode;Component/Images/handMoney.png" Height="64" Width="80"/>
-                <Label Content="View Transactions" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="462,95,188,262" >
-            <StackPanel>
-                <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>
-                <Label Content="View spending reposrts" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="462,280,188,76" Width="108" Height="102">
-            <StackPanel Height="99" Width="96">
-                <Image Source="/SharedCode;Component/Images/people.png" Height="72" Width="Auto" Margin="10,0,8,0"/>
-                <Label Content="Something here 4" HorizontalAlignment="Center" Width="98" Margin="-2,0,0,0"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="272,280,382,76" Width="104" Height="102" >
-            <StackPanel Height="99">
-                <Image Source="/SharedCode;Component/Images/people.png" Height="78" Width="80"/>
-                <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Height="19" RenderTransformOrigin="0.479,1.211"><Run Text="Something here 3"/></TextBlock>
-            </StackPanel>
-        </Button>
-
+        <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="164,0,0,0" VerticalAlignment="Top" Height="485" Width="697"/>
+        <Button Content="View spending reports" Name="btViewSpendRep" Click="btViewSpendRep_Click" HorizontalAlignment="Left" Margin="493,494,0,0" VerticalAlignment="Top" Width="129" Height="44"/>
+        <Button Name="btMyProfile" Click="btMyProfile_Click" Content="My Profile" HorizontalAlignment="Left" Margin="385,494,0,0" VerticalAlignment="Top" Width="75" Height="44"/>
+        <Button Name="btBack" Content="Back to dashboard" Visibility="Hidden" Click="btBack_Click" HorizontalAlignment="Left" Margin="655,506,0,0" VerticalAlignment="Top" Width="118"/>
     </Grid>
 </Window>
