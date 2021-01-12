@@ -84,7 +84,6 @@ namespace BankManagementSys
                 account.OpenDate = DateTime.Today;
                 account.UserId = currentCust.Id;
                 account.Balance = 0;
-                account.InterestFeeDate = DateTime.Today.AddMonths(1);
                 account.AccountTypeId = selectedAccType.Id;
                 if (selectedAccType.Description == "Checking" || selectedAccType.Description == "Business")
                 {
@@ -104,6 +103,8 @@ namespace BankManagementSys
                 catch (SystemException ex)
                 {
                     MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.InnerException.InnerException.Message);
+                    return;
                 }
 
                MessageBox.Show("Account created successfully","New account created", MessageBoxButton.OK, MessageBoxImage.Information);

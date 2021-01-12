@@ -233,3 +233,25 @@ password: z77smMQEXz
 - entities validation (consult with Ksenia)
 
 
+2021/01/12 Ksenia
+1. Done/not done since last scrum:
+- Changed program interface for admin
+- Added monthly fee and interest transaction types
+- Patially implemented entities validation
+2. To do until next scrum:
+- Continue validation of entities
+3. Need assistance:
+- learn about unit tests
+
+2021/01/12 Saulo
+1. Done/not done since last scrum:
+- Partially added validation to entities
+- Changed 'view customer profile' to user control
+- Implemented 'update' for customer contact information (customer interface)
+2. To do until next scrum:
+- Continue validation of entities
+- Design of wpf controls
+3. Need assistance:
+- pass event from main window to user control
+
+

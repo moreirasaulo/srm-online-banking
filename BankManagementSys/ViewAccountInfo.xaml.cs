@@ -30,15 +30,6 @@ namespace BankManagementSys
             currentUser = user;
             currentAccount = account;
             LoadInfoToFileds();
-            if(currentAccount.AccountType.Description == "Savings")
-            {
-                btPayment.IsEnabled = false;
-            }
-            if(currentAccount.AccountType.Description == "Investment")
-            {
-                btTransfer.IsEnabled = false;
-                btPayment.IsEnabled = false;
-            }
             comboHistory.ItemsSource = Utilities.transactionHistoryDays;
             comboHistory.SelectedIndex = 0;
            
@@ -60,7 +51,7 @@ namespace BankManagementSys
             lblOpenDate.Content = currentAccount.OpenDate.ToShortDateString();
             lblBalance.Content = "$ " + currentAccount.Balance.ToString("0.00");
             lblAccType.Content = currentAccount.AccountType.Description;
-            lblInterestFeeDate.Content = currentAccount.InterestFeeDate.ToShortDateString();
+            lblInterestFeeDate.Content = currentAccount.InterestFeeDate;
 
             if (currentAccount.AccountType.Description == "Checking")
             {
@@ -168,59 +159,6 @@ namespace BankManagementSys
         {
             SortTransactionsByTypeAndDate();
         }
-
-        private void CallTransactionDialog(string type)
-        {
-            TransactionDialog transacDlg = new TransactionDialog(currentUser, currentAccount, type);
-            transacDlg.Owner = this;
-            bool? result = transacDlg.ShowDialog();
-            if (result == true)
-            {
-                SortTransactionsByTypeAndDate();
-                LoadInfoToFileds();
-            }
-        }
-
-        //deposit
-        private void btDeposit_Click(object sender, RoutedEventArgs e)
-        {
-            CallTransactionDialog("Deposit");
-        }
-
-        private bool IsBalanceSufficient()
-        {
-            if (currentAccount.Balance <= 0)
-            {
-                string message = string.Format("Account No {0} has insufficient balance ({1} $) to proceed with operation", currentAccount.Id, currentAccount.Balance);
-                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            return true;
-        }
-
-        
-
-        //withdrawal
-        private void btWithdrawal_Click(object sender, RoutedEventArgs e)
-        {
-            if(IsBalanceSufficient() == false) { return; }
-            CallTransactionDialog("Withdrawal");
-        }
-
-        //transfer
-        private void btTransfer_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsBalanceSufficient() == false) { return; }
-            CallTransactionDialog("Transfer");
-        }
-
-        //payment
-        private void btPayment_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsBalanceSufficient() == false) { return; }
-            CallTransactionDialog("Payment");
-        }
-
 
 
         private void lvTransactions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
