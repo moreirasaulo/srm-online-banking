@@ -156,6 +156,7 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\logout.png" />
     <Resource Include="Images\transfer.png" />
     <Resource Include="Images\payment.png" />
     <Resource Include="Images\saveAsPDF.png" />
@@ -165,7 +166,6 @@
     <Resource Include="Images\addPerson.png" />
     <Resource Include="Images\exit.png" />
     <Resource Include="Images\file.png" />
-    <Resource Include="Images\folder.png" />
     <Resource Include="Images\handMoney.png" />
     <Resource Include="Images\people.png" />
     <Resource Include="Images\person.png" />

@@ -15,10 +15,10 @@
           <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Interest" Type="decimal" Precision="4" Scale="2" />
           <Property Name="MonthlyFee" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="InterestFeeDate" Type="date" Nullable="false" />
           <Property Name="AccountTypeId" Type="int" Nullable="false" />
           <Property Name="CloseDate" Type="date" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="InterestFeeDate" Type="date" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="AccountTypes">
           <Key>
@@ -178,7 +178,7 @@
           <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Interest" Type="Decimal" Precision="4" Scale="2" />
           <Property Name="MonthlyFee" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="InterestFeeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InterestFeeDate" Type="DateTime" Precision="0" />
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccountType" Relationship="Self.FK__Accounts__Accoun__74AE54BC" FromRole="Accounts" ToRole="AccountTypes" />
           <NavigationProperty Name="User" Relationship="Self.FK__Accounts__UserId__75A278F5" FromRole="Accounts" ToRole="Users" />

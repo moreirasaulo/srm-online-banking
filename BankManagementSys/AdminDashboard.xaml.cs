@@ -19,31 +19,79 @@ namespace BankManagementSys
     /// </summary>
     public partial class AdminDashboard : Window
     {
+        UserControl currentControl;
+        public Action<string> OnTitleChanged;
+
         public AdminDashboard()
         {
             InitializeComponent();
-           
         }
 
-        private void btManageCustomers_Click(object sender, RoutedEventArgs e)
-        {
-            ManageCustomers manageCustsDlg = new ManageCustomers();
-            manageCustsDlg.Owner = this;
-            manageCustsDlg.ShowDialog();
-        }
 
-        private void btManageAccounts_Click(object sender, RoutedEventArgs e)
-        {
-            ManageAccounts manageAccsDlg = new ManageAccounts();
-            manageAccsDlg.Owner = this;
-            manageAccsDlg.ShowDialog();
-        }
+
 
         private void btValidationTest_Click(object sender, RoutedEventArgs e)
         {
             UserTypeValidationTest validationTestDlg = new UserTypeValidationTest();
             validationTestDlg.Owner = this;
             validationTestDlg.ShowDialog();
+        }
+
+        private void miManageAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            currentControl = new ManageAccounts();
+            this.contentControl.Content = currentControl;
+            mainMenu.IsEnabled = false;
+            mainMenu.Visibility = Visibility.Hidden;
+            accountsMenu.IsEnabled = true;
+            accountsMenu.Visibility = Visibility.Visible;
+        }
+
+        private void miAddClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void miUpdateClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+        private void miAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            AddClientDialog addNewClientDlg = new AddClientDialog();
+            addNewClientDlg.Owner = this;
+            addNewClientDlg.ShowDialog();
+        }
+
+
+
+        private void miViewUpdateCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            this.contentControl.Content = new UpdateCustomer();
+        }
+
+        private void miNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+            this.contentControl.Content = new ManageAccounts();
+        }
+
+
+        //verified
+        private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.contentControl.Content = null;
+            mainMenu.IsEnabled = true;
+            mainMenu.Visibility = Visibility.Visible;
+            accountsMenu.IsEnabled = false;
+            accountsMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void miCreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

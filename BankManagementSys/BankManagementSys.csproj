@@ -118,6 +118,9 @@
     <Compile Include="GenerateStatement.xaml.cs">
       <DependentUpon>GenerateStatement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManageAccounts.xaml.cs">
+      <DependentUpon>ManageAccounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageExistingCustomers.xaml.cs">
       <DependentUpon>ManageExistingCustomers.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,9 @@
     <Compile Include="TransactionDialog.xaml.cs">
       <DependentUpon>TransactionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateCustomer.xaml.cs">
+      <DependentUpon>UpdateCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserTypeValidationTest.xaml.cs">
       <DependentUpon>UserTypeValidationTest.xaml</DependentUpon>
     </Compile>
@@ -139,6 +145,9 @@
     </Compile>
     <Compile Include="ViewCustomerProfile.xaml.cs">
       <DependentUpon>ViewCustomerProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUpdateClientProfile.xaml.cs">
+      <DependentUpon>ViewUpdateClientProfile.xaml</DependentUpon>
     </Compile>
     <Page Include="AccountClosureStatement.xaml">
       <SubType>Designer</SubType>
@@ -199,6 +208,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UpdateCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserTypeValidationTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,11 +224,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewUpdateClientProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManageAccounts.xaml.cs">
-      <DependentUpon>ManageAccounts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ManageCustomers.xaml.cs">
       <DependentUpon>ManageCustomers.xaml</DependentUpon>
     </Compile>

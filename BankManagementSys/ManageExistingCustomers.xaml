@@ -25,13 +25,6 @@
         <Label Content="" HorizontalAlignment="Left" Margin="708,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Label Content="" HorizontalAlignment="Left" Margin="748,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Label Content="" HorizontalAlignment="Left" Margin="751,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
-        <Button Click="btBackToDashClicked"
-        Margin="629,287,67,40">
-            <StackPanel Width="53" Height="97">
-                <Image Source="/SharedCode;Component/Images/exit.png" Height="72"/>
-                <Label Content="Back" HorizontalAlignment="Center" Margin="10,0,-22,0" Width="65" Height="24"/>
-            </StackPanel>
-        </Button>
         <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="114,13,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,35,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,58,0,0" VerticalAlignment="Top"/>

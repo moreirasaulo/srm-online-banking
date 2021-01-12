@@ -11,27 +11,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BankManagementSys
 {
     /// <summary>
-    /// Interaction logic for ManageExistingCustomers.xaml
+    /// Interaction logic for UpdateCustomer.xaml
     /// </summary>
-    public partial class ManageExistingCustomers : Window
+    public partial class UpdateCustomer : UserControl
     {
         List<User> customers = new List<User>();
-
-        public ManageExistingCustomers()
+        public UpdateCustomer()
         {
             InitializeComponent();
         }
+
         private void btFind_Click(object sender, RoutedEventArgs e)
         {
+            if (tbSearchCustBy.Text.Length == 0)
+            {
+                MessageBox.Show("The search field cannot be empty.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             LoadFoundCustomers();
             tbSearchCustBy.Text = "";
             lblEmptyResult.Content = "";
-           
+            if (customers.Count == 0)
+            {
+                lblEmptyResult.Content = "No customers that satisfy your search criteria was found.";
+                return;
+            }
+
         }
 
         private void LoadFoundCustomers()
@@ -83,24 +94,28 @@ namespace BankManagementSys
             {
                 MessageBox.Show("Error fetching from database: " + ex.Message);
             }
-            
+
         }
 
-        private void btViewCustProfileClicked(object sender, RoutedEventArgs e)
-        {
-            if(lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
+       
+            
+           // viewCustProfileDlg.Owner = this;
+           // bool? result = viewCustProfileDlg.ShowDialog();
+           /* if (result == true)
             {
-                MessageBox.Show("No customer is selected to view profile");
+                //FIX   LoadFoundCustomers();  //reload customers after updating
+            } */
+        
+
+        private void lvCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
+            {
+                this.contentControl.Content = null;
                 return;
             }
             User selectedUser = (User)lvCustomers.SelectedItem;
-            ViewCustomerProfile viewCustProfileDlg = new ViewCustomerProfile(selectedUser);
-            viewCustProfileDlg.Owner = this;
-            bool? result = viewCustProfileDlg.ShowDialog();
-            if(result == true)
-            {
-               //FIX   LoadFoundCustomers();  //reload customers after updating
-            }
+            this.contentControl.Content = new ViewUpdateClientProfile(selectedUser);
         }
     }
 }

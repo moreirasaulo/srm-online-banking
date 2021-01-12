@@ -5,45 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="450" Width="800">
+        Title="Admin Dashboard" Height="580" Width="990.909">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="419" Width="159">
+
+        <StackPanel HorizontalAlignment="Left" Width="180">
             <StackPanel.Background>
-                <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
+                <SolidColorBrush>MediumSeagreen</SolidColorBrush>
             </StackPanel.Background>
-            <Image Height="61" Margin="28,40,30,0" Source="/SharedCode;Component/Images/person.png"/>
+            <Image Height="108" Margin="23,0,30,0" Source="/SharedCode;Component/Images/johnabbottbank.png"/>
             <Label Content="Logged as admin" HorizontalContentAlignment="Center"/>
-            <Label Content="LogOut" Margin="28,40,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
-            <Label Content="Exit" Margin="28,20,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
         </StackPanel>
-        <Button Click="btManageCustomers_Click" Name="btManageCustomers" HorizontalAlignment="Center" VerticalAlignment="Center"
-        Margin="264,82,418,243">
-            <StackPanel Width="100">
-                <Image Source="/SharedCode;Component/Images/people.png" Height="64" Width="80"/>
-                <Label Content="Manage clients" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Click="btManageAccounts_Click"
-        Margin="390,-150, 160,10" >
-            <StackPanel>
-                <Image Source="/SharedCode;Component/Images/folder.png" Height="64" Width="80"/>
-                <Label Content="Manage accounts" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-        Margin="458,225,228,93" Width="106" Height="101">
-            <StackPanel Height="99">
-                <Image Source="/SharedCode;Component/Images/file.png" Height="64" Width="80"/>
-                <Label Content="Manage reports" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-        Margin="69,225,228,93" Width="106" Height="101" >
-            <StackPanel Height="99">
-                <Image Source="/SharedCode;Component/Images/handMoney.png" Height="64" Width="80"/>
-                <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">Manage transactions</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="674,176,0,0" VerticalAlignment="Top" Width="92"/>
+        
+       
+        <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="800,376,0,0" VerticalAlignment="Top" Width="92"/>
+        <Menu Margin="10,169,803,69" Background="MediumSeaGreen" Name="mainMenu">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Add New Client" Name="miAddClient" Click="miAddClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" >
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/file.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="View/Update Client" Name="miUpdateClient" Click="miUpdateClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/file.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Click="miManageAccounts_Click"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/file.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Log Out" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/logout.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Exit" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/exit.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+
+        </Menu>
+        <Menu Margin="10,169,803,69" Background="MediumSeaGreen" Name="accountsMenu" IsEnabled="False" Visibility="Hidden">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Create account  &#10095;" Name="miCreateAccount" Click="miCreateAccount_Click"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="View account info  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Close account  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Statement  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Transactions   &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+
+        </Menu>
+        <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="185,0,0,0" VerticalAlignment="Top" Height="550" Width="800"/>
+
     </Grid>
 </Window>

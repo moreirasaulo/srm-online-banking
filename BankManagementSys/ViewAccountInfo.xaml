@@ -33,13 +33,13 @@
         <Label x:Name="lblInterest" MouseDoubleClick="lblInterest_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="151,353,0,0" VerticalAlignment="Top"/>
         <Label Name="lblInterestOrFee"  Content="..." HorizontalAlignment="Left" Margin="43,379,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblInterestFeeDate" Content="." HorizontalAlignment="Left" Margin="151,378,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="625,23,0,0" VerticalAlignment="Top" Width="155"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="409,60,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="456,60,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="531,60,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="628,61,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="708,61,0,0" VerticalAlignment="Top"/>
-        <ListView MouseDoubleClick="lvTransactions_MouseDoubleClick" Name="lvTransactions" HorizontalAlignment="Left" Height="223" Margin="410,92,0,0" VerticalAlignment="Top" Width="370">
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="625,81,0,0" VerticalAlignment="Top" Width="155"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="409,118,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="456,118,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="531,118,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="628,119,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="708,119,0,0" VerticalAlignment="Top"/>
+        <ListView MouseDoubleClick="lvTransactions_MouseDoubleClick" Name="lvTransactions" HorizontalAlignment="Left" Height="223" Margin="410,150,0,0" VerticalAlignment="Top" Width="370">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="120" DisplayMemberBinding="{Binding Type}"/>
@@ -48,11 +48,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Recent account transactions:" HorizontalAlignment="Left" Margin="405,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <Button Click="btDeposit_Click" Name="btDeposit" Content="Make Deposit" HorizontalAlignment="Left" Margin="384,354,0,0" VerticalAlignment="Top" Width="95"/>
-        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" Content="Make Withdrawal" HorizontalAlignment="Left" Margin="491,354,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btTransfer_Click" x:Name="btTransfer" Content="Make Transfer" HorizontalAlignment="Left" Margin="606,354,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btPayment_Click" x:Name="btPayment" Content="Make Payment" HorizontalAlignment="Left" Margin="722,354,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Recent account transactions:" HorizontalAlignment="Left" Margin="405,76,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label x:Name="lblCompanyName" Content="" HorizontalAlignment="Left" Margin="42,149,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblCompanyNameValue" Content="" HorizontalAlignment="Left" Margin="212,149,0,0" VerticalAlignment="Top"/>
         <Label Content="* Double-click to modify" HorizontalAlignment="Left" Margin="33,438,0,0" VerticalAlignment="Top"/>

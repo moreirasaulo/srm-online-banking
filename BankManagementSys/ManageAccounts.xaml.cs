@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BankManagementSys
@@ -19,13 +19,48 @@ namespace BankManagementSys
     /// <summary>
     /// Interaction logic for ManageAccounts.xaml
     /// </summary>
-    public partial class ManageAccounts : Window
+    public partial class ManageAccounts : UserControl
     {
         List<User> customers = null;
-
+        User currentClient;
+        Account currentAccount;
         public ManageAccounts()
         {
             InitializeComponent();
+           
+            /*  operation = action;
+              if(operation == "New account")
+              {
+                  lvAccounts.Visibility = Visibility.Hidden;
+                  HideButtons();
+                  btAdd.Visibility = Visibility.Visible;
+              } */
+        }
+
+        private void HideButtons()
+        {
+            btViewAccInfo.Visibility = Visibility.Hidden;
+            btCloseAcct.Visibility = Visibility.Hidden;
+            btAdd.Visibility = Visibility.Hidden;
+            btDeposit.Visibility = Visibility.Hidden;
+            btWithdrawal.Visibility = Visibility.Hidden;
+            btTransfer.Visibility = Visibility.Hidden;
+            btPayment.Visibility = Visibility.Hidden;
+            btStatement.Visibility = Visibility.Hidden;
+            lblCustAccounts.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowButtons()
+        {
+            btViewAccInfo.Visibility = Visibility.Visible;
+            btCloseAcct.Visibility = Visibility.Visible;
+            btAdd.Visibility = Visibility.Visible;
+            btDeposit.Visibility = Visibility.Visible;
+            btWithdrawal.Visibility = Visibility.Visible;
+            btTransfer.Visibility = Visibility.Visible;
+            btPayment.Visibility = Visibility.Visible;
+            btStatement.Visibility = Visibility.Visible;
+            lblCustAccounts.Visibility = Visibility.Visible;
         }
 
         private void LoadFoundCustomers()
@@ -78,8 +113,7 @@ namespace BankManagementSys
 
         private void LoadFoundAccounts()
         {
-            User selectedUser = (User)lvCustomers.SelectedItem;
-            List<Account> accounts = EFData.context.Accounts.Where(a => a.UserId.Equals(selectedUser.Id)).ToList();
+            List<Account> accounts = EFData.context.Accounts.Where(a => a.UserId.Equals(currentClient.Id)).ToList();
             lvAccounts.ItemsSource = accounts;
         }
 
@@ -87,7 +121,7 @@ namespace BankManagementSys
         {
             if (tbSearchCustBy.Text.Length == 0)
             {
-                MessageBox.Show("The search input cannot be null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The search field cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -97,7 +131,7 @@ namespace BankManagementSys
 
             if (lvCustomers.Items.Count == 0)
             {
-                lblCustNotFound.Content = "No customers that satisfy your search criteria was found.";
+                lblCustNotFound.Content = "No customers that satisfy your search criteria was found";
                 return;
             }
         }
@@ -109,13 +143,10 @@ namespace BankManagementSys
                 lvAccounts.ItemsSource = new List<User>();
                 return;
             }
+            currentClient = (User)lvCustomers.SelectedItem;
             LoadFoundAccounts();
         }
 
-        private void btBackToDash_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
 
         private void btViewAccInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -129,12 +160,10 @@ namespace BankManagementSys
                 MessageBox.Show("Please choose an account to view");
                 return;
             }
-            User selectedUser = (User)lvCustomers.SelectedItem;
-            Account selectedAcc = (Account)lvAccounts.SelectedItem;
-            ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(selectedUser, selectedAcc);
-            viewAccInfoDlg.Owner = this;
+            ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(currentClient, currentAccount);
+            // viewAccInfoDlg.Owner = this;
             bool? result = viewAccInfoDlg.ShowDialog();
-            if(result == true)
+            if (result == true)
             {
                 LoadFoundAccounts();
             }
@@ -142,18 +171,38 @@ namespace BankManagementSys
 
         private void lvAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btViewAccInfo.IsEnabled = true;
-            btCloseAcct.IsEnabled = true;
-            btStatement.IsEnabled = true;
-            Account selectedAcc = (Account)lvAccounts.SelectedItem;
-            if (lvAccounts.Items.Count == 0 || lvAccounts.SelectedIndex == -1 || selectedAcc.IsActive == false) 
+            if (lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
             {
-                btViewAccInfo.IsEnabled = false;
-                btCloseAcct.IsEnabled = false;
-                btStatement.IsEnabled = false;
-                if(selectedAcc != null && selectedAcc.IsActive == false)
+                currentAccount = (Account)lvAccounts.SelectedItem;
+                btViewAccInfo.IsEnabled = true;
+                btCloseAcct.IsEnabled = true;
+                btStatement.IsEnabled = true;
+                btDeposit.IsEnabled = true;
+                btWithdrawal.IsEnabled = true;
+                btTransfer.IsEnabled = true;
+                btPayment.IsEnabled = true;
+                if (currentAccount.AccountType.Description == "Savings")
                 {
-                    btStatement.IsEnabled = true;
+                    btPayment.IsEnabled = false;
+                }
+                if (currentAccount.AccountType.Description == "Investment")
+                {
+                    btTransfer.IsEnabled = false;
+                    btPayment.IsEnabled = false;
+                }
+                if (currentAccount.IsActive == false)
+                {
+                    btViewAccInfo.IsEnabled = false;
+                    btCloseAcct.IsEnabled = false;
+                    btStatement.IsEnabled = false;
+                    if (currentAccount != null && currentAccount.IsActive == false)
+                    {
+                        btStatement.IsEnabled = true;
+                        btTransfer.IsEnabled = false;
+                        btPayment.IsEnabled = false;
+                        btDeposit.IsEnabled = false;
+                        btWithdrawal.IsEnabled = false;
+                    }
                 }
             }
         }
@@ -193,11 +242,11 @@ namespace BankManagementSys
 
         private void tbSearchCustBy_KeyDown(object sender, KeyEventArgs e)
         {
-            if (rbAccNo.IsChecked == true) 
+            if (rbAccNo.IsChecked == true)
             {
                 NumbersOnly(e);
             }
-            if (tbSearchCustBy.Text.Length == 0) 
+            if (tbSearchCustBy.Text.Length == 0)
             {
                 lblErrorMsg.Content = "";
             }
@@ -205,11 +254,14 @@ namespace BankManagementSys
 
         private void btStatement_Click(object sender, RoutedEventArgs e)
         {
-            User currentUser = (User)lvCustomers.SelectedItem;
-            Account currentAccount = (Account)lvAccounts.SelectedItem;
-            GenerateStatement statementWindow = new GenerateStatement(currentUser,currentAccount);
-            statementWindow.Owner = this;
+            GenerateStatement statementWindow = new GenerateStatement(currentClient, currentAccount);
+            // statementWindow.Owner = this;
             statementWindow.ShowDialog();
+        }
+
+        private void AddAccount()
+        {
+            
         }
 
 
@@ -220,30 +272,29 @@ namespace BankManagementSys
                 MessageBox.Show("A customer must be selected first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            User selectedCust = (User)lvCustomers.SelectedItem;
 
-            AddNewAccount addNewAcct = new AddNewAccount(selectedCust);
-            addNewAcct.Owner = this;
+            AddNewAccount addNewAcct = new AddNewAccount(currentClient);
+            //addNewAcct.Owner = this;
             bool? result = addNewAcct.ShowDialog();
             if (result == true)
             {
+                lvAccounts.Visibility = Visibility.Visible;
+                ShowButtons();
                 LoadFoundAccounts();
             }
         }
 
         private void btCloseAcct_Click(object sender, RoutedEventArgs e)
         {
-            if(lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
+            if (lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
             {
-                User selectedCust = (User)lvCustomers.SelectedItem;
-                Account currentAccount = (Account)lvAccounts.SelectedItem;
                 string closingAcctMessage = null;
-                if(currentAccount.Balance > 0)
+                if (currentAccount.Balance > 0)
                 {
                     closingAcctMessage = "Before closing account, confirm withdrawal of remaining balance of $" + currentAccount.Balance;
                     MessageBoxResult res = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     Transaction transac;
-                    if(res == MessageBoxResult.Yes)
+                    if (res == MessageBoxResult.Yes)
                     {
                         transac = new Transaction();
                         transac.Date = DateTime.Now;
@@ -261,11 +312,11 @@ namespace BankManagementSys
                         {
                             MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        Receipt withdrawalReceipt = new Receipt(currentAccount, previousBalance, transac, selectedCust, true);
-                        withdrawalReceipt.Owner = this;
+                        Receipt withdrawalReceipt = new Receipt(currentAccount, previousBalance, transac, currentClient, true);
+                        //   withdrawalReceipt.Owner = this;
                         bool? dlgResult = withdrawalReceipt.ShowDialog();
                     }
-                    if(res == MessageBoxResult.No)
+                    if (res == MessageBoxResult.No)
                     {
                         MessageBox.Show("Account cannot be closed before withdrawal of remaining funds", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -273,15 +324,15 @@ namespace BankManagementSys
                 }
                 string message = string.Format("Confirm closure of account number {0} with remaining balance of {1} $ ?", currentAccount.Id, currentAccount.Balance);
                 MessageBoxResult result = MessageBox.Show(message, "Confirmation of account closure required", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                if(result == MessageBoxResult.Yes)
+                if (result == MessageBoxResult.Yes)
                 {
                     currentAccount.IsActive = false;
                     currentAccount.CloseDate = DateTime.Today;
                     AccountClosureStatement closureStatementDlg = new AccountClosureStatement(currentAccount);
-                    closureStatementDlg.Owner = this;
+                    //  closureStatementDlg.Owner = this;
                     closureStatementDlg.ShowDialog();
                 }
-                
+
                 try
                 {
                     EFData.context.SaveChanges();
@@ -295,6 +346,77 @@ namespace BankManagementSys
                 LoadFoundAccounts();
 
             }
+        }
+
+        private void lvAccounts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvCustomers.Items.Count != 0 && lvCustomers.SelectedIndex != -1 && lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
+            {
+                if (currentAccount.IsActive == false)
+                {
+                    MessageBox.Show("This account is closed");
+                    return;
+                }
+                ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(currentClient, currentAccount);
+                // viewAccInfoDlg.Owner = this;
+                bool? result = viewAccInfoDlg.ShowDialog();
+                if (result == true)
+                {
+                    LoadFoundAccounts();
+                }
+            }
+        }
+
+        private void CallTransactionDialog(string type)
+        {
+            TransactionDialog transacDlg = new TransactionDialog(currentClient, currentAccount, type);
+            // transacDlg.Owner = this;
+            transacDlg.ShowDialog();
+             /*  if (result == true)
+               {
+                   SortTransactionsByTypeAndDate();
+                   LoadInfoToFileds();
+               } */
+        }
+
+        private bool IsBalanceSufficient()
+        {
+            if (currentAccount.Balance <= 0)
+            {
+                string message = string.Format("Account No {0} has insufficient balance ({1} $) to proceed with operation", currentAccount.Id, currentAccount.Balance);
+                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
+
+        //deposit
+        private void btDeposit_Click(object sender, RoutedEventArgs e)
+        {
+            CallTransactionDialog("Deposit");
+        }
+
+       
+        //withdrawal
+        private void btWithdrawal_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsBalanceSufficient() == false) { return; }
+            CallTransactionDialog("Withdrawal");
+        }
+
+        //transfer
+        private void btTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsBalanceSufficient() == false) { return; }
+            CallTransactionDialog("Transfer");
+        }
+
+        //payment
+        private void btPayment_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsBalanceSufficient() == false) { return; }
+            CallTransactionDialog("Payment");
         }
     }
 }
