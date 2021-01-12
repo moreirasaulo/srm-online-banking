@@ -309,7 +309,9 @@ namespace CustomerUI
 
         private void btMyProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            MyProfile myProfile = new MyProfile();
+            myProfile.Owner = this;
+            myProfile.ShowDialog();
         }
     }
 }
