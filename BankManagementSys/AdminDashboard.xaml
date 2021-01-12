@@ -5,16 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="450" Width="800">
+        Title="JAB - Admin Dashboard" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="419" Width="159">
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
             </StackPanel.Background>
             <Image Height="61" Margin="28,40,30,0" Source="/SharedCode;Component/Images/person.png"/>
-            <Label Content="Logged as admin" HorizontalContentAlignment="Center"/>
-            <Label Content="LogOut" Margin="28,40,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
-            <Label Content="Exit" Margin="28,20,42,0"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Logged as" HorizontalContentAlignment="Center"/>
         </StackPanel>
         <Button Click="btManageCustomers_Click" Name="btManageCustomers" HorizontalAlignment="Center" VerticalAlignment="Center"
         Margin="264,82,418,243">
@@ -45,5 +43,7 @@
             </StackPanel>
         </Button>
         <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="674,176,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Name="lblUserName" Content="" HorizontalAlignment="Left" Margin="21,127,0,0" VerticalAlignment="Top" Width="124"/>
+        <Button Name="btLogout" Click="btLogout_Click" Content="Logout" Margin="0,161,633,223"/>
     </Grid>
 </Window>

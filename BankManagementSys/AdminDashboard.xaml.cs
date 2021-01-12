@@ -19,10 +19,12 @@ namespace BankManagementSys
     /// </summary>
     public partial class AdminDashboard : Window
     {
+        ManageAccounts manageAccs;
         public AdminDashboard()
         {
             InitializeComponent();
-           
+            lblUserName.Content = Utilities.login.User.FirstName + " (admin)";
+            manageAccs = new ManageAccounts();
         }
 
         private void btManageCustomers_Click(object sender, RoutedEventArgs e)
@@ -44,6 +46,16 @@ namespace BankManagementSys
             UserTypeValidationTest validationTestDlg = new UserTypeValidationTest();
             validationTestDlg.Owner = this;
             validationTestDlg.ShowDialog();
+        }
+
+        private void btLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to logout?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
+            {
+                Utilities.login = null;
+                Close();
+            }
         }
     }
 }

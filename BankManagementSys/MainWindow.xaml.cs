@@ -70,7 +70,12 @@ namespace BankManagementSys
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Environment.Exit(0);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
