@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="BMS - Client Dashboard" Height="587.144" Width="883.45" Closing="Window_Closing">
+        Title="JAB - Client Dashboard" Height="587.144" Width="883.45" Closing="Window_Closing">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="Auto" Width="159" Margin="0,0,0,-1">
             <StackPanel.Background>
