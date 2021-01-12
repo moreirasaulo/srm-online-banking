@@ -19,7 +19,7 @@ namespace BankManagementSys
     /// </summary>
     public partial class AdminDashboard : Window
     {
-        UserControl currentControl;
+        ManageAccounts manAccscontrol;
         public Action<string> OnTitleChanged;
 
         public AdminDashboard()
@@ -39,44 +39,27 @@ namespace BankManagementSys
 
         private void miManageAccounts_Click(object sender, RoutedEventArgs e)
         {
-            currentControl = new ManageAccounts();
-            this.contentControl.Content = currentControl;
+            manAccscontrol = new ManageAccounts();
+            this.contentControl.Content = manAccscontrol;
             mainMenu.IsEnabled = false;
             mainMenu.Visibility = Visibility.Hidden;
             accountsMenu.IsEnabled = true;
             accountsMenu.Visibility = Visibility.Visible;
         }
 
+        //add client
         private void miAddClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void miUpdateClient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
-        private void miAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             AddClientDialog addNewClientDlg = new AddClientDialog();
             addNewClientDlg.Owner = this;
             addNewClientDlg.ShowDialog();
         }
 
-
-
-        private void miViewUpdateCustomer_Click(object sender, RoutedEventArgs e)
+        private void miUpdateClient_Click(object sender, RoutedEventArgs e)
         {
             this.contentControl.Content = new UpdateCustomer();
         }
 
-        private void miNewAccount_Click(object sender, RoutedEventArgs e)
-        {
-            this.contentControl.Content = new ManageAccounts();
-        }
 
 
         //verified
@@ -91,7 +74,24 @@ namespace BankManagementSys
 
         private void miCreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            
+            manAccscontrol.AddAccount();
+           
         }
+
+        private void miViewUpdateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            manAccscontrol.ViewAccountIinfo();
+        }
+
+        private void miCloseAccount_Click(object sender, RoutedEventArgs e)
+        {
+            manAccscontrol.CloseAccount();
+        }
+
+        private void miStatement_Click(object sender, RoutedEventArgs e)
+        {
+            manAccscontrol.CreateStatement();
+        }
+
     }
 }

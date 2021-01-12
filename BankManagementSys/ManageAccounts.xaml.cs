@@ -24,10 +24,12 @@ namespace BankManagementSys
         List<User> customers = null;
         User currentClient;
         Account currentAccount;
+        
         public ManageAccounts()
         {
             InitializeComponent();
-           
+
+
             /*  operation = action;
               if(operation == "New account")
               {
@@ -147,8 +149,7 @@ namespace BankManagementSys
             LoadFoundAccounts();
         }
 
-
-        private void btViewAccInfo_Click(object sender, RoutedEventArgs e)
+        public void ViewAccountIinfo()
         {
             if (lvCustomers.Items.Count == 0 && lvCustomers.SelectedIndex == -1)
             {
@@ -167,6 +168,11 @@ namespace BankManagementSys
             {
                 LoadFoundAccounts();
             }
+        }
+
+        private void btViewAccInfo_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void lvAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -254,16 +260,36 @@ namespace BankManagementSys
 
         private void btStatement_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        public void CreateStatement()
+        {
             GenerateStatement statementWindow = new GenerateStatement(currentClient, currentAccount);
             // statementWindow.Owner = this;
             statementWindow.ShowDialog();
         }
 
-        private void AddAccount()
+        public void AddAccount()
         {
-            
+            if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
+            {
+                MessageBox.Show("A customer must be selected first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            AddNewAccount addNewAcct = new AddNewAccount(currentClient);
+            //addNewAcct.Owner = this;
+            bool? result = addNewAcct.ShowDialog();
+            if (result == true)
+            {
+                lvAccounts.Visibility = Visibility.Visible;
+                ShowButtons();
+                LoadFoundAccounts();
+            }
         }
 
+       
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -284,7 +310,7 @@ namespace BankManagementSys
             }
         }
 
-        private void btCloseAcct_Click(object sender, RoutedEventArgs e)
+        public void CloseAccount()
         {
             if (lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
             {
@@ -344,8 +370,14 @@ namespace BankManagementSys
                 //FIX : confirm closing account
                 //FIX: generate statement about closing account
                 LoadFoundAccounts();
-
             }
+        }
+
+        private void btCloseAcct_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            
         }
 
         private void lvAccounts_MouseDoubleClick(object sender, MouseButtonEventArgs e)

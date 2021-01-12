@@ -60,10 +60,9 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="Create account  &#10095;" Name="miCreateAccount" Click="miCreateAccount_Click"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="View account info  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Close account  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Statement  &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Transactions   &#10095;" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="View/Update account info  &#10095;" Name="miViewUpdateAccount" Click="miViewUpdateAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Close account  &#10095;" Name="miCloseAccount" Click="miCloseAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Statement  &#10095;" Name="miStatement" Click="miStatement_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
             <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
 
         </Menu>

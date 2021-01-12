@@ -25,8 +25,6 @@
 
         <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btAdd" Content="New Account" HorizontalAlignment="Left" Margin="680,239,0,0" VerticalAlignment="Top" Width="110" Height="37" Click="btAdd_Click"/>
-        <Button Name="btCloseAcct" Click="btCloseAcct_Click" IsEnabled="False" Content="Close Account" HorizontalAlignment="Left" Margin="90,409,0,0" VerticalAlignment="Top" Width="122" Height="37"/>
         <Label Name="lblCustNotFound" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top"/>
         <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" HorizontalAlignment="Left" Height="99" Margin="90,78,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
@@ -38,8 +36,6 @@
             </ListView.View>
         </ListView>
         <Label Content="Customer's accounts:" Name="lblCustAccounts" HorizontalAlignment="Left" Margin="90,209,0,0" VerticalAlignment="Top"/>
-        <Button Name="btViewAccInfo" Click="btViewAccInfo_Click" IsEnabled="False" Content="View Full Acct Info" FontWeight="Bold" HorizontalAlignment="Left" Margin="90,367,0,0" VerticalAlignment="Top" Width="124" Height="37"/>
-        <Button Name="btStatement" Click="btStatement_Click" Content="Statement" IsEnabled="False" HorizontalAlignment="Left" Margin="232,386,0,0" VerticalAlignment="Top" Width="110" Height="37"/>
         <Label Name="lblErrorMsg" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="334,47,0,0" VerticalAlignment="Top"/>
         <Button Click="btDeposit_Click" Name="btDeposit" IsEnabled="False" Content="Make Deposit" HorizontalAlignment="Left" Margin="445,375,0,0" VerticalAlignment="Top" Width="105"/>
         <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" IsEnabled="False" Content="Make Withdrawal" HorizontalAlignment="Left" Margin="445,409,0,0" VerticalAlignment="Top" Width="105"/>
