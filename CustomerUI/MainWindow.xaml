@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="Customer login" Height="317" Width="489" Background="Beige" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Customer login" Height="317" Width="489" Background="Azure" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="100"/>
         <Label Content="Login:" HorizontalAlignment="Left" Margin="168,143,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="66" Margin="72,143,0,0" Source="/SharedCode;Component/Images/handCard.png"  VerticalAlignment="Top" Width="91"/>
-        <TextBox Name="tbClientUsername" HorizontalAlignment="Left" Height="23" Margin="238,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
-        <PasswordBox Name="pbClientPassword" HorizontalAlignment="Left" Margin="238,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
+        <TextBox Name="tbClientUsername" TextChanged="tbClientUsername_TextChanged" HorizontalAlignment="Left"  Height="23" Margin="238,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
+        <PasswordBox Name="pbClientPassword" PasswordChanged="pbClientPassword_PasswordChanged" HorizontalAlignment="Left"  Margin="238,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="168,183,0,0" VerticalAlignment="Top"/>
         <Button Content="Login" IsDefault="True" HorizontalAlignment="Left" Margin="263,237,0,0" VerticalAlignment="Top" Width="75" Click="btLoginClicked"/>
-        <Button Content="Cancel" IsCancel="True" Name="btCancel" Click="btCancel_Click" HorizontalAlignment="Left" Margin="168,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Cancel" IsCancel="True" Name="btCancel" HorizontalAlignment="Left" Margin="168,237,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

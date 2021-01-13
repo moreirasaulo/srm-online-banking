@@ -33,7 +33,7 @@ namespace CustomerUI
 
 
             comboAccountType.ItemsSource = Utils.login.User.Accounts;
-            comboAccountType.DisplayMemberPath = "AccountType.Description";
+            comboAccountType.DisplayMemberPath = "AccounNoDescription";
 
             if (Utils.login.User.Accounts.Count == 0)
             {
