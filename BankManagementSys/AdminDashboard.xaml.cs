@@ -20,12 +20,17 @@ namespace BankManagementSys
     public partial class AdminDashboard : Window
     {
         ManageAccounts manAccscontrol;
-        public Action<string> OnTitleChanged;
 
         public AdminDashboard()
         {
             InitializeComponent();
+            Utilities.adminDashboard = this;
             lblAgenName.Content = Utilities.login.User.FullName;
+            SetStartingWinodw();
+        }
+
+        public void SetStartingWinodw()
+        {
             this.contentControl.Content = new JABMSImage();
         }
 
@@ -36,8 +41,23 @@ namespace BankManagementSys
             validationTestDlg.ShowDialog();
         }
 
+        private void HightlightSelectedMenuItem(MenuItem selectedItem)
+        {
+            miAddClient.Background = null;
+            miUpdateClient.Background = null;
+            miManageAccounts.Background = null;
+            miLogOut.Background = null;
+            miExit.Background = null;
+            if (selectedItem != null)
+            {
+                selectedItem.Background = SystemColors.ControlDarkBrush;
+            }
+        }
+
+
         private void miManageAccounts_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem(miManageAccounts);
             manAccscontrol = new ManageAccounts();
             this.contentControl.Content = manAccscontrol;
             mainMenu.IsEnabled = false;
@@ -49,19 +69,25 @@ namespace BankManagementSys
         //add client
         private void miAddClient_Click(object sender, RoutedEventArgs e)
         {
-            AddClientDialog addNewClientDlg = new AddClientDialog();
-            addNewClientDlg.Owner = this;
-            addNewClientDlg.ShowDialog();
+            HightlightSelectedMenuItem(miAddClient);
+            this.contentControl.Content = new AddNewClient();
+           /* if (result == true)
+            {
+                HightlightSelectedMenuItem(null);
+                this.contentControl.Content = new JABMSImage();
+            } */
         }
 
         private void miUpdateClient_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem(miUpdateClient);
             this.contentControl.Content = new UpdateCustomer();
         }
 
         private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
         {
-            this.contentControl.Content = null;
+            HightlightSelectedMenuItem(null);
+            this.contentControl.Content = new JABMSImage();
             mainMenu.IsEnabled = true;
             mainMenu.Visibility = Visibility.Visible;
             accountsMenu.IsEnabled = false;
@@ -91,20 +117,32 @@ namespace BankManagementSys
 
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem(miExit);
             MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Environment.Exit(0);
             }
+            if(result == MessageBoxResult.No)
+            {
+                HightlightSelectedMenuItem(null);
+                this.contentControl.Content = new JABMSImage();
+            }
         }
 
         private void miLogOut_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem(miLogOut);
             MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Utilities.login = null;
                 DialogResult = true;
+            }
+            if (result == MessageBoxResult.No)
+            {
+                HightlightSelectedMenuItem(null);
+                this.contentControl.Content = new JABMSImage();
             }
         }
 

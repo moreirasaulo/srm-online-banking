@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Add New Customer" Height="390" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" FontFamily="Nirmala UI">
+        Title="Add New Customer" Height="390" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" FontFamily="Nirmala UI" Closing="Window_Closing">
     <Grid>
         <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
             <xctk:WizardPage x:Name="Page1" Background="azure"

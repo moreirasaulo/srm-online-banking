@@ -12,16 +12,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BankManagementSys
 {
     /// <summary>
-    /// Interaction logic for AddClientDialog.xaml
+    /// Interaction logic for AddNewClient.xaml
     /// </summary>
-    public partial class AddClientDialog : Window
+    public partial class AddNewClient : UserControl
     {
-        public AddClientDialog()
+
+        public AddNewClient()
         {
             InitializeComponent();
             comboCountry.ItemsSource = Utilities.Countries;
@@ -29,7 +31,6 @@ namespace BankManagementSys
             Wizard.FinishButtonContent = "Add customer";
             Wizard.CancelButtonClosesWindow = false;
         }
-
 
         private void Wizard_Next(object sender, Xceed.Wpf.Toolkit.Core.CancelRoutedEventArgs e)
         {
@@ -42,7 +43,7 @@ namespace BankManagementSys
 
             //page 2 (full name +- company name)
             if (Wizard.CurrentPage == Page2)
-            { 
+            {
                 if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
                 {
                     MessageBox.Show("First name must contain between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -57,7 +58,7 @@ namespace BankManagementSys
                 }
                 if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
                 {
-                    MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);                   
+                    MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -99,7 +100,7 @@ namespace BankManagementSys
             }
 
             //page 4 (contact information)
-            if(Wizard.CurrentPage == Page4)
+            if (Wizard.CurrentPage == Page4)
             {
                 if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
                 {
@@ -159,7 +160,7 @@ namespace BankManagementSys
                     MessageBox.Show("Please choose one of the options", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                 }
-                if(rbOnlineBankYes.IsChecked == true)
+                if (rbOnlineBankYes.IsChecked == true)
                 {
                     if (tbUsername.Text.Length < 5 || tbUsername.Text.Length > 20)
                     {
@@ -171,10 +172,10 @@ namespace BankManagementSys
                     try
                     {
                         username = (from l in EFData.context.Logins
-                                                          where l.Username == tbUsername.Text
-                                                          select l.Username).FirstOrDefault();
+                                    where l.Username == tbUsername.Text
+                                    select l.Username).FirstOrDefault();
                     }
-                    catch(SystemException ex)
+                    catch (SystemException ex)
                     {
                         MessageBox.Show("Error fetching from database: " + ex.Message, "Database error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
@@ -193,8 +194,8 @@ namespace BankManagementSys
                 }
             }
 
-                //summary
-                if (Wizard.CurrentPage == Page5)
+            //summary
+            if (Wizard.CurrentPage == Page5)
             {
                 lblSumFirstName.Content = tbFirstName.Text;
                 lblSumMidName.Content = tbMiddleName.Text;
@@ -229,7 +230,7 @@ namespace BankManagementSys
 
         private void rbCustCatIndividual_Checked(object sender, RoutedEventArgs e)
         {
-            if(lblCompanyRep == null) { return; }
+            if (lblCompanyRep == null) { return; }
             lblCompanyRep.Visibility = Visibility.Hidden;  //company representative title
             Page3.Title = "National Id and date of birth";
             lblNatIdCompRegNo.Content = "National Id: *";
@@ -323,7 +324,7 @@ namespace BankManagementSys
                     return;
                 }
 
-                }
+            }
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -352,18 +353,15 @@ namespace BankManagementSys
             lblSumUsername.Content = "";
         }
 
+       
+
         private void Wizard_Cancel(object sender, RoutedEventArgs e)
         {
             MessageBoxResult answer = MessageBox.Show("Exit 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                Wizard.CancelButtonClosesWindow = true;
+               
             }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DialogResult = true;
         }
     }
 }
