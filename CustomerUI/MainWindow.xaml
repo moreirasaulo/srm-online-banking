@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Customer login" Height="317" Width="489" Background="Azure" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <Label Content="Login:" HorizontalAlignment="Left" Margin="168,143,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="66" Margin="72,143,0,0" Source="/SharedCode;Component/Images/handCard.png"  VerticalAlignment="Top" Width="91"/>
         <TextBox Name="tbClientUsername" TextChanged="tbClientUsername_TextChanged" HorizontalAlignment="Left"  Height="23" Margin="238,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
