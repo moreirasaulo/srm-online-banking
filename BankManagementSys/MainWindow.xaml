@@ -11,7 +11,7 @@
         <Label Content="Login:" HorizontalAlignment="Left" Margin="136,141,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbAdminUsername" HorizontalAlignment="Left" Height="23" Margin="206,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <PasswordBox Name="pbAdminPassword" HorizontalAlignment="Left" Margin="206,181,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="136,181,0,0" VerticalAlignment="Top"/>
         <Button Click="btLoginClicked" Content="Login" IsDefault="True" IsCancel="True" HorizontalAlignment="Left" Margin="257,243,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Cancel" IsCancel="True" Name="btCancel" Click="btCancel_Click" HorizontalAlignment="Left" Margin="162,243,0,0" VerticalAlignment="Top" Width="75"/>

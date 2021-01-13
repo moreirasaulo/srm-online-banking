@@ -26,10 +26,8 @@ namespace BankManagementSys
         {
             InitializeComponent();
             lblAgenName.Content = Utilities.login.User.FullName;
+            this.contentControl.Content = new JABMSImage();
         }
-
-
-
 
         private void btValidationTest_Click(object sender, RoutedEventArgs e)
         {
@@ -61,9 +59,6 @@ namespace BankManagementSys
             this.contentControl.Content = new UpdateCustomer();
         }
 
-
-
-        //verified
         private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
         {
             this.contentControl.Content = null;

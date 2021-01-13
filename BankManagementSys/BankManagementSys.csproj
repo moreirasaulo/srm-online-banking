@@ -118,6 +118,9 @@
     <Compile Include="GenerateStatement.xaml.cs">
       <DependentUpon>GenerateStatement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JABMSImage.xaml.cs">
+      <DependentUpon>JABMSImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageAccounts.xaml.cs">
       <DependentUpon>ManageAccounts.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GenerateStatement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JABMSImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
