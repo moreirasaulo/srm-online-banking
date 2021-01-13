@@ -34,6 +34,8 @@ namespace SharedCode
         // Status(active/notActive)
         public string Status { get { return IsActive ? "Active" : "Inactive"; } }
 
+        //account number + description
+        public string AccounNoDescription { get { return AccountType.Description + "  #" + Id; } }
         public virtual AccountType AccountType { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

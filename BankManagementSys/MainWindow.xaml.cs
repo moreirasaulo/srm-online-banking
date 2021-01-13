@@ -26,7 +26,7 @@ namespace BankManagementSys
         public MainWindow()
         {
             InitializeComponent();
-            
+            Utilities.mainWindow = this;
         }
 
         private void btLoginClicked(object sender, RoutedEventArgs e)
@@ -34,42 +34,47 @@ namespace BankManagementSys
             string username = tbAdminUsername.Text;
             string password = pbAdminPassword.Password;
 
+            if (tbAdminUsername.Text.Length == 0 || pbAdminPassword.Password.Length == 0)
+            {
+                MessageBox.Show("Username and password cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                HightlightFields();
+                return;
+            }
+
             try
             {
-                Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password); //FIX exception
+                Utilities.login = EFData.context.Logins.FirstOrDefault(l => l.Username == username && l.Password == password);
             }
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Error loading from Database", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            /* same:
-            Login login1 = (from l in EFData.context.Logins
-                           where l.Username == username && l.Password == password
-                           select l).FirstOrDefault();
-            */
 
-            if (Utilities.login != null)
+
+            if (Utilities.login != null && Utilities.login.UserTypeId == 2)
             {
-                if (Utilities.login.UserTypeId == 2)
+                MessageBox.Show("Login successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                AdminDashboard adminDashDlg = new AdminDashboard();
+                Hide(); // this window
+                adminDashDlg.Owner = this;
+                bool? result = adminDashDlg.ShowDialog();
+                if (result == true)
                 {
-                    MessageBox.Show("Login successful");
-                    AdminDashboard adminDashDlg = new AdminDashboard();
-                    adminDashDlg.Owner = this;
-                    bool? result = adminDashDlg.ShowDialog();
-                    if(result == true)
-                    {
-                        tbAdminUsername.Text = "";
-                        pbAdminPassword.Password = "";
-                    }
+                    Show(); //this window
+                    tbAdminUsername.Text = "";
+                    pbAdminPassword.Password = "";
                 }
-                else
-                {
-                    MessageBox.Show("Login failed, incorrect login or password");
-                }
+            }
+            else if (Utilities.login != null && Utilities.login.UserTypeId !=2)
+            {
+                MessageBox.Show("Login failed, you do not have rights to log in as agent", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("Login failed, this username does not exist");
+                MessageBox.Show("Login failed, incorrect username or password", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                HightlightFields();
+
             }
         }
 
@@ -81,6 +86,38 @@ namespace BankManagementSys
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void HightlightFields()
+        {
+            tbAdminUsername.BorderBrush = System.Windows.Media.Brushes.Red;
+            pbAdminPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+            tbAdminUsername.BorderThickness = new Thickness(1, 1, 1, 3);
+            pbAdminPassword.BorderThickness = new Thickness(1, 1, 1, 3);
+        }
+
+        private void RemoveHightlightFromFields()
+        {
+            tbAdminUsername.BorderBrush = null;
+            pbAdminPassword.BorderBrush = null;
+            tbAdminUsername.BorderThickness = new Thickness(0, 0, 0, 0);
+            pbAdminPassword.BorderThickness = new Thickness(0, 0, 0, 0);
+        }
+
+        private void tbAdminUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbAdminUsername.Text.Length > 0)
+            {
+                RemoveHightlightFromFields();
+            }
+        }
+
+        private void pbAdminPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbAdminPassword.Password.Length > 0)
+            {
+                RemoveHightlightFromFields();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI">
+        Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
 
         <StackPanel HorizontalAlignment="Left" Width="180">

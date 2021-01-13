@@ -5,18 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="JAB - Client Dashboard" Height="587.144" Width="883.45" Closing="Window_Closing">
+        Title="JAB - Client Dashboard" Height="587.144" Width="883.45" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="Auto" Width="159" Margin="0,0,0,-1">
+        <StackPanel HorizontalAlignment="Left" Height="Auto" Width="164" Margin="0,0,0,-1">
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
             </StackPanel.Background>
             <Image Height="61" Margin="28,40,30,0" Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\person.png"/>
             <Label Content="Logged as" HorizontalContentAlignment="Center"/>
             <Label Name="lblLoggedAs" Content="" HorizontalContentAlignment="Center"/>
-            <Button Name="btLogout" Click="btLogout_Click" Content="Logout"/>
         </StackPanel>
-        <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="164,0,0,0" VerticalAlignment="Top" Height="485" Width="697"/>
+        <Menu Margin="-1,178,717,60" Background="MediumSeaGreen" Name="mainMenu">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" Margin="10,0,-21,0">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/logout.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" Margin="10,0,-21,0">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/exit.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="169,0,0,0" VerticalAlignment="Top" Height="485" Width="692"/>
         <Button Content="View spending reports" Name="btViewSpendRep" Click="btViewSpendRep_Click" HorizontalAlignment="Left" Margin="493,494,0,0" VerticalAlignment="Top" Width="129" Height="44"/>
         <Button Name="btMyProfile" Click="btMyProfile_Click" Content="My Profile" HorizontalAlignment="Left" Margin="385,494,0,0" VerticalAlignment="Top" Width="75" Height="44"/>
         <Button Name="btBack" Content="Back to dashboard" Visibility="Hidden" Click="btBack_Click" HorizontalAlignment="Left" Margin="655,506,0,0" VerticalAlignment="Top" Width="118"/>

@@ -33,6 +33,13 @@ namespace CustomerUI
             string username = tbClientUsername.Text;
             string password = pbClientPassword.Password;
 
+            if (tbClientUsername.Text.Length == 0 || pbClientPassword.Password.Length == 0)
+            {
+                MessageBox.Show("Username and password cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                HightlightFields();
+                return;
+            }
+
             try
             {
                 Utils.login = EFData.context.Logins.Include("User").SingleOrDefault(l => l.Username == username && l.Password == password);
@@ -40,45 +47,67 @@ namespace CustomerUI
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Error loading from Database", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            if (Utils.login != null)
+            if (Utils.login != null && (Utils.login.UserTypeId == 3 || Utils.login.UserTypeId == 2))
             {
-                if (Utils.login.UserTypeId == 3)
+                MessageBox.Show("Login successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClientDashboard clientDlg = new ClientDashboard();
+                Hide(); // this window
+                clientDlg.Owner = this;
+                bool? result = clientDlg.ShowDialog();
+                if (result == true)
                 {
-                    MessageBox.Show("Login successful");
-                    ClientDashboard clientDlg = new ClientDashboard();
-                    Hide(); // this window
                     tbClientUsername.Text = "";
                     pbClientPassword.Password = "";
-                    bool? result = clientDlg.ShowDialog();
-                    if(result == true)
-                    {
-                        Show(); //this window
-                    }
+                    Show(); //this window
                 }
-                else
-                {
-                    MessageBox.Show("Login failed, incorrect login or password");
-                    tbClientUsername.SelectAll();
-                    tbClientUsername.BorderBrush = System.Windows.Media.Brushes.Red;
-                    pbClientPassword.Password = "";
-                    pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
-                }
+
             }
             else
             {
-                MessageBox.Show("Login failed, this username does not exist");
-                tbClientUsername.SelectAll();
-                tbClientUsername.BorderBrush = System.Windows.Media.Brushes.Red;
-                pbClientPassword.Password = "";
-                pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
-            } 
+                MessageBox.Show("Login failed, incorrect username or password", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                HightlightFields();
+
+            }
         }
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();            
+            Environment.Exit(0);           
+        }
+
+        private void HightlightFields()
+        {
+            tbClientUsername.BorderBrush = System.Windows.Media.Brushes.Red;
+            pbClientPassword.BorderBrush = System.Windows.Media.Brushes.Red;
+            tbClientUsername.BorderThickness = new Thickness(1, 1, 1, 3);
+            pbClientPassword.BorderThickness = new Thickness(1, 1, 1, 3);
+        }
+
+        private void RemoveHightlightFromFields()
+        {
+            tbClientUsername.BorderBrush = null;
+            pbClientPassword.BorderBrush = null;
+            tbClientUsername.BorderThickness = new Thickness(0, 0, 0, 0);
+            pbClientPassword.BorderThickness = new Thickness(0, 0, 0, 0);
+        }
+
+        private void tbClientUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbClientUsername.Text.Length > 0)
+            {
+                RemoveHightlightFromFields();
+            }
+        }
+
+        private void pbClientPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbClientPassword.Password.Length > 0)
+            {
+                RemoveHightlightFromFields();
+            }
         }
     }
 }

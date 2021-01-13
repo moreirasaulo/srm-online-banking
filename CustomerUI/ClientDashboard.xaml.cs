@@ -30,17 +30,6 @@ namespace CustomerUI
 
         }
 
-        private void btLogout_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to logout?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (answer == MessageBoxResult.Yes) 
-            {
-                Utils.login = null;
-                Close();
-                Utils.mainWindow.Show();
-            }            
-        }
-
         private void btViewSpendRep_Click(object sender, RoutedEventArgs e)
         {
             if (Utils.selectedAcc == null)
@@ -67,10 +56,6 @@ namespace CustomerUI
             btMyProfile.Visibility = Visibility.Hidden;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DialogResult = true;
-        }
 
         private void btBack_Click(object sender, RoutedEventArgs e)
         {
@@ -78,6 +63,31 @@ namespace CustomerUI
             btBack.Visibility = Visibility.Hidden;
             btViewSpendRep.Visibility = Visibility.Visible;
             btMyProfile.Visibility = Visibility.Visible;
+        }
+
+        private void miExit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void miLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Utils.login = null;
+                DialogResult = true;
+                Close();
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Utils.mainWindow.Show();
         }
     }
 }
