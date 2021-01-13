@@ -8,7 +8,7 @@
         Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
 
-        <StackPanel HorizontalAlignment="Left" Width="180">
+        <StackPanel HorizontalAlignment="Left" Width="196">
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeagreen</SolidColorBrush>
             </StackPanel.Background>
@@ -16,38 +16,38 @@
             <Label Content="Logged as" HorizontalContentAlignment="Center"/>
             <Label Name="lblAgenName" Content="" HorizontalContentAlignment="Center"/>
         </StackPanel>
-        
-       
+
+
         <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="800,376,0,0" VerticalAlignment="Top" Width="92"/>
-        <Menu Margin="10,169,803,69" Background="MediumSeaGreen" Name="mainMenu">
+        <Menu Margin="10,169,794,69" Background="MediumSeaGreen" Name="mainMenu">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Add New Client" Name="miAddClient" Click="miAddClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" >
+            <MenuItem Header="Add New Client" Name="miAddClient" Click="miAddClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="181" Foreground="White" >
                 <MenuItem.Icon>
-                    <Image Source="/SharedCode;Component/Images/file.png" />
+                    <Image Source="/SharedCode;Component/Images/addPerson.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="View/Update Client" Name="miUpdateClient" Click="miUpdateClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="View/Update Client" Name="miUpdateClient" Click="miUpdateClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="181" Foreground="White">
                 <MenuItem.Icon>
-                    <Image Source="/SharedCode;Component/Images/file.png" />
+                    <Image Source="/SharedCode;Component/Images/manageClients.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Click="miManageAccounts_Click"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Click="miManageAccounts_Click"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="181" Foreground="White">
                 <MenuItem.Icon>
-                    <Image Source="/SharedCode;Component/Images/file.png" />
+                    <Image Source="/SharedCode;Component/Images/addAccount.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="181" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/logout.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="181" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/exit.png"/>
                 </MenuItem.Icon>
@@ -67,7 +67,7 @@
             <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
 
         </Menu>
-        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="185,0,0,0" VerticalAlignment="Top" Height="550" Width="800"/>
+        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Top" Height="550" Width="789"/>
 
     </Grid>
 </Window>
