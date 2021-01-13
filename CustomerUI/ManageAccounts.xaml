@@ -21,14 +21,14 @@
         </ListView>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" IsEnabled="False" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
         <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png"  VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png"  VerticalAlignment="Top" Width="100"/>
         <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
         <Button Name="btMakeTransfer" Click="btMakeTransfer_Click" 
             Margin="24,161,565,287">

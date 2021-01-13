@@ -67,7 +67,7 @@ namespace CustomerUI
             }
             else
             {
-                MessageBox.Show("Login failed, incorrect username or password", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Incorrect username or password.", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 HightlightFields();
 
             }

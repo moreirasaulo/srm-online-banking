@@ -103,15 +103,39 @@ namespace CustomerUI
         {
             if (comboHistory.SelectedIndex == 0)
             {
-                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 7);
+                try
+                {
+                    return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 7);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return list;
+                }
             }
             else if (comboHistory.SelectedIndex == 1)
             {
-                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 30);
+                try
+                {
+                    return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 30);
+                }
+                catch (ArgumentNullException ex) 
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return list;
+                }               
             }
             else if (comboHistory.SelectedIndex == 2)
             {
-                return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 60);
+                try
+                {
+                    return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 60);
+                }
+                catch (ArgumentNullException ex) 
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return list;
+                }
             }
             else
             {
@@ -156,6 +180,12 @@ namespace CustomerUI
 
         private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            comboHistory.IsEnabled = true;
+            rbTransactAll.IsEnabled = true;
+            rbTransacDeposits.IsEnabled = true;
+            rbTransacWithdrawals.IsEnabled = true;
+            rbTransacTransfers.IsEnabled = true;
+            rbTransacPayments.IsEnabled = true;
             Utils.selectedAcc = (Account)comboAccountType.SelectedItem;
             if (Utils.selectedAcc == null)
             {
@@ -183,7 +213,7 @@ namespace CustomerUI
                 return;
             }
             TransferPaymentDialog paymentDlg = new TransferPaymentDialog("Payment");
-           // paymentDlg.Owner = this;
+            // paymentDlg.Owner = this;
             bool? result = paymentDlg.ShowDialog();
             if (result == true)
             {
@@ -272,11 +302,8 @@ namespace CustomerUI
             Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
 
             Receipt receiptDlg = new Receipt(currentAcc, 0, currTrans, false);
-           // receiptDlg.Owner = this;
+            // receiptDlg.Owner = this;
             receiptDlg.ShowDialog();
         }
-
-
- 
     }
 }
