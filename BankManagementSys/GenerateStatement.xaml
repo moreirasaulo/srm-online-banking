@@ -15,7 +15,7 @@
         <ComboBox Name="comboStatementYears" HorizontalAlignment="Left" Margin="321,22,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementYears_SelectionChanged"/>
         <Label Content="Year:" HorizontalAlignment="Left" Margin="252,22,0,0" VerticalAlignment="Top"/>
         <Label Content="Month:" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>
-        <ListView MouseDoubleClick="lvMonthStatement_MouseDoubleClick" Name="lvMonthStatement"  HorizontalAlignment="Left" Height="262" Margin="24,127,0,0" VerticalAlignment="Top" Width="430">
+        <ListView MouseDoubleClick="lvMonthStatement_MouseDoubleClick" Name="lvMonthStatement" Background="azure"  HorizontalAlignment="Left" Height="262" Margin="24,127,0,0" VerticalAlignment="Top" Width="430">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="160" DisplayMemberBinding="{Binding Type}"/>

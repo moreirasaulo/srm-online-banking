@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
-        <ListView Name="lvCustomers" SelectionChanged="lvCustomers_SelectionChanged" HorizontalAlignment="Left" Height="152" Margin="36,173,0,0" VerticalAlignment="Top" Width="290">
+        <Image Margin="22,19,635,418" Source="/SharedCode;Component/Images/manageClients.png"/>
+        <ListView Name="lvCustomers" SelectionChanged="lvCustomers_SelectionChanged" HorizontalAlignment="Left" Height="152" Margin="36,293,0,0" VerticalAlignment="Top" Width="290">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Full Name" Width="170" DisplayMemberBinding="{Binding Path=FullName}" />
@@ -15,17 +16,19 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Search by" HorizontalAlignment="Left" Margin="35,51,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="36,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Click="btFind_Click" Name="btFind" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="237,122,0,0" VerticalAlignment="Top" Width="89" Height="23"/>
+        <Label Content="Search by" HorizontalAlignment="Left" Margin="35,171,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox Name="tbSearchCustBy" HorizontalAlignment="Left" Height="23" Margin="36,242,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Click="btFind_Click" Name="btFind" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="237,242,0,0" VerticalAlignment="Top" Width="89" Height="23"/>
         <Label Content="" HorizontalAlignment="Left" Margin="737,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Label Content="" HorizontalAlignment="Left" Margin="708,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Label Content="" HorizontalAlignment="Left" Margin="748,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
         <Label Content="" HorizontalAlignment="Left" Margin="751,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654"/>
-        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="114,43,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,65,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,88,0,0" VerticalAlignment="Top"/>
-        <Label Foreground="Red" Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="39,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
-        <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="370,7,0,0" VerticalAlignment="Top" Height="533" Width="387"/>
+        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="114,163,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,185,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="114,208,0,0" VerticalAlignment="Top"/>
+        <Label Foreground="Red" Name="lblEmptyResult" Content="" HorizontalAlignment="Left" Margin="39,450,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,0.077" Width="444"/>
+        <StackPanel Margin="355,0,10,0" Background="azure"/>
+        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="370,7,0,0" VerticalAlignment="Top" Height="533" Width="387"/>
+        
     </Grid>
 </UserControl>

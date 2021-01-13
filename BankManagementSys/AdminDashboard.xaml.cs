@@ -25,6 +25,7 @@ namespace BankManagementSys
         public AdminDashboard()
         {
             InitializeComponent();
+            lblAgenName.Content = Utilities.login.User.FullName;
         }
 
 
@@ -93,5 +94,23 @@ namespace BankManagementSys
             manAccscontrol.CreateStatement();
         }
 
+        private void miExit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void miLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Utilities.login = null;
+                DialogResult = true;
+            }
+        }
     }
 }

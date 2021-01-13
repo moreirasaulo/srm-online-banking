@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="-8,0,8,0">
-        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" MouseDoubleClick="lvAccounts_MouseDoubleClick" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="580">
+        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" Background="azure" MouseDoubleClick="lvAccounts_MouseDoubleClick" HorizontalAlignment="Left" Height="112" Margin="90,239,0,0" VerticalAlignment="Top" Width="580">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Account No" Width="95" DisplayMemberBinding="{Binding Path=Id}" />
@@ -26,7 +26,7 @@
         <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
         <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Name="lblCustNotFound" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top"/>
-        <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" HorizontalAlignment="Left" Height="99" Margin="90,78,0,0" VerticalAlignment="Top" Width="482">
+        <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" Background="azure" HorizontalAlignment="Left" Height="99" Margin="90,78,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Full Name" Width="190" DisplayMemberBinding="{Binding FullName}" />
@@ -38,9 +38,9 @@
         <Label Content="Customer's accounts:" Name="lblCustAccounts" HorizontalAlignment="Left" Margin="90,209,0,0" VerticalAlignment="Top"/>
         <Label Name="lblErrorMsg" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="334,47,0,0" VerticalAlignment="Top"/>
         <Button Click="btDeposit_Click" Name="btDeposit" IsEnabled="False" Content="Make Deposit" HorizontalAlignment="Left" Margin="445,375,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" IsEnabled="False" Content="Make Withdrawal" HorizontalAlignment="Left" Margin="445,409,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btTransfer_Click" x:Name="btTransfer" IsEnabled="False" Content="Make Transfer" HorizontalAlignment="Left" Margin="565,375,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button Click="btPayment_Click" x:Name="btPayment" Content="Make Payment" IsEnabled="False" HorizontalAlignment="Left" Margin="565,408,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" IsEnabled="False"  Content="Make Withdrawal" HorizontalAlignment="Left" Margin="445,409,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button Click="btTransfer_Click" x:Name="btTransfer" IsEnabled="False"  Content="Make Transfer" HorizontalAlignment="Left" Margin="565,375,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button Click="btPayment_Click" x:Name="btPayment" IsEnabled="False" Content="Make Payment" HorizontalAlignment="Left" Margin="565,408,0,0" VerticalAlignment="Top" Width="105"/>
 
     </Grid>
 </UserControl>

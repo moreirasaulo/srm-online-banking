@@ -55,7 +55,12 @@ namespace BankManagementSys
                     MessageBox.Show("Login successful");
                     AdminDashboard adminDashDlg = new AdminDashboard();
                     adminDashDlg.Owner = this;
-                    adminDashDlg.ShowDialog();
+                    bool? result = adminDashDlg.ShowDialog();
+                    if(result == true)
+                    {
+                        tbAdminUsername.Text = "";
+                        pbAdminPassword.Password = "";
+                    }
                 }
                 else
                 {

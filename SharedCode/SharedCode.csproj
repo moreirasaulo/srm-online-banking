@@ -156,6 +156,8 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\percentage.png" />
+    <Resource Include="Images\addAccount.png" />
     <Resource Include="Images\logout.png" />
     <Resource Include="Images\transfer.png" />
     <Resource Include="Images\payment.png" />

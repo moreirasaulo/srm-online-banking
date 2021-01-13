@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin login" Closing="Window_Closing" Height="317" Width="489" Background="Beige" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Admin login" Closing="Window_Closing" Height="317" Width="489" Background="azure" FontFamily="Nirmala UI" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
 
         <Label Content="Login:" HorizontalAlignment="Left" Margin="136,141,0,0" VerticalAlignment="Top"/>

@@ -6,18 +6,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Add New Customer" Height="390" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="Add New Customer" Height="390" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" FontFamily="Sitka Text">
     <Grid>
-        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=LastPage}" >
-            <xctk:WizardPage x:Name="Page1" 
+        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
+            <xctk:WizardPage x:Name="Page1" Background="azure"
                                    Title="Add new customer"
                                    Description="Select type of cutomer">
                 <Grid>
+                    <Image Height="108" Margin="-164,29,467,94" Source="/SharedCode;Component/Images/addPerson.png"/>
                     <RadioButton Checked="rbCustCatIndividual_Checked" Name="rbCustCatIndividual" Content="Individual" GroupName="CustCategory" IsChecked="True" HorizontalAlignment="Left" Margin="37,13,0,0" VerticalAlignment="Top"/>
                     <RadioButton Checked="rbCustCatCompany_Checked"  Name="rbCustCatCompany" Content="Company" GroupName="CustCategory" HorizontalAlignment="Left" Margin="37,43,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </xctk:WizardPage>
-            <xctk:WizardPage x:Name="Page2" PageType="Interior"
+            <xctk:WizardPage x:Name="Page2" PageType="Interior" Background="azure"
                                    Title="Full name and Gender"
                                    NextPage="{Binding ElementName=Page3 }"
                                    PreviousPage="{Binding ElementName=Page1}">
@@ -26,32 +27,32 @@
                     <Label Content="First Name: *" HorizontalAlignment="Left" Margin="36,52,0,0" VerticalAlignment="Top"/>
                     <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="36,84,0,0" VerticalAlignment="Top"/>
                     <Label Content="Last Name: *" HorizontalAlignment="Left" Margin="36,115,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-                    <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="481,161,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="481,198,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="148,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                     <TextBox Name="tbMiddleName" HorizontalAlignment="Left" Height="23" Margin="148,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                     <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="148,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
-                    <Label Content="Gender: *" HorizontalAlignment="Left" Margin="365,84,0,0" VerticalAlignment="Top"/>
-                    <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" IsChecked="True" HorizontalAlignment="Left" Margin="430,70,0,0" VerticalAlignment="Top"/>
-                    <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="430,93,0,0" VerticalAlignment="Top"/>
-                    <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="430,116,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Gender: *" HorizontalAlignment="Left" Margin="362,85,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" IsChecked="True" HorizontalAlignment="Left" Margin="432,65,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="432,88,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="432,111,0,0" VerticalAlignment="Top"/>
                     <Label Name="lblCompName" Visibility="Hidden" Content="Company Name: *" HorizontalAlignment="Left" Margin="36,147,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbCompanyName" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="148,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
 
                 </Grid>
             </xctk:WizardPage>
-            <xctk:WizardPage  x:Name="Page3" PageType="Interior"
+            <xctk:WizardPage  x:Name="Page3" PageType="Interior" Background="azure"
                                    Title="National Id and Date of Birth"
                               NextPage="{Binding ElementName=Page4 }"
                                    PreviousPage="{Binding ElementName=Page2}">
                 <Grid>
                     <Label Name="lblNatIdCompRegNo" Content="National ID: *" HorizontalAlignment="Left" Margin="36,41,0,0" VerticalAlignment="Top"/>
                     <Label Name="lblDateBirthOrRegist" Content="Date of Birth: *" HorizontalAlignment="Left" Margin="36,88,0,0" VerticalAlignment="Top"/>
-                    <Label Name="lblRequired1" Content="* Mandatory fields" HorizontalAlignment="Left" Margin="429,161,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblRequired1" Content="* Mandatory fields" HorizontalAlignment="Left" Margin="451,201,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbNatId" HorizontalAlignment="Left" Height="23" Margin="215,43,0,0" Text="" VerticalAlignment="Top" Width="177"/>
                     <DatePicker Name="dpBirthday" HorizontalAlignment="Left" Margin="215,88,0,0" VerticalAlignment="Top" Width="177"/>
                 </Grid>
             </xctk:WizardPage>
-            <xctk:WizardPage x:Name="Page4" PageType="Interior"
+            <xctk:WizardPage x:Name="Page4" PageType="Interior" Background="azure"
                                    Title="Contact information"
                              NextPage="{Binding ElementName=Page5 }"
                                    PreviousPage="{Binding ElementName=Page3}">
@@ -75,11 +76,11 @@
                     <TextBox Name="tbProvinceState" HorizontalAlignment="Left" Height="23" Margin="39,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Column="2"/>
                     <TextBox Name="tbPostalCode" HorizontalAlignment="Left" Height="23" Margin="39,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Column="2"/>
                     <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="39,152,0,0" VerticalAlignment="Top" Width="174" RenderTransformOrigin="0.5,0.5" Grid.Column="2" />
-                    <Label Name="lblRequired3" Content="* Mandatory fields" Grid.Column="2" HorizontalAlignment="Left" Margin="407,162,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblRequired3" Content="* Mandatory fields" Grid.Column="2" HorizontalAlignment="Left" Margin="407,201,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </xctk:WizardPage>
-            <xctk:WizardPage  x:Name="Page5" PageType="Interior"
+            <xctk:WizardPage  x:Name="Page5" PageType="Interior" Background="azure"
                                    Title="Online bank access"
                               NextPage="{Binding ElementName=LastPage }"
                                    PreviousPage="{Binding ElementName=Page4}">
@@ -93,7 +94,7 @@
                     <TextBox Name="tbPassword" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                 </Grid>
             </xctk:WizardPage>
-            <xctk:WizardPage x:Name="LastPage" PageType="Interior" 
+            <xctk:WizardPage x:Name="LastPage" PageType="Interior" Background="azure"
                                    Title="New customer summary"
                                    CanFinish="True">
                 <Grid>

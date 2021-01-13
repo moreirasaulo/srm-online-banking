@@ -42,6 +42,7 @@
             <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,559,0,0" VerticalAlignment="Top" Width="94"/>
             <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,559,0,0" VerticalAlignment="Top" Width="94"/>
             <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="145,611,0,0" VerticalAlignment="Top" Width="75"/>
+            <Image Margin="278,-5,17,576" Source="/SharedCode;Component/Images/johnabbottbank.png"/>
         </Grid>
 
     </Grid>

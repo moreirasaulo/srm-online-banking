@@ -121,9 +121,6 @@
     <Compile Include="ManageAccounts.xaml.cs">
       <DependentUpon>ManageAccounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManageExistingCustomers.xaml.cs">
-      <DependentUpon>ManageExistingCustomers.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Receipt.xaml.cs">
       <DependentUpon>Receipt.xaml</DependentUpon>
     </Compile>
@@ -188,14 +185,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ManageCustomers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ManageExistingCustomers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Receipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,9 +219,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManageCustomers.xaml.cs">
-      <DependentUpon>ManageCustomers.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="580" Width="990.909">
+        Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI">
     <Grid>
 
         <StackPanel HorizontalAlignment="Left" Width="180">
@@ -13,7 +13,8 @@
                 <SolidColorBrush>MediumSeagreen</SolidColorBrush>
             </StackPanel.Background>
             <Image Height="108" Margin="23,0,30,0" Source="/SharedCode;Component/Images/johnabbottbank.png"/>
-            <Label Content="Logged as admin" HorizontalContentAlignment="Center"/>
+            <Label Content="Logged as" HorizontalContentAlignment="Center"/>
+            <Label Name="lblAgenName" Content="" HorizontalContentAlignment="Center"/>
         </StackPanel>
         
        
@@ -41,12 +42,12 @@
                     <Image Source="/SharedCode;Component/Images/file.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Log Out" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/logout.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Exit" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
+            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/exit.png"/>
                 </MenuItem.Icon>
@@ -66,7 +67,7 @@
             <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
 
         </Menu>
-        <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="185,0,0,0" VerticalAlignment="Top" Height="550" Width="800"/>
+        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="185,0,0,0" VerticalAlignment="Top" Height="550" Width="800"/>
 
     </Grid>
 </Window>
