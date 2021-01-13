@@ -11,9 +11,9 @@
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
             </StackPanel.Background>
-            <Image Height="61" Margin="28,40,30,0" Source="C:\Users\user\Documents\2020-ipd23-dotnet\BankForms\person.png"/>
-            <Label Content="Logged as" HorizontalContentAlignment="Center"/>
-            <Label Name="lblLoggedAs" Content="" HorizontalContentAlignment="Center"/>
+            <Image Height="61" Margin="28,40,30,0" Source="/SharedCode;Component/Images/login_img.png"/>
+            <Label Content="Logged as" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+            <Label Name="lblLoggedAs" Content="" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
         </StackPanel>
         <Menu Margin="-1,178,717,60" Background="MediumSeaGreen" Name="mainMenu">
             <Menu.ItemsPanel>
