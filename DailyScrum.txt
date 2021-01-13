@@ -255,3 +255,24 @@ password: z77smMQEXz
 - pass event from main window to user control
 
 
+2021/01/13 Ksenia
+1. Done/not done since last scrum:
+- Validation of entities
+- Design of customer interface
+- Patially implemented entities validation
+2. To do until next scrum:
+- Implement 5 unit tests
+3. Need assistance:
+- unit tests
+
+2021/01/13 Saulo
+1. Done/not done since last scrum:
+- Vilidation of entities
+- Design of wpf controls
+2. To do until next scrum:
+- Design of wpf controls
+- Implement exceptions throughout the program
+3. Need assistance:
+- exceptions when creating Pdf and sending email
+
+
