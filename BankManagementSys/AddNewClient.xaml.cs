@@ -317,6 +317,8 @@ namespace BankManagementSys
                     EFData.context.SaveChanges();
 
                     MessageBox.Show(successMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Window parentWindow = Window.GetWindow(this);
+                    parentWindow.GetType().InvokeMember("SetStartingWindow", System.Reflection.BindingFlags.InvokeMethod, null, parentWindow, new object[] { });
                 }
                 if (answer == MessageBoxResult.No)
                 {
@@ -360,7 +362,8 @@ namespace BankManagementSys
             MessageBoxResult answer = MessageBox.Show("Exit 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-               
+                Window parentWindow = Window.GetWindow(this);
+                parentWindow.GetType().InvokeMember("SetStartingWindow", System.Reflection.BindingFlags.InvokeMethod, null, parentWindow, new object[] { });
             }
         }
     }

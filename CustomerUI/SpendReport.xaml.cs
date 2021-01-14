@@ -54,11 +54,11 @@ namespace CustomerUI
             DateTime toDate = (DateTime)dpToDate.SelectedDate;
             if (rbPieChart.IsChecked == true)
             {
-                this.contentControl.Content = new PieChart(Utils.selectedAcc, fromDate, toDate);
+                //this.contentControl.Content = new PieChart(Utils.selectedAcc, fromDate, toDat);
             }
             else if (rbBarGraph.IsChecked == true)
             {
-                this.contentControl.Content = new BarChart(Utils.selectedAcc, fromDate, toDate);
+               // this.contentControl.Content = new BarChart(Utils.selectedAcc, fromDate, toDate);
             }
             else
             {

@@ -21,67 +21,117 @@ namespace CustomerUI
     public partial class ClientDashboard : Window
     {
         ManageAccounts manageAccs;
+        string selectedMenuItem;
         public ClientDashboard()
         {
             InitializeComponent();
             lblLoggedAs.Content = Utils.login.User.FullName;
             manageAccs = new ManageAccounts();
             this.contentControl.Content = manageAccs;
+            selectedMenuItem = "ManageAccounts";
+            HightlightSelectedMenuItem(selectedMenuItem);
 
         }
 
-        private void btViewSpendRep_Click(object sender, RoutedEventArgs e)
+        private void HightlightSelectedMenuItem(string selectedItem)
         {
-            if (Utils.selectedAcc == null)
+            rectManageAccs.Visibility = Visibility.Hidden;
+            rectProfile.Visibility = Visibility.Hidden;
+            rectLogOut.Visibility = Visibility.Hidden;
+            rectExit.Visibility = Visibility.Hidden;
+            miManageAccounts.BorderBrush = null;
+            miManageAccounts.BorderThickness = new Thickness(0, 0, 0, 0);
+            miProfile.BorderBrush = null;
+            miProfile.BorderThickness = new Thickness(0, 0, 0, 0);
+            miLogOut.BorderBrush = null;
+            miLogOut.BorderThickness = new Thickness(0, 0, 0, 0);
+            miExit.BorderBrush = null;
+            miExit.BorderThickness = new Thickness(0, 0, 0, 0);
+
+
+            if (selectedItem == "ManageAccounts")
             {
-                MessageBox.Show("First select an account to view spending reports");
-                return;
+                rectManageAccs.Visibility = Visibility.Visible;
+                miManageAccounts.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
+                miManageAccounts.BorderThickness = new Thickness(0, 4, 0, 4);
             }
-            if (Utils.selectedAcc.AccountType.Description != "Checking")
+            if (selectedItem == "Profile")
             {
-                MessageBox.Show("Spending reports are available only for checking accounts");
-                return;
+                rectProfile.Visibility = Visibility.Visible;
+                miProfile.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
+                miProfile.BorderThickness = new Thickness(0, 4, 0, 4);
             }
-            this.contentControl.Content = new SpendReport();
-            btBack.Visibility = Visibility.Visible;
-            btViewSpendRep.Visibility = Visibility.Hidden;
-            btMyProfile.Visibility = Visibility.Hidden;
+            if (selectedItem == "LogOut")
+            {
+                rectLogOut.Visibility = Visibility.Visible;
+                miLogOut.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
+                miLogOut.BorderThickness = new Thickness(0, 4, 0, 4);
+            }
+            if (selectedItem == "Exit")
+            {
+                rectExit.Visibility = Visibility.Visible;
+                miExit.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
+                miExit.BorderThickness = new Thickness(0, 4, 0, 4);
+            }
+
+            /*  miManageAccounts.Foreground = System.Windows.Media.Brushes.White;
+              miProfile.Foreground = System.Windows.Media.Brushes.White;
+              miLogOut.Foreground = System.Windows.Media.Brushes.White;
+              miExit.Foreground = System.Windows.Media.Brushes.White;
+              if (selectedItem != null)
+              {
+                  selectedItem.Background = System.Windows.Media.Brushes.White;
+                  selectedItem.Foreground = System.Windows.Media.Brushes.MediumSeaGreen;
+              } */
         }
 
-        private void btMyProfile_Click(object sender, RoutedEventArgs e)
-        {
-            this.contentControl.Content = new CustProfile();
-            btBack.Visibility = Visibility.Visible;
-            btViewSpendRep.Visibility = Visibility.Hidden;
-            btMyProfile.Visibility = Visibility.Hidden;
-        }
-
-
-        private void btBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.contentControl.Content = manageAccs;
-            btBack.Visibility = Visibility.Hidden;
-            btViewSpendRep.Visibility = Visibility.Visible;
-            btMyProfile.Visibility = Visibility.Visible;
-        }
 
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem("Exit");
             MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Environment.Exit(0);
             }
+            if (result == MessageBoxResult.No)
+            {
+                if (this.contentControl.Content == null)
+                {
+                    this.contentControl.Content = new ManageAccounts();
+                    selectedMenuItem = "ManageAccounts";
+                    HightlightSelectedMenuItem(selectedMenuItem);
+                }
+                else
+                {
+                    HightlightSelectedMenuItem(selectedMenuItem);
+                }
+            }
         }
 
         private void miLogOut_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem("LogOut");
             MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Utils.login = null;
+                Utils.selectedAcc = null;
+                Utils.userTransactions = null;
                 DialogResult = true;
-                Close();
+            }
+            if (result == MessageBoxResult.No)
+            {
+                if (this.contentControl.Content == null)
+                {
+                    this.contentControl.Content = new ManageAccounts();
+                    selectedMenuItem = "ManageAccounts";
+                    HightlightSelectedMenuItem(selectedMenuItem);
+                }
+                else
+                {
+                    HightlightSelectedMenuItem(selectedMenuItem);
+                }
             }
         }
 
@@ -89,5 +139,26 @@ namespace CustomerUI
         {
             Utils.mainWindow.Show();
         }
+
+        private void miManageAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            Utils.selectedAcc = null;
+            Utils.userTransactions = null;
+            manageAccs = new ManageAccounts();
+            this.contentControl.Content = manageAccs;
+            selectedMenuItem = "ManageAccounts";
+            HightlightSelectedMenuItem(selectedMenuItem);
+        }
+
+        private void miProfile_Click(object sender, RoutedEventArgs e)
+        {
+            Utils.selectedAcc = null;
+            Utils.userTransactions = null;
+            this.contentControl.Content = new CustProfile();
+            selectedMenuItem = "Profile";
+            HightlightSelectedMenuItem(selectedMenuItem);
+        }
+
+       
     }
 }

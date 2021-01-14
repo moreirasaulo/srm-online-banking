@@ -54,13 +54,34 @@ namespace CustomerUI
             }
             DateTime fromDate = (DateTime)dpFromDate.SelectedDate;
             DateTime toDate = (DateTime)dpToDate.SelectedDate;
+
+            List<Transaction> transactions = new List<Transaction>();
+            try
+            {
+                //load all payments for selected period of time
+                transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null && t.Date <= toDate && t.Date >= fromDate).ToList();
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (transactions.Count == 0)
+            {
+                MessageBox.Show("There are no payements over this period of time");
+                this.contentControl.Content = null;
+                this.Width = 315;
+                return;
+            }
+            this.Width = 800;
             if (rbPieChart.IsChecked == true)
             {
-                this.contentControl.Content = new PieChart(currentAcc, fromDate, toDate);
+                this.contentControl.Content = new PieChart(currentAcc, transactions);
             }
             else if (rbBarGraph.IsChecked == true)
             {
-                this.contentControl.Content = new BarChart(currentAcc, fromDate, toDate);
+                this.contentControl.Content = new BarChart(currentAcc, transactions);
             }
             else
             {

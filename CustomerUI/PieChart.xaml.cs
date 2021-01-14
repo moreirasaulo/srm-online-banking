@@ -23,36 +23,17 @@ namespace CustomerUI
     public partial class PieChart : UserControl
     {
         Account currentAcc;
-        DateTime fromDate;
-        DateTime toDate;
-        public PieChart(Account account, DateTime startDate, DateTime finishDate)
+        List<Transaction> transactions;
+        public PieChart(Account account, List<Transaction> transList)
         {
             InitializeComponent();
             currentAcc = account;
-            fromDate = startDate;
-            toDate = finishDate;
+            transactions = transList;
             LoadPieChartData();
         }
 
         private void LoadPieChartData()
         {
-            //load all payments
-            List<Transaction> transactions;
-            try
-            {
-                transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null && t.Date <= toDate && t.Date >= fromDate).ToList();
-            }
-            catch (SystemException ex)
-            {
-                MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (transactions.Count == 0)
-            {
-                MessageBox.Show("There are no payements over this period of time");
-                return;
-            }
 
             List<decimal> amounts = new List<decimal>();
 

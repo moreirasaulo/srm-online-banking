@@ -7,7 +7,47 @@
         mc:Ignorable="d"
         Title="JAB - Client Dashboard" Height="587.144" Width="883.45" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="Auto" Width="164" Margin="0,0,0,-1">
+        <Rectangle Fill="MediumSeaGreen" Name="rectManageAccs" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="41" Margin="141,180,695,0"  VerticalAlignment="Top" Width="41" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" Stroke="DarkGreen" StrokeThickness="4" Name="rectProfile" HorizontalAlignment="center" Height="40" Margin="142,221,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" x:Name="rectLogOut" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="40" Margin="142,260,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" x:Name="rectExit" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="40" Margin="142,301,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <StackPanel HorizontalAlignment="Left" Height="Auto" Width="175" Margin="0,0,0,-1">
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
             </StackPanel.Background>
@@ -15,27 +55,36 @@
             <Label Content="Logged as" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
             <Label Name="lblLoggedAs" Content="" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
         </StackPanel>
-        <Menu Margin="-1,178,717,60" Background="MediumSeaGreen" Name="mainMenu">
+        <Menu Margin="-1,178,707,60" Background="MediumSeaGreen" Name="mainMenu">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-
-            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" Margin="10,0,-21,0">
+            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Width="185" Click="miManageAccounts_Click" VerticalAlignment="Center"  FontSize="16" Height="41" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/file.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="My Profile" Name="miProfile" Click="miProfile_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White" Margin="1,0,-1,0">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/file.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White" Margin="1,0,-1,0">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/logout.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="170" Foreground="White" Margin="10,0,-21,0">
+            <MenuItem Header="Exit" HorizontalAlignment="Right" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/exit.png"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
-        <ContentControl Name="contentControl" Content="" HorizontalAlignment="Left" Margin="169,0,0,0" VerticalAlignment="Top" Height="485" Width="692"/>
-        <Button Content="View spending reports" Name="btViewSpendRep" Click="btViewSpendRep_Click" HorizontalAlignment="Left" Margin="493,494,0,0" VerticalAlignment="Top" Width="129" Height="44"/>
-        <Button Name="btMyProfile" Click="btMyProfile_Click" Content="My Profile" HorizontalAlignment="Left" Margin="385,494,0,0" VerticalAlignment="Top" Width="75" Height="44"/>
-        <Button Name="btBack" Content="Back to dashboard" Visibility="Hidden" Click="btBack_Click" HorizontalAlignment="Left" Margin="655,506,0,0" VerticalAlignment="Top" Width="118"/>
+
+        <ContentControl Name="contentControl" HorizontalAlignment="Right" Margin="169,0,0,0" VerticalAlignment="Top" Height="485" Width="692">
+
+        </ContentControl>
     </Grid>
 </Window>

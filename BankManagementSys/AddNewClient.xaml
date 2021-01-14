@@ -6,19 +6,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BankManagementSys"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" FontFamily="Nirmala UI">
+             d:DesignHeight="450" d:DesignWidth="740" FontFamily="Nirmala UI" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Grid>
         <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
-        <xctk:WizardPage x:Name="Page1" Background="azure"
+        <xctk:WizardPage x:Name="Page1" Background="azure" Height="320" Width="620"
                                    Title="Add new customer"
                                    Description="Select type of cutomer">
             <Grid>
-                <Image Height="108" Margin="-164,29,467,94" Source="/SharedCode;Component/Images/addPerson.png"/>
+                <Image Height="108" Margin="-159,53,462,66" Source="/SharedCode;Component/Images/addPerson.png"/>
                 <RadioButton Checked="rbCustCatIndividual_Checked" Name="rbCustCatIndividual" Content="Individual" GroupName="CustCategory" IsChecked="True" HorizontalAlignment="Left" Margin="37,13,0,0" VerticalAlignment="Top"/>
                 <RadioButton Checked="rbCustCatCompany_Checked"  Name="rbCustCatCompany" Content="Company" GroupName="CustCategory" HorizontalAlignment="Left" Margin="37,43,0,0" VerticalAlignment="Top"/>
             </Grid>
         </xctk:WizardPage>
-        <xctk:WizardPage x:Name="Page2" PageType="Interior" Background="azure"
+            <xctk:WizardPage x:Name="Page2" PageType="Interior" Background="azure"  Height="320" Width="620"
                                    Title="Full name and Gender"
                                    NextPage="{Binding ElementName=Page3 }"
                                    PreviousPage="{Binding ElementName=Page1}">
@@ -40,7 +40,7 @@
 
             </Grid>
         </xctk:WizardPage>
-        <xctk:WizardPage  x:Name="Page3" PageType="Interior" Background="azure"
+            <xctk:WizardPage  x:Name="Page3" PageType="Interior" Background="azure"  Height="320" Width="620"
                                    Title="National Id and Date of Birth"
                               NextPage="{Binding ElementName=Page4 }"
                                    PreviousPage="{Binding ElementName=Page2}">
@@ -52,7 +52,7 @@
                 <DatePicker Name="dpBirthday" HorizontalAlignment="Left" Margin="215,88,0,0" VerticalAlignment="Top" Width="177"/>
             </Grid>
         </xctk:WizardPage>
-        <xctk:WizardPage x:Name="Page4" PageType="Interior" Background="azure"
+            <xctk:WizardPage x:Name="Page4" PageType="Interior" Background="azure"  Height="320" Width="620"
                                    Title="Contact information"
                              NextPage="{Binding ElementName=Page5 }"
                                    PreviousPage="{Binding ElementName=Page3}">
@@ -80,7 +80,7 @@
 
             </Grid>
         </xctk:WizardPage>
-        <xctk:WizardPage  x:Name="Page5" PageType="Interior" Background="azure"
+            <xctk:WizardPage  x:Name="Page5" PageType="Interior" Background="azure"  Height="320" Width="620"
                                    Title="Online bank access"
                               NextPage="{Binding ElementName=LastPage }"
                                    PreviousPage="{Binding ElementName=Page4}">
@@ -94,7 +94,7 @@
                 <TextBox Name="tbPassword" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
             </Grid>
         </xctk:WizardPage>
-        <xctk:WizardPage x:Name="LastPage" PageType="Interior" Background="azure"
+            <xctk:WizardPage x:Name="LastPage" PageType="Interior" Background="azure"  Height="320" Width="620"
                                    Title="New customer summary"
                                    CanFinish="True">
             <Grid>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Generate Statement" Height="441.433" Width="485.464" ResizeMode="NoResize">
     <Grid>
-        <Image HorizontalAlignment="Left" Height="100" Margin="24,22,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="24,22,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <ComboBox Name="comboStatementMonths" IsEnabled="False" HorizontalAlignment="Left" Margin="321,49,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementMonths_SelectionChanged"/>
         <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="252,81,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.853,0.65"/>
         <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="321,81,0,0" VerticalAlignment="Top" Width="64"/>

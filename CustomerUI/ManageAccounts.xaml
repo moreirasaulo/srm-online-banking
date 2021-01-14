@@ -52,5 +52,6 @@
             </StackPanel>
         </Button>
         <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="145,417,0,0" VerticalAlignment="Top" FontSize="10"/>
-         </Grid>
+        <Button Content="Spending reports" Name="btViewReport" Click="btViewReport_Click" HorizontalAlignment="Left" Margin="363,425,0,0" VerticalAlignment="Top" Width="110"/>
+    </Grid>
 </UserControl>

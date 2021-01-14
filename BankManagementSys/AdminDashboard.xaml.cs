@@ -26,12 +26,13 @@ namespace BankManagementSys
             InitializeComponent();
             Utilities.adminDashboard = this;
             lblAgenName.Content = Utilities.login.User.FullName;
-            SetStartingWinodw();
+            this.contentControl.Content = new JABMSImage();
         }
 
-        public void SetStartingWinodw()
+        public void SetStartingWindow()
         {
             this.contentControl.Content = new JABMSImage();
+            HightlightSelectedMenuItem(null);
         }
 
         private void btValidationTest_Click(object sender, RoutedEventArgs e)
@@ -84,15 +85,7 @@ namespace BankManagementSys
             this.contentControl.Content = new UpdateCustomer();
         }
 
-        private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
-        {
-            HightlightSelectedMenuItem(null);
-            this.contentControl.Content = new JABMSImage();
-            mainMenu.IsEnabled = true;
-            mainMenu.Visibility = Visibility.Visible;
-            accountsMenu.IsEnabled = false;
-            accountsMenu.Visibility = Visibility.Hidden;
-        }
+         
 
         private void miCreateAccount_Click(object sender, RoutedEventArgs e)
         {
@@ -126,7 +119,10 @@ namespace BankManagementSys
             if(result == MessageBoxResult.No)
             {
                 HightlightSelectedMenuItem(null);
-                this.contentControl.Content = new JABMSImage();
+                if (this.contentControl.Content == null)
+                {
+                    this.contentControl.Content = new JABMSImage();
+                }
             }
         }
 
@@ -142,13 +138,26 @@ namespace BankManagementSys
             if (result == MessageBoxResult.No)
             {
                 HightlightSelectedMenuItem(null);
-                this.contentControl.Content = new JABMSImage();
+                if (this.contentControl.Content == null)
+                {
+                    this.contentControl.Content = new JABMSImage();
+                }
             }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Utilities.mainWindow.Show();
+        }
+
+        private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.contentControl.Content = new JABMSImage();
+            mainMenu.IsEnabled = true;
+            mainMenu.Visibility = Visibility.Visible;
+            accountsMenu.IsEnabled = false;
+            accountsMenu.Visibility = Visibility.Hidden;
+            HightlightSelectedMenuItem(null);
         }
     }
 }

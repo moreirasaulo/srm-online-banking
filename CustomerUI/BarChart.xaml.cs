@@ -23,29 +23,17 @@ namespace CustomerUI
     public partial class BarChart : UserControl
     {
         Account currentAcc;
-        DateTime fromDate;
-        DateTime toDate;
-        public BarChart(Account account, DateTime startDate, DateTime finishDate)
+        List<Transaction> transactions;
+        public BarChart(Account account, List<Transaction> transacList)
         {
             InitializeComponent();
             currentAcc = account;
-            fromDate = startDate;
-            toDate = finishDate;
+            transactions = transacList;
             LoadBarChartData();
         }
 
         private void LoadBarChartData()
         {
-            //load all payments for selected period of time
-            List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == currentAcc.Id && t.PaymentCategory != null && t.Date <= toDate && t.Date >= fromDate).ToList();
-            //FIX exception
-
-            if (transactions.Count == 0)
-            {
-                MessageBox.Show("There are no payements over this period of time");
-                return;
-            }
-
             List<decimal> amounts = new List<decimal>();
 
             

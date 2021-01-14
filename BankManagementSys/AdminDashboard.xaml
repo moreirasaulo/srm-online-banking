@@ -67,7 +67,7 @@
             <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
 
         </Menu>
-        <ContentControl Name="contentControl"  Content="" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Top" Height="550" Width="789"/>
+        <ContentControl Name="contentControl" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"  Content="" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Top" Height="551" Width="789"/>
 
     </Grid>
 </Window>

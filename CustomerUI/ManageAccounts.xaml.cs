@@ -47,7 +47,7 @@ namespace CustomerUI
             try
             {
                 Utils.userTransactions = EFData.context.Transactions.Where(t => t.AccountId ==
-            Utils.selectedAcc.Id).ToList();
+                Utils.selectedAcc.Id).ToList();
             }
             catch (SystemException ex)
             {
@@ -304,6 +304,23 @@ namespace CustomerUI
             Receipt receiptDlg = new Receipt(currentAcc, 0, currTrans, false);
             // receiptDlg.Owner = this;
             receiptDlg.ShowDialog();
+        }
+
+        private void btViewReport_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utils.selectedAcc == null)
+            {
+                MessageBox.Show("First select an account to view spending reports");
+                return;
+            }
+            if (Utils.selectedAcc.AccountType.Description != "Checking")
+            {
+                MessageBox.Show("Spending reports are available only for checking accounts");
+                return;
+            }
+            SpendingReport spendReportDlg = new SpendingReport(Utils.selectedAcc);
+            //spendReportDlg.Owner = this;
+            spendReportDlg.ShowDialog();
         }
     }
 }
