@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Deposit" Height="690.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+        Title="Deposit" Height="690.175" Width="374" ResizeMode="NoResize" Background="#e6ebea" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid Margin="-2,1,2,-1">
             <StackPanel Name="receiptPanel" Margin="0,0,0,84">
@@ -39,9 +66,9 @@
                 <Label x:Name="lblAgentNo" Content="..." HorizontalAlignment="Left" Margin="210,-110,0,0" VerticalAlignment="Top"/>
 
             </StackPanel>
-            <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,559,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,559,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="145,611,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,559,0,0" VerticalAlignment="Top" Width="94" Height="28"/>
+            <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,559,0,0" VerticalAlignment="Top" Width="94" Height="28"/>
+            <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="145,611,0,0" VerticalAlignment="Top" Width="75" Height="28"/>
             <Image Margin="278,-5,17,576" Source="/SharedCode;Component/Images/johnabbottbank.png"/>
         </Grid>
 

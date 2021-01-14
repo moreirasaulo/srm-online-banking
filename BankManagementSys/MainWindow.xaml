@@ -6,6 +6,33 @@
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
         Title="Admin login" Closing="Window_Closing" Height="317" Width="489" Background="azure" FontFamily="Nirmala UI" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
 
         <Label Content="Login:" HorizontalAlignment="Left" Margin="136,141,0,0" VerticalAlignment="Top"/>
@@ -13,7 +40,7 @@
         <PasswordBox Name="pbAdminPassword" PasswordChanged="pbAdminPassword_PasswordChanged" HorizontalAlignment="Left" Margin="206,181,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="136,181,0,0" VerticalAlignment="Top"/>
-        <Button Click="btLoginClicked" Content="Login" IsDefault="True" IsCancel="True" HorizontalAlignment="Left" Margin="257,243,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Cancel" IsCancel="True" Name="btCancel" Click="btCancel_Click" HorizontalAlignment="Left" Margin="162,243,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="btLoginClicked" Content="Login" IsDefault="True" HorizontalAlignment="Left" Margin="257,236,0,0" VerticalAlignment="Top" Width="84" Height="27"/>
+        <Button Content="Cancel" IsCancel="True" Name="btCancel" Click="btCancel_Click" HorizontalAlignment="Left" Margin="156,236,0,0" VerticalAlignment="Top" Width="84" Height="27"/>
     </Grid>
 </Window>

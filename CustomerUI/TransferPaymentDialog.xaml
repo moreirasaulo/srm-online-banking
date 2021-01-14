@@ -5,18 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-         Title="Make a transfer to another account" Height="332.173" Width="718.387" Closing="Window_Closing">
+         Title="Make a transfer to another account" Height="332.173" Width="718.387" Background="#e6ebea"  Closing="Window_Closing" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Label Content="Account summary" HorizontalAlignment="Left" Margin="74,36,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="146" Margin="36,65,0,0" VerticalAlignment="Top" Width="260"/>
-        <Label Content="Account no:" HorizontalAlignment="Left" Margin="53,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
-        <Label Name="lblAccNo" Content="" HorizontalAlignment="Left" Margin="145,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
-        <Label Content="Owner:" HorizontalAlignment="Left" Margin="53,101,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
-        <Label Name="lblOwnerName" Content="" HorizontalAlignment="Left" Margin="145,101,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
-        <Label Content="Account type:" HorizontalAlignment="Left" Margin="53,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
-        <Label Name="lblAccType" Content="" HorizontalAlignment="Left" Margin="145,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
-        <Label Content="Balance:" HorizontalAlignment="Left" Margin="53,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
-        <Label Name="lblBalance" Content="" HorizontalAlignment="Left" Margin="145,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <StackPanel Background="MediumSeaGreen" HorizontalAlignment="Left" Height="146" Margin="36,81,0,0" VerticalAlignment="Top" Width="260"/>
+        <Label Content="Account no:" HorizontalAlignment="Left" Margin="53,89,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblAccNo" Content="" HorizontalAlignment="Left" Margin="145,89,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Owner:" HorizontalAlignment="Left" Margin="53,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblOwnerName" Content="" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Account type:" HorizontalAlignment="Left" Margin="53,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblAccType" Content="" HorizontalAlignment="Left" Margin="145,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Margin="53,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" FontStyle="Italic"/>
+        <Label Name="lblBalance" Content="" HorizontalAlignment="Left" Margin="145,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.316,0.654" Width="142"/>
         <Label Name="lblBeneficiaryPayee" Content="" HorizontalAlignment="Left" Margin="315,142,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbBeneficiaryAcct" KeyDown="tbBeneficiaryAcct_KeyDown"  Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="458,146,0,0" TextWrapping="Wrap" TextChanged="tbBeneficiaryAcct_TextChanged" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="343,210,0,0" VerticalAlignment="Top" Width="92" Height="29"/>

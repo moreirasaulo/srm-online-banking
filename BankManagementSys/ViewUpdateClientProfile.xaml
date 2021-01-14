@@ -6,6 +6,33 @@
              xmlns:local="clr-namespace:BankManagementSys"
              mc:Ignorable="d" 
              d:DesignHeight="500" Width="387">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Label Content="First Name:" HorizontalAlignment="Left" Margin="36,21,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
         <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="36,51,0,0" VerticalAlignment="Top"/>
@@ -32,7 +59,7 @@
         <RadioButton Name="rbGenderMale" GroupName="Gender" Content="Male" HorizontalAlignment="Left" Margin="159,114,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbGenderFemale" GroupName="Gender" Content="Female" HorizontalAlignment="Left" Margin="215,114,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbGenderOther" GroupName="Gender" Content="Other" HorizontalAlignment="Left" Margin="281,114,0,0" VerticalAlignment="Top"/>
-        <Button Click="btUpdateCustomer_Click" Name="btUpdateCustomer" Content="Update profile"  HorizontalAlignment="Left" Margin="124,452,0,0" VerticalAlignment="Top" Width="131" Height="45"/>
+        <Button Click="btUpdateCustomer_Click" Name="btUpdateCustomer" Content="Update profile"  HorizontalAlignment="Left" Margin="124,458,0,0" VerticalAlignment="Top" Width="131" Height="27"/>
         <Button Click="btCancelUpdate_Click" Visibility="Hidden" Name="btCancelUpdate" Content="Cancel update" Background="LightCoral" HorizontalAlignment="Left" Margin="97,456,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
         <Button Click="btConfirmUpdate_Click" Visibility="Hidden" Name="btConfirmUpdate" Content="Confirm update" Background="LightGreen"  HorizontalAlignment="Left" Margin="206,456,0,0" VerticalAlignment="Top" Width="93" Height="37"/>
         <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="159,353,0,0" VerticalAlignment="Top" Width="177"/>

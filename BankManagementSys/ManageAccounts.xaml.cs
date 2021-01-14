@@ -102,11 +102,11 @@ namespace BankManagementSys
 
             LoadFoundCustomers();
             tbSearchCustBy.Text = "";
-            lblCustNotFound.Content = "";
+            lblErrorMsg.Content = "";
 
             if (lvCustomers.Items.Count == 0)
             {
-                lblCustNotFound.Content = "No customers that satisfy your search criteria was found";
+                lblErrorMsg.Content = "No customers that satisfy your search criteria was found";
                 return;
             }
         }
@@ -243,6 +243,7 @@ namespace BankManagementSys
                 return;
             }
             AddNewAccount addNewAcct = new AddNewAccount(currentClient);
+            addNewAcct.Owner = Utilities.adminDashboard;
             bool? result = addNewAcct.ShowDialog();
             if (result == true)
             {

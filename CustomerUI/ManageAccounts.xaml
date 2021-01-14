@@ -5,12 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CustomerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Label Content="Select Account:" HorizontalAlignment="Left" Margin="145,63,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
+        <Label Content="Select Account:" HorizontalAlignment="Left" Margin="11,31,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="118,35,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
         </ComboBox>
-          <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="145,161,0,0" VerticalAlignment="Top" Width="506">
+        <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="11,129,0,0" VerticalAlignment="Top" Width="506">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
@@ -19,39 +46,28 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="145,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="View:" HorizontalAlignment="Left" Margin="145,111,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" IsEnabled="False" Name="comboHistory" HorizontalAlignment="Left" Margin="531,111,0,0" VerticalAlignment="Top" Width="120"/>
-        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="188,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="226,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="296,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="385,117,0,0" VerticalAlignment="Top"/>
-        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="456,117,0,0" VerticalAlignment="Top"/>
-        <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="443,66,0,0" VerticalAlignment="Top" Width="96"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="24,18,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png"  VerticalAlignment="Top" Width="100"/>
-        <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button Name="btMakeTransfer" Click="btMakeTransfer_Click" 
-            Margin="24,161,565,287">
-            <StackPanel Width="80">
-                <Image Source="/SharedCode;component/Images/transfer.png" Height="41"/>
-                <Label Content="Make transfer" HorizontalAlignment="Right" Width="90" Margin="-2,0,-8,0"/>
-            </StackPanel>
-        </Button>
-        <Button Name="btMakePayment" Click="btMakePayment_Click" 
-            Margin="24,250,565,198">
-            <StackPanel Width="80">
-                <Image Source="/SharedCode;component/Images/payment.png" Height="41"/>
-                <Label Content="Make payment" HorizontalAlignment="Right" Width="90" Margin="-4,0,-6,0"/>
-            </StackPanel>
-        </Button>
-        <Button Name="btPDF" Click="btPDF_Click" 
-            Margin="24,337,565,110">
-            <StackPanel Width="80">
-                <Image Source="/SharedCode;component/Images/saveAsPDF.png" Height="41"/>
-                <Label Content="Save as .PDF" HorizontalAlignment="Right" Width="80"/>
-            </StackPanel>
-        </Button>
-        <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="145,417,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <Button Content="Spending reports" Name="btViewReport" Click="btViewReport_Click" HorizontalAlignment="Left" Margin="363,425,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="11,71,0,0" VerticalAlignment="Top"/>
+        <Label Content="View:" HorizontalAlignment="Left" Margin="11,79,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" IsEnabled="False" Name="comboHistory" HorizontalAlignment="Left" Margin="397,79,0,0" VerticalAlignment="Top" Width="120"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="54,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="92,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="162,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacTransfers" GroupName="Transactions" Content="Transfers" HorizontalAlignment="Left" Margin="251,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacPayments" GroupName="Transactions" Content="Payments" HorizontalAlignment="Left" Margin="322,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="309,34,0,0" VerticalAlignment="Top" Width="96"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="527,-15,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png"  VerticalAlignment="Top" Width="100"/>
+        <Label Name="lblBalance" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="410,35,0,0" VerticalAlignment="Top" Width="107"/>
+
+        <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="13,386,0,0" VerticalAlignment="Top" FontSize="10"/>
+        <Button Content="Make transfer" Name="btMakeTransfer" Click="btMakeTransfer_Click"  HorizontalAlignment="Left" Margin="545,214,0,0" VerticalAlignment="Top" Width="91" Height="35"/>
+        <Button Content="Make payemnt" Name="btMakePayment" Click="btMakePayment_Click"  HorizontalAlignment="Left" Margin="545,276,0,0" VerticalAlignment="Top" Width="91" Height="35"/>
+        <Button Content="Save transactions list as PDF" Name="btPDF" Click="btPDF_Click" HorizontalAlignment="Left" Margin="92,426,0,0" VerticalAlignment="Top" Width="167" Height="35"/>
+        <Button Content="Spending reports" Name="btViewReport" Click="btViewReport_Click" HorizontalAlignment="Left" Margin="278,426,0,0" VerticalAlignment="Top" Width="101" Height="35"/>
+
+
+
+
+
+
     </Grid>
 </UserControl>

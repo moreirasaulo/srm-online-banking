@@ -5,13 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Generate Statement" Height="441.433" Width="485.464" ResizeMode="NoResize">
+        Title="Generate Statement" Height="441.433" Width="485.464" ResizeMode="NoResize" Background="#e6ebea" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C" Width="70" Height="30"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Image HorizontalAlignment="Left" Height="100" Margin="24,22,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <ComboBox Name="comboStatementMonths" IsEnabled="False" HorizontalAlignment="Left" Margin="321,49,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementMonths_SelectionChanged"/>
-        <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="252,81,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.853,0.65"/>
-        <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="321,81,0,0" VerticalAlignment="Top" Width="64"/>
-        <Button Name="btCancel" Click="btCancel_Click" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="390,81,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="311,81,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.853,0.65"/>
+        <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="389,81,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Name="btCancel" Click="btCancel_Click" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="231,81,0,0" VerticalAlignment="Top" Width="64"/>
         <ComboBox Name="comboStatementYears" HorizontalAlignment="Left" Margin="321,22,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="comboStatementYears_SelectionChanged"/>
         <Label Content="Year:" HorizontalAlignment="Left" Margin="252,22,0,0" VerticalAlignment="Top"/>
         <Label Content="Month:" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>

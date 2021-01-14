@@ -6,6 +6,33 @@
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
         Title="Customer login" Height="317" Width="489" Background="Azure" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Image HorizontalAlignment="Left" Height="100" Margin="196,20,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
         <Label Content="Login:" HorizontalAlignment="Left" Margin="168,143,0,0" VerticalAlignment="Top"/>
@@ -13,7 +40,7 @@
         <TextBox Name="tbClientUsername" TextChanged="tbClientUsername_TextChanged" HorizontalAlignment="Left"  Height="23" Margin="238,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" />
         <PasswordBox Name="pbClientPassword" PasswordChanged="pbClientPassword_PasswordChanged" HorizontalAlignment="Left"  Margin="238,183,0,0" VerticalAlignment="Top" Width="151" Height="23" MaxLength="15"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="168,183,0,0" VerticalAlignment="Top"/>
-        <Button Content="Login" IsDefault="True" HorizontalAlignment="Left" Margin="263,237,0,0" VerticalAlignment="Top" Width="75" Click="btLoginClicked"/>
-        <Button Content="Cancel" IsCancel="True" Name="btCancel" HorizontalAlignment="Left" Margin="168,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Login" IsDefault="True" HorizontalAlignment="Left" Margin="263,237,0,0" VerticalAlignment="Top" Width="84" Click="btLoginClicked" Height="27"/>
+        <Button Content="Cancel" IsCancel="True" Name="btCancel" HorizontalAlignment="Left" Margin="159,237,0,0" VerticalAlignment="Top" Width="84" Height="27"/>
     </Grid>
 </Window>

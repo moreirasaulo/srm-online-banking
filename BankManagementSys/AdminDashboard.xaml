@@ -5,10 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
-    <Grid>
+        Title="Admin Dashboard" Height="580" Width="990.909" FontFamily="Nirmala UI" Background="#e6ebea" Closing="Window_Closing" ResizeMode="NoResize">
 
-        <StackPanel HorizontalAlignment="Left" Width="196">
+    <Grid>
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" HorizontalAlignment="Center" VerticalAlignment="Top" StrokeThickness="2.5"  Name="rectAddClient"  Height="40" Margin="167,167,779,0"   Width="39" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" StrokeThickness="2.5"  x:Name="rectViewUpdateClient" HorizontalAlignment="center" Height="40" Margin="167,208,778,0"  VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" StrokeThickness="2.5"  x:Name="rectLogOut" HorizontalAlignment="center" Height="40" Margin="167,289,778,0"  VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" StrokeThickness="2.5"  x:Name="rectExit" HorizontalAlignment="center" Height="40" Margin="167,329,778,0"  VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="133.339"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <StackPanel HorizontalAlignment="Left" Width="185" Margin="0,0,0,370">
             <StackPanel.Background>
                 <SolidColorBrush>MediumSeagreen</SolidColorBrush>
             </StackPanel.Background>
@@ -19,55 +59,56 @@
 
 
         <Button Click="btValidationTest_Click" Name="btValidationTest" Content="Validation test" HorizontalAlignment="Left" Margin="800,376,0,0" VerticalAlignment="Top" Width="92"/>
-        <Menu Margin="-1,169,790,69" Background="MediumSeaGreen" Name="mainMenu" Width="196">
+        <Menu Margin="-1,169,790,0" Background="MediumSeaGreen" Name="mainMenu" Width="196">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Add New Client" Name="miAddClient" Click="miAddClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="196" Foreground="White" Margin="6,0,-6,0" >
+            <MenuItem Header="Add New Client" Name="miAddClient" Click="miAddClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="194" Foreground="White" >
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/addPerson.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="View/Update Client" Name="miUpdateClient" Click="miUpdateClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="196" Foreground="White" Margin="6,0,-6,0">
+            <MenuItem Header="View/Update Client" Name="miUpdateClient" Click="miUpdateClient_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="194" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/manageClients.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Click="miManageAccounts_Click"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="196" Foreground="White" Margin="6,0,-6,0">
+            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Click="miManageAccounts_Click"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="194" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/addAccount.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="196" Foreground="White" Margin="6,0,-6,0">
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="194" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/logout.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="196" Foreground="White" Margin="6,0,-6,0">
+            <MenuItem Header="Exit" HorizontalAlignment="Left" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="194" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/exit.png"/>
                 </MenuItem.Icon>
             </MenuItem>
 
         </Menu>
-        <Menu Margin="10,169,803,69" Background="MediumSeaGreen" Name="accountsMenu" IsEnabled="False" Visibility="Hidden">
+        <Menu Margin="-1,169,790,1" Background="MediumSeaGreen" Name="accountsMenu" IsEnabled="False" Visibility="Hidden">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Create account  &#10095;" Name="miCreateAccount" Click="miCreateAccount_Click"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="View/Update account info  &#10095;" Name="miViewUpdateAccount" Click="miViewUpdateAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Close account  &#10095;" Name="miCloseAccount" Click="miCloseAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Statement  &#10095;" Name="miStatement" Click="miStatement_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
-            <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="170"/>
+            <MenuItem Header="Create account" Name="miCreateAccount" Click="miCreateAccount_Click"  HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="196"/>
+            <MenuItem Header="View/Update account" Name="miViewUpdateAccount" Click="miViewUpdateAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="196"/>
+            <MenuItem Header="Close account" Name="miCloseAccount" Click="miCloseAccount_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="196"/>
+            <MenuItem Header="Statement" Name="miStatement" Click="miStatement_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="196"/>
+            <MenuItem Header="Back to main menu" Name="miBackToMainMenu" Click="miBackToMainMenu_Click" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="16" Foreground="White" Height="41" Width="196"/>
 
         </Menu>
-        <ContentControl Name="contentControl" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"  Content="" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Top" Height="551" Width="789"/>
+
+        <ContentControl Name="contentControl" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"  Content="" HorizontalAlignment="Left" Margin="196,-1,0,0" VerticalAlignment="Top" Height="551" Width="789"/>
 
     </Grid>
 </Window>
