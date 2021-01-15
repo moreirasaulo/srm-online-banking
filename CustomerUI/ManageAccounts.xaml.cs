@@ -222,6 +222,19 @@ namespace CustomerUI
             }
         }
 
+        private void AddLogo(XGraphics gfx, PdfPage page, string imagePath, int xPosition, int yPosition)
+        {
+            try
+            {
+                XImage xImage = XImage.FromFile(imagePath);
+                gfx.DrawImage(xImage, xPosition, yPosition, xImage.PixelWidth / 3, xImage.PixelWidth / 3);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Error reading logo from file: " + ex.Message, "Internal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void btPDF_Click(object sender, RoutedEventArgs e)
         {
             Account selectedAcc = (Account)comboAccountType.SelectedItem;
@@ -235,14 +248,14 @@ namespace CustomerUI
                 PdfDocument doc = new PdfDocument();
                 doc.Info.Title = "Banking history";
                 PdfPage page = doc.AddPage();
-
+                XImage logo = XImage.FromFile("johnabbottbank.png");
                 XGraphics graphics = XGraphics.FromPdfPage(page);
 
                 XFont fontReg = new XFont("Arial", 10, XFontStyle.Regular);
                 XFont fontBold = new XFont("Arial", 10, XFontStyle.Bold);
                 XFont fontItalic = new XFont("Arial", 10, XFontStyle.Italic);
 
-                graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
+                // graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
                 graphics.DrawString("Account Holder: " + Utils.login.User.FirstName + " " + Utils.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
                 graphics.DrawString("Account Number: " + selectedAcc.Id, fontBold, XBrushes.Black, 20, 45);
                 graphics.DrawString("Current Balance: $ " + selectedAcc.Balance, fontBold, XBrushes.Black, 20, 60);
@@ -254,6 +267,7 @@ namespace CustomerUI
                 graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
                 graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
                 graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
 
                 List<Transaction> tr = new List<Transaction>();
                 foreach (Transaction item in lvTransactions.Items)

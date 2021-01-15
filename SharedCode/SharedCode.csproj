@@ -156,6 +156,7 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\johnabbottbank.png" />
     <Resource Include="Images\updateClient.png" />
     <Resource Include="Images\email.png" />
     <Resource Include="Images\login_img.png" />

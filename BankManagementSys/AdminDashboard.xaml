@@ -53,8 +53,8 @@
                 <SolidColorBrush>MediumSeagreen</SolidColorBrush>
             </StackPanel.Background>
             <Image Height="108" Margin="23,0,30,0" Source="/SharedCode;Component/Images/johnabbottbank2White.png"/>
-            <Label Content="Logged as" HorizontalContentAlignment="Center"/>
-            <Label Name="lblAgenName" Content="" HorizontalContentAlignment="Center"/>
+            <Label Content="Logged as" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+            <Label Name="lblAgenName" Content="" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
         </StackPanel>
 
 
