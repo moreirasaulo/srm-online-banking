@@ -20,6 +20,7 @@ namespace BankManagementSys
     public partial class AdminDashboard : Window
     {
         ManageAccounts manAccscontrol;
+        string selectedMenuItem;
 
         public AdminDashboard()
         {
@@ -27,13 +28,64 @@ namespace BankManagementSys
             Utilities.adminDashboard = this;
             lblAgenName.Content = Utilities.login.User.FullName;
             this.contentControl.Content = new JABMSImage();
+            selectedMenuItem = "";
+            HightlightSelectedMenuItem(selectedMenuItem);
         }
 
         public void SetStartingWindow()
         {
             this.contentControl.Content = new JABMSImage();
-            HightlightSelectedMenuItem(null);
+            HightlightSelectedMenuItem("");
         }
+
+        private void HightlightSelectedMenuItem(string selectedItem)
+        {
+            rectAddClient.Visibility = Visibility.Hidden;
+            rectViewUpdateClient.Visibility = Visibility.Hidden;
+            rectLogOut.Visibility = Visibility.Hidden;
+            rectExit.Visibility = Visibility.Hidden;
+            miAddClient.BorderBrush = null;
+            miAddClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            miUpdateClient.BorderBrush = null;
+            miUpdateClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            miLogOut.BorderBrush = null;
+            miLogOut.BorderThickness = new Thickness(0, 0, 0, 0);
+            miExit.BorderBrush = null;
+            miExit.BorderThickness = new Thickness(0, 0, 0, 0);
+
+
+            if (selectedItem == "AddClient")
+            {
+                rectAddClient.Visibility = Visibility.Visible;
+                miAddClient.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miAddClient.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            }
+            if (selectedItem == "ViewUpdateClient")
+            {
+                rectViewUpdateClient.Visibility = Visibility.Visible;
+                miUpdateClient.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miUpdateClient.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            }
+          /*  if (selectedItem == "ManageAccounts")
+            {
+                rectManageAccs.Visibility = Visibility.Visible;
+                miManageAccounts.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miManageAccounts.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            } */
+            if (selectedItem == "LogOut")
+            {
+                rectLogOut.Visibility = Visibility.Visible;
+                miLogOut.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miLogOut.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            }
+            if (selectedItem == "Exit")
+            {
+                rectExit.Visibility = Visibility.Visible;
+                miExit.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miExit.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            }
+        }
+
 
         private void btValidationTest_Click(object sender, RoutedEventArgs e)
         {
@@ -42,23 +94,11 @@ namespace BankManagementSys
             validationTestDlg.ShowDialog();
         }
 
-        private void HightlightSelectedMenuItem(MenuItem selectedItem)
-        {
-            miAddClient.Background = null;
-            miUpdateClient.Background = null;
-            miManageAccounts.Background = null;
-            miLogOut.Background = null;
-            miExit.Background = null;
-            if (selectedItem != null)
-            {
-                selectedItem.Background = SystemColors.ControlDarkBrush;
-            }
-        }
-
 
         private void miManageAccounts_Click(object sender, RoutedEventArgs e)
         {
-            HightlightSelectedMenuItem(miManageAccounts);
+            selectedMenuItem = "ManageAccounts";
+            HightlightSelectedMenuItem(selectedMenuItem);
             manAccscontrol = new ManageAccounts();
             this.contentControl.Content = manAccscontrol;
             mainMenu.IsEnabled = false;
@@ -70,7 +110,8 @@ namespace BankManagementSys
         //add client
         private void miAddClient_Click(object sender, RoutedEventArgs e)
         {
-            HightlightSelectedMenuItem(miAddClient);
+            selectedMenuItem = "AddClient";
+            HightlightSelectedMenuItem(selectedMenuItem);
             this.contentControl.Content = new AddNewClient();
            /* if (result == true)
             {
@@ -81,7 +122,8 @@ namespace BankManagementSys
 
         private void miUpdateClient_Click(object sender, RoutedEventArgs e)
         {
-            HightlightSelectedMenuItem(miUpdateClient);
+            selectedMenuItem = "ViewUpdateClient";
+            HightlightSelectedMenuItem(selectedMenuItem);
             this.contentControl.Content = new UpdateCustomer();
         }
 
@@ -110,7 +152,7 @@ namespace BankManagementSys
 
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
-            HightlightSelectedMenuItem(miExit);
+            HightlightSelectedMenuItem("Exit");
             MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -118,17 +160,21 @@ namespace BankManagementSys
             }
             if(result == MessageBoxResult.No)
             {
-                HightlightSelectedMenuItem(null);
                 if (this.contentControl.Content == null)
                 {
                     this.contentControl.Content = new JABMSImage();
+                    HightlightSelectedMenuItem("");
+                }
+                else
+                {
+                    HightlightSelectedMenuItem(selectedMenuItem);
                 }
             }
         }
 
         private void miLogOut_Click(object sender, RoutedEventArgs e)
         {
-            HightlightSelectedMenuItem(miLogOut);
+            HightlightSelectedMenuItem("LogOut");
             MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -137,10 +183,14 @@ namespace BankManagementSys
             }
             if (result == MessageBoxResult.No)
             {
-                HightlightSelectedMenuItem(null);
                 if (this.contentControl.Content == null)
                 {
                     this.contentControl.Content = new JABMSImage();
+                    HightlightSelectedMenuItem("");
+                }
+                else
+                {
+                    HightlightSelectedMenuItem(selectedMenuItem);
                 }
             }
         }
@@ -157,7 +207,7 @@ namespace BankManagementSys
             mainMenu.Visibility = Visibility.Visible;
             accountsMenu.IsEnabled = false;
             accountsMenu.Visibility = Visibility.Hidden;
-            HightlightSelectedMenuItem(null);
+            HightlightSelectedMenuItem("");
         }
     }
 }

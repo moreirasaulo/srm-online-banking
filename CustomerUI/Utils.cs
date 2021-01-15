@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CustomerUI
 {
     public static class Utils
     {
         public static MainWindow mainWindow; // login window
+        public static Window clientDashboard;
 
         public static Login login;
         public static Account selectedAcc;

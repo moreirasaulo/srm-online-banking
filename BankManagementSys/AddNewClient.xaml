@@ -7,6 +7,33 @@
              xmlns:local="clr-namespace:BankManagementSys"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="740" FontFamily="Nirmala UI" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C" Width="80" Height="30"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
         <xctk:WizardPage x:Name="Page1" Background="azure" Height="320" Width="620"

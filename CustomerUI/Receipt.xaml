@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="Deposit" Height="670.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+        Title="Deposit" Height="670.175" Width="374" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Background="#e6ebea" Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid Margin="-2,1,2,-1">
             <StackPanel Name="receiptPanel" Margin="0,0,0,56">
@@ -35,9 +62,9 @@
                 <Label Content="Account holder:" HorizontalAlignment="Left" Margin="36,-368,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblAccHolder" Content="..." HorizontalAlignment="Left" Margin="156,-368,0,0" VerticalAlignment="Top"/>
             </StackPanel>
-            <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="78,540,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,540,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="OK" HorizontalAlignment="Left" Margin="145,592,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Click="btSendByEmail_Click" Name="btSendByEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="71,540,0,0" VerticalAlignment="Top" Width="101" Height="27"/>
+            <Button Click="btPrint_Click" Name="btPrint" Content="Print" HorizontalAlignment="Left" Margin="191,540,0,0" VerticalAlignment="Top" Width="105" Height="27"/>
+            <Button Name="btOk" Click="btOk_Click" IsDefault="True" Content="Close" HorizontalAlignment="Left" Margin="141,592,0,0" VerticalAlignment="Top" Width="85" Height="27"/>
         </Grid>
 
     </Grid>

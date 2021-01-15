@@ -5,16 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Add a New Customer's Account" Height="194.845" Width="411.804" >
+        Title="Add a New Customer's Account" Height="218.415" Width="432.231" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" >
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Margin="128,0,0,0" Background="azure"/>
-        <Image Margin="20,37,299,41" Source="/SharedCode;Component/Images/addAccount.png"/>
+        <Image Margin="17,43,321,54" Source="/SharedCode;Component/Images/addAccount.png"/>
         <Label Name="lblNewAcctFor" Content="New account for ..." HorizontalAlignment="Left" Margin="135,21,0,0" VerticalAlignment="Top"/>
         <Label Content="Account Type: " HorizontalAlignment="Left" Margin="135,52,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="comboAcctTypes" HorizontalAlignment="Left" Margin="227,56,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="comboAcctTypes_SelectionChanged"/>
-        <Label Name="lblFeeOrInterest" Content="Fee or Interest:" Visibility="Hidden" HorizontalAlignment="Left" Margin="20,83,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbFeeOrInterest" KeyDown="tbFeeOrInterest_KeyDown" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="112,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
-        <Button Content="OK" Click="btOK_Click" Name="btOK" IsDefault="True" HorizontalAlignment="Left" Margin="213,122,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Cancel" Name="btCancel" IsCancel="True" HorizontalAlignment="Left" Margin="293,122,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox Name="comboAcctTypes" HorizontalAlignment="Left" Margin="237,56,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="comboAcctTypes_SelectionChanged"/>
+        <Label Name="lblFeeOrInterest" Content="Fee or Interest:" Visibility="Hidden" HorizontalAlignment="Left" Margin="135,83,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbFeeOrInterest" KeyDown="tbFeeOrInterest_KeyDown" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="237,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <Button Content="OK" Click="btOK_Click" Name="btOK" IsDefault="True" HorizontalAlignment="Left" Margin="213,134,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
+        <Button Content="Cancel" Name="btCancel" IsCancel="True" HorizontalAlignment="Left" Margin="293,134,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
     </Grid>
 </Window>

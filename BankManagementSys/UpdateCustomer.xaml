@@ -6,11 +6,48 @@
              xmlns:local="clr-namespace:BankManagementSys"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Image Margin="22,19,635,418" Source="/SharedCode;Component/Images/manageClients.png"/>
-        <ListView Name="lvCustomers" SelectionChanged="lvCustomers_SelectionChanged" HorizontalAlignment="Left" Height="152" Margin="36,293,0,0" VerticalAlignment="Top" Width="290">
+        <Image Margin="22,19,635,418" Source="/SharedCode;Component/Images/updateClient.png"/>
+        <ListView Name="lvCustomers" SelectionChanged="lvCustomers_SelectionChanged" HorizontalAlignment="Left" Height="152" Margin="36,293,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="TextElement.Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Header="Full Name" Width="170" DisplayMemberBinding="{Binding Path=FullName}" />
                     <GridViewColumn Header="National Id" Width="120" DisplayMemberBinding="{Binding Path=NationalId}" />
                 </GridView>

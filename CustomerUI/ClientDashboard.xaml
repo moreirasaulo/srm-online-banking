@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="JAB - Client Dashboard" Height="587.144" Width="883.45" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize">
+        Title="JAB - Client Dashboard" Height="587.144" Width="883.45" Background="#e6ebea" FontFamily="Nirmala UI" Closing="Window_Closing" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+
     <Grid>
-        <Rectangle Fill="MediumSeaGreen" Name="rectManageAccs" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="41" Margin="141,180,695,0"  VerticalAlignment="Top" Width="41" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" StrokeThickness="2.5"  Name="rectManageAccs" HorizontalAlignment="center" Height="40" Margin="152,173,686,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -17,7 +18,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="MediumSeaGreen" Stroke="DarkGreen" StrokeThickness="4" Name="rectProfile" HorizontalAlignment="center" Height="40" Margin="142,221,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="MediumSeaGreen" Stroke="#00695C" StrokeThickness="2.5" Name="rectProfile" HorizontalAlignment="center" Height="40" Margin="151,214,687,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,7 +28,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="MediumSeaGreen" x:Name="rectLogOut" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="40" Margin="142,260,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="MediumSeaGreen" x:Name="rectLogOut" Stroke="#00695C" StrokeThickness="2.5" HorizontalAlignment="center" Height="40" Margin="152,254,686,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -37,7 +38,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="MediumSeaGreen" x:Name="rectExit" Stroke="DarkGreen" StrokeThickness="4" HorizontalAlignment="center" Height="40" Margin="142,301,696,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="MediumSeaGreen" x:Name="rectExit" Stroke="#00695C" StrokeThickness="2.5" HorizontalAlignment="center" Height="40" Margin="150,297,688,0"  VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -47,44 +48,42 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <StackPanel HorizontalAlignment="Left" Height="Auto" Width="175" Margin="0,0,0,-1">
-            <StackPanel.Background>
-                <SolidColorBrush>MediumSeaGreen</SolidColorBrush>
-            </StackPanel.Background>
-            <Image Height="61" Margin="28,40,30,0" Source="/SharedCode;Component/Images/login_img.png"/>
-            <Label Content="Logged as" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-            <Label Name="lblLoggedAs" Content="" FontFamily="Calibri" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-        </StackPanel>
-        <Menu Margin="-1,178,707,60" Background="MediumSeaGreen" Name="mainMenu">
+        <Rectangle Fill="MediumSeaGreen" HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="170"/>
+        <Image Height="61" Margin="36,20,742,476" Source="/SharedCode;Component/Images/login_img.png"/>
+
+
+        <Menu  Background="MediumSeaGreen" Name="mainMenu" Width="180" Margin="0,175,697,0">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Width="185" Click="miManageAccounts_Click" VerticalAlignment="Center"  FontSize="16" Height="41" Foreground="White">
+            <MenuItem Header="Manage Accounts" Name="miManageAccounts" Width="178"
+ Click="miManageAccounts_Click" VerticalAlignment="Center"  FontSize="16" Height="41" Foreground="White">
+                <MenuItem.Icon>
+                    <Image Source="/SharedCode;Component/Images/addAccount.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="My Profile" Name="miProfile" Click="miProfile_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="178" Foreground="White" Margin="1,0,-1,0">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/file.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="My Profile" Name="miProfile" Click="miProfile_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White" Margin="1,0,-1,0">
-                <MenuItem.Icon>
-                    <Image Source="/SharedCode;Component/Images/file.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White" Margin="1,0,-1,0">
+            <MenuItem Header="Log Out" Name="miLogOut" Click="miLogOut_Click" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="41" Width="178" Foreground="White" Margin="1,0,-1,0">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/logout.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Exit" HorizontalAlignment="Right" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="164" Foreground="White">
+            <MenuItem Header="Exit" HorizontalAlignment="Right" Name="miExit" Click="miExit_Click" VerticalAlignment="Center" FontSize="16" Height="41" Width="178" Foreground="White">
                 <MenuItem.Icon>
                     <Image Source="/SharedCode;Component/Images/exit.png"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
-
-        <ContentControl Name="contentControl" HorizontalAlignment="Right" Margin="169,0,0,0" VerticalAlignment="Top" Height="485" Width="692">
+        <ContentControl Name="contentControl" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Top" Height="534" Width="655">
 
         </ContentControl>
+        <Label Content="Logged as" FontFamily="Calibri" FontWeight="Bold" HorizontalAlignment="Left" Margin="57,98,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblLoggedAs" Content="..." HorizontalContentAlignment="Center" FontFamily="Calibri" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,118,0,0" VerticalAlignment="Top" Width="170"/>
     </Grid>
 </Window>

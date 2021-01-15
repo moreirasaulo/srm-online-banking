@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerUI"
         mc:Ignorable="d"
-        Title="SpendingReport" Height="450" Width="315">
+        Title="SpendingReport" Height="450" Width="315" WindowStartupLocation="CenterOwner" Background="#e6ebea" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="126" Margin="34,36,0,0" VerticalAlignment="Top" Width="250"/>
         <Label Content="Account number:" HorizontalAlignment="Left" Margin="52,48,0,0" VerticalAlignment="Top" Width="110"/>
@@ -16,12 +43,13 @@
         <Label Content="." x:Name="lblBalance" HorizontalAlignment="Left" Margin="174,112,0,0" VerticalAlignment="Top" Width="110"/>
         <Label Content="Choose a time period to see spending report:" HorizontalAlignment="Left" Margin="34,197,0,0" VerticalAlignment="Top"/>
         <Label Content="From:" HorizontalAlignment="Left" Margin="34,228,0,0" VerticalAlignment="Top"/>
-        <DatePicker Name="dpFromDate" HorizontalAlignment="Left" Margin="93,230,0,0" VerticalAlignment="Top" Width="191"/>
+        <DatePicker Name="dpFromDate" Background="azure" HorizontalAlignment="Left" Margin="93,230,0,0" VerticalAlignment="Top" Width="191"/>
         <Label Content="To:" HorizontalAlignment="Left" Margin="34,262,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="dpToDate" HorizontalAlignment="Left" Margin="93,262,0,0" VerticalAlignment="Top" Width="191"/>
-        <Button Name="btViewReport" Click="btViewReport_Click" Content="View report" HorizontalAlignment="Left" Margin="122,314,0,0" VerticalAlignment="Top" Width="75"/>
+        <DatePicker x:Name="dpToDate" Background="Azure" HorizontalAlignment="Left" Margin="93,262,0,0" VerticalAlignment="Top" Width="191"/>
+        <Button Name="btViewReport" Click="btViewReport_Click" Content="View report" HorizontalAlignment="Left" Margin="166,314,0,0" VerticalAlignment="Top" Width="88" Height="27"/>
         <RadioButton Checked="rbPieChart_Checked" Name="rbPieChart" Content="Pie chart" GroupName="ChartType" IsChecked="True" HorizontalAlignment="Left" Margin="427,36,-213,0" VerticalAlignment="Top" Width="93"/>
         <RadioButton Checked="rbBarGraph_Checked" Name="rbBarGraph" Content="Bar graph" GroupName="ChartType" HorizontalAlignment="Left" Margin="525,36,-306,0" VerticalAlignment="Top" Width="88"/>
         <ContentControl Name="contentControl" Content="ContentControl" HorizontalAlignment="Left" Margin="324,85,-391,0" VerticalAlignment="Top" Height="256" Width="374"/>
+        <Button x:Name="btCancel" IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="65,314,0,0" VerticalAlignment="Top" Width="88" Height="27"/>
     </Grid>
 </Window>

@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="TransactionDialog" Height="356" Width="834">
+        Title="TransactionDialog" Height="356" Width="834" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Background="Azure" HorizontalAlignment="Left" Height="170" Margin="33,60,0,0" VerticalAlignment="Top" Width="333"/>
         <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="325" Margin="380,0,0,0" VerticalAlignment="Top" Width="446"/>
@@ -17,10 +44,10 @@
         <Label Name="lblAccountNo" Content="." HorizontalAlignment="Left" Margin="128,129,0,0" VerticalAlignment="Top"/>
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="42,160,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="128,159,0,0" VerticalAlignment="Top"/>
-        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="440,226,0,0" VerticalAlignment="Top" Width="92" Height="29"/>
+        <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="471,226,0,0" VerticalAlignment="Top" Width="98" Height="29"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="440,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="592,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
-        <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="594,226,0,0" VerticalAlignment="Top" Width="122" Height="29"/>
+        <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="610,226,0,0" VerticalAlignment="Top" Width="98" Height="29"/>
         <Label Name="lblTransacTitle" Content="Deposit" HorizontalAlignment="Left" Margin="439,33,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>

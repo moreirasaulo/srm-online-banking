@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="View Account Information" Height="512" Width="859">
+        Title="View Account Information" Height="512" Width="859" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Background="Azure" HorizontalAlignment="Left" Height="172" Margin="33,21,0,0" VerticalAlignment="Top" Width="338"/>
         <Label Content="Account's owner information:" HorizontalAlignment="Left" Margin="42,29,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
@@ -17,22 +44,22 @@
         <Label x:Name="lblNatId" Content="." HorizontalAlignment="Left" Margin="212,120,0,0" VerticalAlignment="Top"/>
         <StackPanel Background="LightGray" HorizontalAlignment="Left" Height="235" Margin="33,198,0,0" VerticalAlignment="Top" Width="338">
         </StackPanel>
-        <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="152,230,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="165,230,0,0" VerticalAlignment="Top"/>
         <Label Content="Account information:" HorizontalAlignment="Left" Margin="42,203,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Label Content="Account number:" HorizontalAlignment="Left" Margin="43,256,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblAccNo" Content="." HorizontalAlignment="Left" Margin="151,255,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAccNo" Content="." HorizontalAlignment="Left" Margin="164,255,0,0" VerticalAlignment="Top"/>
         <Label Content="Date of opening:" HorizontalAlignment="Left" Margin="43,280,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblOpenDate" Content="." HorizontalAlignment="Left" Margin="151,279,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblOpenDate" Content="." HorizontalAlignment="Left" Margin="164,279,0,0" VerticalAlignment="Top"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="43,305,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="151,305,0,0" VerticalAlignment="Top" Height="26"/>
-        <Button Click="btOk_Click" Name="btOk" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="568,412,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="164,305,0,0" VerticalAlignment="Top" Height="26"/>
+        <Button Click="btOk_Click" Name="btOk" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="561,412,0,0" VerticalAlignment="Top" Width="82" Height="30"/>
         <Label Content="Account type:" HorizontalAlignment="Left" Margin="43,232,0,0" VerticalAlignment="Top"/>
         <Label Name="lblMonthlyFeeAst" Content="Monthly fee:" HorizontalAlignment="Left" Margin="43,330,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="lblMonthlyFee" MouseDoubleClick="lblMonthlyFee_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="151,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.462,0.885" Height="26"/>
+        <Label x:Name="lblMonthlyFee" MouseDoubleClick="lblMonthlyFee_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="164,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.462,0.885" Height="26"/>
         <Label Name="lblInterestDivid"  Content="..." HorizontalAlignment="Left" Margin="43,355,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblInterest" MouseDoubleClick="lblInterest_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="151,353,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblInterest" MouseDoubleClick="lblInterest_MouseDoubleClick" Content="." HorizontalAlignment="Left" Margin="164,353,0,0" VerticalAlignment="Top"/>
         <Label Name="lblInterestOrFee"  Content="..." HorizontalAlignment="Left" Margin="43,379,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblInterestFeeDate" Content="." HorizontalAlignment="Left" Margin="151,378,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblInterestFeeDate" Content="." HorizontalAlignment="Left" Margin="164,378,0,0" VerticalAlignment="Top"/>
         <ComboBox SelectionChanged="comboHistory_SelectionChanged" Name="comboHistory" HorizontalAlignment="Left" Margin="625,81,0,0" VerticalAlignment="Top" Width="155"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="409,118,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="456,118,0,0" VerticalAlignment="Top"/>

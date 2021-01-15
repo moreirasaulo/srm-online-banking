@@ -168,7 +168,7 @@ namespace CustomerUI
                 return;
             }
             TransferPaymentDialog transferDlg = new TransferPaymentDialog("Transfer");
-            //transferDlg.Owner = ClientDashboard;
+            transferDlg.Owner = Utils.clientDashboard;
             bool? result = transferDlg.ShowDialog();
 
             if (result == true)
@@ -213,7 +213,7 @@ namespace CustomerUI
                 return;
             }
             TransferPaymentDialog paymentDlg = new TransferPaymentDialog("Payment");
-            // paymentDlg.Owner = this;
+            paymentDlg.Owner = Utils.clientDashboard;
             bool? result = paymentDlg.ShowDialog();
             if (result == true)
             {
@@ -302,7 +302,7 @@ namespace CustomerUI
             Transaction currTrans = (Transaction)lvTransactions.SelectedItem;
 
             Receipt receiptDlg = new Receipt(currentAcc, 0, currTrans, false);
-            // receiptDlg.Owner = this;
+            receiptDlg.Owner = Utils.clientDashboard;
             receiptDlg.ShowDialog();
         }
 
@@ -319,7 +319,7 @@ namespace CustomerUI
                 return;
             }
             SpendingReport spendReportDlg = new SpendingReport(Utils.selectedAcc);
-            //spendReportDlg.Owner = this;
+            spendReportDlg.Owner = Utils.clientDashboard;
             spendReportDlg.ShowDialog();
         }
     }

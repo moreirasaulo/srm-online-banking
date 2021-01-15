@@ -25,6 +25,7 @@ namespace CustomerUI
         public ClientDashboard()
         {
             InitializeComponent();
+            Utils.clientDashboard = this;
             lblLoggedAs.Content = Utils.login.User.FullName;
             manageAccs = new ManageAccounts();
             this.contentControl.Content = manageAccs;
@@ -48,41 +49,31 @@ namespace CustomerUI
             miExit.BorderBrush = null;
             miExit.BorderThickness = new Thickness(0, 0, 0, 0);
 
-
+            
             if (selectedItem == "ManageAccounts")
             {
                 rectManageAccs.Visibility = Visibility.Visible;
-                miManageAccounts.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
-                miManageAccounts.BorderThickness = new Thickness(0, 4, 0, 4);
+                miManageAccounts.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miManageAccounts.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
             }
             if (selectedItem == "Profile")
             {
                 rectProfile.Visibility = Visibility.Visible;
-                miProfile.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
-                miProfile.BorderThickness = new Thickness(0, 4, 0, 4);
+                miProfile.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miProfile.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
             }
             if (selectedItem == "LogOut")
             {
                 rectLogOut.Visibility = Visibility.Visible;
-                miLogOut.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
-                miLogOut.BorderThickness = new Thickness(0, 4, 0, 4);
+                miLogOut.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miLogOut.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
             }
             if (selectedItem == "Exit")
             {
                 rectExit.Visibility = Visibility.Visible;
-                miExit.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
-                miExit.BorderThickness = new Thickness(0, 4, 0, 4);
-            }
-
-            /*  miManageAccounts.Foreground = System.Windows.Media.Brushes.White;
-              miProfile.Foreground = System.Windows.Media.Brushes.White;
-              miLogOut.Foreground = System.Windows.Media.Brushes.White;
-              miExit.Foreground = System.Windows.Media.Brushes.White;
-              if (selectedItem != null)
-              {
-                  selectedItem.Background = System.Windows.Media.Brushes.White;
-                  selectedItem.Foreground = System.Windows.Media.Brushes.MediumSeaGreen;
-              } */
+                miExit.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miExit.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+            } 
         }
 
 
@@ -115,6 +106,7 @@ namespace CustomerUI
             MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
+                Utils.clientDashboard = null;
                 Utils.login = null;
                 Utils.selectedAcc = null;
                 Utils.userTransactions = null;
