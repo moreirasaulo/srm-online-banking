@@ -172,6 +172,23 @@ namespace BankManagementSys
         }
 
 
+        public decimal CalculateNewBalance(string transType,decimal previousBalance, decimal transAmount)
+        {
+            if (transType == "Deposit")
+            {
+                return previousBalance + Math.Round(transAmount, 2);  //new balance
+            }
+            else if (transType == "Withdrawal" || currentTransType == "Transfer" || currentTransType == "Payment")
+            {
+                return previousBalance - Math.Round(transAmount, 2);  //new balance
+            }
+            else
+            {
+                return previousBalance;
+            }
+            
+        }
+
 
         //make transaction
         private void MakeTransaction()
@@ -202,18 +219,11 @@ namespace BankManagementSys
                 EFData.context.Transactions.Add(transac);
 
                 decimal previousBalance = currentAccount.Balance; //balance before transaction
-                if (currentTransType == "Deposit")
-                {
-                    currentAccount.Balance = currentAccount.Balance + Math.Round(amount, 2);  //new balance
-                }
-                if (currentTransType == "Withdrawal")
-                {
-                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
-                }
+                currentAccount.Balance = CalculateNewBalance(currentTransType, previousBalance, amount); //new balance
+
                 if (currentTransType == "Transfer" || currentTransType == "Payment")
                 {
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
-                    currentAccount.Balance = currentAccount.Balance - Math.Round(amount, 2);  //new balance
                     beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 }
                 EFData.context.SaveChanges();
