@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Account Closure Statement" Height="595" Width="385">
+        Title="Account Closure Statement" Height="595" Width="385"  Background="#e6ebea" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="#00695C" Width="95" Height="30"  CornerRadius="8" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004D40"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF179182"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid >
         <StackPanel x:Name="statementPanel" HorizontalAlignment="Left" Height="564" VerticalAlignment="Top" Width="377">
             <Image HorizontalAlignment="Left" Height="85" Margin="25,0,0,0" Source="/SharedCode;Component/Images/johnabbottbank.png" VerticalAlignment="Top" Width="92" RenderTransformOrigin="-1.12,0.718"/>
@@ -29,8 +56,8 @@
             <Label x:Name="lblPrintDate" Content="." HorizontalAlignment="Left" Margin="268,-27,0,0" VerticalAlignment="Top"/>
         </StackPanel>
         <Button Click="btEmailStatement_Click" IsEnabled="False" Name="btEmailStatement" Content="Email statement" HorizontalAlignment="Left" Margin="63,469,0,0" VerticalAlignment="Top" Width="104"/>
-        <Button Click="btPrintStatement_Click" x:Name="btPrintStatement" Content="Print statement" HorizontalAlignment="Left" Margin="201,469,0,0" VerticalAlignment="Top" Width="104"/>
-        <Button Name="btOk" Click="btOk_Click" Content="OK" HorizontalAlignment="Left" Margin="149,518,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="btPrintStatement_Click" x:Name="btPrintStatement" Content="Print statement" HorizontalAlignment="Left" Margin="182,469,0,0" VerticalAlignment="Top" Width="123"/>
+        <Button Name="btOk" Click="btOk_Click" Content="OK" HorizontalAlignment="Left" Margin="149,518,0,0" VerticalAlignment="Top" Width="103"/>
 
     </Grid>
 </Window>

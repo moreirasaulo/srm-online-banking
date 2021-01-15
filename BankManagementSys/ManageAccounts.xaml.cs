@@ -46,7 +46,7 @@ namespace BankManagementSys
             {
                 if (rbNatId.IsChecked == true)
                 {
-                    customers = EFData.context.Users.Include("Accounts").Where(cust => cust.NationalId == searchInfo).ToList();  //FIX EXCEPTIONS
+                    customers = EFData.context.Users.Include("Accounts").Where(cust => cust.NationalId == searchInfo).ToList(); 
                 }
                 else if (rbAccNo.IsChecked == true)
                 {
@@ -140,7 +140,7 @@ namespace BankManagementSys
                 return;
             }
             ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(currentClient, currentAccount);
-            // viewAccInfoDlg.Owner = this;
+            viewAccInfoDlg.Owner = Utilities.adminDashboard;
             bool? result = viewAccInfoDlg.ShowDialog();
             if (result == true)
             {
@@ -232,6 +232,7 @@ namespace BankManagementSys
                 return;
             }
             GenerateStatement statementWindow = new GenerateStatement(currentClient, currentAccount);
+            statementWindow.Owner = Utilities.adminDashboard;
             statementWindow.ShowDialog();
         }
 
