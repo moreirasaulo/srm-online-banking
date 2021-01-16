@@ -178,7 +178,7 @@ namespace BankManagementSys
             {
                 return previousBalance + Math.Round(transAmount, 2);  //new balance
             }
-            else if (transType == "Withdrawal" || currentTransType == "Transfer" || currentTransType == "Payment")
+            else if (transType == "Withdrawal" || transType == "Transfer" || transType == "Payment")
             {
                 return previousBalance - Math.Round(transAmount, 2);  //new balance
             }
