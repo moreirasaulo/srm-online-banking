@@ -118,16 +118,16 @@ namespace CustomerUI
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential()
                 {
-                    UserName = "ks.studilina@gmail.com",
-                    Password = "1112522kO"
+                    UserName = "johnabbottbank@gmail.com",
+                    Password = "querty123!"
                 }
             };
-            MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Bank");
-            MailAddress ToEmail = new MailAddress(toEmail, "Customer"); //change cust email
+            MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "John Abbott Bank");
+            MailAddress ToEmail = new MailAddress(toEmail, "Customer");
 
             MailMessage mess = new MailMessage(
                 "ks.studilina@gmail.com",
-                toEmail, //change cust email
+                toEmail,
                 "Transaction receipt from " + currentTans.Date.ToShortDateString(),
                 "Please see the attached receipt.\nThank you,\nBank");
 

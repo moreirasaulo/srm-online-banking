@@ -40,9 +40,10 @@
         <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="11,129,0,0" VerticalAlignment="Top" Width="506">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Transaction Type" Width="200" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Transaction Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
                     <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}"/>
+                    <GridViewColumn Header="Balanceafter transaction" Width="100" DisplayMemberBinding="{Binding AccBalanceAfterTrans}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -60,7 +61,7 @@
 
         <Label Content="* Double click on transaction to view receipt" HorizontalAlignment="Left" Margin="13,386,0,0" VerticalAlignment="Top" FontSize="10"/>
         <Button Content="Make transfer" Name="btMakeTransfer" Click="btMakeTransfer_Click"  HorizontalAlignment="Left" Margin="545,214,0,0" VerticalAlignment="Top" Width="91" Height="35"/>
-        <Button Content="Make payemnt" Name="btMakePayment" Click="btMakePayment_Click"  HorizontalAlignment="Left" Margin="545,276,0,0" VerticalAlignment="Top" Width="91" Height="35"/>
+        <Button Content="Make payment" Name="btMakePayment" Click="btMakePayment_Click"  HorizontalAlignment="Left" Margin="545,276,0,0" VerticalAlignment="Top" Width="91" Height="35"/>
         <Button Content="Save transactions list as PDF" Name="btPDF" Click="btPDF_Click" HorizontalAlignment="Left" Margin="92,426,0,0" VerticalAlignment="Top" Width="167" Height="35"/>
         <Button Content="Spending reports" Name="btViewReport" Click="btViewReport_Click" HorizontalAlignment="Left" Margin="278,426,0,0" VerticalAlignment="Top" Width="101" Height="35"/>
 

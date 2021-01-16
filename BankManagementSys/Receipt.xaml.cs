@@ -129,18 +129,18 @@ namespace BankManagementSys
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential()
                     {
-                        UserName = "ks.studilina@gmail.com",
-                        Password = "1112522kO"
+                        UserName = "johnabbottbank@gmail.com",
+                        Password = "querty123!"
                     }
                 };
-                MailAddress FromEmail = new MailAddress("ks.studilina@gmail.com", "Bank");
-                MailAddress ToEmail = new MailAddress("ks.studilina@gmail.com", "Customer"); //change cust email
+                MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "John Abbott Bank");
+                MailAddress ToEmail = new MailAddress(currentCust.Email, "Customer");
 
                 MailMessage mess = new MailMessage(
-                    "ks.studilina@gmail.com",
-                    "ks.studilina@gmail.com", //change cust email
+                    "johnabbottbank@gmail.com",
+                    currentCust.Email,
                     "Transaction receipt from " + currentTans.Date.ToShortDateString(),
-                    "Please see the attached receipt.\nThank you,\nBank");
+                    "Please see the attached receipt.\nThank you,\nJohn Abbott Bank");
 
                 Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 

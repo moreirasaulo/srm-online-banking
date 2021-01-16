@@ -35,7 +35,7 @@ namespace CustomerUI
 
             if (tbClientUsername.Text.Length == 0 || pbClientPassword.Password.Length == 0)
             {
-                MessageBox.Show("Username and password cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The 'username' and 'password' fields cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 HightlightFields();
                 return;
             }

@@ -37,10 +37,12 @@ namespace CustomerUI
 
             if (Utils.login.User.Accounts.Count == 0)
             {
-                lblError.Content = "There's no bank account linked to your profile yet";
+                lblError.Content = "There is no bank account linked to your profile yet.";
                 return;
             }
         }
+
+       
 
         private void LoadTransactions()
         {

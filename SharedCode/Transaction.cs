@@ -11,7 +11,8 @@ namespace SharedCode
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Transaction
     {
         public int Id { get; set; }
@@ -21,7 +22,30 @@ namespace SharedCode
         public string Type { get; set; }
         public string PaymentCategory { get; set; }
         public int AccountId { get; set; }
-    
+
+        //account balance after this transaction
+        public decimal AccBalanceAfterTrans { get { return CalculateBalanceAfterParticularTransaction(); } }
+
         public virtual Account Account { get; set; }
+
+        //calculate account balance after particular transaction
+        public decimal CalculateBalanceAfterParticularTransaction()
+        {
+            decimal balance = 0;
+            List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == AccountId && t.Id <= Id).ToList();
+
+            foreach (Transaction t in transactions)
+            {
+                if (t.Type == "Deposit")
+                {
+                    balance = balance + t.Amount;
+                }
+                else
+                {
+                    balance = balance - t.Amount;
+                }
+            }
+            return balance;
+        }
     }
 }

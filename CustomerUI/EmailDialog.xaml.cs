@@ -28,12 +28,12 @@ namespace CustomerUI
         {
             if(!tbEmail.Text.Contains('@'))
             {
-                MessageBox.Show("Please enter valid email address", "Invalid e-mail format", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a valid email address.", "Invalid e-mail format", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (tbEmail.Text.Length < 5)
             {
-                MessageBox.Show("Email address is too short, it must containt at least 5 characters", "Invalid e-mail format", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The Email address inserted is too short, it must containt at least 5 characters.", "Invalid email format", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Utils.emailForReceipts = tbEmail.Text;
