@@ -175,7 +175,7 @@ namespace BankManagementSys
         private void miLogOut_Click(object sender, RoutedEventArgs e)
         {
             HightlightSelectedMenuItem("LogOut");
-            MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure you wish to log out?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Utilities.login = null;

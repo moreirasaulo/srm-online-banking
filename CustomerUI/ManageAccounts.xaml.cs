@@ -328,12 +328,12 @@ namespace CustomerUI
         {
             if (Utils.selectedAcc == null)
             {
-                MessageBox.Show("First select an account to view spending reports");
+                MessageBox.Show("Please select an account to view spending reports.");
                 return;
             }
             if (Utils.selectedAcc.AccountType.Description != "Checking")
             {
-                MessageBox.Show("Spending reports are available only for checking accounts");
+                MessageBox.Show("Spending reports are available only for checking accounts.");
                 return;
             }
             SpendingReport spendReportDlg = new SpendingReport(Utils.selectedAcc);

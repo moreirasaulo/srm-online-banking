@@ -145,7 +145,7 @@ namespace BankManagementSys
                 interestFee = decimal.Parse(tbFeeOrInterest.Text);
                 if (interestFee <= 0)
                 {
-                    MessageBox.Show("Interest/Fee must not be 0 or negative", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Interest/Fee must not be 0 or negative.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
 
@@ -156,13 +156,13 @@ namespace BankManagementSys
                 }
                 if ((selectedAccType.Id == 2 || selectedAccType.Id == 3) && (interestFee < (decimal)0.5 || interestFee > 10))
                 {
-                    MessageBox.Show("Interest must be between 0.5 $ and 10 $", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Interest must be between 0.5 % and 10 %", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("Interest/Fee must contain only digits and . symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Interest/Fee must contain only digits and period/decimal(.) symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             return true;

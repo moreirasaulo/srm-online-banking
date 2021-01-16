@@ -70,7 +70,7 @@ namespace BankManagementSys
                         MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                MessageBox.Show("Rate was modified successfully");
+                MessageBox.Show("The rate was modified successfully");
             }
             DialogResult = true;
         }

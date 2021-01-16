@@ -194,11 +194,31 @@ namespace BankManagementSys
                 MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "John Abbott Bank");
                 MailAddress ToEmail = new MailAddress(currentAccount.User.Email, "Customer");
 
-                MailMessage mess = new MailMessage(
+                MailMessage mess = null;
+                if (currentUser.Gender == "male")
+                {
+                    mess = new MailMessage(
                     "johnabbottbank@gmail.com",
                     currentAccount.User.Email,
                     "Transaction receipt from " + DateTime.Now.ToShortDateString(),
-                    "Please see the attached statement.\nThank you,\n John Abbott Bank");
+                    "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
+                else if(currentUser.Gender == "female")
+                {
+                    mess = new MailMessage(
+                    "johnabbottbank@gmail.com",
+                    currentAccount.User.Email,
+                    "Transaction receipt from " + DateTime.Now.ToShortDateString(),
+                    "Dear Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
+                else
+                {
+                    mess = new MailMessage(
+                    "johnabbottbank@gmail.com",
+                    currentAccount.User.Email,
+                    "Transaction receipt from " + DateTime.Now.ToShortDateString(),
+                    "Dear Mr/Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
 
                 Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 
@@ -206,7 +226,7 @@ namespace BankManagementSys
 
 
                 client.Send(mess);
-                MessageBox.Show("The statement was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("The statement was sent successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (SmtpException ex)

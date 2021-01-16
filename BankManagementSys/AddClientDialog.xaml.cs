@@ -103,7 +103,7 @@ namespace BankManagementSys
             {
                 if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
                 {
-                    MessageBox.Show("Please enter valid phone number xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter a valid phone number using the following format: xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -180,13 +180,13 @@ namespace BankManagementSys
                     }
                     if (username != null)
                     {
-                        MessageBox.Show("This username already exists, please choose another one", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("This username already exists, please choose another one.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;
                         return;
                     }
                     if (tbPassword.Text.Length < 8 || tbPassword.Text.Length > 20) // FIX(any othe syblos allowed?????)
                     {
-                        MessageBox.Show("Password must be made of 8 to 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Password must be made of 8 to 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;
                         return;
                     }
