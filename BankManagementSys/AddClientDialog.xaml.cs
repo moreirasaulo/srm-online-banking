@@ -23,6 +23,7 @@ namespace BankManagementSys
     /// </summary>
     public partial class AddClientDialog : Window
     {
+        bool LoadNewCustomer;
         public AddClientDialog()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace BankManagementSys
             comboCountry.SelectedIndex = 0;
             Wizard.FinishButtonContent = "Add customer";
             Wizard.CancelButtonClosesWindow = false;
+            LoadNewCustomer = true;
         }
 
 
@@ -318,12 +320,13 @@ namespace BankManagementSys
                         successMessage = successMessage + ",\nonline bank with Username: " + login.Username + " was created";
                     }
                     EFData.context.SaveChanges();
-
+                    LoadNewCustomer = true;
                     MessageBox.Show(successMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 if (answer == MessageBoxResult.No)
                 {
                     e.Cancel = true;
+                    LoadNewCustomer = false;
                     return;
                 }
 
@@ -372,13 +375,17 @@ namespace BankManagementSys
             MessageBoxResult answer = MessageBox.Show("Exit 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                Wizard.CancelButtonClosesWindow = true;
+                LoadNewCustomer = false;
+                Wizard.CancelButtonClosesWindow = true; 
             }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DialogResult = true;
+            if (LoadNewCustomer == true)
+            {
+                DialogResult = true;
+            }
         }
     }
 }
