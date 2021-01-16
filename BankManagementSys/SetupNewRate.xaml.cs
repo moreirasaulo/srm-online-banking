@@ -1,6 +1,7 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,41 +46,48 @@ namespace BankManagementSys
             MessageBoxResult result = MessageBox.Show("Are you sure you would like to setup the new rate for this " + currentAccount.AccountType.Description + " account at " + tbNewRate.Text + "?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes) 
             {
-                if (currentAccount.AccountType.Description == "Checking")
+                if (currentAccount.AccountType.Description == "Checking" || currentAccount.AccountType.Description == "Business")
                 {
                     currentAccount.MonthlyFee = decimal.Parse(tbNewRate.Text);
-                    try
-                    {
-                        EFData.context.SaveChanges();
-                        
-                    } 
-                    catch (SystemException ex)
-                    {
-                        MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
                 }
-                else if (currentAccount.AccountType.Description == "Savings")
+                if (currentAccount.AccountType.Description == "Savings" || currentAccount.AccountType.Description == "Investment")
                 {
                     currentAccount.Interest = decimal.Parse(tbNewRate.Text);
                 }
+                try
+                {
+                    EFData.context.SaveChanges();      
+                }
+                    catch (DbEntityValidationException ex)
+                    {
+                        var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                        MessageBox.Show(error.ErrorMessage);
+                      //  EFData.context.Entry(account).State = EntityState.Detached;
+                        return;
+                    }
+                    catch (SystemException ex)
+                    {
+                        MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                MessageBox.Show("Rate was modified successfully");
             }
-
             DialogResult = true;
         }
 
         private bool AreFieldsValid()
         {
-            if (tbNewRate.Text.Length == 0)
+          /*  if (tbNewRate.Text.Length == 0)
             {
                 MessageBox.Show("The new rate field cannot be empty.", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-            }
+            } */
 
             decimal interestFee;
             try
             {
                 interestFee = decimal.Parse(tbNewRate.Text);
-                if (interestFee <= 0)
+              /*  if (interestFee <= 0)
                 {
                     MessageBox.Show("The new rate must not be 0 or negative", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -89,7 +97,7 @@ namespace BankManagementSys
                 {
                     MessageBox.Show("The new rate must not be higher than 20", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
-                }
+                } */
             }
             catch (FormatException)
             {

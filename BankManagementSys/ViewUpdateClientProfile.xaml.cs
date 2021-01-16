@@ -1,6 +1,7 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -126,7 +127,7 @@ namespace BankManagementSys
             btUpdateCustomer.Visibility = Visibility.Visible;
         }
 
-        private bool ValidateFields()
+     /*   private bool ValidateFields()
         {
             if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
             {
@@ -142,7 +143,7 @@ namespace BankManagementSys
             {
                 MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-            }
+            } 
             if (rbGenderMale.IsChecked == false && rbGenderFemale.IsChecked == false && rbGenderOther.IsChecked == false)
             {
                 MessageBox.Show("Please choose gender of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -203,17 +204,17 @@ namespace BankManagementSys
                 MessageBox.Show("E-mail must contain maximum 60 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (currentUser.CompanyName != null && (tbCompanyName.Text.Length < 1 || tbCompanyName.Text.Length > 70))
+            if (currentUser.CompanyName != null)
             {
                 MessageBox.Show("Company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            return true;
-        }
+            return true; 
+        } */
 
         private void btConfirmUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidateFields()) { return; }
+          /*  if (!ValidateFields()) { return; }  */
 
             currentUser.FirstName = tbFirstName.Text;
             currentUser.MiddleName = tbMiddleName.Text;
@@ -247,6 +248,13 @@ namespace BankManagementSys
             try
             {
                 EFData.context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                MessageBox.Show(error.ErrorMessage);
+                // EFData.context.Entry(userType).State = EntityState.Detached;
+                return;
             }
             catch (SystemException ex)
             {

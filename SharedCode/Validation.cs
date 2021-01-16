@@ -11,18 +11,19 @@ namespace SharedCode
 
     public partial class UserType : IValidatableObject
     {
-            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Description.Length < 1 || Description.Length > 20)
             {
-                if (Description.Length < 1 || Description.Length > 20)
-                {
-                    yield return new ValidationResult(
-                        "Description must be between 1 and 20 characters",
-                        new[] {nameof(Description)});
-                }
+                yield return new ValidationResult(
+                    "Description must be between 1 and 20 characters",
+                    new[] { nameof(Description) });
             }
+        }
     }
 
 
+    //User
     public partial class User : IValidatableObject
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -105,17 +106,67 @@ namespace SharedCode
                        "Country must be Canada or USA",
                        new[] { nameof(Country) });
             }
-            if (Email.Length > 60)
+            if (Email != null && Email.Length > 60)
             {
                 yield return new ValidationResult(
                         "E-mail must contain maximum 60 characters",
                         new[] { nameof(Email) });
             }
-            if (CompanyName.Length > 70)
+            if (CompanyName != null && CompanyName.Length > 70)
             {
                 yield return new ValidationResult(
                         "Company name must not contain more than 70 characters",
                         new[] { nameof(CompanyName) });
+            }
+        }
+    }
+
+    // Account
+    public partial class Account : IValidatableObject
+    {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (OpenDate > DateTime.Today)
+            {
+                yield return new ValidationResult(
+                        "Open date cannot be later than today's date",
+                        new[] { nameof(OpenDate) });
+            }
+            if (AccountTypeId != 1 && AccountTypeId != 2 && AccountTypeId != 3 && AccountTypeId != 4)
+            {
+                yield return new ValidationResult(
+                        "Account type can be only 'Checking', 'Savings', 'Investment' or 'Business'",
+                        new[] { nameof(AccountTypeId) });
+            }
+            if (CloseDate != null && CloseDate > OpenDate)
+            {
+                yield return new ValidationResult(
+                        "Account closing date cannot be earlier that account open date",
+                        new[] { nameof(CloseDate), nameof(OpenDate) });
+            }
+            if ((AccountTypeId == 1 || AccountTypeId == 4) && MonthlyFee == null)
+            {
+                yield return new ValidationResult(
+                        "Monthly fee must be set for Checking/Business account type",
+                        new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
+            }
+            if ((AccountTypeId == 1 || AccountTypeId == 4) && MonthlyFee != null && (MonthlyFee <= 4 || MonthlyFee > 50))
+            {
+                yield return new ValidationResult(
+                        "Monthly fee must be between 4$ and  50 $",
+                        new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
+            }
+            if ((AccountTypeId == 2 || AccountTypeId == 3) && Interest == null)
+            {
+                yield return new ValidationResult(
+                        "Interest must be set for Savings/Investment account type",
+                        new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
+            }
+            if ((AccountTypeId == 2 || AccountTypeId == 3) && Interest != null && (Interest <= (decimal)0.5 || Interest > 10))
+            {
+                yield return new ValidationResult(
+                        "Interest must be between 0.5 % and 10 %",
+                        new[] { nameof(AccountTypeId), nameof(Interest) });
             }
         }
     }
