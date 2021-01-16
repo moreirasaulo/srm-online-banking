@@ -170,4 +170,42 @@ namespace SharedCode
             }
         }
     }
+
+    // Transaction
+    public partial class Transaction : IValidatableObject
+    {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Date > DateTime.Today)
+            {
+                yield return new ValidationResult(
+                        "Transaction date cannot be later than today's date",
+                        new[] { nameof(Date) });
+            }
+            if (Amount <= 0)
+            {
+                yield return new ValidationResult(
+                        "Transaction amount cannot be 0 or negative",
+                        new[] { nameof(Amount) });
+            }
+            if ((Type == "Transfer" || Type == "Payment") && ToAccount == null)
+            {
+                yield return new ValidationResult(
+                        "Destination account must not be null",
+                        new[] { nameof(Type), nameof(ToAccount), nameof(AccountId) });
+            }
+            if ((Type == "Transfer" || Type == "Payment") && ToAccount != null && AccountId == ToAccount)
+            {
+                yield return new ValidationResult(
+                        "Transfer of money withing the same account is prohibited",
+                        new[] { nameof(Type), nameof(ToAccount), nameof(AccountId) });
+            }
+            if (Type == "Payment" && PaymentCategory == null)
+            {
+                yield return new ValidationResult(
+                        "Payment category must be selected",
+                        new[] { nameof(Type), nameof(PaymentCategory) });
+            }
+        }
+    }
 }
