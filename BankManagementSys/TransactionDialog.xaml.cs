@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -148,6 +149,11 @@ namespace BankManagementSys
                         MessageBox.Show("Payee business account does not exist", "Payment impossible", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
+                    if (comboPayCategory.Items.Count == 0 || comboPayCategory.SelectedIndex == -1 || comboPayCategory.SelectedIndex == 0)
+                    {
+                        MessageBox.Show("Payment category must be selected", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
                     return true;
                 }
                 return false;
@@ -198,7 +204,7 @@ namespace BankManagementSys
             {
                 decimal amount = decimal.Parse(tbAmount.Text);
                 transac = new Transaction();
-                transac.Date = DateTime.Now;
+                transac.Date = DateTime.Today;
                 transac.Amount = amount;
                 transac.Type = currentTransType;
                 transac.AccountId = currentAccount.Id;
@@ -226,7 +232,7 @@ namespace BankManagementSys
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
                     Transaction depositToBenefAccount = new Transaction
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.Today,
                         Amount = amount,
                         Type = "Deposit",
                         AccountId = beneficiaryAcc.Id
@@ -254,13 +260,17 @@ namespace BankManagementSys
                     }
                 }
             }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                MessageBox.Show(error.ErrorMessage);
+                EFData.context.Entry(transac).State = EntityState.Detached;
+                return;
+            }
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-              /*  String innerMessage = (ex.InnerException.InnerException != null)
-                      ? ex.InnerException.InnerException.Message
-                      : "";
-                MessageBox.Show(innerMessage); */
+                return;
             }
         }
 

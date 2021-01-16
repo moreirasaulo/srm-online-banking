@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Setup New Rate" Height="133.381" Width="285.814" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="Setup New Rate" Height="161.771" Width="310.455" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -34,10 +34,10 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Image Margin="16,25,211,36" Source="/SharedCode;Component/Images/percentage.png"/>
-        <Label Name="lblInformation" Content="New monthly fee/interest rate:" HorizontalAlignment="Left" Margin="77,15,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbNewRate" KeyDown="tbNewRate_KeyDown" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="54" Margin="196,18,0,0"/>
-        <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="175,62,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btOK" Click="btOK_Click" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="94,62,0,0" VerticalAlignment="Top" Width="75"/>
+        <Image Margin="10,29,239,50" Source="/SharedCode;Component/Images/percentage.png"/>
+        <Label Name="lblInformation" Content="New monthly fee/interest rate:" HorizontalAlignment="Left" Margin="97,29,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbNewRate" KeyDown="tbNewRate_KeyDown" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="54" Margin="222,32,0,0"/>
+        <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="114,78,0,0" VerticalAlignment="Top" Width="75" Height="22"/>
+        <Button Name="btOK" Click="btOK_Click" Content="OK" IsDefault="True" HorizontalAlignment="Left" Margin="205,78,0,0" VerticalAlignment="Top" Width="75" Height="22"/>
     </Grid>
 </Window>
