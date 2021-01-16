@@ -37,7 +37,7 @@ namespace BankManagementSys
             //page 1 (customer type)
             if (Wizard.CurrentPage == Page1 && rbCustCatIndividual.IsChecked == false && rbCustCatCompany.IsChecked == false)
             {
-                MessageBox.Show("Please choose the type of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please choose the type of customer.", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 e.Cancel = true;
             }
 
@@ -46,31 +46,31 @@ namespace BankManagementSys
             {
                 if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
                 {
-                    MessageBox.Show("First name must contain between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'First name' field must contain between 1 and 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbMiddleName.Text.Length > 20)
                 {
-                    MessageBox.Show("Middle name must containt not more than 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Middle name' field must containt not more than 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
                 {
-                    MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Last name' field must containt between 1 and 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (rbGenderMale.IsChecked == false && rbGenderFemale.IsChecked == false && rbGenderOther.IsChecked == false)
                 {
-                    MessageBox.Show("Please choose gender of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Please choose the gender of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
                 if (rbCustCatCompany.IsChecked == true && (tbCompanyName.Text.Length < 1 || tbCompanyName.Text.Length > 70))
                 {
-                    MessageBox.Show("Company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -81,7 +81,7 @@ namespace BankManagementSys
             {
                 if (tbNatId.Text.Length < 5 || tbNatId.Text.Length > 20)
                 {
-                    MessageBox.Show("National Id/Company registration Id number must containt between 5 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("National Id/Company registration Id number must containt between 5 and 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -104,49 +104,49 @@ namespace BankManagementSys
             {
                 if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
                 {
-                    MessageBox.Show("Please enter valid phone number xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter a valid phone number using the following format: xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbAddress.Text.Length < 5 || tbAddress.Text.Length > 50)
                 {
-                    MessageBox.Show("Address must contain between 5 and 50 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Address' field must contain between 5 and 50 caracters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbCity.Text.Length < 2 || tbCity.Text.Length > 20)
                 {
-                    MessageBox.Show("City must contain between 2 and 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'City' field must contain between 2 and 20 caracters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbProvinceState.Text.Length > 20)
                 {
-                    MessageBox.Show("Province or State must have not more than 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Province or State' field must have not more than 20 caracters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbPostalCode.Text.Length < 5 || tbPostalCode.Text.Length > 10)
                 {
-                    MessageBox.Show("Postal code must be made of 5 to 10 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Postal code' field must be made of 5 to 10 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (comboCountry.Text.Length > 20)
                 {
-                    MessageBox.Show("Country must contain maximum 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Country' field must contain maximum 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (comboCountry.SelectedIndex == -1)
                 {
-                    MessageBox.Show("Please select country", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please select a country.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
                 if (tbEmail.Text.Length > 60)
                 {
-                    MessageBox.Show("E-mail must contain maximum 60 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("The 'Email' field must contain a maximum of 60 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
@@ -157,14 +157,14 @@ namespace BankManagementSys
             {
                 if (rbOnlineBankYes.IsChecked == false && rbOnlineBankNo.IsChecked == false)
                 {
-                    MessageBox.Show("Please choose one of the options", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Please choose one of the options.", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                 }
                 if (rbOnlineBankYes.IsChecked == true)
                 {
                     if (tbUsername.Text.Length < 5 || tbUsername.Text.Length > 20)
                     {
-                        MessageBox.Show("Username must be made of 5 to 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("The 'Username' must be made of 5 to 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;
                         return;
                     }
@@ -181,13 +181,13 @@ namespace BankManagementSys
                     }
                     if (username != null)
                     {
-                        MessageBox.Show("This username already exists, please choose another one", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("This username already exists. Please choose another one.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;
                         return;
                     }
                     if (tbPassword.Text.Length < 8 || tbPassword.Text.Length > 20) // FIX(any othe syblos allowed?????)
                     {
-                        MessageBox.Show("Password must be made of 8 to 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("The password must be made of 8 to 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;
                         return;
                     }
@@ -359,7 +359,7 @@ namespace BankManagementSys
 
         private void Wizard_Cancel(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show("Exit 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult answer = MessageBox.Show("Are you sure you would like to exit the 'Add new customer' wizard?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
                 Window parentWindow = Window.GetWindow(this);

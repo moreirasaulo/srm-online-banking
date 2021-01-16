@@ -164,7 +164,7 @@ namespace CustomerUI
             }
             catch (FormatException)
             {
-                MessageBox.Show("Amount must contain only digits and . symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Amount must contain only digits and period/decimal(.) symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (Utils.selectedAcc.Balance < amount)

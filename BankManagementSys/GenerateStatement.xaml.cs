@@ -203,13 +203,21 @@ namespace BankManagementSys
                     "Transaction receipt from " + DateTime.Now.ToShortDateString(),
                     "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                 }
-                else 
+                else if(currentUser.Gender == "female")
                 {
                     mess = new MailMessage(
                     "johnabbottbank@gmail.com",
                     currentAccount.User.Email,
                     "Transaction receipt from " + DateTime.Now.ToShortDateString(),
                     "Dear Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
+                else
+                {
+                    mess = new MailMessage(
+                    "johnabbottbank@gmail.com",
+                    currentAccount.User.Email,
+                    "Transaction receipt from " + DateTime.Now.ToShortDateString(),
+                    "Dear Mr/Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                 }
 
                 Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
@@ -218,7 +226,7 @@ namespace BankManagementSys
 
 
                 client.Send(mess);
-                MessageBox.Show("The statement was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("The statement was sent successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (SmtpException ex)

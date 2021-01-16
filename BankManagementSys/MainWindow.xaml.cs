@@ -36,7 +36,7 @@ namespace BankManagementSys
 
             if (tbAdminUsername.Text.Length == 0 || pbAdminPassword.Password.Length == 0)
             {
-                MessageBox.Show("Username and password cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("'Username' and 'password' fields cannot be empty.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 HightlightFields();
                 return;
             }
@@ -68,11 +68,11 @@ namespace BankManagementSys
             }
             else if (Utilities.login != null && Utilities.login.UserTypeId !=2)
             {
-                MessageBox.Show("Login failed, you do not have rights to log in as agent", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Login failed, you do not have rights to log in as an agent.", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("Login failed, incorrect username or password", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Login failed, incorrect username or password.", "Login failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 HightlightFields();
 
             }

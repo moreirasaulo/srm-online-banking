@@ -109,13 +109,21 @@ namespace BankManagementSys
                         "Account closure statement",
                         "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                     }
-                    else 
+                    else if (currentUser.Gender == "female") 
                     {
                         mess = new MailMessage(
                         "johnabbottbank@gmail.com",
                         currentUser.Email,
                         "Account closure statement",
                         "Dear Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                    }
+                    else
+                    {
+                        mess = new MailMessage(
+                        "johnabbottbank@gmail.com",
+                        currentUser.Email,
+                        "Account closure statement",
+                        "Dear Mr/Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                     }                   
 
                     Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);

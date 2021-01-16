@@ -68,7 +68,7 @@ namespace CustomerUI
                 try
                 {
                     EFData.context.SaveChanges();
-                    MessageBox.Show("Contact information successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Contact information successfully updated.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (DbEntityValidationException ex)
                 {

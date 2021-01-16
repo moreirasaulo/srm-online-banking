@@ -80,7 +80,7 @@ namespace CustomerUI
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
             HightlightSelectedMenuItem("Exit");
-            MessageBoxResult result = MessageBox.Show("Exit program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure you would like to exit?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Environment.Exit(0);
@@ -103,7 +103,7 @@ namespace CustomerUI
         private void miLogOut_Click(object sender, RoutedEventArgs e)
         {
             HightlightSelectedMenuItem("LogOut");
-            MessageBoxResult result = MessageBox.Show("Log out of program?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure you would like to log out?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Utils.clientDashboard = null;

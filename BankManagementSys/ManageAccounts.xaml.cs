@@ -58,7 +58,7 @@ namespace BankManagementSys
                     }
                     catch (FormatException)
                     {
-                        MessageBox.Show("Please enter correct account number (digits only).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Please enter the correct account number (digits only).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     customers = (from cust in EFData.context.Users
@@ -73,7 +73,7 @@ namespace BankManagementSys
                 }
                 else
                 {
-                    MessageBox.Show("Please select one search criteria");
+                    MessageBox.Show("Please select one search criteria.");
                     return;
                 }
                 lvCustomers.ItemsSource = customers;
@@ -96,7 +96,7 @@ namespace BankManagementSys
         {
             if (tbSearchCustBy.Text.Length == 0)
             {
-                MessageBox.Show("The search field cannot be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The search field cannot be empty.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -223,12 +223,12 @@ namespace BankManagementSys
         {
             if (lvCustomers.Items.Count == 0 && lvCustomers.SelectedIndex == -1)
             {
-                MessageBox.Show("First choose a customer to generate account statement");
+                MessageBox.Show("First choose a customer to generate account statement.");
                 return;
             }
             if (lvAccounts.Items.Count == 0 || lvAccounts.SelectedIndex == -1)
             {
-                MessageBox.Show("Please choose an account to generate statement");
+                MessageBox.Show("Please choose an account to generate statement.");
                 return;
             }
             GenerateStatement statementWindow = new GenerateStatement(currentClient, currentAccount);
@@ -240,7 +240,7 @@ namespace BankManagementSys
         {
             if (lvCustomers.Items.Count == 0 || lvCustomers.SelectedIndex == -1)
             {
-                MessageBox.Show("A customer must be selected first", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("A customer must be selected first.", "Action required", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             AddNewAccount addNewAcct = new AddNewAccount(currentClient);
@@ -259,13 +259,13 @@ namespace BankManagementSys
             {
                 if(currentAccount.IsActive == false)
                 {
-                    MessageBox.Show("This account is already closed");
+                    MessageBox.Show("This account is already closed.");
                     return;
                 }
                 string closingAcctMessage = null;
                 if (currentAccount.Balance > 0)
                 {
-                    closingAcctMessage = "Before closing account, confirm withdrawal of remaining balance of $" + currentAccount.Balance;
+                    closingAcctMessage = "Before closing the account, please confirm the withdrawal of the remaining balance of $" + currentAccount.Balance;
                     MessageBoxResult res = MessageBox.Show(closingAcctMessage, "Withdrawal of funds required", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     Transaction transac;
                     if (res == MessageBoxResult.Yes)
@@ -321,7 +321,7 @@ namespace BankManagementSys
             }
             else
             {
-                MessageBox.Show("Customer and account to close must be selected first");
+                MessageBox.Show("Customer and account to close must be selected first.");
                 return;
             }
         }
@@ -333,7 +333,7 @@ namespace BankManagementSys
             {
                 if (currentAccount.IsActive == false)
                 {
-                    MessageBox.Show("This account is closed");
+                    MessageBox.Show("This account is closed.");
                     return;
                 }
                 ViewAccountInfo viewAccInfoDlg = new ViewAccountInfo(currentClient, currentAccount);
@@ -357,7 +357,7 @@ namespace BankManagementSys
         {
             if (currentAccount.Balance <= 0)
             {
-                string message = string.Format("Account No {0} has insufficient balance ({1} $) to proceed with operation", currentAccount.Id, currentAccount.Balance);
+                string message = string.Format("The account Number {0} has insufficient balance ($ {1}) to proceed with this operation.", currentAccount.Id, currentAccount.Balance);
                 MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }

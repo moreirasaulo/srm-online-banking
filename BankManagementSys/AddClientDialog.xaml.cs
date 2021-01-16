@@ -103,7 +103,7 @@ namespace BankManagementSys
             {
                 if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
                 {
-                    MessageBox.Show("Please enter a valid phone number format: xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter a valid phone number using the following format: xxx-xxx-xxxx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
