@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SharedCode
@@ -19,5 +20,103 @@ namespace SharedCode
                         new[] {nameof(Description)});
                 }
             }
+    }
+
+
+    public partial class User : IValidatableObject
+    {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (FirstName.Length < 1 || FirstName.Length > 20)
+            {
+                yield return new ValidationResult(
+                        "First name must contain between 1 and 20 characters",
+                        new[] { nameof(FirstName) });
+            }
+            if (MiddleName.Length > 20)
+            {
+                yield return new ValidationResult(
+                        "Middle name must containt not more than 20 characters",
+                        new[] { nameof(MiddleName) });
+            }
+            if (LastName.Length < 1 || LastName.Length > 20)
+            {
+                yield return new ValidationResult(
+                       "Last name must containt between 1 and 20 characters",
+                       new[] { nameof(LastName) });
+            }
+            if (Gender.ToLower() != "male" && Gender.ToLower() != "female" && Gender.ToLower() != "other")
+            {
+                yield return new ValidationResult(
+                       "Please choose customer's gender",
+                       new[] { nameof(Gender) });
+            }
+            if (NationalId.Length < 5 || NationalId.Length > 20)
+            {
+                yield return new ValidationResult(
+                       "National Id/Company registration Id number must containt between 5 and 20 characters",
+                       new[] { nameof(NationalId) });
+            }
+            if (DateOfBirth == null)
+            {
+                yield return new ValidationResult(
+                      "Please select date of birth/date of company registration",
+                      new[] { nameof(DateOfBirth) });
+            }
+            if (DateOfBirth > DateTime.Now)
+            {
+                yield return new ValidationResult(
+                      "Date of birth/company registration date must be earlier than today's date",
+                      new[] { nameof(DateOfBirth) });
+            }
+            if (!Regex.IsMatch(PhoneNo, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
+            {
+                yield return new ValidationResult(
+                        "Please enter valid phone number xxx-xxx-xxxx",
+                        new[] { nameof(PhoneNo) });
+            }
+            if (Address.Length < 5 || Address.Length > 50)
+            {
+                yield return new ValidationResult(
+                        "Address must contain between 5 and 50 caracters",
+                        new[] { nameof(Address) });
+            }
+            if (City.Length < 2 || City.Length > 20)
+            {
+                yield return new ValidationResult(
+                       "City must contain between 2 and 20 caracters",
+                       new[] { nameof(City) });
+            }
+            if (ProvinceState.Length < 2 || ProvinceState.Length > 20)
+            {
+                yield return new ValidationResult(
+                       "Province or State must be between 2 and 20 caracters",
+                       new[] { nameof(ProvinceState) });
+            }
+            if (PostalCode.Length < 5 || PostalCode.Length > 10)
+            {
+                yield return new ValidationResult(
+                       "Postal code must be made of 5 to 10 characters",
+                       new[] { nameof(PostalCode) });
+            }
+            if (Country != "Canada" && Country != "USA")
+            {
+                yield return new ValidationResult(
+                       "Country must be Canada or USA",
+                       new[] { nameof(Country) });
+            }
+            if (Email.Length > 60)
+            {
+                yield return new ValidationResult(
+                        "E-mail must contain maximum 60 characters",
+                        new[] { nameof(Email) });
+            }
+            if (CompanyName.Length > 70)
+            {
+                yield return new ValidationResult(
+                        "Company name must not contain more than 70 characters",
+                        new[] { nameof(CompanyName) });
+            }
         }
+    }
 }
