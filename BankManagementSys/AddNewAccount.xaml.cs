@@ -1,6 +1,8 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,6 +102,13 @@ namespace BankManagementSys
                     EFData.context.Accounts.Add(account);
                     EFData.context.SaveChanges();
                 }
+                catch (DbEntityValidationException ex)
+                {
+                    var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                    MessageBox.Show(error.ErrorMessage);
+                    EFData.context.Entry(account).State = EntityState.Detached;
+                    return;
+                }
                 catch (SystemException ex)
                 {
                     MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -109,12 +118,17 @@ namespace BankManagementSys
 
                MessageBox.Show("Account created successfully","New account created", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
+
+                ViewAccountInfo viewCreatedAccInfoDialog = new ViewAccountInfo(currentCust, account);
+                viewCreatedAccInfoDialog.Owner = Utilities.adminDashboard;
+                
+                viewCreatedAccInfoDialog.ShowDialog();
             }
         }
 
         private bool AreFieldsValid()
         {
-            if (comboAcctTypes.Items.Count == 0 || comboAcctTypes.SelectedIndex == -1)
+           if (comboAcctTypes.Items.Count == 0 || comboAcctTypes.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select an account type.", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -135,9 +149,14 @@ namespace BankManagementSys
                     return false;
                 }
 
-                if (interestFee > 20)
+                if ((selectedAccType.Id == 1 || selectedAccType.Id == 4) && (interestFee < 4 || interestFee > 50))
                 {
-                    MessageBox.Show("Interest/Fee must not be higher than 20", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Fee must be between 4 $ and 50 $", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                if ((selectedAccType.Id == 2 || selectedAccType.Id == 3) && (interestFee < (decimal)0.5 || interestFee > 10))
+                {
+                    MessageBox.Show("Interest must be between 0.5 $ and 10 $", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
@@ -147,7 +166,7 @@ namespace BankManagementSys
                 return false;
             }
             return true;
-        }
+        } 
 
         private void DecimalInput(KeyEventArgs e)
         {
