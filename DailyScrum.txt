@@ -294,4 +294,26 @@ password: z77smMQEXz
 3. Need assistance:
 - exceptions when creating Pdf and sending email
 
+2021/01/15 Ksenia
+1. Done/not done since last scrum:
+- Implemented 5 unit tests
+2. To do until next scrum:
+- Finish validation of entities
+- Organize presentation
+3. Need assistance:
+- If db query fails in validation
+
+2021/01/15 Saulo
+1. Done/not done since last scrum:
+- Fixed PDF design after logo update
+- Language review
+- Added calculated field account balance
+- Didn't implement 5 unit tests
+2. To do until next scrum:
+- Review
+- Organize presentation
+- Implement 5 unit tests
+3. Need assistance:
+- N/A
+
 
