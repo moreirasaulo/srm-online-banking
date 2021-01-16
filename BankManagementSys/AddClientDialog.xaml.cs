@@ -1,6 +1,8 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -273,9 +275,11 @@ namespace BankManagementSys
             {
                 gender = "Other";
             }
+            User user = null;
+            Login login = null;
             try
             {
-                User user = new User();
+                user = new User();
 
                 user.FirstName = tbFirstName.Text;
                 user.MiddleName = tbMiddleName.Text;
@@ -303,7 +307,7 @@ namespace BankManagementSys
                     if (rbOnlineBankYes.IsChecked == true)
                     {
 
-                        Login login = new Login
+                        login = new Login
                         {
                             Username = tbUsername.Text,
                             Password = tbPassword.Text,
@@ -323,7 +327,18 @@ namespace BankManagementSys
                     return;
                 }
 
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                MessageBox.Show(error.ErrorMessage);
+                EFData.context.Entry(user).State = EntityState.Detached;
+                if (login != null)
+                {
+                    EFData.context.Entry(login).State = EntityState.Detached;
                 }
+                return;
+            }
             catch (SystemException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Database operation failed", MessageBoxButton.OK, MessageBoxImage.Error);

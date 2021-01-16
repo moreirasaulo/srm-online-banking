@@ -1,6 +1,8 @@
 ﻿using SharedCode;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,10 +155,13 @@ namespace BankManagementSys
         {
             if (lvAccounts.Items.Count != 0 && lvAccounts.SelectedIndex != -1)
             {
+                btGenerateStatement.IsEnabled = true;
                 ActivateTransactionButtons();
                 currentAccount = (Account)lvAccounts.SelectedItem;
+                btCloseAccount.IsEnabled = true;
                 if (currentAccount.IsActive == false)
                 {
+                    btCloseAccount.IsEnabled = false;
                     btTransfer.IsEnabled = false;
                     btPayment.IsEnabled = false;
                     btDeposit.IsEnabled = false;
@@ -271,7 +276,7 @@ namespace BankManagementSys
                     if (res == MessageBoxResult.Yes)
                     {
                         transac = new Transaction();
-                        transac.Date = DateTime.Now;
+                        transac.Date = DateTime.Today;
                         transac.Amount = currentAccount.Balance;
                         transac.Type = "Withdrawal";
                         transac.AccountId = currentAccount.Id;
@@ -281,6 +286,13 @@ namespace BankManagementSys
                             EFData.context.Transactions.Add(transac);
                             currentAccount.Balance = 0;  //new balance
                             EFData.context.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                            MessageBox.Show(error.ErrorMessage);
+                            EFData.context.Entry(transac).State = EntityState.Detached;
+                            return;
                         }
                         catch (SystemException ex)
                         {
@@ -310,6 +322,13 @@ namespace BankManagementSys
                 try
                 {
                     EFData.context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                    MessageBox.Show(error.ErrorMessage);
+                  //  EFData.context.Entry(transac).State = EntityState.Detached;
+                    return;
                 }
                 catch (SystemException ex)
                 {
@@ -391,6 +410,21 @@ namespace BankManagementSys
         {
             if (IsBalanceSufficient() == false) { return; }
             CallTransactionDialog("Payment");
+        }
+
+        private void btAddNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+            AddAccount();
+        }
+
+        private void btCloseAccount_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAccount();
+        }
+
+        private void btGenerateStatement_Click(object sender, RoutedEventArgs e)
+        {
+            CreateStatement();
         }
     }
 }

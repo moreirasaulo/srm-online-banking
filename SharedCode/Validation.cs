@@ -8,16 +8,22 @@ using System.Threading.Tasks;
 
 namespace SharedCode
 {
-
-    public partial class UserType : IValidatableObject
+    //Login
+    public partial class Login : IValidatableObject
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Description.Length < 1 || Description.Length > 20)
+            if (Username.Length < 5 || Username.Length > 20)
             {
                 yield return new ValidationResult(
-                    "Description must be between 1 and 20 characters",
-                    new[] { nameof(Description) });
+                        "Username must be made of 5 to 20 characters",
+                        new[] { nameof(Username) });
+            }
+            if (Password.Length < 8 || Username.Length > 20)
+            {
+                yield return new ValidationResult(
+                        "Password must be made of 8 to 20 characters",
+                        new[] { nameof(Password) });
             }
         }
     }
@@ -138,7 +144,7 @@ namespace SharedCode
                         "Account type can be only 'Checking', 'Savings', 'Investment' or 'Business'",
                         new[] { nameof(AccountTypeId) });
             }
-            if (CloseDate != null && CloseDate > OpenDate)
+            if (CloseDate != null && CloseDate < OpenDate)
             {
                 yield return new ValidationResult(
                         "Account closing date cannot be earlier that account open date",

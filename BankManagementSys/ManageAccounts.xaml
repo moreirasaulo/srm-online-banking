@@ -33,7 +33,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Margin="-8,0,8,0">
-        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" Background="azure" MouseDoubleClick="lvAccounts_MouseDoubleClick" HorizontalAlignment="Left" Height="112" Margin="90,316,0,0" VerticalAlignment="Top">
+        <ListView Name="lvAccounts" SelectionChanged="lvAccounts_SelectionChanged" Background="azure" MouseDoubleClick="lvAccounts_MouseDoubleClick" HorizontalAlignment="Left" Height="112" Margin="53,316,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>
@@ -54,15 +54,15 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Search customer by" HorizontalAlignment="Left" Margin="90,61,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="35"/>
-        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,72,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="232,94,0,0" VerticalAlignment="Top"/>
+        <Label Content="Search customer by" HorizontalAlignment="Left" Margin="53,61,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="35"/>
+        <RadioButton Name="rbNatId" Content="National Id" GroupName="CustSearch" IsChecked="True" HorizontalAlignment="Left" Margin="195,50,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbAccNo" Content="Account No" GroupName="CustSearch" HorizontalAlignment="Left" Margin="195,72,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbLastName" Content="Last Name" GroupName="CustSearch" HorizontalAlignment="Left" Margin="195,94,0,0" VerticalAlignment="Top"/>
 
-        <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="334,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-        <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="546,62,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Label Name="lblCustNotFound" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="90,200,0,0" VerticalAlignment="Top"/>
-        <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" Background="azure" HorizontalAlignment="Left" Height="99" Margin="90,128,0,0" VerticalAlignment="Top">
+        <TextBox Name="tbSearchCustBy" KeyDown="tbSearchCustBy_KeyDown" HorizontalAlignment="Left" Height="23" Margin="297,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+        <Button Name="btFind" Click="btFind_Click" IsDefault="True" Content="Find" HorizontalAlignment="Left" Margin="509,62,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <Label Name="lblCustNotFound" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="53,200,0,0" VerticalAlignment="Top"/>
+        <ListView SelectionChanged="lvCustomers_SelectionChanged" Name="lvCustomers" Background="azure" HorizontalAlignment="Left" Height="99" Margin="53,128,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>
@@ -81,16 +81,19 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Customer's accounts:" Name="lblCustAccounts" HorizontalAlignment="Left" Margin="90,290,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblErrorMsg" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="334,84,0,0" VerticalAlignment="Top"/>
-        <Button Click="btDeposit_Click" Name="btDeposit" IsEnabled="False" Content="Make Deposit" HorizontalAlignment="Left" Margin="124,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" IsEnabled="False"  Content="Make Withdrawal" HorizontalAlignment="Left" Margin="256,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <Button Click="btTransfer_Click" x:Name="btTransfer" IsEnabled="False"  Content="Make Transfer" HorizontalAlignment="Left" Margin="392,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <Button Click="btPayment_Click" x:Name="btPayment" IsEnabled="False" Content="Make Payment" HorizontalAlignment="Left" Margin="533,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
-        <Label Content="1. Select customer" HorizontalAlignment="Left" Margin="82,8,0,0" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
-        <Rectangle Fill="#00695C" HorizontalAlignment="Left" Height="4" Margin="90,35,0,0" VerticalAlignment="Top" Width="575"/>
-        <Label Content="2. Select account" HorizontalAlignment="Left" Margin="81,253,0,0" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
-        <Rectangle Fill="#00695C" HorizontalAlignment="Left" Height="4" Margin="89,280,0,0" VerticalAlignment="Top" Width="576"/>
+        <Label Content="Customer's accounts:" Name="lblCustAccounts" HorizontalAlignment="Left" Margin="53,290,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblErrorMsg" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="297,84,0,0" VerticalAlignment="Top"/>
+        <Button Click="btDeposit_Click" Name="btDeposit" IsEnabled="False" Content="Make Deposit" HorizontalAlignment="Left" Margin="87,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Button Click="btWithdrawal_Click" x:Name="btWithdrawal" IsEnabled="False"  Content="Make Withdrawal" HorizontalAlignment="Left" Margin="219,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Button Click="btTransfer_Click" x:Name="btTransfer" IsEnabled="False"  Content="Make Transfer" HorizontalAlignment="Left" Margin="355,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Button Click="btPayment_Click" x:Name="btPayment" IsEnabled="False" Content="Make Payment" HorizontalAlignment="Left" Margin="496,445,0,0" VerticalAlignment="Top" Width="105" Height="26"/>
+        <Label Content="1. Select customer" HorizontalAlignment="Left" Margin="45,8,0,0" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
+        <Rectangle Fill="#00695C" HorizontalAlignment="Left" Height="4" Margin="53,35,0,0" VerticalAlignment="Top" Width="575"/>
+        <Label Content="2. Select account" HorizontalAlignment="Left" Margin="44,253,0,0" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
+        <Rectangle Fill="#00695C" HorizontalAlignment="Left" Height="4" Margin="52,280,0,0" VerticalAlignment="Top" Width="576"/>
+        <Button x:Name="btAddNewAccount" Click="btAddNewAccount_Click" Content="Add new account" HorizontalAlignment="Left" Margin="671,317,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button x:Name="btCloseAccount" Click="btCloseAccount_Click" IsEnabled="False" Content="Close account" HorizontalAlignment="Left" Margin="671,358,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button x:Name="btGenerateStatement" Click="btGenerateStatement_Click" IsEnabled="False" Content="Statement" HorizontalAlignment="Left" Margin="671,398,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
 
     </Grid>
 </UserControl>

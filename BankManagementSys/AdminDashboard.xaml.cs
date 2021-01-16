@@ -28,24 +28,28 @@ namespace BankManagementSys
             Utilities.adminDashboard = this;
             lblAgenName.Content = Utilities.login.User.FullName;
             this.contentControl.Content = new JABMSImage();
-            selectedMenuItem = "";
+            selectedMenuItem = "Home";
             HightlightSelectedMenuItem(selectedMenuItem);
         }
 
         public void SetStartingWindow()
         {
             this.contentControl.Content = new JABMSImage();
-            HightlightSelectedMenuItem("");
+            selectedMenuItem = "Home";
+            HightlightSelectedMenuItem(selectedMenuItem);
         }
 
         private void HightlightSelectedMenuItem(string selectedItem)
         {
             rectAddClient.Visibility = Visibility.Hidden;
             rectViewUpdateClient.Visibility = Visibility.Hidden;
+            rectManageAccounts.Visibility = Visibility.Hidden;
             rectLogOut.Visibility = Visibility.Hidden;
             rectExit.Visibility = Visibility.Hidden;
-            miAddClient.BorderBrush = null;
-            miAddClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            miHome.BorderBrush = null;
+            miHome.BorderThickness = new Thickness(0, 0, 0, 0);
+            miManageAccounts.BorderBrush = null;
+            miManageAccounts.BorderThickness = new Thickness(0, 0, 0, 0);
             miUpdateClient.BorderBrush = null;
             miUpdateClient.BorderThickness = new Thickness(0, 0, 0, 0);
             miLogOut.BorderBrush = null;
@@ -54,24 +58,24 @@ namespace BankManagementSys
             miExit.BorderThickness = new Thickness(0, 0, 0, 0);
 
 
-            if (selectedItem == "AddClient")
+            if (selectedItem == "Home")
             {
                 rectAddClient.Visibility = Visibility.Visible;
-                miAddClient.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
-                miAddClient.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
+                miHome.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
+                miHome.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
             }
-            if (selectedItem == "ViewUpdateClient")
+            if (selectedItem == "ManageClients")
             {
                 rectViewUpdateClient.Visibility = Visibility.Visible;
                 miUpdateClient.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
                 miUpdateClient.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
             }
-          /*  if (selectedItem == "ManageAccounts")
+            if (selectedItem == "ManageAccounts")
             {
-                rectManageAccs.Visibility = Visibility.Visible;
+                rectManageAccounts.Visibility = Visibility.Visible;
                 miManageAccounts.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00695C"));
                 miManageAccounts.BorderThickness = new Thickness(0, 2.5, 0, 2.5);
-            } */
+            }
             if (selectedItem == "LogOut")
             {
                 rectLogOut.Visibility = Visibility.Visible;
@@ -87,12 +91,6 @@ namespace BankManagementSys
         }
 
 
-        private void btValidationTest_Click(object sender, RoutedEventArgs e)
-        {
-            UserTypeValidationTest validationTestDlg = new UserTypeValidationTest();
-            validationTestDlg.Owner = this;
-            validationTestDlg.ShowDialog();
-        }
 
 
         private void miManageAccounts_Click(object sender, RoutedEventArgs e)
@@ -101,13 +99,9 @@ namespace BankManagementSys
             HightlightSelectedMenuItem(selectedMenuItem);
             manAccscontrol = new ManageAccounts();
             this.contentControl.Content = manAccscontrol;
-            mainMenu.IsEnabled = false;
-            mainMenu.Visibility = Visibility.Hidden;
-            accountsMenu.IsEnabled = true;
-            accountsMenu.Visibility = Visibility.Visible;
         }
 
-        //add client
+    /*    //add client
         private void miAddClient_Click(object sender, RoutedEventArgs e)
         {
             selectedMenuItem = "AddClient";
@@ -117,38 +111,17 @@ namespace BankManagementSys
             {
                 HightlightSelectedMenuItem(null);
                 this.contentControl.Content = new JABMSImage();
-            } */
-        }
+            } 
+        } */
 
         private void miUpdateClient_Click(object sender, RoutedEventArgs e)
         {
-            selectedMenuItem = "ViewUpdateClient";
+            selectedMenuItem = "ManageClients";
             HightlightSelectedMenuItem(selectedMenuItem);
             this.contentControl.Content = new UpdateCustomer();
         }
 
-         
-
-        private void miCreateAccount_Click(object sender, RoutedEventArgs e)
-        {
-            manAccscontrol.AddAccount();
-           
-        }
-
-        private void miViewUpdateAccount_Click(object sender, RoutedEventArgs e)
-        {
-            manAccscontrol.ViewAccountIinfo();
-        }
-
-        private void miCloseAccount_Click(object sender, RoutedEventArgs e)
-        {
-            manAccscontrol.CloseAccount();
-        }
-
-        private void miStatement_Click(object sender, RoutedEventArgs e)
-        {
-            manAccscontrol.CreateStatement();
-        }
+        
 
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
@@ -163,7 +136,8 @@ namespace BankManagementSys
                 if (this.contentControl.Content == null)
                 {
                     this.contentControl.Content = new JABMSImage();
-                    HightlightSelectedMenuItem("");
+                    selectedMenuItem = "Home";
+                    HightlightSelectedMenuItem(selectedMenuItem);
                 }
                 else
                 {
@@ -186,7 +160,8 @@ namespace BankManagementSys
                 if (this.contentControl.Content == null)
                 {
                     this.contentControl.Content = new JABMSImage();
-                    HightlightSelectedMenuItem("");
+                    selectedMenuItem = "Home";
+                    HightlightSelectedMenuItem(selectedMenuItem);
                 }
                 else
                 {
@@ -200,14 +175,10 @@ namespace BankManagementSys
             Utilities.mainWindow.Show();
         }
 
-        private void miBackToMainMenu_Click(object sender, RoutedEventArgs e)
+        private void miHome_Click(object sender, RoutedEventArgs e)
         {
+            HightlightSelectedMenuItem("Home");
             this.contentControl.Content = new JABMSImage();
-            mainMenu.IsEnabled = true;
-            mainMenu.Visibility = Visibility.Visible;
-            accountsMenu.IsEnabled = false;
-            accountsMenu.Visibility = Visibility.Hidden;
-            HightlightSelectedMenuItem("");
         }
     }
 }

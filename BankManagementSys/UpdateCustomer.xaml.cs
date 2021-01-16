@@ -29,6 +29,11 @@ namespace BankManagementSys
 
         private void btFind_Click(object sender, RoutedEventArgs e)
         {
+            FindCustomers();
+        }
+
+        private void FindCustomers()
+        {
             if (tbSearchCustBy.Text.Length == 0)
             {
                 MessageBox.Show("The search field cannot be empty.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -42,7 +47,6 @@ namespace BankManagementSys
                 lblEmptyResult.Content = "No customers that satisfy your search criteria was found.";
                 return;
             }
-
         }
 
         private void LoadFoundCustomers()
@@ -53,7 +57,7 @@ namespace BankManagementSys
             {
                 if (rbNatId.IsChecked == true)
                 {
-                    customers = EFData.context.Users.Where(cust => cust.NationalId == searchInfo).ToList();  //FIX EXCEPTIONS
+                    customers = EFData.context.Users.Where(cust => cust.NationalId == searchInfo).ToList();
                 }
                 else if (rbAccNo.IsChecked == true)
                 {
@@ -116,6 +120,28 @@ namespace BankManagementSys
             }
             User selectedUser = (User)lvCustomers.SelectedItem;
             this.contentControl.Content = new ViewUpdateClientProfile(selectedUser);
+        }
+
+        private void btAddNewClient_Click(object sender, RoutedEventArgs e)
+        {
+            AddClientDialog addNewClientDlg = new AddClientDialog();
+            addNewClientDlg.Owner = Utilities.adminDashboard;
+            bool? result = addNewClientDlg.ShowDialog();
+            if(result == true)
+            {
+
+                User newlyAddedClientId = (EFData.context.Users
+                            .OrderByDescending(u => u.Id)
+                            .Select(u => u)
+                            .First());
+                rbNatId.IsChecked = true;
+                tbSearchCustBy.Text = newlyAddedClientId.NationalId;
+                FindCustomers();
+                if(lvCustomers.Items.Count != 0)
+                {
+                    lvCustomers.SelectedIndex = 0;
+                }
+            }
         }
     }
 }
