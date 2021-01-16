@@ -194,11 +194,23 @@ namespace BankManagementSys
                 MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "John Abbott Bank");
                 MailAddress ToEmail = new MailAddress(currentAccount.User.Email, "Customer");
 
-                MailMessage mess = new MailMessage(
+                MailMessage mess = null;
+                if (currentUser.Gender == "male")
+                {
+                    mess = new MailMessage(
                     "johnabbottbank@gmail.com",
                     currentAccount.User.Email,
                     "Transaction receipt from " + DateTime.Now.ToShortDateString(),
-                    "Please see the attached statement.\nThank you,\n John Abbott Bank");
+                    "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
+                else 
+                {
+                    mess = new MailMessage(
+                    "johnabbottbank@gmail.com",
+                    currentAccount.User.Email,
+                    "Transaction receipt from " + DateTime.Now.ToShortDateString(),
+                    "Dear Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                }
 
                 Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 

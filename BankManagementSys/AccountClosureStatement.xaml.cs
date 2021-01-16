@@ -49,7 +49,7 @@ namespace BankManagementSys
 
         private void btEmailStatement_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show("Send receipt to " + currentUser.Email, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult answer = MessageBox.Show("Would you like to send this receipt to " + currentUser.Email + " ?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
                 try
@@ -100,11 +100,23 @@ namespace BankManagementSys
                     MailAddress FromEmail = new MailAddress("johnabbottbank@gmail.com", "Bank");
                     MailAddress ToEmail = new MailAddress(currentUser.Email, "Customer");
 
-                    MailMessage mess = new MailMessage(
+                    MailMessage mess = null;
+                    if (currentUser.Gender == "male")
+                    {
+                        mess = new MailMessage(
                         "johnabbottbank@gmail.com",
                         currentUser.Email,
                         "Account closure statement",
-                        "Please see the attached statement.\nThank you,\nJohn Abbott Bank");
+                        "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                    }
+                    else 
+                    {
+                        mess = new MailMessage(
+                        "johnabbottbank@gmail.com",
+                        currentUser.Email,
+                        "Account closure statement",
+                        "Dear Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
+                    }                   
 
                     Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
 
@@ -112,7 +124,7 @@ namespace BankManagementSys
 
 
                     client.Send(mess);
-                    MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("The receipt was sent successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
                 catch (IOException ex)
