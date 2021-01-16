@@ -34,6 +34,14 @@ namespace SharedCode
             decimal balance = 0;
             List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == AccountId && t.Id <= Id).ToList();
 
+           /* List<Transaction> transactsToThisAcc = EFData.context.Transactions.Where(t => t.ToAccount == AccountId && t.Id <= Id).ToList();
+
+            decimal transferSum = 0;
+            foreach(Transaction tr in transactsToThisAcc)
+            {
+                transferSum = transferSum + tr.Amount;
+            } */
+
             foreach (Transaction t in transactions)
             {
                 if (t.Type == "Deposit")

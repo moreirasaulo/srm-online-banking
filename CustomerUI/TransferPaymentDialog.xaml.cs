@@ -103,7 +103,16 @@ namespace CustomerUI
                 
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
                 Utils.selectedAcc.Balance = Utils.selectedAcc.Balance - Math.Round(amount, 2);  //new balance
-                    beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
+
+                Transaction depositToBenefAccount = new Transaction
+                {
+                    Date = DateTime.Now,
+                    Amount = amount,
+                    Type = "Deposit",
+                    AccountId = beneficiaryAcc.Id
+                };
+                EFData.context.Transactions.Add(depositToBenefAccount);
+                beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 
                 EFData.context.SaveChanges();
                 lblBalance.Content = Utils.selectedAcc.Balance + " $";

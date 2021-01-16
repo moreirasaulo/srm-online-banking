@@ -37,13 +37,23 @@
         <Label Content="Select Account:" HorizontalAlignment="Left" Margin="11,31,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="comboAccountType" HorizontalAlignment="Left" Margin="118,35,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="comboAccountType_SelectionChanged">
         </ComboBox>
-        <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="11,129,0,0" VerticalAlignment="Top" Width="506">
+        <ListView Name="lvTransactions" MouseDoubleClick="lvTransactions_MouseDoubleClick" HorizontalAlignment="Left" Height="256" Margin="11,129,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="TextElement.Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Header="Transaction Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
-                    <GridViewColumn Header="Amount" Width="160" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}"/>
-                    <GridViewColumn Header="Balanceafter transaction" Width="100" DisplayMemberBinding="{Binding AccBalanceAfterTrans}"/>
+                    <GridViewColumn Header="Date" Width="120" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
+                    <GridViewColumn Header="Amount" Width="120" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}"/>
+                    <GridViewColumn Header="Balance" Width="120" DisplayMemberBinding="{Binding AccBalanceAfterTrans, StringFormat=0.00}"/>
                 </GridView>
             </ListView.View>
         </ListView>

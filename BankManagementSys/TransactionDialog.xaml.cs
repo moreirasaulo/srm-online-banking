@@ -224,6 +224,14 @@ namespace BankManagementSys
                 if (currentTransType == "Transfer" || currentTransType == "Payment")
                 {
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
+                    Transaction depositToBenefAccount = new Transaction
+                    {
+                        Date = DateTime.Now,
+                        Amount = amount,
+                        Type = "Deposit",
+                        AccountId = beneficiaryAcc.Id
+                    };
+                    EFData.context.Transactions.Add(depositToBenefAccount);
                     beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 }
                 EFData.context.SaveChanges();

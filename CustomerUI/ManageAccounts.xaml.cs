@@ -177,6 +177,7 @@ namespace CustomerUI
             {
                 LoadTransactions();
                 SortTransactionsByTypeAndDate();
+                lblBalance.Content = "$ " + Utils.selectedAcc.Balance;
             }
         }
 
@@ -221,6 +222,7 @@ namespace CustomerUI
             {
                 LoadTransactions();
                 SortTransactionsByTypeAndDate();
+                lblBalance.Content = "$ " + Utils.selectedAcc.Balance;
             }
         }
 
