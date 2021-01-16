@@ -252,8 +252,9 @@ namespace BankManagementSys
                 XPoint pt2 = new XPoint(page.Width, 90);
                 graphics.DrawLine(lineRed, pt1, pt2);
                 graphics.DrawString("TRANSACTION TYPE", fontBold, XBrushes.Black, 20, 105);
-                graphics.DrawString("DATE", fontBold, XBrushes.Black, 250, 105);
-                graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 450, 105);
+                graphics.DrawString("DATE", fontBold, XBrushes.Black, 170, 105);
+                graphics.DrawString("AMOUNT", fontBold, XBrushes.Black, 320, 105);
+                graphics.DrawString("BALANCE", fontBold, XBrushes.Black, 470, 105);
                 AddLogo(graphics, page, "johnabbottbank.png", 500, 0);
 
                 List<Transaction> tr = new List<Transaction>();
@@ -267,8 +268,9 @@ namespace BankManagementSys
                 {
                     Transaction t = tr[i];
                     graphics.DrawString(t.Type, fontReg, XBrushes.Black, 20, ind);
-                    graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 250, ind);
-                    graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 450, ind);
+                    graphics.DrawString(t.Date.ToShortDateString(), fontReg, XBrushes.Black, 170, ind);
+                    graphics.DrawString(t.Amount.ToString(), fontReg, XBrushes.Black, 320, ind);
+                    graphics.DrawString(t.CalculateBalanceAfterParticularTransaction().ToString(), fontReg, XBrushes.Black, 470, ind);
                     ind = ind + 15;
                 }
             }
