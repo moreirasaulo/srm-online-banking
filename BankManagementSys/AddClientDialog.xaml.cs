@@ -355,6 +355,7 @@ namespace BankManagementSys
             lblPassword.Content = "Create password: *";
             tbPassword.Visibility = Visibility.Visible;
             lblSummaryUsername.Content = "Username:";
+            lblRequired5.Visibility = Visibility.Visible;
         }
 
         private void rbOnlineBankNo_Checked(object sender, RoutedEventArgs e)

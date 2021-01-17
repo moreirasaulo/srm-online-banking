@@ -32,13 +32,6 @@ namespace BankManagementSys
             HightlightSelectedMenuItem(selectedMenuItem);
         }
 
-        public void SetStartingWindow()
-        {
-            this.contentControl.Content = new JABMSImage();
-            selectedMenuItem = "Home";
-            HightlightSelectedMenuItem(selectedMenuItem);
-        }
-
         private void HightlightSelectedMenuItem(string selectedItem)
         {
             rectAddClient.Visibility = Visibility.Hidden;
@@ -101,27 +94,13 @@ namespace BankManagementSys
             this.contentControl.Content = manAccscontrol;
         }
 
-    /*    //add client
-        private void miAddClient_Click(object sender, RoutedEventArgs e)
-        {
-            selectedMenuItem = "AddClient";
-            HightlightSelectedMenuItem(selectedMenuItem);
-            this.contentControl.Content = new AddNewClient();
-           /* if (result == true)
-            {
-                HightlightSelectedMenuItem(null);
-                this.contentControl.Content = new JABMSImage();
-            } 
-        } */
 
         private void miUpdateClient_Click(object sender, RoutedEventArgs e)
         {
             selectedMenuItem = "ManageClients";
             HightlightSelectedMenuItem(selectedMenuItem);
             this.contentControl.Content = new UpdateCustomer();
-        }
-
-        
+        }       
 
         private void miExit_Click(object sender, RoutedEventArgs e)
         {

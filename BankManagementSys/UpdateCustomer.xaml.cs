@@ -97,19 +97,10 @@ namespace BankManagementSys
             catch (SystemException ex)
             {
                 MessageBox.Show("Error fetching from database: " + ex.Message);
+                return;
             }
 
         }
-
-       
-            
-           // viewCustProfileDlg.Owner = this;
-           // bool? result = viewCustProfileDlg.ShowDialog();
-           /* if (result == true)
-            {
-                //FIX   LoadFoundCustomers();  //reload customers after updating
-            } */
-        
 
         private void lvCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -129,11 +120,19 @@ namespace BankManagementSys
             bool? result = addNewClientDlg.ShowDialog();
             if(result == true)
             {
-
-                User newlyAddedClientId = (EFData.context.Users
-                            .OrderByDescending(u => u.Id)
-                            .Select(u => u)
-                            .First());
+                User newlyAddedClientId = null;
+                try
+                {
+                    newlyAddedClientId = (EFData.context.Users
+                                .OrderByDescending(u => u.Id)
+                                .Select(u => u)
+                                .First());
+                }
+                catch(SystemException ex)
+                {
+                    MessageBox.Show("Error fetching from database: " + ex.Message);
+                    return;
+                }
                 rbNatId.IsChecked = true;
                 tbSearchCustBy.Text = newlyAddedClientId.NationalId;
                 FindCustomers();

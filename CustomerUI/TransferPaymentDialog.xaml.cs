@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,11 +76,13 @@ namespace CustomerUI
 
         private void MakeTransaction()
         {
+            Transaction transac = null;
+            Transaction depositToBenefAccount = null;
             try
             {
                 decimal amount = decimal.Parse(tbAmount.Text);
-                Transaction transac = new Transaction();
-                transac.Date = DateTime.Now;
+                transac = new Transaction();
+                transac.Date = DateTime.Today;
                 transac.Amount = amount;
                 transac.Type = currentTransType;
                 transac.AccountId = Utils.selectedAcc.Id;
@@ -104,9 +108,9 @@ namespace CustomerUI
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
                 Utils.selectedAcc.Balance = Utils.selectedAcc.Balance - Math.Round(amount, 2);  //new balance
 
-                Transaction depositToBenefAccount = new Transaction
+                depositToBenefAccount = new Transaction
                 {
-                    Date = DateTime.Now,
+                    Date = DateTime.Today,
                     Amount = amount,
                     Type = "Deposit",
                     AccountId = beneficiaryAcc.Id
@@ -133,6 +137,14 @@ namespace CustomerUI
                         DialogResult = true;
                     }
                 }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                MessageBox.Show(error.ErrorMessage);
+                EFData.context.Entry(transac).State = EntityState.Detached;
+                EFData.context.Entry(depositToBenefAccount).State = EntityState.Detached;
+                return;
             }
             catch (SystemException ex)
             {

@@ -165,7 +165,7 @@ namespace BankManagementSys
 
         private void btPrint_Click(object sender, RoutedEventArgs e)
         {
-            PrintDialog printDialog = new PrintDialog();  //not win forms
+            PrintDialog printDialog = new PrintDialog(); 
             if (printDialog.ShowDialog().GetValueOrDefault(false))
             {
                 this.btPrint.Visibility = Visibility.Hidden;

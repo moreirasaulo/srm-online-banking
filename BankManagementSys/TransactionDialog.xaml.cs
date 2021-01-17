@@ -200,6 +200,7 @@ namespace BankManagementSys
         private void MakeTransaction()
         {
             Transaction transac = null;
+            Transaction depositToBenefAccount = null;
             try
             {
                 decimal amount = decimal.Parse(tbAmount.Text);
@@ -230,7 +231,7 @@ namespace BankManagementSys
                 if (currentTransType == "Transfer" || currentTransType == "Payment")
                 {
                     Account beneficiaryAcc = EFData.context.Accounts.SingleOrDefault(a => a.Id == transac.ToAccount);
-                    Transaction depositToBenefAccount = new Transaction
+                    depositToBenefAccount = new Transaction
                     {
                         Date = DateTime.Today,
                         Amount = amount,
@@ -265,6 +266,7 @@ namespace BankManagementSys
                 var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                 MessageBox.Show(error.ErrorMessage);
                 EFData.context.Entry(transac).State = EntityState.Detached;
+                EFData.context.Entry(depositToBenefAccount).State = EntityState.Detached;
                 return;
             }
             catch (SystemException ex)

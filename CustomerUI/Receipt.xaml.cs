@@ -82,7 +82,7 @@ namespace CustomerUI
             //create bmp
             int Width = (int)receiptPanel.RenderSize.Width;
             int Height = (int)receiptPanel.RenderSize.Height;
-            string fileName = "receipt.bmp";
+            string fileName = "rec.bmp";
             RenderTargetBitmap renderTargetBitmap =
             new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(receiptPanel);
@@ -99,7 +99,7 @@ namespace CustomerUI
             PdfPage oPage = new PdfPage();
             doc.Pages.Add(oPage);
             XGraphics xgr = XGraphics.FromPdfPage(oPage);
-            XImage img = XImage.FromFile("receipt.bmp");
+            XImage img = XImage.FromFile("rec.bmp");
             xgr.DrawImage(img, 0, 0);
             using (Stream fileStream = File.Create(pdfFileName))
             {
@@ -137,6 +137,15 @@ namespace CustomerUI
 
                 client.Send(mess);
                 MessageBox.Show("Receipt was sent", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (File.Exists("rec.bmp"))
+                {
+                    File.Delete("rec.bmp");
+                }
+                if (File.Exists("receipt.pdf"))
+                {
+                    File.Delete("receipt.pdf");
+                }
+                
 
             }
             catch (IOException ex)
