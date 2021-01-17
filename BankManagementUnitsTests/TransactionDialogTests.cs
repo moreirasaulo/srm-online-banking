@@ -33,38 +33,41 @@ namespace BankManagementUnitsTests
         }
 
         [TestMethod]
-        public void CalculateBalanceAfterDeposit()
+        public void BalanceAfterDeposit()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Deposit", 100, 10), 110);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Deposit", 0, 1000), 1000);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Deposit", 100, 10), 110);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Deposit", 0, 1000), 1000);
         }
 
         [TestMethod]
-        public void CalculateBalanceAfterWidthdrawal()
+        public void BalanceAfterWidthdrawal()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Withdrawal", 100, 10), 90);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Withdrawal", 500, 500), 0);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Withdrawal", 100, 10), 90);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Withdrawal", 500, 500), 0);
         }
 
         [TestMethod]
-        public void CalculateBalanceAfterTransfer()
+        public void BalanceAfterTransfer()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Transfer", 750, 230), 520);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Transfer", 40, 23), 17);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Transfer", 750, 230), 520);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Transfer", 40, 23), 17);
         }
 
         [TestMethod]
-        public void CalculateBalanceAfterPayment()
+        public void BalanceAfterPayment()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Payment", 1060, 200), 860);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Payment", 300, 23), 277);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Payment", 1060, 200), 860);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Payment", 300, 23), 277);
         }
 
         [TestMethod]
-        public void CalculateBalanceAfterOtherTransType()
+        public void BalanceAfterOtherTransType()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Other", 600, 200), 600);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Other", 0, 40), 0);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Other", 600, 200), 600);
+            Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Other", 0, 40), 0);
         }
+
     }
+
+
 }

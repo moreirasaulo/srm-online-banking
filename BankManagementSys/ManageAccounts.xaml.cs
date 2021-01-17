@@ -372,12 +372,10 @@ namespace BankManagementSys
             transacDlg.ShowDialog(); 
         }
 
-        private bool IsBalanceSufficient()
+        public bool IsBalanceSufficient(decimal balance)
         {
-            if (currentAccount.Balance <= 0)
+            if (balance <= 0)
             {
-                string message = string.Format("The account Number {0} has insufficient balance ($ {1}) to proceed with this operation.", currentAccount.Id, currentAccount.Balance);
-                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             return true;
@@ -394,21 +392,36 @@ namespace BankManagementSys
         //withdrawal
         private void btWithdrawal_Click(object sender, RoutedEventArgs e)
         {
-            if (IsBalanceSufficient() == false) { return; }
+            if (IsBalanceSufficient(currentAccount.Balance) == false) 
+            {
+                string message = string.Format("The account Number {0} has insufficient balance ($ {1}) to proceed with this operation.", currentAccount.Id, currentAccount.Balance);
+                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
             CallTransactionDialog("Withdrawal");
         }
 
         //transfer
         private void btTransfer_Click(object sender, RoutedEventArgs e)
         {
-            if (IsBalanceSufficient() == false) { return; }
+            if (IsBalanceSufficient(currentAccount.Balance) == false)
+            {
+                string message = string.Format("The account Number {0} has insufficient balance ($ {1}) to proceed with this operation.", currentAccount.Id, currentAccount.Balance);
+                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             CallTransactionDialog("Transfer");
         }
 
         //payment
         private void btPayment_Click(object sender, RoutedEventArgs e)
         {
-            if (IsBalanceSufficient() == false) { return; }
+            if (IsBalanceSufficient(currentAccount.Balance) == false)
+            {
+                string message = string.Format("The account Number {0} has insufficient balance ($ {1}) to proceed with this operation.", currentAccount.Id, currentAccount.Balance);
+                MessageBox.Show(message, "Warning: impossible operation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             CallTransactionDialog("Payment");
         }
 

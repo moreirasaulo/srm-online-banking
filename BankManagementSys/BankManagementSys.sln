@@ -15,7 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerUI", "..\CustomerUI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCode", "..\SharedCode\SharedCode.csproj", "{B8B69B6B-A548-44DE-B307-98EDCDEB983F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementUnitsTests", "..\BankManagementUnitsTests\BankManagementUnitsTests.csproj", "{B9317B99-810A-4F57-8FE0-9F6093C05135}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionTests", "..\BankManagementUnitsTests\TransactionTests.csproj", "{B9317B99-810A-4F57-8FE0-9F6093C05135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountTests", "..\AccountTests\AccountTests.csproj", "{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit tests", "Unit tests", "{F8E9430F-4475-42DF-B9CE-5DBF0D755388}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,17 @@ Global
 		{B9317B99-810A-4F57-8FE0-9F6093C05135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9317B99-810A-4F57-8FE0-9F6093C05135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9317B99-810A-4F57-8FE0-9F6093C05135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9317B99-810A-4F57-8FE0-9F6093C05135} = {F8E9430F-4475-42DF-B9CE-5DBF0D755388}
+		{47CB1B3D-5656-42D3-B822-FAAE06FF2DB0} = {F8E9430F-4475-42DF-B9CE-5DBF0D755388}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0535EF7-84B6-4E7B-A22C-E58D6D65788F}
