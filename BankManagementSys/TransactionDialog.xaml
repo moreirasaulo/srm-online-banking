@@ -46,17 +46,18 @@
         <Label x:Name="lblAccType" Content="." HorizontalAlignment="Left" Margin="128,159,0,0" VerticalAlignment="Top"/>
         <Button Name="btCancel" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="471,226,0,0" VerticalAlignment="Top" Width="98" Height="29"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="440,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
-        <TextBox Name="tbAmount" HorizontalAlignment="Left" Height="23" Margin="592,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
+        <TextBox Name="tbAmount" TextChanged="tbAmount_TextChanged" HorizontalAlignment="Left" Height="23" Margin="592,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" KeyDown="tbAmount_KeyDown"/>
         <Button Click="btMakeTrans_Click" Name="btMakeTrans"  Content="Deposit" HorizontalAlignment="Left" Margin="610,226,0,0" VerticalAlignment="Top" Width="98" Height="29"/>
         <Label Name="lblTransacTitle" Content="Deposit" HorizontalAlignment="Left" Margin="439,33,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Label Content="Balance:" HorizontalAlignment="Left" Margin="42,188,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBalance" Content="." HorizontalAlignment="Left" Margin="128,185,0,0" VerticalAlignment="Top"/>
         <Label Content="$" HorizontalAlignment="Left" Margin="575,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <Label Name="lblBenefAcc" Content="" HorizontalAlignment="Left" Margin="440,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
-        <TextBox x:Name="tbBenefAccNo" TextChanged="tbBenefAccNo_TextChanged" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="592,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148"/>
+        <TextBox x:Name="tbBenefAccNo" TextChanged="tbBenefAccNo_TextChanged" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="592,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" KeyDown="tbBenefAccNo_KeyDown"/>
         <Label Name="lblBenefAccOwner" Content="" HorizontalAlignment="Left" Margin="440,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <Label Name="lblPayee" Content="" HorizontalAlignment="Left" Margin="440,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
         <ComboBox Visibility="Hidden" Name="comboPayees" HorizontalAlignment="Left" Margin="592,77,0,0" VerticalAlignment="Top" Width="148"/>
-        <ComboBox x:Name="comboPayCategory" Visibility="Hidden" HorizontalAlignment="Left" Margin="592,182,0,0" VerticalAlignment="Top" Width="148"/>
+        <ComboBox x:Name="comboPayCategory" Visibility="Hidden" HorizontalAlignment="Left" Margin="592,165,0,0" VerticalAlignment="Top" Width="148"/>
+        <Label Name="lblPaymentCategory" Content="Payment category:" Visibility="Hidden" HorizontalAlignment="Left" Margin="440,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.401"/>
     </Grid>
 </Window>

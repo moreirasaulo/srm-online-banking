@@ -156,10 +156,10 @@ namespace SharedCode
                         "Monthly fee must be set for Checking/Business account type",
                         new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
             }
-            if ((AccountTypeId == 1 || AccountTypeId == 4) && MonthlyFee != null && (MonthlyFee <= 4 || MonthlyFee > 50))
+            if ((AccountTypeId == 1 || AccountTypeId == 4) && MonthlyFee != null && (MonthlyFee < 4 || MonthlyFee > 50))
             {
                 yield return new ValidationResult(
-                        "Monthly fee must be between 4$ and  50 $",
+                        "Monthly fee must be between $4 and  $50",
                         new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
             }
             if ((AccountTypeId == 2 || AccountTypeId == 3) && Interest == null)
@@ -168,7 +168,7 @@ namespace SharedCode
                         "Interest must be set for Savings/Investment account type",
                         new[] { nameof(AccountTypeId), nameof(MonthlyFee) });
             }
-            if ((AccountTypeId == 2 || AccountTypeId == 3) && Interest != null && (Interest <= (decimal)0.5 || Interest > 10))
+            if ((AccountTypeId == 2 || AccountTypeId == 3) && Interest != null && (Interest < (decimal)0.5 || Interest > 10))
             {
                 yield return new ValidationResult(
                         "Interest must be between 0.5 % and 10 %",

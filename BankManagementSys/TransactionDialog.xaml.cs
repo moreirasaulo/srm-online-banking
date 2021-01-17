@@ -52,7 +52,7 @@ namespace BankManagementSys
                 }
                 comboPayees.ItemsSource = Utilities.Payees;
                 comboPayees.DisplayMemberPath = "CompanyName";
-                lblBenefAccOwner.Content = "Payment category";
+                lblPaymentCategory.Visibility = Visibility.Visible;
                 comboPayCategory.Visibility = Visibility.Visible;
                 comboPayCategory.ItemsSource = Utilities.paymentCategories;
                 comboPayCategory.SelectedIndex = 0;
@@ -81,7 +81,7 @@ namespace BankManagementSys
             }
             catch (FormatException)
             {
-                MessageBox.Show("Amount must contain only digits and . symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Amount must contain only digits and period/decimal(.) symbol", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (currentTransType != "Deposit" && currentAccount.Balance < amount)
@@ -317,6 +317,8 @@ namespace BankManagementSys
                     break;
                 default:
                     e.Handled = true;
+                    lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
+                    lblBenefAccOwner.Content = "Only numbers are allowed for this field.";
                     break;
             }
         }
@@ -350,11 +352,13 @@ namespace BankManagementSys
                     break;
                 default:
                     e.Handled = true;
+                    lblBenefAccOwner.Foreground = new SolidColorBrush(Colors.Red);
+                    lblBenefAccOwner.Content = "Only numbers and period/decimal symbol(.) are allowed.";
                     break;
             }
         }
 
-        private void tbBeneficiaryAcct_KeyDown(object sender, KeyEventArgs e)
+        private void tbBenefAccNo_KeyDown(object sender, KeyEventArgs e)
         {
             NumbersOnly(e);
         }
@@ -367,6 +371,11 @@ namespace BankManagementSys
         private void tbBenefAccNo_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidateDestAccount();
+        }
+
+        private void tbAmount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            lblBenefAccOwner.Content = "";
         }
     }
 
