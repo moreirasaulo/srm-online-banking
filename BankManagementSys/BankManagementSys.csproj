@@ -115,9 +115,6 @@
     <Compile Include="AddNewAccount.xaml.cs">
       <DependentUpon>AddNewAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddNewClient.xaml.cs">
-      <DependentUpon>AddNewClient.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GenerateStatement.xaml.cs">
       <DependentUpon>GenerateStatement.xaml</DependentUpon>
     </Compile>
@@ -155,10 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNewAccount.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddNewClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

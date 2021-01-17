@@ -74,7 +74,6 @@ namespace CustomerUI
                 {
                     var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                     MessageBox.Show(error.ErrorMessage);
-                    // EFData.context.Entry(userType).State = EntityState.Detached;
                     return;
                 }
                 catch (SystemException ex)

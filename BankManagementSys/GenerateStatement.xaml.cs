@@ -44,25 +44,17 @@ namespace BankManagementSys
                 finishDate = (DateTime)currentAccount.CloseDate;
             }
             LoadYears();
-            //calendarMonthYear.SelectedDate = new DateTime(1983, 01, 01);
         }
         private void LoadYears()
         {
             List<int> years = new List<int>();
 
-            try
+            for (int i = currentAccount.OpenDate.Year; i <= finishDate.Year; i++)
             {
-                for (int i = currentAccount.OpenDate.Year; i <= finishDate.Year; i++)
-                {
-                    years.Add(i);
-                }
+                years.Add(i);
+            }
 
-                comboStatementYears.ItemsSource = years;
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            comboStatementYears.ItemsSource = years;
         }
 
         private List<string> LoadMonths()
@@ -204,7 +196,7 @@ namespace BankManagementSys
                     "Transaction receipt from " + DateTime.Now.ToShortDateString(),
                     "Dear Mr " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                 }
-                else if(currentUser.Gender == "female")
+                else if (currentUser.Gender == "female")
                 {
                     mess = new MailMessage(
                     "johnabbottbank@gmail.com",
@@ -309,7 +301,7 @@ namespace BankManagementSys
                 XImage xImage = XImage.FromFile(imagePath);
                 gfx.DrawImage(xImage, xPosition, yPosition, xImage.PixelWidth / 3, xImage.PixelWidth / 3);
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 MessageBox.Show("Error reading logo from file: " + ex.Message, "Internal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

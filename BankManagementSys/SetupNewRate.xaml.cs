@@ -62,7 +62,6 @@ namespace BankManagementSys
                     {
                         var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                         MessageBox.Show(error.ErrorMessage);
-                      //  EFData.context.Entry(account).State = EntityState.Detached;
                         return;
                     }
                     catch (SystemException ex)
@@ -77,27 +76,11 @@ namespace BankManagementSys
 
         private bool AreFieldsValid()
         {
-          /*  if (tbNewRate.Text.Length == 0)
-            {
-                MessageBox.Show("The new rate field cannot be empty.", "Action required", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            } */
 
             decimal interestFee;
             try
             {
                 interestFee = decimal.Parse(tbNewRate.Text);
-              /*  if (interestFee <= 0)
-                {
-                    MessageBox.Show("The new rate must not be 0 or negative", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-
-                if (interestFee > 20)
-                {
-                    MessageBox.Show("The new rate must not be higher than 20", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                } */
             }
             catch (FormatException)
             {

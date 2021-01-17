@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Add New Customer" Height="378" Width="632" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" FontFamily="Nirmala UI" Closing="Window_Closing">
+        Title="Add New Customer" Height="399" Width="632" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" FontFamily="Nirmala UI" Closing="Window_Closing">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -35,7 +35,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
+        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page5}" >
             <xctk:WizardPage x:Name="Page1" Background="azure"
                                    Title="Add new customer"
                                    Description="Select type of cutomer">
@@ -54,7 +54,7 @@
                     <Label Content="First Name: *" HorizontalAlignment="Left" Margin="36,52,0,0" VerticalAlignment="Top"/>
                     <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="36,84,0,0" VerticalAlignment="Top"/>
                     <Label Content="Last Name: *" HorizontalAlignment="Left" Margin="36,115,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-                    <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="481,198,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="474,175,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="148,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                     <TextBox Name="tbMiddleName" HorizontalAlignment="Left" Height="23" Margin="148,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                     <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="148,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
@@ -74,7 +74,7 @@
                 <Grid>
                     <Label Name="lblNatIdCompRegNo" Content="National ID: *" HorizontalAlignment="Left" Margin="36,41,0,0" VerticalAlignment="Top"/>
                     <Label Name="lblDateBirthOrRegist" Content="Date of Birth: *" HorizontalAlignment="Left" Margin="36,88,0,0" VerticalAlignment="Top"/>
-                    <Label Name="lblRequired1" Content="* Mandatory fields" HorizontalAlignment="Left" Margin="451,201,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblRequired1" Content="* Mandatory fields" HorizontalAlignment="Left" Margin="444,171,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbNatId" HorizontalAlignment="Left" Height="23" Margin="215,43,0,0" Text="" VerticalAlignment="Top" Width="177"/>
                     <DatePicker Name="dpBirthday" HorizontalAlignment="Left" Margin="215,88,0,0" VerticalAlignment="Top" Width="177"/>
                 </Grid>
@@ -103,7 +103,7 @@
                     <TextBox Name="tbProvinceState" HorizontalAlignment="Left" Height="23" Margin="39,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Column="2"/>
                     <TextBox Name="tbPostalCode" HorizontalAlignment="Left" Height="23" Margin="39,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Grid.Column="2"/>
                     <ComboBox Name="comboCountry" HorizontalAlignment="Left" Margin="39,152,0,0" VerticalAlignment="Top" Width="174" RenderTransformOrigin="0.5,0.5" Grid.Column="2" />
-                    <Label Name="lblRequired3" Content="* Mandatory fields" Grid.Column="2" HorizontalAlignment="Left" Margin="407,201,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lblRequired3" Content="* Mandatory fields" Grid.Column="2" HorizontalAlignment="Left" Margin="391,174,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </xctk:WizardPage>
@@ -119,6 +119,8 @@
                     <TextBox Name="tbUsername" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                     <Label Name="lblPassword" Content="" HorizontalAlignment="Left" Margin="138,137,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBox Name="tbPassword" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Margin="252,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+                    <Label Name="lblRequired5" Content="* Mandatory fields" Visibility="Hidden" HorizontalAlignment="Left" Margin="444,171,0,0" VerticalAlignment="Top"/>
+
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="LastPage" PageType="Interior" Background="azure"

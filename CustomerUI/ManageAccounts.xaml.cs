@@ -105,39 +105,39 @@ namespace CustomerUI
         {
             if (comboHistory.SelectedIndex == 0)
             {
-                try
-                {
+              //  try
+              //  {
                     return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 7);
-                }
-                catch (ArgumentNullException ex)
+              //  }
+              /*  catch (ArgumentNullException ex)
                 {
                     MessageBox.Show("Error: " + ex.Message);
                     return list;
-                }
+                } */
             }
             else if (comboHistory.SelectedIndex == 1)
             {
-                try
-                {
+              //  try
+             //   {
                     return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 30);
-                }
-                catch (ArgumentNullException ex) 
+              //  }
+              /*  catch (ArgumentNullException ex) 
                 {
                     MessageBox.Show("Error: " + ex.Message);
                     return list;
-                }               
+                }      */          
             }
             else if (comboHistory.SelectedIndex == 2)
             {
-                try
-                {
+             //   try
+             //   {
                     return list = list.FindAll(t => (DateTime.Now - t.Date).TotalDays <= 60);
-                }
-                catch (ArgumentNullException ex) 
+             //   }
+             /*   catch (ArgumentNullException ex) 
                 {
                     MessageBox.Show("Error: " + ex.Message);
                     return list;
-                }
+                } */
             }
             else
             {

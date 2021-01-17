@@ -127,94 +127,9 @@ namespace BankManagementSys
             btUpdateCustomer.Visibility = Visibility.Visible;
         }
 
-     /*   private bool ValidateFields()
-        {
-            if (tbFirstName.Text.Length < 1 || tbFirstName.Text.Length > 20)
-            {
-                MessageBox.Show("First name must contain between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbMiddleName.Text.Length > 20)
-            {
-                MessageBox.Show("Middle name must containt not more than 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbLastName.Text.Length < 1 || tbLastName.Text.Length > 20)
-            {
-                MessageBox.Show("Last name must containt between 1 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            } 
-            if (rbGenderMale.IsChecked == false && rbGenderFemale.IsChecked == false && rbGenderOther.IsChecked == false)
-            {
-                MessageBox.Show("Please choose gender of customer", "Selection required", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            if (tbNatId.Text.Length < 5 || tbNatId.Text.Length > 20)
-            {
-                MessageBox.Show("National Id/Company registration Id number must containt between 5 and 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (dpBirthday.SelectedDate == null)
-            {
-                MessageBox.Show("Please select date of birth/date of company registration", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (dpBirthday.SelectedDate > DateTime.Now)
-            {
-                MessageBox.Show("Date of birth/company registration date must be earlier than today's date", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (!Regex.IsMatch(tbPhoneNo.Text, @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"))
-            {
-                MessageBox.Show("Please enter valid phone number xxx-xxx-xx-xx", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbAddress.Text.Length < 5 || tbAddress.Text.Length > 50)
-            {
-                MessageBox.Show("Address must contain between 5 and 50 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbCity.Text.Length < 2 || tbCity.Text.Length > 20)
-            {
-                MessageBox.Show("City must contain between 2 and 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbProvinceState.Text.Length < 2 || tbProvinceState.Text.Length > 20)
-            {
-                MessageBox.Show("Province or State must be between 2 and 20 caracters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbPostalCode.Text.Length < 5 || tbPostalCode.Text.Length > 10)
-            {
-                MessageBox.Show("Postal code must be made of 5 to 10 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (comboCountry.Text.Length > 20)
-            {
-                MessageBox.Show("Country must contain maximum 20 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (comboCountry.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select country", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (tbEmail.Text.Length > 60)
-            {
-                MessageBox.Show("E-mail must contain maximum 60 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            if (currentUser.CompanyName != null)
-            {
-                MessageBox.Show("Company name must contain between 1 and 70 characters", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            return true; 
-        } */
 
         private void btConfirmUpdate_Click(object sender, RoutedEventArgs e)
         {
-          /*  if (!ValidateFields()) { return; }  */
 
             currentUser.FirstName = tbFirstName.Text;
             currentUser.MiddleName = tbMiddleName.Text;
@@ -253,7 +168,6 @@ namespace BankManagementSys
             {
                 var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                 MessageBox.Show(error.ErrorMessage);
-                // EFData.context.Entry(userType).State = EntityState.Detached;
                 return;
             }
             catch (SystemException ex)
