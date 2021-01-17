@@ -35,7 +35,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page6}" >
+        <xctk:Wizard Name="Wizard" FinishButtonClosesWindow="True" Cancel="Wizard_Cancel" Next="Wizard_Next" Finish="Wizard_Finish" HelpButtonVisibility="Hidden" CurrentPage="{Binding ElementName=Page2}" >
         <xctk:WizardPage x:Name="Page1" Background="azure" Height="320" Width="620"
                                    Title="Add new customer"
                                    Description="Select type of cutomer">
@@ -54,7 +54,7 @@
                 <Label Content="First Name: *" HorizontalAlignment="Left" Margin="36,52,0,0" VerticalAlignment="Top"/>
                 <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="36,84,0,0" VerticalAlignment="Top"/>
                 <Label Content="Last Name: *" HorizontalAlignment="Left" Margin="36,115,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"/>
-                <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="481,198,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblRequired" Content="* Mandatory fields" Visibility="Visible" HorizontalAlignment="Left" Margin="432,176,0,0" VerticalAlignment="Top"/>
                 <TextBox Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="148,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                 <TextBox Name="tbMiddleName" HorizontalAlignment="Left" Height="23" Margin="148,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
                 <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="148,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>

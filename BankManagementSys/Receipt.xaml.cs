@@ -74,8 +74,8 @@ namespace BankManagementSys
             lblAccNo.Content = account.Id;
             lblTransId.Content = transaction.Id;
             lblAccHolder.Content = currentCust.FullName;
-            lblAmount.Content = string.Format("{0:0.00} $", transaction.Amount);
-            lblNewBalance.Content = account.Balance + " $";
+            lblAmount.Content = string.Format("$ {0:0.00}", transaction.Amount);
+            lblNewBalance.Content = "$ " + account.Balance;
             lblAgentNo.Content = Utilities.login.User.Id;
             lblDate.Content = transaction.Date;
             lblPrintDate.Content = DateTime.Now;
@@ -85,7 +85,7 @@ namespace BankManagementSys
 
         private void btSendByEmail_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show("Send receipt to "+ currentCust.Email, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult answer = MessageBox.Show("Send receipt to " + currentCust.Email + " ?", "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
                 try

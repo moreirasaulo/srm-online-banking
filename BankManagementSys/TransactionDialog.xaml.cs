@@ -62,7 +62,7 @@ namespace BankManagementSys
             lblOwner.Content = user.FullName;
             lblAccountNo.Content = account.Id;
             lblAccType.Content = account.AccountType.Description;
-            lblBalance.Content = account.Balance + " $";
+            lblBalance.Content = "$ " + account.Balance;
 
         }
 
@@ -241,7 +241,7 @@ namespace BankManagementSys
                     beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 }
                 EFData.context.SaveChanges();
-                lblBalance.Content = currentAccount.Balance + " $";
+                lblBalance.Content = "$ " + currentAccount.Balance;
 
 
                 string message = string.Format("The {0} was completed successfully", currentTransType.ToLower());
@@ -278,7 +278,7 @@ namespace BankManagementSys
         private void btMakeTrans_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidateFields()) { return; }
-            string message = string.Format("Proceed with this {0}: {1} $ ?", currentTransType.ToLower(),
+            string message = string.Format("Proceed with this {0}: $ {1} ?", currentTransType.ToLower(),
                 decimal.Parse(tbAmount.Text).ToString("N2"));
             MessageBoxResult answer = MessageBox.Show(message, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
