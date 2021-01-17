@@ -66,6 +66,7 @@ namespace BankManagementUnitsTests
             Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Other", 600, 200), 600);
             Assert.AreEqual(transDialog.DeductAddMoneyToAccount("Other", 0, 40), 0);
         }
+
     }
 
 
