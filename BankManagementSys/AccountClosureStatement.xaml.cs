@@ -42,7 +42,7 @@ namespace BankManagementSys
             lblAccType.Content = currentAccount.AccountType.Description;
             lblOpenDate.Content = currentAccount.OpenDate;
             lblClosedDate.Content = currentAccount.CloseDate;
-            lblBalance.Content = currentAccount.Balance.ToString("0.00") + " $";
+            lblBalance.Content = "$ "+ currentAccount.Balance.ToString("0.00");
             lblPrintDate.Content = DateTime.Now.ToShortDateString();
 
         }
