@@ -58,7 +58,7 @@ namespace CustomerUI
             }
             if (needOldBalance == true)
             {
-                lblPreviousBalance.Content = oldBalance + " $";
+                lblPreviousBalance.Content = "$ " + oldBalance;
             }
             if (needOldBalance == false)
             {
@@ -195,7 +195,7 @@ namespace CustomerUI
             }
             else
             {
-                MessageBoxResult answer = CustomMessageBox.ShowYesNo("Send receipt to " + Utils.login.User.Email, "Confirmation required",
+                MessageBoxResult answer = CustomMessageBox.ShowYesNo("Would you like to send this receipt to " + Utils.login.User.Email + "?", "Confirmation required",
                 "Yes", "Enter another email", MessageBoxImage.Question);
                 if (answer == MessageBoxResult.Yes)
                 {
