@@ -65,8 +65,8 @@ namespace CustomerUI
         private void btMakeTransaction_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidateFields()) { return; }
-            string message = string.Format("Proceed with this {0}: {1} $ ?", currentTransType.ToLower(),
-                decimal.Parse(tbAmount.Text).ToString("N2"));
+            string message = string.Format("Are you sure you would like to proceed with the following {0}? \n\nAmount: $ {1}\nPayee: {2}", currentTransType.ToLower(),
+                decimal.Parse(tbAmount.Text).ToString("N2"), comboPayees.Text);
             MessageBoxResult answer = MessageBox.Show(message, "Confirmation required", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
@@ -119,7 +119,7 @@ namespace CustomerUI
                 beneficiaryAcc.Balance = beneficiaryAcc.Balance + Math.Round(amount, 2);  //add money to beneficiary
                 
                 EFData.context.SaveChanges();
-                lblBalance.Content = Utils.selectedAcc.Balance + " $";
+                lblBalance.Content = "$ " + Utils.selectedAcc.Balance;
 
 
                 string message = string.Format("The {0} was completed successfully", currentTransType.ToLower());

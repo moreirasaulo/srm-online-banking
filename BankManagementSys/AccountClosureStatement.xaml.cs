@@ -57,24 +57,25 @@ namespace BankManagementSys
                     //create bmp
                     int Width = (int)statementPanel.RenderSize.Width;
                     int Height = (int)statementPanel.RenderSize.Height;
-                    string fileName = "receipt.bmp";
+                    string timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
+                    string bmpFileName = "receipt" + timeStamp + ".bmp";
                     RenderTargetBitmap renderTargetBitmap =
                     new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
                     renderTargetBitmap.Render(statementPanel);
                     PngBitmapEncoder pngImage = new PngBitmapEncoder();
                     pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-                    using (Stream fileStream = File.Create(fileName))
+                    using (Stream fileStream = File.Create(bmpFileName))
                     {
                         pngImage.Save(fileStream);
                     }
 
                     //create pdf
-                    string pdfFileName = "receipt.pdf";
+                    string pdfFileName = "receipt" + timeStamp + ".pdf";
                     PdfDocument doc = new PdfDocument();
                     PdfPage oPage = new PdfPage();
                     doc.Pages.Add(oPage);
                     XGraphics xgr = XGraphics.FromPdfPage(oPage);
-                    XImage img = XImage.FromFile("receipt.bmp");
+                    XImage img = XImage.FromFile(bmpFileName);
                     xgr.DrawImage(img, 0, 0);
                     using (Stream fileStream = File.Create(pdfFileName))
                     {
@@ -83,7 +84,7 @@ namespace BankManagementSys
 
 
                     //email
-                    string file = "receipt.pdf";
+                    //string file = "receipt.pdf";
                     SmtpClient client = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -126,7 +127,7 @@ namespace BankManagementSys
                         "Dear Mr/Mrs " + currentUser.LastName + ",\n\nPlease see the attached statement.\n\nThank you,\n\nJohn Abbott Bank");
                     }                   
 
-                    Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+                    Attachment data = new Attachment(pdfFileName, MediaTypeNames.Application.Octet);
 
                     mess.Attachments.Add(data);
 

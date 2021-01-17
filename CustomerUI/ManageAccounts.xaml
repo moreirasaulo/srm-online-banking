@@ -59,7 +59,7 @@
         </ListView>
         <Label Name="lblError" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="11,71,0,0" VerticalAlignment="Top"/>
         <Label Content="View:" HorizontalAlignment="Left" Margin="11,79,0,0" VerticalAlignment="Top"/>
-        <ComboBox SelectionChanged="comboHistory_SelectionChanged_1" IsEnabled="False" Name="comboHistory" HorizontalAlignment="Left" Margin="397,79,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="comboHistory" SelectionChanged="comboHistory_SelectionChanged_1" IsEnabled="False" HorizontalAlignment="Left" Margin="397,79,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransactAll" GroupName="Transactions" IsChecked="True" Content="All" HorizontalAlignment="Left" Margin="54,85,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacDeposits" GroupName="Transactions" Content="Deposits" HorizontalAlignment="Left" Margin="92,85,0,0" VerticalAlignment="Top"/>
         <RadioButton Checked="RadioButton_Checked" IsEnabled="False" Name="rbTransacWithdrawals" GroupName="Transactions" Content="Withdrawals" HorizontalAlignment="Left" Margin="162,85,0,0" VerticalAlignment="Top"/>
