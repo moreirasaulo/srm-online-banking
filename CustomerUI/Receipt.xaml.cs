@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPFCustomMessageBox;
+using System.Drawing;
 
 namespace CustomerUI
 {
@@ -101,9 +102,9 @@ namespace CustomerUI
                 XGraphics xgr = XGraphics.FromPdfPage(oPage);
                 XImage img = XImage.FromFile("receipt.bmp");
                 xgr.DrawImage(img, 0, 0);
-                using (Stream fileStream = File.Create(pdfFileName))
+                using (Stream fileStream1 = File.Create(pdfFileName))
                 {
-                    doc.Save(fileStream);
+                    doc.Save(fileStream1);
                 }
 
 
@@ -156,6 +157,12 @@ namespace CustomerUI
                 mess.Attachments.Add(data);
 
                 client.Send(mess);
+              /*  var image = System.Drawing.Image.FromFile("receipt.bmp");
+                pngImage.Dispose();
+                File.Delete("receipt.bmp");
+
+                doc.Dispose();
+                File.Delete("receipt.pdf"); */
                 MessageBox.Show("Receipt was sent successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
