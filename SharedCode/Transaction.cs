@@ -31,16 +31,16 @@ namespace SharedCode
         //calculate account balance after particular transaction
         public decimal CalculateBalanceAfterParticularTransaction()
         {
+            List<Transaction> transactions = null;
             decimal balance = 0;
-            List<Transaction> transactions = EFData.context.Transactions.Where(t => t.AccountId == AccountId && t.Id <= Id).ToList();
-
-           /* List<Transaction> transactsToThisAcc = EFData.context.Transactions.Where(t => t.ToAccount == AccountId && t.Id <= Id).ToList();
-
-            decimal transferSum = 0;
-            foreach(Transaction tr in transactsToThisAcc)
+            try
             {
-                transferSum = transferSum + tr.Amount;
-            } */
+                 transactions = EFData.context.Transactions.Where(t => t.AccountId == AccountId && t.Id <= Id).ToList();
+            }
+            catch(SystemException ex)
+            {
+                Console.WriteLine("Database error: " + ex.Message);
+            }
 
             foreach (Transaction t in transactions)
             {

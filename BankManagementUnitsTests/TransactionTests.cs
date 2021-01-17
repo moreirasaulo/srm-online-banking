@@ -8,6 +8,7 @@ using SharedCode;
 
 namespace BankManagementUnitsTests
 {
+    [TestClass]
     class TransactionTests
     {
         Transaction transaction;
@@ -30,11 +31,11 @@ namespace BankManagementUnitsTests
             };
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void CalculateBalanceAfterTransaction()
         {
-            Assert.AreEqual(transDialog.CalculateNewBalance("Deposit", 100, 10), 110);
-            Assert.AreEqual(transDialog.CalculateNewBalance("Deposit", 0, 1000), 1000);
-        } */
+            Assert.AreEqual(transaction.CalculateBalanceAfterParticularTransaction(), 110);
+           // Assert.AreEqual(transDialog.CalculateNewBalance("Deposit", 0, 1000), 1000);
+        }
     }
 }

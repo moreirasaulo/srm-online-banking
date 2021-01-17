@@ -178,7 +178,7 @@ namespace BankManagementSys
         }
 
 
-        public decimal CalculateNewBalance(string transType,decimal previousBalance, decimal transAmount)
+        public decimal DeductAddMoneyToAccount(string transType,decimal previousBalance, decimal transAmount)
         {
             if (transType == "Deposit")
             {
@@ -225,7 +225,7 @@ namespace BankManagementSys
                 EFData.context.Transactions.Add(transac);
 
                 decimal previousBalance = currentAccount.Balance; //balance before transaction
-                currentAccount.Balance = CalculateNewBalance(currentTransType, previousBalance, amount); //new balance
+                currentAccount.Balance = DeductAddMoneyToAccount(currentTransType, previousBalance, amount); //new balance
 
                 if (currentTransType == "Transfer" || currentTransType == "Payment")
                 {
