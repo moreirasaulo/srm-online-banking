@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagementSys"
         mc:Ignorable="d"
-        Title="Generate Statement" Height="445.433" Width="499.464" ResizeMode="NoResize" Background="#e6ebea" WindowStartupLocation="CenterOwner">
+        Title="Generate Statement" Height="445.433" Width="527.464" ResizeMode="NoResize" Background="#e6ebea" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -35,16 +35,26 @@
     </Window.Resources>
     <Grid>
         <Image HorizontalAlignment="Left" Height="100" Margin="24,22,0,0" Source="/SharedCode;Component/Images/johnabbottbank2.png" VerticalAlignment="Top" Width="100"/>
-        <ComboBox Name="comboStatementMonths" IsEnabled="False" HorizontalAlignment="Left" Margin="321,49,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="comboStatementMonths_SelectionChanged"/>
-        <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="311,81,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.853,0.65"/>
-        <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="389,81,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btCancel" Click="btCancel_Click" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="231,81,0,0" VerticalAlignment="Top" Width="75"/>
-        <ComboBox Name="comboStatementYears" HorizontalAlignment="Left" Margin="321,22,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="comboStatementYears_SelectionChanged"/>
-        <Label Content="Year:" HorizontalAlignment="Left" Margin="252,22,0,0" VerticalAlignment="Top"/>
-        <Label Content="Month:" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>
-        <ListView MouseDoubleClick="lvMonthStatement_MouseDoubleClick" Name="lvMonthStatement" Background="azure"  HorizontalAlignment="Left" Height="262" Margin="24,127,0,0" VerticalAlignment="Top" Width="440">
+        <ComboBox Name="comboStatementMonths" IsEnabled="False" HorizontalAlignment="Left" Margin="351,49,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="comboStatementMonths_SelectionChanged"/>
+        <Button Name="btByEmail" Click="btByEmail_Click" IsEnabled="False" Content="By Email" HorizontalAlignment="Left" Margin="341,81,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.853,0.65"/>
+        <Button Name="btExport" Click="btExport_Click" IsEnabled="False" Content="Export..." IsDefault="True" HorizontalAlignment="Left" Margin="419,81,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btCancel" Click="btCancel_Click" Content="Cancel" IsCancel="True" HorizontalAlignment="Left" Margin="261,81,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox Name="comboStatementYears" HorizontalAlignment="Left" Margin="351,22,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="comboStatementYears_SelectionChanged"/>
+        <Label Content="Year:" HorizontalAlignment="Left" Margin="282,22,0,0" VerticalAlignment="Top"/>
+        <Label Content="Month:" HorizontalAlignment="Left" Margin="282,49,0,0" VerticalAlignment="Top"/>
+        <ListView MouseDoubleClick="lvMonthStatement_MouseDoubleClick" Name="lvMonthStatement" Background="azure"  HorizontalAlignment="Left" Height="262" Margin="30,127,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="TextElement.Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Header="Transaction Type" Width="120" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Date" Width="105" DisplayMemberBinding="{Binding Date, StringFormat=d}"/>
                     <GridViewColumn Header="Amount" Width="105" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}"/>

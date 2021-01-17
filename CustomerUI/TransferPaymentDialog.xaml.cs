@@ -78,7 +78,7 @@ namespace CustomerUI
             {
                 decimal amount = decimal.Parse(tbAmount.Text);
                 Transaction transac = new Transaction();
-                transac.Date = DateTime.Now;
+                transac.Date = DateTime.Today;
                 transac.Amount = amount;
                 transac.Type = currentTransType;
                 transac.AccountId = Utils.selectedAcc.Id;
@@ -106,7 +106,7 @@ namespace CustomerUI
 
                 Transaction depositToBenefAccount = new Transaction
                 {
-                    Date = DateTime.Now,
+                    Date = DateTime.Today,
                     Amount = amount,
                     Type = "Deposit",
                     AccountId = beneficiaryAcc.Id

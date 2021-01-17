@@ -183,6 +183,8 @@ namespace CustomerUI
 
         private void comboAccountType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btMakeTransfer.IsEnabled = true;
+            btMakePayment.IsEnabled = true;
             comboHistory.IsEnabled = true;
             rbTransactAll.IsEnabled = true;
             rbTransacDeposits.IsEnabled = true;
@@ -200,6 +202,13 @@ namespace CustomerUI
             LoadTransactions();
             SortTransactionsByTypeAndDate();
             comboHistory.SelectedIndex = 0;
+
+            if (Utils.selectedAcc.IsActive == false) 
+            {
+                MessageBox.Show("This account is closed.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                btMakeTransfer.IsEnabled = false;
+                btMakePayment.IsEnabled = false;
+            }
         }
 
         private void btMakePayment_Click(object sender, RoutedEventArgs e)

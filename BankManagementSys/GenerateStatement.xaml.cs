@@ -175,9 +175,10 @@ namespace BankManagementSys
 
             try
             {
-                doc.Save("Statement.pdf");
+                string timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
+                doc.Save("Statement"+ timeStamp + ".pdf");
 
-                string file = "Statement.pdf";
+                string file = "Statement" + timeStamp + ".pdf";
                 SmtpClient client = new SmtpClient
                 {
                     Host = "smtp.gmail.com",
@@ -262,7 +263,7 @@ namespace BankManagementSys
 
 
                 //graphics.DrawString("John Abbott Bank®", fontItalic, XBrushes.Black, 480, 30);
-                graphics.DrawString("Account Holder: " + Utilities.login.User.FirstName + " " + Utilities.login.User.LastName, fontBold, XBrushes.Black, 20, 30);
+                graphics.DrawString("Account Holder: " + currentUser.FirstName + " " + currentUser.LastName, fontBold, XBrushes.Black, 20, 30);
                 graphics.DrawString("Account Number: " + currentAccount.Id, fontBold, XBrushes.Black, 20, 45);
                 graphics.DrawString("Current Balance: $ " + currentAccount.Balance, fontBold, XBrushes.Black, 20, 60);
                 graphics.DrawString(DateTime.Now.ToString(), fontBold, XBrushes.Black, 20, 75);

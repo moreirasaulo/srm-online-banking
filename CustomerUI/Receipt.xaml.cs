@@ -69,8 +69,8 @@ namespace CustomerUI
             lblAccNo.Content = account.Id;
             lblAccHolder.Content = Utils.login.User.FullName;
             lblTransId.Content = transaction.Id;
-            lblAmount.Content = string.Format("{0:0.00} $", transaction.Amount);
-            lblNewBalance.Content = account.Balance + " $";
+            lblAmount.Content = string.Format("$ {0:0.00}", transaction.Amount);
+            lblNewBalance.Content = "$ " + account.Balance;
             lblDate.Content = transaction.Date;
             lblPrintDate.Content = DateTime.Now;
         }
@@ -79,36 +79,38 @@ namespace CustomerUI
         {
             try
             {
+                string fileName = "receipt" + DateTime.Now.ToString("yyyyMMddhhmmss");
+                
                 //create bmp
                 int Width = (int)receiptPanel.RenderSize.Width;
                 int Height = (int)receiptPanel.RenderSize.Height;
-                string fileName = "receipt.bmp";
+                string bmpFileName = fileName + ".bmp";
+                //string fileName = "receipt.bmp";
                 RenderTargetBitmap renderTargetBitmap =
                 new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
                 renderTargetBitmap.Render(receiptPanel);
                 PngBitmapEncoder pngImage = new PngBitmapEncoder();
                 pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-                using (Stream fileStream = File.Create(fileName))
+                using (Stream fileStream = File.Create(bmpFileName))
                 {
                     pngImage.Save(fileStream);
                 }
 
                 //create pdf
-                string pdfFileName = "receipt.pdf";
+                string pdfFileName = fileName + ".pdf";
                 PdfDocument doc = new PdfDocument();
                 PdfPage oPage = new PdfPage();
                 doc.Pages.Add(oPage);
                 XGraphics xgr = XGraphics.FromPdfPage(oPage);
-                XImage img = XImage.FromFile("receipt.bmp");
+                XImage img = XImage.FromFile(bmpFileName);
                 xgr.DrawImage(img, 0, 0);
                 using (Stream fileStream = File.Create(pdfFileName))
                 {
                     doc.Save(fileStream);
                 }
 
-
                 //email
-                string file = "receipt.pdf";
+               
                 SmtpClient client = new SmtpClient
                 {
                     Host = "smtp.gmail.com",
@@ -151,12 +153,21 @@ namespace CustomerUI
                     "Dear Mr/Mrs " + Utils.login.User.LastName + ",\n\nPlease see the attached receipt.\n\nThank you,\n\nJohn Abbott Bank");
                 }
 
-                Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+                Attachment data = new Attachment(pdfFileName, MediaTypeNames.Application.Octet);
 
                 mess.Attachments.Add(data);
 
                 client.Send(mess);
                 MessageBox.Show("Receipt was sent successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+              /*  System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+                File.Delete(bmpFileName);
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+               // doc.Close();
+               // doc.Dispose();
+                File.Delete(pdfFileName);*/
 
             }
             catch (IOException ex)

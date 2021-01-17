@@ -49,7 +49,7 @@
             </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle Fill="MediumSeaGreen" HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="170"/>
-        <Image Height="61" Margin="36,20,742,476" Source="/SharedCode;Component/Images/login_img.png"/>
+        <Image Margin="36,21,742,465" Source="/SharedCode;Component/Images/login_img.png"/>
 
 
         <Menu  Background="MediumSeaGreen" Name="mainMenu" Width="180" Margin="0,175,697,0">
