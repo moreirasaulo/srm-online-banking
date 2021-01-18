@@ -188,7 +188,7 @@ namespace BankManagementSys
                         e.Cancel = true;
                         return;
                     }
-                    if (tbPassword.Text.Length < 8 || tbPassword.Text.Length > 20) // FIX(any othe syblos allowed?????)
+                    if (tbPassword.Text.Length < 8 || tbPassword.Text.Length > 20)
                     {
                         MessageBox.Show("Password must be made of 8 to 20 characters.", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                         e.Cancel = true;

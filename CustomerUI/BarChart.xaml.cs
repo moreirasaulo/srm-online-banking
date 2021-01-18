@@ -48,9 +48,9 @@ namespace CustomerUI
                 amounts.Add(sum);
             }
 
-            var CategoryAmount = new List<KeyValuePair<string, decimal>>();
+           // var CategoryAmount = new List<KeyValuePair<string, decimal>>();
 
-            CategoryAmount = Enumerable.Range(0, Utils.paymentCategories.Count)
+            var CategoryAmount = Enumerable.Range(0, Utils.paymentCategories.Count)
             .Select(i => new KeyValuePair<string, decimal>(Utils.paymentCategories[i], amounts[i]))
             .ToList();
             ((BarSeries)mcChart.Series[0]).ItemsSource = CategoryAmount;
